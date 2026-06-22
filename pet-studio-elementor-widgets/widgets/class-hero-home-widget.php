@@ -204,6 +204,7 @@ class Hero_Home_Widget extends Widget_Base {
 		$eid         = $this->get_id();
 		$video_desk  = media_url( $s['video_desktop'] ?? null );
 		$video_mob   = media_url( $s['video_mobile'] ?? null ) ?: $video_desk;
+		$split_video = $video_desk && $video_mob && $video_mob !== $video_desk;
 		$logo_desk   = media_url( $s['logo_desktop'] ?? null );
 		$logo_mob    = media_url( $s['logo_mobile'] ?? null ) ?: $logo_desk;
 		$logo_alt    = $s['logo_alt'] ?? '';
@@ -218,15 +219,17 @@ class Hero_Home_Widget extends Widget_Base {
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-copy > * { position: relative; z-index: 1; }
 		</style>
 
-		<div class="uk-section-default uk-inverse-light uk-section uk-padding-remove-vertical" tm-header-transparent-noplaceholder>
+		<div class="uk-section-default uk-inverse-light uk-section uk-padding-remove-vertical pet-studio-hero-home" tm-header-transparent-noplaceholder>
 			<div class="uk-grid-margin uk-grid tm-grid-expand uk-child-width-1-1">
 				<div class="uk-width-1-1">
-					<div class="uk-position-z-index uk-tile uk-padding-remove" uk-height-viewport="offset-top: !*;" uk-sticky="end: !.uk-section;">
+					<div class="uk-position-z-index uk-tile uk-padding-remove ps-hero-video-tile" uk-height-viewport="offset-top: !*;" uk-sticky="end: !.uk-section;">
 						<?php if ( $video_desk ) : ?>
-							<video class="uk-visible@s" src="<?php echo esc_url( $video_desk ); ?>" playsinline loop muted preload="none" uk-cover></video>
-						<?php endif; ?>
-						<?php if ( $video_mob ) : ?>
-							<video class="uk-hidden@s" src="<?php echo esc_url( $video_mob ); ?>" playsinline loop muted preload="none" uk-cover></video>
+							<?php if ( $split_video ) : ?>
+								<video class="uk-object-center-left uk-visible@s" src="<?php echo esc_url( $video_desk ); ?>" playsinline loop muted preload="none" width="2560" uk-cover></video>
+								<video class="uk-object-center-left uk-hidden@s" src="<?php echo esc_url( $video_mob ); ?>" playsinline loop muted preload="none" width="2560" uk-cover></video>
+							<?php else : ?>
+								<video class="uk-object-center-left" src="<?php echo esc_url( $video_desk ); ?>" playsinline loop muted preload="none" width="2560" uk-cover></video>
+							<?php endif; ?>
 						<?php endif; ?>
 						<div class="uk-panel uk-width-1-1"></div>
 					</div>

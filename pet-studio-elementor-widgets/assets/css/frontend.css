@@ -109,3 +109,12 @@
 	font-size: 0.8125rem;
 	color: #666;
 }
+
+/* Hero home — mirror video framing (left-aligned cover crop) */
+.pet-studio-hero-home .ps-hero-video-tile {
+	overflow: hidden;
+}
+
+.pet-studio-hero-home .ps-hero-video-tile video[uk-cover].uk-object-center-left {
+	object-position: 0 50%;
+}
