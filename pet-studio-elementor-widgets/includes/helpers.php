@@ -33,6 +33,75 @@ function eager_media_attrs( bool $high_priority = false ): string {
 	return $attrs;
 }
 
+/**
+ * Resolve a readable SVG path from a media URL (uploads or bundled demo asset).
+ */
+function resolve_svg_file_path( string $url ): string {
+	$url = strtok( $url, '?' ) ?: $url;
+
+	static $bundled = array(
+		'Liza_signature_pink_v06.svg' => 'assets/demo-media/logos/Liza_signature_pink_v06.svg',
+	);
+
+	foreach ( $bundled as $needle => $relative ) {
+		if ( false !== strpos( $url, $needle ) ) {
+			$path = PET_STUDIO_EW_PATH . $relative;
+			if ( is_readable( $path ) ) {
+				return $path;
+			}
+		}
+	}
+
+	$upload = wp_upload_dir();
+	if ( ! empty( $upload['baseurl'] ) && str_contains( $url, $upload['baseurl'] ) ) {
+		$path = str_replace( $upload['baseurl'], $upload['basedir'], $url );
+		if ( is_readable( $path ) ) {
+			return $path;
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Echo inline SVG markup (immune to LiteSpeed/img lazy optimizers).
+ *
+ * @return bool True when SVG was rendered.
+ */
+function render_inline_svg( string $url, string $class = '', int $width = 0, int $height = 0 ): bool {
+	$path = resolve_svg_file_path( $url );
+	if ( '' === $path ) {
+		return false;
+	}
+
+	$svg = (string) file_get_contents( $path );
+	if ( '' === $svg || ! preg_match( '/<svg\b/i', $svg ) ) {
+		return false;
+	}
+
+	$attrs = '';
+	if ( '' !== $class ) {
+		$attrs .= ' class="' . esc_attr( $class ) . '"';
+	}
+	if ( $width > 0 ) {
+		$attrs .= ' width="' . (int) $width . '"';
+	}
+	if ( $height > 0 ) {
+		$attrs .= ' height="' . (int) $height . '"';
+	}
+	$attrs .= ' aria-hidden="true" focusable="false"';
+
+	$svg = preg_replace( '/<svg\b/i', '<svg' . $attrs, $svg, 1 );
+	if ( ! is_string( $svg ) ) {
+		return false;
+	}
+
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted plugin/upload SVG source.
+	echo $svg;
+
+	return true;
+}
+
 function media_url( ?array $media, string $fallback = '' ): string {
 	if ( empty( $media['url'] ) ) {
 		return $fallback;

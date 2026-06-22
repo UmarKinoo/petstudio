@@ -15,6 +15,7 @@ use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\render_inline_svg;
 use function Pet_Studio_Elementor\render_rich_text;
 
 defined( 'ABSPATH' ) || exit;
@@ -106,7 +107,13 @@ class Team_Member_Widget extends Widget_Base {
 						<div class="el-content uk-panel uk-margin-large-top"><?php render_rich_text( $s['bio'] ); ?></div>
 					<?php endif; ?>
 					<?php if ( ( $s['show_signature'] ?? '' ) === 'yes' && $sig ) : ?>
-						<img class="<?php echo esc_attr( lazy_load_exempt_class( 'uk-text-primary el-image uk-margin-medium-top' ) ); ?>" src="<?php echo esc_url( $sig ); ?>" alt="" width="350" height="182"<?php echo eager_media_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+						<div class="uk-margin-medium-top ps-signature-inline">
+							<?php
+							if ( ! render_inline_svg( $sig, 'uk-text-primary el-image ps-signature-svg', 350, 182 ) ) :
+								?>
+								<img class="<?php echo esc_attr( lazy_load_exempt_class( 'uk-text-primary el-image' ) ); ?>" src="<?php echo esc_url( $sig ); ?>" alt="" width="350" height="182"<?php echo eager_media_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+							<?php endif; ?>
+						</div>
 					<?php endif; ?>
 				</div>
 			</div>

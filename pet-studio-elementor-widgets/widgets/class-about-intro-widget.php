@@ -17,6 +17,7 @@ use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
 use function Pet_Studio_Elementor\print_link_attributes;
+use function Pet_Studio_Elementor\render_inline_svg;
 use function Pet_Studio_Elementor\render_rich_text;
 
 defined( 'ABSPATH' ) || exit;
@@ -70,7 +71,7 @@ class About_Intro_Widget extends Widget_Base {
 		$sig   = media_url( $s['signature_image'] ?? null );
 		?>
 		<div class="uk-section-default uk-section uk-section-large">
-			<div class="uk-container">
+			<div class="uk-container uk-position-relative">
 				<div class="uk-grid-margin uk-grid tm-grid-expand" uk-grid>
 					<div class="uk-grid-item-match uk-flex-middle uk-width-1-2@s">
 						<div class="uk-panel uk-width-1-1">
@@ -104,8 +105,12 @@ class About_Intro_Widget extends Widget_Base {
 					<div class="uk-grid-margin uk-grid tm-grid-expand uk-child-width-1-1">
 						<div class="uk-grid-item-match uk-width-1-1">
 							<div class="uk-panel uk-width-1-1">
-								<div class="uk-position-absolute uk-width-1-1 uk-text-center" uk-parallax="opacity: 1 70%,0; blur: 0 70%,100; easing: 0; media: @s" style="right: -30px; bottom: -6vh;" uk-scrollspy="target: [uk-scrollspy-class];">
-									<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $sig ); ?>" alt="" width="600" height="312"<?php echo eager_media_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg="stroke-animation: true; attributes: uk-scrollspy-class:uk-animation-stroke">
+								<div class="uk-position-absolute uk-width-1-1 uk-text-center ps-signature-overlay" uk-parallax="opacity: 1 70%,0; blur: 0 70%,100; easing: 0; media: @s" style="right: -30px; bottom: -6vh;" uk-scrollspy="target: [uk-scrollspy-class];">
+									<?php
+									if ( ! render_inline_svg( $sig, 'el-image uk-text-primary ps-signature-svg', 600, 312 ) ) :
+										?>
+										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $sig ); ?>" alt="" width="600" height="312"<?php echo eager_media_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg="stroke-animation: true; attributes: uk-scrollspy-class:uk-animation-stroke">
+									<?php endif; ?>
 								</div>
 							</div>
 						</div>

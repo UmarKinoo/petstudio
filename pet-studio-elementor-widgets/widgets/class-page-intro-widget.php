@@ -15,6 +15,7 @@ use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\render_inline_svg;
 use function Pet_Studio_Elementor\render_rich_text;
 
 defined( 'ABSPATH' ) || exit;
@@ -98,7 +99,13 @@ class Page_Intro_Widget extends Widget_Base {
 										<?php endif; ?>
 									</div>
 									<?php if ( ( $s['show_signature'] ?? '' ) === 'yes' && $sig_url ) : ?>
-										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'uk-text-primary el-image uk-margin-medium-top' ) ); ?>" src="<?php echo esc_url( $sig_url ); ?>" alt="" width="300" height="156"<?php echo eager_media_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+										<div class="uk-margin-medium-top ps-signature-inline">
+											<?php
+											if ( ! render_inline_svg( $sig_url, 'uk-text-primary el-image ps-signature-svg', 300, 156 ) ) :
+												?>
+												<img class="<?php echo esc_attr( lazy_load_exempt_class( 'uk-text-primary el-image' ) ); ?>" src="<?php echo esc_url( $sig_url ); ?>" alt="" width="300" height="156"<?php echo eager_media_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+											<?php endif; ?>
+										</div>
 									<?php endif; ?>
 									<?php if ( $badge_url ) : ?>
 										<img class="el-image uk-margin-medium-top" src="<?php echo esc_url( $badge_url ); ?>" alt="" loading="lazy" width="180" height="130">

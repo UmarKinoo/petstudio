@@ -173,6 +173,27 @@ a.ps-book-now-btn:focus,
 	box-shadow: 0 9px 24px rgba(255, 144, 170, 0.6);
 }
 
+/* Liza signature — inline SVG (immune to LiteSpeed lazy-load on <img>) */
+.elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg {
+	max-width: 70vw;
+	height: auto;
+	display: inline-block;
+}
+
+.elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg path {
+	fill: var(--pet-primary, #ff90aa);
+}
+
+.ps-signature-inline svg.ps-signature-svg {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+.ps-signature-inline svg.ps-signature-svg path {
+	fill: var(--pet-primary, #ff90aa);
+}
+
 /* Dog divider icons — mirror uses per-icon width/height; override stale Elementor/LiteSpeed attrs */
 .tm-grid-expand img.el-image[src*="icon_dog_01.png"],
 .tm-grid-expand img.el-image[data-src*="icon_dog_01.png"] {
