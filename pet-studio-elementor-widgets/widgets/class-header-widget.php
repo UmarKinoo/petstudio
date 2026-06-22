@@ -525,7 +525,7 @@ class Header_Widget extends Widget_Base {
 		}
 
 		$link = $settings['book_now_link'] ?? null;
-		if ( empty( $link['url'] ) ) {
+		if ( empty( $link['url'] ) || '#' === $link['url'] ) {
 			$link = array(
 				'url'         => '/contact/',
 				'is_external' => false,
