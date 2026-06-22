@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Pet Studio Elementor Widgets
  * Description:       Custom Elementor widgets for The Pet Studio — faithful mirror HTML/CSS with full builder controls and API-ready schemas.
- * Version:           0.5.15
+ * Version:           0.5.21
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            The Pet Studio

@@ -64,6 +64,18 @@ if [[ "${GIT_FTP_INSECURE:-1}" == "1" ]]; then
 fi
 
 LOCAL_VERSION="$(rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" "$SYNC_DIR/pet-studio-elementor-widgets.php" | rg -o "'[^']+'" | tail -1 | tr -d "'")"
+LOCAL_HEADER_VERSION="$(rg -o '\* Version:\s+[0-9.]+' "$SYNC_DIR/pet-studio-elementor-widgets.php" | rg -o '[0-9.]+$' || true)"
+
+if [[ -z "$LOCAL_VERSION" ]]; then
+	echo "Could not read PET_STUDIO_EW_VERSION from plugin bootstrap." >&2
+	exit 1
+fi
+
+if [[ "$LOCAL_HEADER_VERSION" != "$LOCAL_VERSION" ]]; then
+	echo "Plugin header Version (${LOCAL_HEADER_VERSION:-missing}) must match PET_STUDIO_EW_VERSION (${LOCAL_VERSION})." >&2
+	echo "WordPress Plugins screen reads the header — update both in pet-studio-elementor-widgets.php." >&2
+	exit 1
+fi
 
 remote_version() {
 	local raw
@@ -76,6 +88,19 @@ remote_version() {
 	printf '%s' "$raw" \
 		| rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" \
 		| rg -o "'[^']+'" | tail -1 | tr -d "'" || true
+}
+
+remote_header_version() {
+	local raw
+	raw="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+		"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
+	if [[ -z "$raw" ]]; then
+		raw="$(curl "${curl_tls[@]}" -sS --user "$U:$P" \
+			"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
+	fi
+	printf '%s' "$raw" \
+		| rg -o '\* Version:\s+[0-9.]+' \
+		| rg -o '[0-9.]+$' || true
 }
 
 find_version_commit() {
@@ -182,10 +207,22 @@ if [[ -z "$REMOTE_VERSION" || "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
 	REMOTE_VERSION="$(remote_version)"
 fi
 
+REMOTE_HEADER_VERSION="$(remote_header_version)"
+
 if [[ "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
-	echo "Deploy FAILED: remote ${REMOTE_VERSION:-missing}, expected ${LOCAL_VERSION}." >&2
+	echo "Deploy FAILED: remote constant ${REMOTE_VERSION:-missing}, expected ${LOCAL_VERSION}." >&2
 	echo "Try: DEPLOY_FORCE=1 bash scripts/deploy-production.sh" >&2
 	exit 1
 fi
 
-echo "Deploy verified: ${LOCAL_VERSION}"
+if [[ "$REMOTE_HEADER_VERSION" != "$LOCAL_VERSION" ]]; then
+	echo "Deploy FAILED: remote header Version ${REMOTE_HEADER_VERSION:-missing}, expected ${LOCAL_VERSION}." >&2
+	echo "WordPress Plugins screen uses the header — re-upload pet-studio-elementor-widgets.php." >&2
+	upload_file "pet-studio-elementor-widgets.php"
+	REMOTE_HEADER_VERSION="$(remote_header_version)"
+	if [[ "$REMOTE_HEADER_VERSION" != "$LOCAL_VERSION" ]]; then
+		exit 1
+	fi
+fi
+
+echo "Deploy verified: ${LOCAL_VERSION} (header + constant)"
