@@ -68,7 +68,11 @@ class Content_Normalizer {
 	public static function get_control_defaults( string $fixture_slug ): array {
 		$fixture = self::get_fixture( $fixture_slug );
 		$defaults = apply_filters( 'pet_studio_fixture_defaults', $fixture, $fixture_slug );
-		return is_array( $defaults ) ? $defaults : array();
+		if ( ! is_array( $defaults ) ) {
+			return array();
+		}
+
+		return self::to_elementor_settings( $fixture_slug, $defaults );
 	}
 
 	/**
@@ -91,7 +95,7 @@ class Content_Normalizer {
 	 */
 	public static function to_elementor_settings( string $fixture_slug, array $fixture = array() ): array {
 		if ( empty( $fixture ) ) {
-			$fixture = self::get_control_defaults( $fixture_slug );
+			$fixture = self::get_fixture( $fixture_slug );
 		}
 
 		switch ( $fixture_slug ) {

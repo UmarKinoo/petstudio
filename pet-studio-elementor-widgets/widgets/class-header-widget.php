@@ -19,6 +19,7 @@ use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
 use function Pet_Studio_Elementor\print_link_attributes;
 use function Pet_Studio_Elementor\social_icon_name;
+use function Pet_Studio_Elementor\switcher_enabled;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -514,27 +515,35 @@ class Header_Widget extends Widget_Base {
 	 * @param bool                 $mobile   Off-canvas vs desktop navbar.
 	 */
 	private function render_book_now( array $settings, bool $mobile ): void {
-		if ( ( $settings['show_book_now'] ?? '' ) !== 'yes' ) {
+		if ( ! switcher_enabled( $settings['show_book_now'] ?? null, true ) ) {
 			return;
 		}
 
 		$label = $settings['book_now_label'] ?? '';
-		$link  = $settings['book_now_link'] ?? null;
-		if ( ! $label || empty( $link['url'] ) ) {
-			return;
+		if ( '' === $label ) {
+			$label = 'Book Now';
+		}
+
+		$link = $settings['book_now_link'] ?? null;
+		if ( empty( $link['url'] ) ) {
+			$link = array(
+				'url'         => '/contact/',
+				'is_external' => false,
+				'nofollow'    => false,
+			);
 		}
 
 		if ( $mobile ) {
 			?>
 			<div class="uk-margin-medium-top">
-				<a class="uk-button uk-button-primary uk-width-1-1"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+				<a class="uk-button ps-book-now-btn uk-width-1-1"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
 			</div>
 			<?php
 			return;
 		}
 		?>
 		<div class="uk-navbar-item ps-header-book-now">
-			<a class="uk-button uk-button-primary"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+			<a class="uk-button ps-book-now-btn"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
 		</div>
 		<?php
 	}

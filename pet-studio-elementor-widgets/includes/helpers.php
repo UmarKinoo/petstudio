@@ -162,6 +162,22 @@ function render_rich_text( string $html ): void {
 }
 
 /**
+ * Whether an Elementor switcher (or fixture bool) is on.
+ *
+ * @param mixed $value Panel value.
+ */
+function switcher_enabled( $value, bool $default = true ): bool {
+	if ( 'no' === $value || false === $value || 0 === $value || '0' === $value ) {
+		return false;
+	}
+	if ( 'yes' === $value || true === $value || 1 === $value || '1' === $value ) {
+		return true;
+	}
+
+	return $default;
+}
+
+/**
  * Mirror width/height for decorative dog divider PNGs (from original YOOtheme markup).
  *
  * @return array{width:int,height:int}|null
