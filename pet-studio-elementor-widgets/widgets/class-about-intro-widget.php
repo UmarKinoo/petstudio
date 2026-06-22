@@ -13,6 +13,8 @@ use Pet_Studio_Elementor\Widget_Base;
 
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
+use function Pet_Studio_Elementor\eager_media_attrs;
+use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
 use function Pet_Studio_Elementor\print_link_attributes;
 use function Pet_Studio_Elementor\render_rich_text;
@@ -103,7 +105,7 @@ class About_Intro_Widget extends Widget_Base {
 						<div class="uk-grid-item-match uk-width-1-1">
 							<div class="uk-panel uk-width-1-1">
 								<div class="uk-position-absolute uk-width-1-1 uk-text-center" uk-parallax="opacity: 1 70%,0; blur: 0 70%,100; easing: 0; media: @s" style="right: -30px; bottom: -6vh;" uk-scrollspy="target: [uk-scrollspy-class];">
-									<img class="el-image uk-text-primary" src="<?php echo esc_url( $sig ); ?>" alt="" loading="lazy" width="600" height="312" uk-svg="stroke-animation: true; attributes: uk-scrollspy-class:uk-animation-stroke">
+									<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $sig ); ?>" alt="" width="600" height="312"<?php echo eager_media_attrs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg="stroke-animation: true; attributes: uk-scrollspy-class:uk-animation-stroke">
 								</div>
 							</div>
 						</div>

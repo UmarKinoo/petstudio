@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PET_STUDIO_EW_VERSION', '0.5.15' );
+define( 'PET_STUDIO_EW_VERSION', '0.5.16' );
 define( 'PET_STUDIO_EW_FILE', __FILE__ );
 define( 'PET_STUDIO_EW_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PET_STUDIO_EW_URL', plugin_dir_url( __FILE__ ) );
