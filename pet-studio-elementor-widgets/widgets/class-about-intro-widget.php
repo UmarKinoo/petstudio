@@ -68,7 +68,7 @@ class About_Intro_Widget extends Widget_Base {
 		$sig   = media_url( $s['signature_image'] ?? null );
 		?>
 		<div class="uk-section-default uk-section uk-section-large">
-			<div class="uk-container uk-container-expand">
+			<div class="uk-container">
 				<div class="uk-grid-margin uk-grid tm-grid-expand" uk-grid>
 					<div class="uk-grid-item-match uk-flex-middle uk-width-1-2@s">
 						<div class="uk-panel uk-width-1-1">

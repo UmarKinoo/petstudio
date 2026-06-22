@@ -255,7 +255,7 @@ class Footer_Widget extends Widget_Base {
 		?>
 		<footer>
 			<div class="uk-section-secondary uk-section uk-section-large">
-				<div class="uk-container uk-container-expand">
+				<div class="uk-container uk-container-xlarge">
 					<div class="uk-grid tm-grid-expand uk-child-width-1-1 uk-margin-small">
 						<div class="uk-width-1-1">
 							<hr>

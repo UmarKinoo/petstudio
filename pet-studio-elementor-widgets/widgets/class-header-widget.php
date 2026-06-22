@@ -301,9 +301,14 @@ class Header_Widget extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'nav_typography',
-				'label'    => esc_html__( 'Nav typography', 'pet-studio-elementor' ),
-				'selector' => '{{WRAPPER}} .uk-navbar-nav > li > a, {{WRAPPER}} .uk-nav-default > li > a',
+				'name'           => 'nav_typography',
+				'label'          => esc_html__( 'Nav typography', 'pet-studio-elementor' ),
+				'selector'       => '{{WRAPPER}} .uk-navbar-nav > li > a, {{WRAPPER}} .uk-nav-default > li > a',
+				'fields_options' => array(
+					'text_transform' => array(
+						'default' => 'none',
+					),
+				),
 			)
 		);
 

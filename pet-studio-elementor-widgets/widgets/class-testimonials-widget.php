@@ -91,7 +91,7 @@ class Testimonials_Widget extends Widget_Base {
 		$slider_attr = implode( '; ', $slider_opts );
 		?>
 		<div class="uk-section-muted uk-section" uk-scrollspy="target: [uk-scrollspy-class]; cls: uk-animation-scale-up; delay: false;">
-			<div class="uk-container uk-container-expand">
+			<div class="uk-container">
 				<div class="uk-grid-margin uk-grid tm-grid-expand uk-child-width-1-1">
 					<div class="uk-width-1-1">
 						<div class="uk-slider-container uk-margin uk-text-left" uk-slider="<?php echo esc_attr( $slider_attr ); ?>" uk-scrollspy-class>
