@@ -81,22 +81,35 @@
 	text-transform: none !important;
 }
 
-/* Desktop header — full-width container + tighter nav fit with Book Now CTA */
+/* Desktop header — full-width container + room for nav + Book Now CTA */
 .tm-header > [uk-sticky] .uk-container-expand,
 .tm-header .uk-navbar-container .uk-container-expand {
-	max-width: 100%;
-	padding-left: clamp(1rem, 3vw, 2.5rem);
-	padding-right: clamp(1rem, 3vw, 2.5rem);
+	max-width: none;
+	width: 100%;
+	padding-left: clamp(0.75rem, 2vw, 1.75rem);
+	padding-right: clamp(0.75rem, 2vw, 1.75rem);
+}
+
+.tm-header .uk-navbar {
+	width: 100%;
 }
 
 .tm-header .uk-navbar-right {
+	flex: 1 1 auto;
+	justify-content: flex-end;
+	min-width: 0;
 	flex-wrap: nowrap;
 	align-items: stretch;
 }
 
+.tm-header .ps-header-nav {
+	flex: 1 1 auto;
+	justify-content: flex-end;
+}
+
 .tm-header .ps-header-nav > li > a {
-	padding-left: 0.55rem;
-	padding-right: 0.55rem;
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
 	white-space: nowrap;
 }
 
@@ -107,7 +120,13 @@
 }
 
 .tm-header .uk-logo.uk-navbar-item {
-	margin-right: 0.5rem;
+	margin-right: 0.25rem;
+	flex-shrink: 0;
+}
+
+.tm-header #module-tm-3 {
+	flex-shrink: 0;
+	margin-left: 0.25rem;
 }
 
 /* Book Now CTA — solid brand-pink pill so it stands out on the hero and the sticky nav.
@@ -116,7 +135,8 @@
 .ps-header-book-now {
 	display: flex;
 	align-items: center;
-	margin-left: 0.85rem;
+	margin-left: 0.5rem;
+	flex-shrink: 0;
 }
 
 a.ps-book-now-btn,

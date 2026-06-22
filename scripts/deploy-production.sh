@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Deploy plugin to production via curl FTP (git-ftp is unreliable on this host).
+# Incremental deploy via git-ftp (same pattern as bizkarts).
+# Only changed files since the last remote .git-ftp.log are uploaded.
+# DEPLOY_FORCE=1 — re-upload all plugin files (slow; includes demo media).
 # Credentials: .vscode/sftp.json (gitignored).
 set -euo pipefail
 
@@ -8,6 +10,7 @@ cd "$REPO_ROOT"
 
 SFTP_JSON="$REPO_ROOT/.vscode/sftp.json"
 CTX="${DEPLOY_CONTEXT:-petstudio-prod}"
+SYNCROOT="${SYNCROOT:-pet-studio-elementor-widgets}"
 
 if [[ ! -f "$SFTP_JSON" ]]; then
 	echo "Missing SFTP config: $SFTP_JSON" >&2
@@ -25,56 +28,130 @@ if [[ -z "$row" ]]; then
 	exit 1
 fi
 
-IFS=$'\t' read -r PROTO U P H PORT R SYNCROOT <<<"$row"
+IFS=$'\t' read -r PROTO U P H PORT R PROFILE_SYNCROOT <<<"$row"
 
 if [[ -z "$U" || -z "$P" || -z "$H" || -z "$R" ]]; then
 	echo "Incomplete profile for context \"$CTX\"." >&2
 	exit 1
 fi
 
+if [[ -n "$PROFILE_SYNCROOT" ]]; then
+	SYNCROOT="$PROFILE_SYNCROOT"
+fi
+
+if [[ "$PROTO" == "sftp" ]]; then
+	for _curl in /opt/homebrew/opt/curl/bin/curl /usr/local/opt/curl/bin/curl; do
+		if [[ -x "$_curl" ]]; then
+			export PATH="$(dirname "$_curl"):$PATH"
+			break
+		fi
+	done
+	if ! curl --version 2>/dev/null | grep "^Protocols: " | grep -qw sftp; then
+		echo "SFTP deploy needs curl with SFTP support. Install: brew install curl" >&2
+		exit 1
+	fi
+fi
+
 R_NOSLASH="${R#/}"
-SYNC_DIR="$REPO_ROOT/${SYNCROOT:-pet-studio-elementor-widgets}"
-FTP_BASE="${PROTO}://${H}:${PORT}//${R_NOSLASH}"
+FTP_URL="${PROTO}://${H}:${PORT}//${R_NOSLASH}"
+SYNC_DIR="$REPO_ROOT/$SYNCROOT"
 
 curl_tls=()
+extra=()
 if [[ "${GIT_FTP_INSECURE:-1}" == "1" ]]; then
+	extra+=(--insecure)
 	curl_tls+=(--insecure)
 fi
 
 LOCAL_VERSION="$(rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" "$SYNC_DIR/pet-studio-elementor-widgets.php" | rg -o "'[^']+'" | tail -1 | tr -d "'")"
 
 remote_version() {
-	curl "${curl_tls[@]}" -sS --user "$U:$P" \
-		"${FTP_BASE}/pet-studio-elementor-widgets.php" 2>/dev/null \
+	curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+		"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null \
 		| rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" \
 		| rg -o "'[^']+'" | tail -1 | tr -d "'" || true
 }
 
-echo "Uploading ${LOCAL_VERSION} to ${FTP_BASE} …"
+remote_deploy_commit() {
+	curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+		"${FTP_URL}/.git-ftp.log" 2>/dev/null | tr -d '[:space:]' || true
+}
 
-count=0
-while IFS= read -r -d '' file; do
-	rel="${file#"$SYNC_DIR"/}"
-	curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U:$P" \
-		-T "$file" "${FTP_BASE}/${rel}" >/dev/null
-	count=$(( count + 1 ))
-done < <(find "$SYNC_DIR" -type f ! -path '*/.git/*' -print0)
-
-git rev-parse HEAD | curl "${curl_tls[@]}" -sS --user "$U:$P" \
-	-T - "${FTP_BASE}/.git-ftp.log" >/dev/null
-
-echo "Uploaded ${count} files."
-
-verified=""
-for attempt in 1 2 3 4 5; do
-	sleep 2
-	verified="$(remote_version)"
-	if [[ "$verified" == "$LOCAL_VERSION" ]]; then
-		echo "Deploy verified: ${LOCAL_VERSION} (attempt ${attempt})"
-		exit 0
+upload_file() {
+	local rel="$1"
+	local file="$SYNC_DIR/$rel"
+	if [[ ! -f "$file" ]]; then
+		echo "Skip missing: $rel" >&2
+		return 0
 	fi
-	echo "Verify attempt ${attempt}: remote=${verified:-missing}, expected=${LOCAL_VERSION}" >&2
-done
+	curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U" --passwd "$P" \
+		-T "$file" "${FTP_URL}/${rel}" >/dev/null
+	echo "  ↑ ${rel}"
+}
 
-echo "Deploy FAILED: remote still ${verified:-missing}, expected ${LOCAL_VERSION}." >&2
-exit 1
+upload_changed_via_curl() {
+	local base="$1"
+	local head="$2"
+	local -a paths=()
+	local path rel
+
+	if [[ "${DEPLOY_FORCE:-0}" == "1" ]]; then
+		echo "Curl fallback: uploading all plugin files…" >&2
+		while IFS= read -r -d '' file; do
+			upload_file "${file#"$SYNC_DIR"/}"
+		done < <(find "$SYNC_DIR" -type f ! -path '*/.git/*' -print0)
+		return 0
+	fi
+
+	if [[ -n "$base" && "$base" =~ ^[0-9a-f]{40}$ ]]; then
+		mapfile -t paths < <(git diff --name-only --diff-filter=ACMR "$base" "$head" -- "$SYNCROOT")
+	else
+		echo "No remote deploy marker — uploading latest commit only." >&2
+		mapfile -t paths < <(git diff-tree --no-commit-id --name-only --diff-filter=ACMR -r "$head" -- "$SYNCROOT")
+	fi
+
+	if [[ ${#paths[@]} -eq 0 ]]; then
+		echo "No changed plugin files to upload." >&2
+		return 0
+	fi
+
+	echo "Curl fallback: uploading ${#paths[@]} changed file(s)…" >&2
+	for path in "${paths[@]}"; do
+		rel="${path#"$SYNCROOT"/}"
+		upload_file "$rel"
+	done
+}
+
+printf '' | curl "${curl_tls[@]}" --user "$U" --passwd "$P" --ftp-create-dirs -sS -T - \
+	"${FTP_URL}/.git-ftp-remote-dir-ok" -o /dev/null 2>/dev/null || true
+
+ftp_args=( push --auto-init "${extra[@]}" --user "$U" --passwd "$P" )
+if [[ -n "$SYNCROOT" ]]; then
+	ftp_args+=( --syncroot "$SYNCROOT" )
+fi
+if [[ "${DEPLOY_FORCE:-0}" == "1" ]]; then
+	ftp_args+=( --force )
+	echo "DEPLOY_FORCE=1: re-uploading all plugin files."
+fi
+
+echo "Deploying ${LOCAL_VERSION} to ${FTP_URL} (incremental via git-ftp)…"
+git ftp "${ftp_args[@]}" "$FTP_URL"
+
+REMOTE_VERSION="$(remote_version)"
+if [[ -z "$REMOTE_VERSION" || "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
+	echo "git-ftp finished but remote is ${REMOTE_VERSION:-missing} (expected ${LOCAL_VERSION}). Curl upload of changed files…" >&2
+	BASE="$(remote_deploy_commit)"
+	HEAD="$(git rev-parse HEAD)"
+	upload_changed_via_curl "$BASE" "$HEAD"
+	git rev-parse HEAD | curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+		-T - "${FTP_URL}/.git-ftp.log" >/dev/null
+	REMOTE_VERSION="$(remote_version)"
+fi
+
+if [[ "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
+	echo "Deploy FAILED: remote ${REMOTE_VERSION:-missing}, expected ${LOCAL_VERSION}." >&2
+	echo "Try: DEPLOY_FORCE=1 bash scripts/deploy-production.sh" >&2
+	exit 1
+fi
+
+echo "Deploy verified: ${LOCAL_VERSION}"
