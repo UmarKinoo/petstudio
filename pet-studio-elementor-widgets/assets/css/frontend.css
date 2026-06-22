@@ -123,10 +123,56 @@
 	margin-left: 0.75rem;
 }
 
-/* Dog divider icons — mirror uses per-icon width/height; avoid squashing from stale Elementor attrs */
+/* Dog divider icons — mirror uses per-icon width/height; override stale Elementor/LiteSpeed attrs */
+.tm-grid-expand img.el-image[src*="icon_dog_01.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_01.png"] {
+	width: 105px !important;
+	height: 98px !important;
+}
+
+.tm-grid-expand img.el-image[src*="icon_dog_02.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_02.png"] {
+	width: 115px !important;
+	height: 101px !important;
+}
+
+.tm-grid-expand img.el-image[src*="icon_dog_03.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_03.png"] {
+	width: 101px !important;
+	height: 54px !important;
+}
+
+.tm-grid-expand img.el-image[src*="icon_dog_04.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_04.png"] {
+	width: 111px !important;
+	height: 111px !important;
+}
+
+.tm-grid-expand img.el-image[src*="icon_dog_05.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_05.png"] {
+	width: 136px !important;
+	height: 101px !important;
+}
+
+.tm-grid-expand img.el-image[src*="icon_dog_06.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_06.png"] {
+	width: 65px !important;
+	height: 47px !important;
+}
+
+.tm-grid-expand img.el-image[src*="icon_dog_07.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_07.png"] {
+	width: 156px !important;
+	height: 100px !important;
+}
+
+.tm-grid-expand img.el-image[src*="icon_dog_08.png"],
+.tm-grid-expand img.el-image[data-src*="icon_dog_08.png"] {
+	width: 127px !important;
+	height: 109px !important;
+}
+
 .tm-grid-expand img.el-image[src*="icon_dog"] {
-	width: auto;
-	height: auto;
 	max-width: none;
 	object-fit: contain;
 }

@@ -52,6 +52,13 @@ abstract class Widget_Base extends Elementor_Widget_Base {
 		);
 	}
 
+	/**
+	 * Pet Studio widgets read fixture defaults at render time — skip Elementor HTML cache.
+	 */
+	protected function is_dynamic_content(): bool {
+		return true;
+	}
+
 	protected function register_style_controls( string $section_id = 'section_style' ): void {
 		$this->start_controls_section(
 			$section_id,

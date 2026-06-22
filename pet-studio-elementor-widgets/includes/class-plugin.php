@@ -22,7 +22,29 @@ final class Plugin {
 
 	private function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'bootstrap' ), 20 );
+		add_action( 'init', array( $this, 'maybe_bust_caches' ), 30 );
 		add_filter( 'litespeed_media_lazy_img_cls_excludes', array( $this, 'litespeed_lazy_exclude_classes' ) );
+	}
+
+	/**
+	 * Clear Elementor + LiteSpeed caches after plugin updates so render fixes reach production.
+	 */
+	public function maybe_bust_caches(): void {
+		$stored = get_option( 'pet_studio_ew_version', '' );
+		if ( $stored === PET_STUDIO_EW_VERSION ) {
+			return;
+		}
+
+		update_option( 'pet_studio_ew_version', PET_STUDIO_EW_VERSION, false );
+
+		if ( class_exists( '\Elementor\Plugin' ) ) {
+			$elementor = \Elementor\Plugin::$instance;
+			if ( isset( $elementor->files_manager ) ) {
+				$elementor->files_manager->clear_cache();
+			}
+		}
+
+		do_action( 'litespeed_purge_all' );
 	}
 
 	/**

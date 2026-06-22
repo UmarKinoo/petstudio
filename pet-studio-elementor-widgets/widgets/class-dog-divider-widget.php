@@ -70,13 +70,13 @@ class Dog_Divider_Widget extends Widget_Base {
 			$height = $dims['height'];
 		}
 		$size_attr = ( $width && $height )
-			? ' width="' . esc_attr( (string) $width ) . '" height="' . esc_attr( (string) $height ) . '"'
+			? ' width="' . esc_attr( (string) $width ) . '" height="' . esc_attr( (string) $height ) . '" style="width:' . esc_attr( (string) $width ) . 'px;height:' . esc_attr( (string) $height ) . 'px;"'
 			: '';
 		?>
 		<div class="uk-grid tm-grid-expand uk-child-width-1-1 uk-margin-xlarge-top uk-margin-remove-bottom">
 			<div class="uk-width-1-1<?php echo esc_attr( $mobile ); ?>">
 				<div class="uk-position-relative uk-margin" uk-parallax="<?php echo $parallax; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" style="right: <?php echo esc_attr( (string) $right ); ?>px;" uk-scrollspy="target: [uk-scrollspy-class];">
-					<img class="el-image" src="<?php echo esc_url( $icon ); ?>" alt="" loading="lazy"<?php echo $size_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<img class="el-image litespeed-no-lazy" src="<?php echo esc_url( $icon ); ?>" alt="" loading="lazy"<?php echo $size_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 				</div>
 			</div>
 		</div>
