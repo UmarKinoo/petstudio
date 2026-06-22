@@ -6,7 +6,7 @@
     "port": 21,
     "username": "u828573126.motiondesignz.com",
     "password": "REPLACE_ME",
-    "remotePath": "/public_html/test/wp-content/plugins/pet-studio-elementor-widgets",
+    "remotePath": "/test/wp-content/plugins/pet-studio-elementor-widgets",
     "syncroot": "pet-studio-elementor-widgets"
   }
 ]
