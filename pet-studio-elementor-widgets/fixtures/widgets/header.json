@@ -75,6 +75,7 @@
     }
   ],
   "show_book_now": true,
+  "show_social": true,
   "book_now_label": "Book Now",
   "book_now_link": {
     "url": "/contact/",

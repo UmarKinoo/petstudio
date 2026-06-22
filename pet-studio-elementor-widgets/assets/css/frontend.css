@@ -81,36 +81,47 @@
 	text-transform: none !important;
 }
 
-/* Desktop header — full-width container + room for nav + Book Now CTA */
+/* Desktop header — full-width container + room for nav + Book Now + social */
 .tm-header > [uk-sticky] .uk-container-expand,
-.tm-header .uk-navbar-container .uk-container-expand {
+.tm-header .uk-navbar-container .uk-container-expand,
+.tm-header .uk-navbar-container {
 	max-width: none;
 	width: 100%;
-	padding-left: clamp(0.75rem, 2vw, 1.75rem);
-	padding-right: clamp(0.75rem, 2vw, 1.75rem);
+	padding-left: 100px !important;
+	padding-right: 100px !important;
+	box-sizing: border-box;
+	overflow: visible;
 }
 
 .tm-header .uk-navbar {
 	width: 100%;
+	overflow: visible;
 }
 
 .tm-header .uk-navbar-right {
-	flex: 1 1 auto;
+	flex: 0 1 auto;
 	justify-content: flex-end;
-	min-width: 0;
+	min-width: auto;
 	flex-wrap: nowrap;
-	align-items: stretch;
+	align-items: flex-start;
+	overflow: visible;
 }
 
 .tm-header .ps-header-nav {
-	flex: 1 1 auto;
+	flex: 0 0 auto;
 	justify-content: flex-end;
+	align-self: flex-start;
 }
 
 .tm-header .ps-header-nav > li > a {
 	padding-left: 0.4rem;
 	padding-right: 0.4rem;
 	white-space: nowrap;
+	align-items: flex-start;
+}
+
+.tm-header .ps-header-nav > li > a > div {
+	display: block;
 }
 
 .tm-header .ps-header-nav > li > a .uk-navbar-subtitle {
@@ -126,7 +137,30 @@
 
 .tm-header #module-tm-3 {
 	flex-shrink: 0;
-	margin-left: 0.25rem;
+	margin-left: 0.75rem;
+	position: relative;
+	z-index: 2;
+	align-self: center;
+}
+
+.tm-header .uk-navbar-item:has(.ps-book-now-btn) {
+	align-self: center;
+}
+
+.tm-header #module-tm-3 .uk-icon-link {
+	color: #fff;
+}
+
+.tm-header #module-tm-3 .uk-icon-link:hover {
+	color: var(--pet-primary, #ff90aa);
+}
+
+.tm-header .uk-navbar-sticky #module-tm-3 .uk-icon-link {
+	color: #000;
+}
+
+.tm-header .uk-navbar-sticky #module-tm-3 .uk-icon-link:hover {
+	color: var(--pet-primary, #ff90aa);
 }
 
 /* Book Now CTA — solid brand-pink pill so it stands out on the hero and the sticky nav.

@@ -503,7 +503,7 @@ class Header_Widget extends Widget_Base {
 					<a<?php print_link_attributes( $item['link'] ?? null ); ?>>
 						<div>
 							<?php echo esc_html( $item['label'] ?? '' ); ?>
-							<div class="uk-nav-subtitle"><?php echo esc_html( $item['subtitle'] ?? '' ); ?></div>
+							<div class="uk-nav-subtitle"><?php $this->render_nav_subtitle( $item['subtitle'] ?? '' ); ?></div>
 						</div>
 					</a>
 				</li>
@@ -530,7 +530,7 @@ class Header_Widget extends Widget_Base {
 					<a<?php print_link_attributes( $item['link'] ?? null ); ?>>
 						<div>
 							<?php echo esc_html( $item['label'] ?? '' ); ?>
-							<div class="uk-navbar-subtitle"><?php echo esc_html( $item['subtitle'] ?? '' ); ?></div>
+							<div class="uk-navbar-subtitle"><?php $this->render_nav_subtitle( $item['subtitle'] ?? '' ); ?></div>
 						</div>
 					</a>
 				</li>
@@ -582,6 +582,18 @@ class Header_Widget extends Widget_Base {
 	 */
 	private function book_now_button_style(): string {
 		return 'display:inline-flex;align-items:center;justify-content:center;padding:0.7rem 1.7rem;font-family:Manrope,sans-serif;font-weight:700;font-size:0.8125rem;line-height:1.1;letter-spacing:0.03em;text-transform:none;white-space:nowrap;border-radius:999px;color:#fff;background-color:#FF90AA;border:2px solid #FF90AA;box-shadow:0 6px 18px rgba(255,144,170,0.5);text-decoration:none;';
+	}
+
+	/**
+	 * Mirror uses <br> in empty nav subtitles so labels stay top-aligned.
+	 */
+	private function render_nav_subtitle( string $subtitle ): void {
+		$subtitle = trim( $subtitle );
+		if ( $subtitle === '' ) {
+			echo '<br>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static mirror markup.
+			return;
+		}
+		echo esc_html( $subtitle );
 	}
 
 	/**

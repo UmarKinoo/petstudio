@@ -16,7 +16,7 @@ final class Assets {
 			'pet-studio-uikit',
 			PET_STUDIO_EW_URL . 'assets/css/uikit.min.css',
 			array(),
-			'3.21.6'
+			PET_STUDIO_EW_VERSION
 		);
 
 		wp_register_style(

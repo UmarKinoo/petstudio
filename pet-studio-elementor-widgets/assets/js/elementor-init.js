@@ -8,6 +8,9 @@
 		if ( typeof UIkit === 'undefined' ) {
 			return;
 		}
+		if ( typeof UIkitKojiro !== 'undefined' && UIkitKojiro.installed !== true ) {
+			UIkit.use( UIkitKojiro );
+		}
 		UIkit.update( scope || document.body );
 		syncHeroVideos( scope || document );
 	}
