@@ -70,3 +70,24 @@ fi
 
 echo "Deploying to ${FTP_URL} …"
 git ftp "${ftp_args[@]}" "$FTP_URL"
+
+LOCAL_VERSION="$(rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" "$REPO_ROOT/${SYNCROOT:-pet-studio-elementor-widgets}/pet-studio-elementor-widgets.php" | rg -o "'[^']+'" | tail -1 | tr -d "'")"
+REMOTE_VERSION="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" "${PROTO}://${H}:${PORT}//${R_NOSLASH}/pet-studio-elementor-widgets.php" | rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" | rg -o "'[^']+'" | tail -1 | tr -d "'" || true)"
+
+if [[ -z "$REMOTE_VERSION" || "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
+	echo "git-ftp reported success but remote is ${REMOTE_VERSION:-missing} (expected ${LOCAL_VERSION}). Falling back to curl FTP upload…" >&2
+	SYNC_DIR="$REPO_ROOT/${SYNCROOT:-pet-studio-elementor-widgets}"
+	while IFS= read -r -d '' file; do
+		rel="${file#"$SYNC_DIR"/}"
+		curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U" --passwd "$P" -T "$file" "${PROTO}://${H}:${PORT}//${R_NOSLASH}/${rel}" >/dev/null
+	done < <(find "$SYNC_DIR" -type f ! -path '*/.git/*' -print0)
+	git rev-parse HEAD | curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" -T - "${PROTO}://${H}:${PORT}//${R_NOSLASH}/.git-ftp.log" >/dev/null
+	REMOTE_VERSION="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" "${PROTO}://${H}:${PORT}//${R_NOSLASH}/pet-studio-elementor-widgets.php" | rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" | rg -o "'[^']+'" | tail -1 | tr -d "'" || true)"
+	if [[ "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
+		echo "Deploy verification failed: remote ${REMOTE_VERSION:-missing}, expected ${LOCAL_VERSION}." >&2
+		exit 1
+	fi
+	echo "Fallback upload verified: ${LOCAL_VERSION}"
+else
+	echo "Deploy verified: ${LOCAL_VERSION}"
+fi
