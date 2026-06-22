@@ -119,6 +119,9 @@ class Demo_Importer {
 
 		update_option( self::OPTION_IMPORTED, time(), false );
 
+		Plugin::purge_elementor_caches();
+		self::maybe_repair_theme_builder();
+
 		return array(
 			'success' => true,
 			'message' => sprintf(
@@ -234,9 +237,8 @@ class Demo_Importer {
 	private function create_theme_template( string $type, array $config ): void {
 		$title   = $config['title'] ?? ucfirst( $type );
 		$widgets = $config['widgets'] ?? array();
-		$existing = get_page_by_title( $title, OBJECT, 'elementor_library' );
+		$post_id = $this->resolve_theme_template_id( $title, $type );
 
-		$post_id = $existing ? $existing->ID : 0;
 		if ( ! $post_id ) {
 			$post_id = wp_insert_post(
 				array(
@@ -258,7 +260,33 @@ class Demo_Importer {
 		update_post_meta( $post_id, '_elementor_data', wp_slash( wp_json_encode( $data ) ) );
 		update_post_meta( $post_id, '_elementor_version', ELEMENTOR_VERSION );
 
-		$this->apply_theme_builder_assignment( $post_id, $type );
+		$this->apply_theme_builder_assignment( (int) $post_id, $type );
+	}
+
+	/**
+	 * Keep a single Theme Builder template per title — duplicates break the header (2× Book Now, etc.).
+	 */
+	private function resolve_theme_template_id( string $title, string $type ): int {
+		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$ids = $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT ID FROM {$wpdb->posts} WHERE post_title = %s AND post_type = 'elementor_library' AND post_status != 'trash' ORDER BY ID ASC",
+				$title
+			)
+		);
+
+		if ( empty( $ids ) ) {
+			return 0;
+		}
+
+		$keep = (int) $ids[0];
+		foreach ( array_slice( $ids, 1 ) as $duplicate_id ) {
+			wp_trash_post( (int) $duplicate_id );
+		}
+
+		return $keep;
 	}
 
 	/**

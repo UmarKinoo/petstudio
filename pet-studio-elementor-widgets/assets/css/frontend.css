@@ -64,8 +64,12 @@
 
 /* Mirror uses Title Case nav labels — override theme/Elementor uppercase */
 .tm-header .uk-navbar-nav > li > a,
-.tm-header .uk-nav-default > li > a {
-	text-transform: none;
+.tm-header .uk-nav-default > li > a,
+.tm-header-mobile .uk-navbar-nav > li > a,
+.tm-header-mobile .uk-nav-default > li > a,
+.elementor-location-header .uk-navbar-nav > li > a,
+.elementor-location-header .uk-nav-default > li > a {
+	text-transform: none !important;
 }
 
 /* Book Now CTA — solid brand-pink pill so it stands out on the hero and the sticky nav.

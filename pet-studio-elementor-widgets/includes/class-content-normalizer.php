@@ -108,8 +108,9 @@ class Content_Normalizer {
 				break;
 
 			case 'header':
+				$book_label = (string) ( $fixture['book_now_label'] ?? 'Book Now' );
 				$fixture['navigation'] = self::map_list(
-					$fixture['navigation'] ?? array(),
+					self::strip_book_now_nav_items( $fixture['navigation'] ?? array(), $book_label ),
 					function ( array $item ): array {
 						return array(
 							'label'     => $item['label'] ?? '',
@@ -128,13 +129,16 @@ class Content_Normalizer {
 						);
 					}
 				);
-				$fixture['logo_default']  = self::media_to_elementor( $fixture['logo_default'] ?? null );
-				$fixture['logo_inverse']  = self::media_to_elementor( $fixture['logo_inverse'] ?? null );
-				$fixture['logo_link']       = self::link_to_elementor( $fixture['logo_link'] ?? null );
-				$fixture['book_now_link']   = self::link_to_elementor( $fixture['book_now_link'] ?? null );
-				$fixture['show_book_now']   = self::bool_to_switcher( $fixture['show_book_now'] ?? true );
-				$fixture['enable_sticky']     = self::bool_to_switcher( $fixture['enable_sticky'] ?? true );
+				$fixture['logo_default']       = self::media_to_elementor( $fixture['logo_default'] ?? null );
+				$fixture['logo_inverse']       = self::media_to_elementor( $fixture['logo_inverse'] ?? null );
+				$fixture['logo_link']          = self::link_to_elementor( $fixture['logo_link'] ?? null );
+				$fixture['book_now_link']      = self::link_to_elementor( $fixture['book_now_link'] ?? null );
+				$fixture['show_book_now']      = self::bool_to_switcher( $fixture['show_book_now'] ?? true );
+				$fixture['show_social']        = self::bool_to_switcher( $fixture['show_social'] ?? true );
+				$fixture['enable_sticky']      = self::bool_to_switcher( $fixture['enable_sticky'] ?? true );
 				$fixture['enable_transparent'] = self::bool_to_switcher( $fixture['enable_transparent'] ?? true );
+				$fixture['nav_typography_typography']      = 'custom';
+				$fixture['nav_typography_text_transform']    = 'none';
 				break;
 
 			case 'footer':
@@ -290,6 +294,30 @@ class Content_Normalizer {
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * Remove Book Now rows from nav repeaters — CTA is a separate control.
+	 *
+	 * @param array<int, array<string, mixed>> $items Nav rows.
+	 * @param string                           $book_label Book Now label to strip.
+	 * @return array<int, array<string, mixed>>
+	 */
+	public static function strip_book_now_nav_items( array $items, string $book_label = 'Book Now' ): array {
+		$blocked = array(
+			strtolower( trim( $book_label ) ),
+			'book now',
+		);
+
+		return array_values(
+			array_filter(
+				$items,
+				static function ( array $item ) use ( $blocked ): bool {
+					$label = strtolower( trim( (string) ( $item['label'] ?? '' ) ) );
+					return ! in_array( $label, $blocked, true );
+				}
+			)
+		);
 	}
 
 	/**

@@ -21,6 +21,8 @@ use function Pet_Studio_Elementor\print_link_attributes;
 use function Pet_Studio_Elementor\social_icon_name;
 use function Pet_Studio_Elementor\switcher_enabled;
 
+use Pet_Studio_Elementor\Content_Normalizer;
+
 defined( 'ABSPATH' ) || exit;
 
 class Header_Widget extends Widget_Base {
@@ -462,6 +464,7 @@ class Header_Widget extends Widget_Base {
 	 * @param array<int, array<string, mixed>> $items Nav repeater rows.
 	 */
 	private function render_mobile_nav( array $items ): void {
+		$items = $this->filter_nav_items( $items );
 		?>
 		<ul class="uk-nav uk-nav-default">
 			<?php foreach ( $items as $item ) : ?>
@@ -488,6 +491,7 @@ class Header_Widget extends Widget_Base {
 	 * @param array<int, array<string, mixed>> $items Nav repeater rows.
 	 */
 	private function render_desktop_nav( array $items ): void {
+		$items = $this->filter_nav_items( $items );
 		?>
 		<ul class="uk-navbar-nav">
 			<?php foreach ( $items as $item ) : ?>
@@ -536,16 +540,37 @@ class Header_Widget extends Widget_Base {
 		if ( $mobile ) {
 			?>
 			<div class="uk-margin-medium-top">
-				<a class="uk-button ps-book-now-btn uk-width-1-1"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+				<a class="uk-button ps-book-now-btn uk-width-1-1" style="<?php echo esc_attr( $this->book_now_button_style() ); ?>"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
 			</div>
 			<?php
 			return;
 		}
 		?>
 		<div class="uk-navbar-item ps-header-book-now">
-			<a class="uk-button ps-book-now-btn"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+			<a class="uk-button ps-book-now-btn" style="<?php echo esc_attr( $this->book_now_button_style() ); ?>"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Inline fallback so the pink pill survives stale LiteSpeed/Elementor CSS after demo import.
+	 */
+	private function book_now_button_style(): string {
+		return 'display:inline-flex;align-items:center;justify-content:center;padding:0.7rem 1.7rem;font-family:Manrope,sans-serif;font-weight:700;font-size:0.8125rem;line-height:1.1;letter-spacing:0.03em;text-transform:none;white-space:nowrap;border-radius:999px;color:#fff;background-color:#FF90AA;border:2px solid #FF90AA;box-shadow:0 6px 18px rgba(255,144,170,0.5);text-decoration:none;';
+	}
+
+	/**
+	 * @param array<int, array<string, mixed>> $items Nav repeater rows.
+	 * @return array<int, array<string, mixed>>
+	 */
+	private function filter_nav_items( array $items ): array {
+		$settings = $this->get_render_settings();
+		if ( ! switcher_enabled( $settings['show_book_now'] ?? null, true ) ) {
+			return $items;
+		}
+
+		$book_label = (string) ( $settings['book_now_label'] ?? 'Book Now' );
+		return Content_Normalizer::strip_book_now_nav_items( $items, $book_label );
 	}
 
 	/**

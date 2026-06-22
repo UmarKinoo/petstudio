@@ -36,7 +36,13 @@ final class Plugin {
 		}
 
 		update_option( 'pet_studio_ew_version', PET_STUDIO_EW_VERSION, false );
+		self::purge_elementor_caches();
+	}
 
+	/**
+	 * Clear Elementor file cache + LiteSpeed after plugin update or demo import.
+	 */
+	public static function purge_elementor_caches(): void {
 		if ( class_exists( '\Elementor\Plugin' ) ) {
 			$elementor = \Elementor\Plugin::$instance;
 			if ( isset( $elementor->files_manager ) ) {
