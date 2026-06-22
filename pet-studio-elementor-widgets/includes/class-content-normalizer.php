@@ -137,8 +137,10 @@ class Content_Normalizer {
 				$fixture['show_social']        = self::bool_to_switcher( $fixture['show_social'] ?? true );
 				$fixture['enable_sticky']      = self::bool_to_switcher( $fixture['enable_sticky'] ?? true );
 				$fixture['enable_transparent'] = self::bool_to_switcher( $fixture['enable_transparent'] ?? true );
-				$fixture['nav_typography_typography']      = 'custom';
-				$fixture['nav_typography_text_transform']    = 'none';
+				$fixture['nav_typography_typography']           = 'custom';
+				$fixture['nav_typography_text_transform']       = 'none';
+				$fixture['nav_subtitle_typography_typography']    = 'custom';
+				$fixture['nav_subtitle_typography_text_transform'] = 'none';
 				break;
 
 			case 'footer':

@@ -64,12 +64,50 @@
 
 /* Mirror uses Title Case nav labels — override theme/Elementor uppercase */
 .tm-header .uk-navbar-nav > li > a,
+.tm-header .uk-navbar-nav > li > a > div,
+.tm-header .uk-navbar-subtitle,
+.tm-header .uk-nav-subtitle,
 .tm-header .uk-nav-default > li > a,
+.tm-header .uk-nav-default > li > a > div,
 .tm-header-mobile .uk-navbar-nav > li > a,
 .tm-header-mobile .uk-nav-default > li > a,
+.elementor-widget-pet_studio_header .uk-navbar-nav > li > a,
+.elementor-widget-pet_studio_header .uk-navbar-nav > li > a > div,
+.elementor-widget-pet_studio_header .uk-navbar-subtitle,
+.elementor-widget-pet_studio_header .uk-nav-subtitle,
 .elementor-location-header .uk-navbar-nav > li > a,
+.elementor-location-header .uk-navbar-nav > li > a > div,
 .elementor-location-header .uk-nav-default > li > a {
 	text-transform: none !important;
+}
+
+/* Desktop header — full-width container + tighter nav fit with Book Now CTA */
+.tm-header > [uk-sticky] .uk-container-expand,
+.tm-header .uk-navbar-container .uk-container-expand {
+	max-width: 100%;
+	padding-left: clamp(1rem, 3vw, 2.5rem);
+	padding-right: clamp(1rem, 3vw, 2.5rem);
+}
+
+.tm-header .uk-navbar-right {
+	flex-wrap: nowrap;
+	align-items: stretch;
+}
+
+.tm-header .ps-header-nav > li > a {
+	padding-left: 0.55rem;
+	padding-right: 0.55rem;
+	white-space: nowrap;
+}
+
+.tm-header .ps-header-nav > li > a .uk-navbar-subtitle {
+	font-size: 0.72rem;
+	line-height: 1.2;
+	letter-spacing: 0;
+}
+
+.tm-header .uk-logo.uk-navbar-item {
+	margin-right: 0.5rem;
 }
 
 /* Book Now CTA — solid brand-pink pill so it stands out on the hero and the sticky nav.

@@ -355,6 +355,20 @@ class Header_Widget extends Widget_Base {
 			)
 		);
 
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'nav_subtitle_typography',
+				'label'          => esc_html__( 'Nav subtitle typography', 'pet-studio-elementor' ),
+				'selector'       => '{{WRAPPER}} .uk-navbar-subtitle, {{WRAPPER}} .uk-nav-subtitle',
+				'fields_options' => array(
+					'text_transform' => array(
+						'default' => 'none',
+					),
+				),
+			)
+		);
+
 		$this->add_control(
 			'nav_subtitle_color',
 			array(
@@ -387,6 +401,7 @@ class Header_Widget extends Widget_Base {
 
 	protected function render(): void {
 		$settings   = $this->get_render_settings();
+		$element_id = esc_attr( (string) $this->get_id() );
 		$dialog_id  = 'tm-dialog-mobile-' . $this->get_id();
 		$logo_url   = media_url( $settings['logo_default'] ?? null );
 		$logo_inv   = media_url( $settings['logo_inverse'] ?? null );
@@ -401,6 +416,16 @@ class Header_Widget extends Widget_Base {
 			? ' uk-sticky media="@m" show-on-up animation="uk-animation-slide-top" cls-active="uk-navbar-sticky" sel-target=".uk-navbar-container" cls-inactive="' . esc_attr( $inactive_cls ) . '" tm-section-start'
 			: '';
 		?>
+		<style>
+			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-navbar-nav > li > a,
+			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-navbar-nav > li > a > div,
+			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-navbar-subtitle,
+			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-nav-subtitle,
+			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-nav-default > li > a,
+			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-nav-default > li > a > div {
+				text-transform: none !important;
+			}
+		</style>
 		<header class="tm-header-mobile uk-hidden@m tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container; sel-active: .uk-navbar-transparent">
 			<div<?php echo $sticky_attr ? ' ' . trim( $sticky_attr ) : ''; ?>>
 				<div class="uk-navbar-container">
@@ -436,7 +461,7 @@ class Header_Widget extends Widget_Base {
 		<header class="tm-header uk-visible@m tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container, .tm-headerbar; sel-active: .uk-navbar-transparent, .tm-headerbar">
 			<div<?php echo $sticky_attr_desktop ? ' ' . trim( $sticky_attr_desktop ) : ''; ?>>
 				<div class="uk-navbar-container">
-					<div class="uk-container">
+					<div class="uk-container uk-container-expand">
 						<nav class="uk-navbar" uk-navbar='{"align":"left","container":".tm-header > [uk-sticky]","boundary":".tm-header .uk-navbar-container"}'>
 							<div class="uk-navbar-left">
 								<a aria-label="<?php esc_attr_e( 'Back to home', 'pet-studio-elementor' ); ?>" class="uk-logo uk-navbar-item"<?php print_link_attributes( $settings['logo_link'] ?? null ); ?>>
@@ -493,7 +518,7 @@ class Header_Widget extends Widget_Base {
 	private function render_desktop_nav( array $items ): void {
 		$items = $this->filter_nav_items( $items );
 		?>
-		<ul class="uk-navbar-nav">
+		<ul class="uk-navbar-nav ps-header-nav">
 			<?php foreach ( $items as $item ) : ?>
 				<?php
 				$classes = array();
