@@ -1,0 +1,105 @@
+{
+  "logo_default": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/the_pet_studio_logo_dark_400px.svg"
+  },
+  "logo_inverse": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/the_pet_studio_logo_400px.svg"
+  },
+  "logo_link": {
+    "url": "/",
+    "is_external": false,
+    "nofollow": false
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "subtitle": "",
+      "link": {
+        "url": "/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "is_active": false
+    },
+    {
+      "label": "Grooming",
+      "subtitle": "Groom Your Dog",
+      "link": {
+        "url": "/dog-grooming/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "is_active": false
+    },
+    {
+      "label": "Academy",
+      "subtitle": "Learn to Groom",
+      "link": {
+        "url": "/grooming-academy/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "is_active": false
+    },
+    {
+      "label": "Training",
+      "subtitle": "Train Your Dog",
+      "link": {
+        "url": "/dog-training/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "is_active": false
+    },
+    {
+      "label": "Team",
+      "subtitle": "Meet Us",
+      "link": {
+        "url": "/team/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "is_active": false
+    },
+    {
+      "label": "Contact",
+      "subtitle": "Find Us",
+      "link": {
+        "url": "/contact/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "is_active": false
+    }
+  ],
+  "social_items": [
+    {
+      "network": "tiktok",
+      "link": {
+        "url": "https://www.tiktok.com/@the.petstudio",
+        "is_external": true,
+        "nofollow": false
+      }
+    },
+    {
+      "network": "instagram",
+      "link": {
+        "url": "https://www.instagram.com/the.petstudio",
+        "is_external": true,
+        "nofollow": false
+      }
+    },
+    {
+      "network": "facebook",
+      "link": {
+        "url": "https://www.facebook.com/PetStudioCongresbury",
+        "is_external": true,
+        "nofollow": false
+      }
+    }
+  ],
+  "enable_sticky": true,
+  "enable_transparent": true
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thepetstudio.local/schemas/est-banner.json",
+  "title": "Pet Studio widget: est-banner",
+  "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "parallax_expression": {
+      "type": "string"
+    },
+    "hide_on_mobile": {
+      "type": "boolean"
+    }
+  }
+}

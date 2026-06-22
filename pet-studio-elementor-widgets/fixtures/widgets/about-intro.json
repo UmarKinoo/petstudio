@@ -1,0 +1,23 @@
+{
+  "heading": "A Class Team",
+  "body": "Providing excellence in dog grooming from our Congresbury salon, The Pet Studio is there for you and your dog. In addition, we offer accredited City & Guilds dog grooming courses providing top class training for the next generation of dog groomers in South-West England.",
+  "cta_text": "Read more",
+  "cta_link": {
+    "url": "/team/",
+    "is_external": false,
+    "nofollow": false
+  },
+  "badge_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/city_guilds_logo.png"
+  },
+  "main_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/home-team-section.jpg"
+  },
+  "show_signature": true,
+  "signature_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thepetstudio.local/schemas/contact.json",
+  "title": "Pet Studio widget: contact",
+  "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
+  "type": "object",
+  "properties": {
+    "heading": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "form_shortcode": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "maps_button_text": {
+      "type": "string"
+    },
+    "maps_link": {
+      "$ref": "_common.json#/$defs/link"
+    },
+    "sticky_image": {
+      "$ref": "_common.json#/$defs/media"
+    },
+    "mobile_image": {
+      "$ref": "_common.json#/$defs/media"
+    },
+    "map_lat": {
+      "type": "string"
+    },
+    "map_lng": {
+      "type": "string"
+    },
+    "map_zoom": {
+      "type": "integer"
+    },
+    "map_marker_title": {
+      "type": "string"
+    }
+  }
+}

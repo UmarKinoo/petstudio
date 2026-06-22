@@ -1,0 +1,9 @@
+{
+  "slug": "contact",
+  "title": "Contact",
+  "widgets": [
+    "hero-inner",
+    "contact",
+    "testimonials"
+  ]
+}

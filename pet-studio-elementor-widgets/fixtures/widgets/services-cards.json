@@ -1,0 +1,48 @@
+{
+  "heading": "Our",
+  "heading_accent": "Services",
+  "cards": [
+    {
+      "image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/service-card-dog-grooming.jpg"
+      },
+      "title": "Dog Grooming",
+      "link": {
+        "url": "/dog-grooming/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "button_text": "See More",
+      "parallax_start": "62vh"
+    },
+    {
+      "image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/academy/service-card-grooming-academy.jpg"
+      },
+      "title": "Grooming Academy",
+      "link": {
+        "url": "/grooming-academy/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "button_text": "See More",
+      "parallax_start": "68vh"
+    },
+    {
+      "image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/general/service-card-dog-training.jpg"
+      },
+      "title": "Dog Training",
+      "link": {
+        "url": "/dog-training/",
+        "is_external": false,
+        "nofollow": false
+      },
+      "button_text": "See More",
+      "parallax_start": "74vh"
+    }
+  ]
+}

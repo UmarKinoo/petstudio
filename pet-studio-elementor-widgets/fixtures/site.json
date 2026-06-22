@@ -1,0 +1,51 @@
+{
+  "site": {
+    "name": "The Pet Studio",
+    "tagline": "Congresbury & Nailsea",
+    "description": "THE first choice provider for all of your Dog Grooming and City & Guilds Training in the South-West",
+    "phone": "01934 90 60 80",
+    "email": "thepetstudio@yahoo.co.uk",
+    "address": "2 High Street Congresbury North Somerset BS49 5JA",
+    "hours": "Monday-Friday, 9am - 4pm"
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "subtitle": "",
+      "slug": "home"
+    },
+    {
+      "label": "Grooming",
+      "subtitle": "Groom Your Dog",
+      "slug": "dog-grooming"
+    },
+    {
+      "label": "Academy",
+      "subtitle": "Learn to Groom",
+      "slug": "grooming-academy"
+    },
+    {
+      "label": "Training",
+      "subtitle": "Train Your Dog",
+      "slug": "dog-training"
+    },
+    {
+      "label": "Team",
+      "subtitle": "Meet Us",
+      "slug": "team"
+    },
+    {
+      "label": "Contact",
+      "subtitle": "Find Us",
+      "slug": "contact"
+    }
+  ],
+  "pages": [
+    "home",
+    "dog-grooming",
+    "grooming-academy",
+    "dog-training",
+    "team",
+    "contact"
+  ]
+}

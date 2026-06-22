@@ -1,0 +1,16 @@
+{
+    "name_line_1": "Skye",
+    "name_accent": "Braham",
+    "role": "Dog Groomer",
+    "bio": "<p>Skye is Liza\u2019s daughter who completed her City &amp; Guilds Level 2 qualification in 2020. She specialises in nervous dogs, young puppies and ultrasonic teeth cleaning.</p>",
+    "portrait": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/skye.jpg"
+    },
+    "show_signature": true,
+    "signature_image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+    },
+    "reverse_columns": true
+}

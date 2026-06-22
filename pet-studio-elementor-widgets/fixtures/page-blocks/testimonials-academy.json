@@ -1,0 +1,69 @@
+{
+    "reviews": [
+        {
+            "icon": {
+                "id": 0,
+                "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/testimonial-paw.png"
+            },
+            "title": "Such a positive experience",
+            "quote": "Apart from meeting so many great dogs, the thing I liked most about the course was Liza and the great group of us girls working together towards a new career. There were ups and downs, tears and laughter and overall such a positive experience.",
+            "author": "Anonymous"
+        },
+        {
+            "icon": {
+                "id": 0,
+                "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/testimonial-paw.png"
+            },
+            "title": "Totally recommend it",
+            "quote": "Since finishing I have set up a small business on my own. And while it is small, it's growing and I meet lovely dogs and people. I'm much happier than before I completed the course and totally recommend it. 5 \ud83c\udf1f",
+            "author": "Anonymous"
+        },
+        {
+            "icon": {
+                "id": 0,
+                "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/testimonial-paw.png"
+            },
+            "title": "Taught me way more than I thought",
+            "quote": "I have just completed the level 2 dog grooming assistant course and I have had an amazing time. Liza is an amazing teacher and has taught me way more than I thought I could have learned in the past 5 weeks. Definitely worth doing especially if you love animals! Thank you Liza.",
+            "author": "Charlotte"
+        },
+        {
+            "icon": {
+                "id": 0,
+                "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/testimonial-paw.png"
+            },
+            "title": "Thoroughly enjoyed the experience",
+            "quote": "I recently had a day of learning to groom my own pooch! Always wanted to do it myself as she cry\u2019s like a baby every time I leave her at local groomers, but I have never had the confidence. I finally took \u2018the plunge\u2019 and I thoroughly enjoyed the whole experience and all the useful information that Liza taught us. Liza has such a natural ability and skill with dogs (and people) that she gave us all the confidence we needed.",
+            "author": "Sue"
+        },
+        {
+            "icon": {
+                "id": 0,
+                "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/testimonial-paw.png"
+            },
+            "title": "A Doggy Goddess!!!",
+            "quote": "She is the bravest, hardest working groomer/trainer I've ever had the pleasure of meeting and I am so honoured that she agreed to help us and has been grooming our dog over the past year. I really don't know what we wouldve done without her support! A doggy goddess!!!",
+            "author": "Donna"
+        },
+        {
+            "icon": {
+                "id": 0,
+                "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/testimonial-paw.png"
+            },
+            "title": "Always gave clear instructions",
+            "quote": "Our Poochon, Chloe and us had a nice time doing a 1 day groom your dog course. Liza was really helpful and encouraging and always gave clear instructions. She was really patient to Chloe. We would really highly recommend.",
+            "author": "Saan"
+        },
+        {
+            "icon": {
+                "id": 0,
+                "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/testimonial-paw.png"
+            },
+            "title": "Huge amount of experience",
+            "quote": "I completed the City and Guilds 6 week course and it has provided me with all the knowledge I needed to become a dog groomer. Liza has a huge amount of experience and adapts her teaching style to each individual student. She makes sure you have the knowledge, skill and confidence to become a groomer as soon as you finish the course. She is even there to support you once you\u2019ve finished which is very reassuring! Would definitely recommend Liza and her team to anyone wanting to become a dog groomer!",
+            "author": "Lauren"
+        }
+    ],
+    "autoplay": true,
+    "show_dots": true
+}

@@ -1,0 +1,11 @@
+{
+  "slug": "home",
+  "title": "Home",
+  "is_front_page": true,
+  "widgets": [
+    "hero-home",
+    "services-cards",
+    "about-intro",
+    "testimonials"
+  ]
+}

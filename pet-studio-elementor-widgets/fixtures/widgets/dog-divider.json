@@ -1,0 +1,8 @@
+{
+  "icon_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/icon_dog_01.png"
+  },
+  "parallax_x": "x: 100vw,0,0,-100vw",
+  "show_on_mobile": true
+}

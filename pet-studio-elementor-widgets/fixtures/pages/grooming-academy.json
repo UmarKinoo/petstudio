@@ -1,0 +1,16 @@
+{
+  "slug": "grooming-academy",
+  "title": "Grooming Academy",
+  "widgets": [
+    "hero-inner",
+    { "slug": "page-intro", "variant": "page-intro-academy" },
+    { "slug": "dog-divider", "variant": "dog-divider-07" },
+    { "slug": "content-split", "variant": "content-split-training-salon" },
+    { "slug": "dog-divider", "variant": "dog-divider-08" },
+    { "slug": "content-split", "variant": "content-split-career-change" },
+    { "slug": "dog-divider", "variant": "dog-divider-03" },
+    "courses-tabs",
+    { "slug": "dog-divider", "variant": "dog-divider-01" },
+    { "slug": "testimonials", "variant": "testimonials-academy" }
+  ]
+}

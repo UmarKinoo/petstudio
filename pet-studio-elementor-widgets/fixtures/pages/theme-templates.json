@@ -1,0 +1,10 @@
+{
+  "header": {
+    "title": "Pet Studio Header",
+    "widgets": ["header"]
+  },
+  "footer": {
+    "title": "Pet Studio Footer",
+    "widgets": ["footer", "cookie-consent"]
+  }
+}

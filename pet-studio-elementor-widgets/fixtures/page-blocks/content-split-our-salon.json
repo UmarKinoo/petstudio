@@ -1,0 +1,14 @@
+{
+  "layout_preset": "standard",
+  "section_tone": "default",
+  "heading": "Our Salon",
+  "blockquote": "Our open plan Congresbury salon offers bespoke dog grooming for all breeds of dogs.",
+  "body": "<p>We consistently work with all owners to help them understand their dog's specific coat and requirements when being groomed. We take the time to work with owners to help them be able to maintain their dog's coat in between grooms.</p><p>We specialise in providing a service that will nurture your dog and ensure that it enjoys the grooming experience at our salon. All of our stylists consistently ensure that your dog's welfare is paramount when being groomed.</p><p>Our full dog grooming service includes hand stripping, clip and style, teeth cleaning or a special puppy visit with our highly trained dog grooming stylists.</p>",
+  "bullet_list": [],
+  "image_layout": "1+1",
+  "images": [
+    { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/our-salon-hero.jpg" },
+    { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/our-salon-stack-1.jpg" },
+    { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/our-salon-stack-2.jpg" }
+  ]
+}

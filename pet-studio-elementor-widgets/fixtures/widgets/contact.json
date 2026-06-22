@@ -1,0 +1,24 @@
+{
+  "heading": "Contact Us",
+  "phone": "01934 90 60 80",
+  "form_shortcode": "",
+  "address": "2 High Street\nCongresbury\nNorth Somerset\nBS49 5JA",
+  "maps_button_text": "Open in Google Maps",
+  "maps_link": {
+    "url": "https://maps.google.com/?q=The+Pet+Studio+Congresbury",
+    "is_external": true,
+    "nofollow": false
+  },
+  "sticky_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/general/contact-sticky.jpg"
+  },
+  "mobile_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/general/contact-sticky.jpg"
+  },
+  "map_lat": "51.3703",
+  "map_lng": "-2.8091",
+  "map_zoom": 15,
+  "map_marker_title": "The Pet Studio, Congresbury"
+}

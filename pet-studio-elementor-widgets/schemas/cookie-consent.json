@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thepetstudio.local/schemas/cookie-consent.json",
+  "title": "Pet Studio widget: cookie-consent",
+  "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
+  "type": "object",
+  "properties": {
+    "banner_text": {
+      "type": "string"
+    },
+    "accept_label": {
+      "type": "string"
+    },
+    "reject_label": {
+      "type": "string"
+    },
+    "manage_label": {
+      "type": "string"
+    },
+    "privacy_link": {
+      "$ref": "_common.json#/$defs/link"
+    }
+  }
+}

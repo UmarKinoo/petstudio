@@ -1,0 +1,25 @@
+{
+  "contact_heading": "Contact Us",
+  "contact_link": {
+    "url": "/contact/",
+    "is_external": false,
+    "nofollow": false
+  },
+  "phone": "01934 90 60 80",
+  "email": "thepetstudio@yahoo.co.uk",
+  "logo": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/the_pet_studio_logo_+tagline_MOBILE_600px.svg"
+  },
+  "tagline": "THE first choice provider for all of your Dog Grooming and City & Guilds Training in the South-West",
+  "address": "2 High Street\nCongresbury\nNorth Somerset\nBS49 5JA",
+  "hours_heading": "Opening Hours",
+  "hours_text": "Monday-Friday\n9am - 4pm",
+  "privacy_label": "Privacy Policy",
+  "privacy_link": {
+    "url": "/privacy-policy/",
+    "is_external": false,
+    "nofollow": false
+  },
+  "copyright": "\u00a9 The Pet Studio. All rights reserved."
+}

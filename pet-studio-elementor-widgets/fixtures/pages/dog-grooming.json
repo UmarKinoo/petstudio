@@ -1,0 +1,21 @@
+{
+  "slug": "dog-grooming",
+  "title": "Dog Grooming",
+  "widgets": [
+    "hero-inner",
+    { "slug": "page-intro", "variant": "page-intro-grooming" },
+    { "slug": "dog-divider", "variant": "dog-divider-01" },
+    { "slug": "content-split", "variant": "content-split-our-salon" },
+    { "slug": "dog-divider", "variant": "dog-divider-02" },
+    { "slug": "content-split", "variant": "content-split-calm-relaxed" },
+    { "slug": "dog-divider", "variant": "dog-divider-03" },
+    { "slug": "content-split", "variant": "content-split-puppy-grooming" },
+    { "slug": "dog-divider", "variant": "dog-divider-04" },
+    { "slug": "content-split", "variant": "content-split-difficult-dog" },
+    { "slug": "dog-divider", "variant": "dog-divider-05" },
+    { "slug": "content-split", "variant": "content-split-hand-stripping" },
+    { "slug": "dog-divider", "variant": "dog-divider-06" },
+    { "slug": "content-split", "variant": "content-split-teeth-cleaning" },
+    "testimonials"
+  ]
+}

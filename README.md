@@ -1,0 +1,38 @@
+# Pet Studio
+
+WordPress + Elementor rebuild of [The Pet Studio](https://mature-brown-antelope.69-72-248-210.cpanel.site/).
+
+## Plugin
+
+`pet-studio-elementor-widgets/` — custom Elementor widgets, demo importer, mirror-faithful UIkit theme.
+
+## Local development
+
+1. Local site: `the-pet-studio.local` (Local by Flywheel)
+2. After edits: `bash sync-plugin-to-local.sh`
+3. Demo import: **Tools → Pet Studio Demo** or `php pet-studio-elementor-widgets/bin/run-demo-import.php`
+4. HTTrack mirror preview: `cd pet-studio && php -S 127.0.0.1:8080`
+
+## Push (GitHub + production)
+
+When you say **push**, this means:
+
+1. Commit any uncommitted changes
+2. `git push origin main`
+3. `bash scripts/deploy-production.sh`
+
+One-liner:
+
+```bash
+git add -A && git commit -m "your message" && git push origin main && bash scripts/deploy-production.sh
+```
+
+### First-time deploy setup
+
+```bash
+cp .env.deploy.example .env.deploy
+# Edit .env.deploy with FTP credentials (never commit this file)
+bash scripts/deploy-production.sh
+```
+
+Production site: [test.motiondesignz.com](https://test.motiondesignz.com/)

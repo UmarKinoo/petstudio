@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thepetstudio.local/schemas/content-split.json",
+  "title": "Pet Studio widget: content-split",
+  "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
+  "type": "object",
+  "properties": {
+    "layout_preset": {
+      "enum": [
+        "standard",
+        "tile-left"
+      ]
+    },
+    "section_tone": {
+      "enum": [
+        "default",
+        "muted",
+        "secondary"
+      ]
+    },
+    "heading": {
+      "type": "string"
+    },
+    "blockquote": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "bullet_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "image_layout": {
+      "enum": [
+        "1-right",
+        "2-stacked",
+        "1-plus-1"
+      ]
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "_common.json#/$defs/media"
+      }
+    }
+  }
+}

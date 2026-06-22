@@ -1,0 +1,4 @@
+.env.deploy
+*.zip
+.DS_Store
+.cursor/

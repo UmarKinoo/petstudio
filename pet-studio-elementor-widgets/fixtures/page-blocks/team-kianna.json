@@ -1,0 +1,16 @@
+{
+    "name_line_1": "Kianna",
+    "name_accent": "",
+    "role": "Apprentice",
+    "bio": "<p>Kianna is one of the apprentices with a lifelong love for animals, learning everything she can about grooming while working with dogs every day.</p>",
+    "portrait": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/kianna.jpg"
+    },
+    "show_signature": true,
+    "signature_image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+    },
+    "reverse_columns": true
+}

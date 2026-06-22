@@ -1,0 +1,16 @@
+{
+  "slug": "dog-training",
+  "title": "Dog Training",
+  "widgets": [
+    "hero-inner",
+    { "slug": "page-intro", "variant": "page-intro-training" },
+    { "slug": "dog-divider", "variant": "dog-divider-07" },
+    { "slug": "content-split", "variant": "content-split-training-salon-dog-training" },
+    { "slug": "dog-divider", "variant": "dog-divider-08" },
+    { "slug": "content-split", "variant": "content-split-career-change-dog-training" },
+    { "slug": "dog-divider", "variant": "dog-divider-03" },
+    "courses-tabs",
+    { "slug": "dog-divider", "variant": "dog-divider-01" },
+    "testimonials"
+  ]
+}

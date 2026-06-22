@@ -1,0 +1,16 @@
+{
+  "slug": "team",
+  "title": "Team",
+  "widgets": [
+    "hero-inner",
+    "est-banner",
+    { "slug": "team-member", "variant": "team-liza" },
+    { "slug": "team-member", "variant": "team-skye" },
+    { "slug": "team-member", "variant": "team-jemma" },
+    { "slug": "team-member", "variant": "team-georgia" },
+    { "slug": "team-member", "variant": "team-rita" },
+    { "slug": "team-member", "variant": "team-liz" },
+    { "slug": "team-member", "variant": "team-bea" },
+    { "slug": "team-member", "variant": "team-kianna" }
+  ]
+}

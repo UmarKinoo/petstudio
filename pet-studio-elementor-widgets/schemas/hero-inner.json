@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thepetstudio.local/schemas/hero-inner.json",
+  "title": "Pet Studio widget: hero-inner",
+  "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
+  "type": "object",
+  "properties": {
+    "video": {
+      "$ref": "_common.json#/$defs/media"
+    },
+    "viewport_offset": {
+      "type": "integer"
+    }
+  }
+}

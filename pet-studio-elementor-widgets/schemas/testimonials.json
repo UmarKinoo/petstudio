@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thepetstudio.local/schemas/testimonials.json",
+  "title": "Pet Studio widget: testimonials",
+  "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
+  "type": "object",
+  "properties": {
+    "reviews": {
+      "type": "array",
+      "items": {
+        "$ref": "_common.json#/$defs/review_item"
+      }
+    },
+    "autoplay": {
+      "type": "boolean"
+    },
+    "interval_ms": {
+      "type": "integer"
+    },
+    "slides_desktop": {
+      "type": "integer"
+    },
+    "slides_tablet": {
+      "type": "integer"
+    },
+    "slides_mobile": {
+      "type": "integer"
+    },
+    "show_dots": {
+      "type": "boolean"
+    }
+  }
+}

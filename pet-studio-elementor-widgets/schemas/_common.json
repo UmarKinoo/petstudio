@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thepetstudio.local/schemas/_common.json",
+  "title": "Pet Studio shared types",
+  "$defs": {
+    "media": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "link": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "is_external": {
+          "type": "boolean",
+          "default": false
+        },
+        "nofollow": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "nav_item": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "link": {
+          "$ref": "#/$defs/link"
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "label",
+        "link"
+      ]
+    },
+    "social_item": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "type": "string"
+        },
+        "link": {
+          "$ref": "#/$defs/link"
+        }
+      },
+      "required": [
+        "network",
+        "link"
+      ]
+    },
+    "review_item": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "$ref": "#/$defs/media"
+        },
+        "title": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "quote",
+        "author"
+      ]
+    },
+    "service_card": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/media"
+        },
+        "title": {
+          "type": "string"
+        },
+        "link": {
+          "$ref": "#/$defs/link"
+        },
+        "button_text": {
+          "type": "string",
+          "default": "See More"
+        },
+        "parallax_start": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "image",
+        "title",
+        "link"
+      ]
+    },
+    "course_tab": {
+      "type": "object",
+      "properties": {
+        "tab_label": {
+          "type": "string"
+        },
+        "badge_image": {
+          "$ref": "#/$defs/media"
+        },
+        "title": {
+          "type": "string"
+        },
+        "duration_meta": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tab_label",
+        "title",
+        "content"
+      ]
+    }
+  }
+}

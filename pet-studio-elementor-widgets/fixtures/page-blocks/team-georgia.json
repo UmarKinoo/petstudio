@@ -1,0 +1,16 @@
+{
+    "name_line_1": "Georgia",
+    "name_accent": "",
+    "role": "Dog Groomer",
+    "bio": "<p>Georgia trained under Liza in 2021 and loves the creative and technical challenge that dog grooming offers across many breeds.</p>",
+    "portrait": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/georgia.jpg"
+    },
+    "show_signature": true,
+    "signature_image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+    },
+    "reverse_columns": true
+}

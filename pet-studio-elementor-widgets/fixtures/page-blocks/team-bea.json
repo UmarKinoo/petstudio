@@ -1,0 +1,16 @@
+{
+    "name_line_1": "Bea",
+    "name_accent": "",
+    "role": "Dog Groomer",
+    "bio": "<p>Bea is a skilled groomer at The Pet Studio bringing care and attention to every dog in the salon.</p>",
+    "portrait": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/bea.jpg"
+    },
+    "show_signature": true,
+    "signature_image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+    },
+    "reverse_columns": false
+}

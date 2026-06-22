@@ -1,0 +1,16 @@
+{
+  "heading": "Teeth Cleaning",
+  "blockquote": "Looking after your dog's oral health with ultrasonic teeth cleaning",
+  "body": "<p>Protect your pet's dental health with a regularly scheduled oral hygiene routine with The Pet Studio. We use state of the art ultrasonic oral hygiene technology to provide a complete teeth, gum and mouth clean for your dog without the drama.</p><p>The equipment we use has no scary movement or vibration, and causes no pain or discomfort, which means a stress-free experience for your dog.</p>",
+  "bullet_list": [
+    { "item": "Deep cleansing and tartar removal – much better doggy breath and a healthier, cleaner mouth." },
+    { "item": "Reduces gum inflammation – no sore or bleeding gums which can affect a dog's ability to eat." },
+    { "item": "Cleans without movement, vibration or noise – which means that dogs are able to tolerate the process with no stress or upset." }
+  ],
+  "image_layout": "1+1",
+  "images": [
+    { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/teeth-cleaning-hero.jpg" },
+    { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/teeth-cleaning-stack-1.jpg" },
+    { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/teeth-cleaning-stack-2.jpg" }
+  ]
+}

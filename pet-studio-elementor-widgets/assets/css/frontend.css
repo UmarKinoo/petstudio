@@ -1,0 +1,105 @@
+/**
+ * Pet Studio Elementor — design tokens from mirror theme.
+ * Widget-specific mirror CSS appended below as each widget is built.
+ */
+
+:root {
+	--pet-primary: #FF90AA;
+	--pet-secondary: #B4ADA7;
+	--pet-success: #80B485;
+	--pet-warning: #E5BA43;
+	--pet-danger: #AA3838;
+	--pet-font-heading: 'Manrope', sans-serif;
+	--pet-font-body: 'Noto Sans', sans-serif;
+}
+
+/* Full-width Pet Studio pages: no Elementor column/section gutters */
+.elementor-page .elementor-section.elementor-section-boxed > .elementor-container {
+	max-width: none;
+}
+
+.elementor-page .elementor-column-gap-default > .elementor-column > .elementor-element-populated,
+.elementor-page .elementor-column-gap-no > .elementor-column > .elementor-element-populated {
+	padding: 0;
+}
+
+.elementor-location-header,
+.elementor-location-footer {
+	margin: 0;
+	padding: 0;
+}
+
+/* Elementor Pro clearfix pseudo creates a 1px white line above the nav */
+.elementor-location-header::before,
+.elementor-location-footer::before {
+	content: none !important;
+	display: none !important;
+}
+
+.elementor-location-header .elementor-column,
+.elementor-location-footer .elementor-column {
+	min-height: 0;
+}
+
+.elementor-location-header .elementor-section,
+.elementor-location-footer .elementor-section {
+	padding: 0;
+	margin: 0;
+}
+
+.elementor-location-header .elementor-container,
+.elementor-location-footer .elementor-container,
+.elementor-location-header .elementor-column > .elementor-element-populated,
+.elementor-location-footer .elementor-column > .elementor-element-populated,
+.elementor-location-header .elementor-widget-container,
+.elementor-location-footer .elementor-widget-container {
+	padding: 0;
+	margin: 0;
+}
+
+.tm-header .uk-navbar-nav > li > a > div > .uk-navbar-subtitle:empty::before {
+	content: '\00a0';
+	display: block;
+}
+
+.elementor-location-header {
+	position: relative;
+	z-index: 980;
+	width: 100%;
+}
+
+.elementor-location-header .tm-header-overlay,
+.elementor-location-header .tm-header-mobile.tm-header-overlay {
+	left: 0;
+	right: 0;
+}
+
+.elementor-location-header .uk-sticky-placeholder {
+	display: none !important;
+	height: 0 !important;
+	margin: 0 !important;
+}
+
+.pet-studio-widget {
+	margin: 0;
+}
+
+.pet-studio-widget--scaffold {
+	padding: 2rem;
+	border: 2px dashed var(--pet-secondary);
+	background: #fafafa;
+	color: #333;
+	font-family: var(--pet-font-body);
+}
+
+.pet-studio-widget--scaffold strong {
+	display: block;
+	font-family: var(--pet-font-heading);
+	font-size: 1.125rem;
+	margin-bottom: 0.5rem;
+}
+
+.pet-studio-widget--scaffold code {
+	font-size: 0.8125rem;
+	color: #666;
+}

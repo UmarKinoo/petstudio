@@ -1,0 +1,11 @@
+{
+  "banner_text": "We use cookies and similar technologies to improve your experience on our website.",
+  "accept_label": "Accept",
+  "reject_label": "Reject",
+  "manage_label": "Manage Settings",
+  "privacy_link": {
+    "url": "/privacy-policy/",
+    "is_external": false,
+    "nofollow": false
+  }
+}

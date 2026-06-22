@@ -1,0 +1,15 @@
+{
+    "heading": "Dog",
+    "heading_accent": "Grooming",
+    "blockquote": "Come to us for our highly rated dog grooming services in Congresbury, North Somerset.",
+    "body": "<p>Our groomers are experts in all key dog grooming techniques, which means that you can guarantee that whatever grooming service you require for your dog, The Pet Studio can deliver with utmost skill and professionalism. In testament to our services, our clients come back to us time and again. Not only because we deliver excellence in grooming standards, but also because we understand dogs \u2013 and a happy dog is a happy client.</p>",
+    "show_signature": true,
+    "signature_image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+    },
+    "primary_image": {
+        "id": 0,
+        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/BK1_8643_1.jpg"
+    }
+}
