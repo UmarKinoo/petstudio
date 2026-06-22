@@ -47,8 +47,21 @@ $blocks = array(
 
 foreach ( range( 1, 8 ) as $i ) {
 	$num = str_pad( (string) $i, 2, '0', STR_PAD_LEFT );
+	$icon_file = 'icons/icon_dog_' . $num . '.png';
+	$icon_dims = array(
+		'01' => array( 105, 98 ),
+		'02' => array( 115, 101 ),
+		'03' => array( 101, 54 ),
+		'04' => array( 111, 111 ),
+		'05' => array( 136, 101 ),
+		'06' => array( 65, 47 ),
+		'07' => array( 156, 100 ),
+		'08' => array( 127, 109 ),
+	);
 	$blocks[ 'dog-divider-' . $num ] = array(
-		'icon_image'     => $m( 'icons/icon_dog_' . $num . '.png' ),
+		'icon_image'     => $m( $icon_file ),
+		'icon_width'     => $icon_dims[ $num ][0],
+		'icon_height'    => $icon_dims[ $num ][1],
 		'parallax_x'     => 'x: 50vw',
 		'show_on_mobile' => true,
 	);

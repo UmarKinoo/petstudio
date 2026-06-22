@@ -68,6 +68,11 @@
 	text-transform: none;
 }
 
+.tm-header .ps-header-book-now .uk-button {
+	white-space: nowrap;
+	text-transform: none;
+}
+
 .elementor-location-header {
 	position: relative;
 	z-index: 980;

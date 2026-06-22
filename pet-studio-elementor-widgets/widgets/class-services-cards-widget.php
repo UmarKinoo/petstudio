@@ -54,6 +54,8 @@ class Services_Cards_Widget extends Widget_Base {
 		$card_rep->add_control( 'link', array( 'label' => esc_html__( 'Link', 'pet-studio-elementor' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => '#' ) ) );
 		$card_rep->add_control( 'button_text', array( 'label' => esc_html__( 'Button text', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => 'See More' ) );
 		$card_rep->add_control( 'parallax_start', array( 'label' => esc_html__( 'Parallax start', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => '62vh' ) );
+		$card_rep->add_control( 'image_width', array( 'label' => esc_html__( 'Image width', 'pet-studio-elementor' ), 'type' => Controls_Manager::NUMBER, 'default' => 0, 'min' => 0 ) );
+		$card_rep->add_control( 'image_height', array( 'label' => esc_html__( 'Image height', 'pet-studio-elementor' ), 'type' => Controls_Manager::NUMBER, 'default' => 0, 'min' => 0 ) );
 
 		$cards_default = array();
 		foreach ( $d['cards'] ?? array() as $card ) {
@@ -63,6 +65,8 @@ class Services_Cards_Widget extends Widget_Base {
 				'link'           => api_link_to_control( $card['link'] ?? null ),
 				'button_text'    => $card['button_text'] ?? 'See More',
 				'parallax_start' => $card['parallax_start'] ?? '62vh',
+				'image_width'    => (int) ( $card['image_width'] ?? 0 ),
+				'image_height'   => (int) ( $card['image_height'] ?? 0 ),
 			);
 		}
 
@@ -110,12 +114,17 @@ class Services_Cards_Widget extends Widget_Base {
 							continue;
 						}
 						$start = esc_attr( $card['parallax_start'] ?? '62vh' );
+						$img_w = (int) ( $card['image_width'] ?? 0 );
+						$img_h = (int) ( $card['image_height'] ?? 0 );
+						$img_size = ( $img_w && $img_h )
+							? ' width="' . esc_attr( (string) $img_w ) . '" height="' . esc_attr( (string) $img_h ) . '"'
+							: '';
 						?>
 						<div class="uk-width-1-3@m">
 							<div class="uk-position-z-index uk-panel" uk-sticky="offset: 50vh - 50%; end: !.uk-section;">
 								<div class="uk-light uk-margin uk-text-center" uk-parallax="x: 100vw,0,0,-100vw; y: 0 68%,-1200; opacity: 1 70%,0; blur: 0 70%,100; easing: 0; media: @s; target: !.uk-section; start: <?php echo $start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
 									<a class="uk-transition-toggle uk-inline-clip uk-link-toggle"<?php print_link_attributes( $card['link'] ?? null ); ?>>
-										<img class="el-image uk-transition-scale-up uk-transition-opaque" src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $card['title'] ?? '' ); ?>" loading="lazy">
+										<img class="el-image uk-transition-scale-up uk-transition-opaque" src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $card['title'] ?? '' ); ?>" loading="lazy"<?php echo $img_size; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 										<div class="uk-position-bottom">
 											<div class="uk-panel uk-padding-large uk-margin-remove-first-child">
 												<div class="el-title uk-heading-medium uk-margin-top uk-margin-remove-bottom"><?php echo esc_html( $card['title'] ?? '' ); ?></div>

@@ -31,6 +31,15 @@
     },
     "enable_transparent": {
       "type": "boolean"
+    },
+    "show_book_now": {
+      "type": "boolean"
+    },
+    "book_now_label": {
+      "type": "string"
+    },
+    "book_now_link": {
+      "$ref": "_common.json#/$defs/link"
     }
   }
 }

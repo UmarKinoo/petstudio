@@ -11,6 +11,7 @@ use Elementor\Controls_Manager;
 use Pet_Studio_Elementor\Widget_Base;
 
 use function Pet_Studio_Elementor\api_media_to_control;
+use function Pet_Studio_Elementor\dog_icon_dimensions;
 use function Pet_Studio_Elementor\media_url;
 
 defined( 'ABSPATH' ) || exit;
@@ -42,6 +43,8 @@ class Dog_Divider_Widget extends Widget_Base {
 
 		$this->start_controls_section( 'section_content', array( 'label' => esc_html__( 'Content', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_CONTENT ) );
 		$this->add_control( 'icon_image', array( 'label' => esc_html__( 'Icon image', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => api_media_to_control( $d['icon_image'] ?? null ) ) );
+		$this->add_control( 'icon_width', array( 'label' => esc_html__( 'Icon width (px)', 'pet-studio-elementor' ), 'type' => Controls_Manager::NUMBER, 'default' => (int) ( $d['icon_width'] ?? 0 ), 'min' => 0 ) );
+		$this->add_control( 'icon_height', array( 'label' => esc_html__( 'Icon height (px)', 'pet-studio-elementor' ), 'type' => Controls_Manager::NUMBER, 'default' => (int) ( $d['icon_height'] ?? 0 ), 'min' => 0 ) );
 		$this->add_control( 'parallax_x', array( 'label' => esc_html__( 'Parallax expression', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['parallax_x'] ?? 'x: 50vw; easing: 0' ) );
 		$this->add_control( 'offset_right', array( 'label' => esc_html__( 'Right offset (px)', 'pet-studio-elementor' ), 'type' => Controls_Manager::NUMBER, 'default' => 30 ) );
 		$this->add_control( 'show_on_mobile', array( 'label' => esc_html__( 'Show on mobile', 'pet-studio-elementor' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => ! empty( $d['show_on_mobile'] ) ? 'yes' : '' ) );
@@ -58,11 +61,23 @@ class Dog_Divider_Widget extends Widget_Base {
 		$parallax = esc_attr( $s['parallax_x'] ?? 'x: 50vw; easing: 0' );
 		$right    = (int) ( $s['offset_right'] ?? 30 );
 		$mobile   = ( $s['show_on_mobile'] ?? '' ) === 'yes' ? '' : ' uk-visible@s';
+		$width    = (int) ( $s['icon_width'] ?? 0 );
+		$height   = (int) ( $s['icon_height'] ?? 0 );
+		if ( ( ! $width || ! $height ) && $icon ) {
+			$dims = dog_icon_dimensions( $icon );
+			if ( $dims ) {
+				$width  = $dims['width'];
+				$height = $dims['height'];
+			}
+		}
+		$size_attr = ( $width && $height )
+			? ' width="' . esc_attr( (string) $width ) . '" height="' . esc_attr( (string) $height ) . '"'
+			: '';
 		?>
 		<div class="uk-grid tm-grid-expand uk-child-width-1-1 uk-margin-xlarge-top uk-margin-remove-bottom">
 			<div class="uk-width-1-1<?php echo esc_attr( $mobile ); ?>">
 				<div class="uk-position-relative uk-margin" uk-parallax="<?php echo $parallax; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" style="right: <?php echo esc_attr( (string) $right ); ?>px;" uk-scrollspy="target: [uk-scrollspy-class];">
-					<img class="el-image" src="<?php echo esc_url( $icon ); ?>" alt="" loading="lazy" width="105" height="98">
+					<img class="el-image" src="<?php echo esc_url( $icon ); ?>" alt="" loading="lazy"<?php echo $size_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 				</div>
 			</div>
 		</div>

@@ -160,3 +160,32 @@ function section_tone_class( string $tone ): string {
 function render_rich_text( string $html ): void {
 	echo wp_kses_post( $html );
 }
+
+/**
+ * Mirror width/height for decorative dog divider PNGs (from original YOOtheme markup).
+ *
+ * @return array{width:int,height:int}|null
+ */
+function dog_icon_dimensions( string $url ): ?array {
+	static $map = array(
+		'icon_dog_01.png' => array( 105, 98 ),
+		'icon_dog_02.png' => array( 115, 101 ),
+		'icon_dog_03.png' => array( 101, 54 ),
+		'icon_dog_04.png' => array( 111, 111 ),
+		'icon_dog_05.png' => array( 136, 101 ),
+		'icon_dog_06.png' => array( 65, 47 ),
+		'icon_dog_07.png' => array( 156, 100 ),
+		'icon_dog_08.png' => array( 127, 109 ),
+	);
+
+	foreach ( $map as $file => $size ) {
+		if ( false !== strpos( $url, $file ) ) {
+			return array(
+				'width'  => $size[0],
+				'height' => $size[1],
+			);
+		}
+	}
+
+	return null;
+}

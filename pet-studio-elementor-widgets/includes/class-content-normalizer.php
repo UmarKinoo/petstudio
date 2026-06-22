@@ -127,6 +127,8 @@ class Content_Normalizer {
 				$fixture['logo_default']  = self::media_to_elementor( $fixture['logo_default'] ?? null );
 				$fixture['logo_inverse']  = self::media_to_elementor( $fixture['logo_inverse'] ?? null );
 				$fixture['logo_link']       = self::link_to_elementor( $fixture['logo_link'] ?? null );
+				$fixture['book_now_link']   = self::link_to_elementor( $fixture['book_now_link'] ?? null );
+				$fixture['show_book_now']   = self::bool_to_switcher( $fixture['show_book_now'] ?? true );
 				$fixture['enable_sticky']     = self::bool_to_switcher( $fixture['enable_sticky'] ?? true );
 				$fixture['enable_transparent'] = self::bool_to_switcher( $fixture['enable_transparent'] ?? true );
 				break;
@@ -151,6 +153,8 @@ class Content_Normalizer {
 							'link'           => self::link_to_elementor( $card['link'] ?? null ),
 							'button_text'    => $card['button_text'] ?? 'See More',
 							'parallax_start' => $card['parallax_start'] ?? '62vh',
+							'image_width'    => (int) ( $card['image_width'] ?? 0 ),
+							'image_height'   => (int) ( $card['image_height'] ?? 0 ),
 						);
 					}
 				);

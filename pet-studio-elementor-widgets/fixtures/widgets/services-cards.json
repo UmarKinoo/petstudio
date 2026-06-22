@@ -14,7 +14,9 @@
         "nofollow": false
       },
       "button_text": "See More",
-      "parallax_start": "62vh"
+      "parallax_start": "62vh",
+      "image_width": 840,
+      "image_height": 1149
     },
     {
       "image": {
@@ -28,7 +30,9 @@
         "nofollow": false
       },
       "button_text": "See More",
-      "parallax_start": "68vh"
+      "parallax_start": "68vh",
+      "image_width": 840,
+      "image_height": 1260
     },
     {
       "image": {
@@ -42,7 +46,9 @@
         "nofollow": false
       },
       "button_text": "See More",
-      "parallax_start": "74vh"
+      "parallax_start": "74vh",
+      "image_width": 840,
+      "image_height": 1149
     }
   ]
 }

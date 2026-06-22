@@ -188,6 +188,46 @@ class Header_Widget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'section_book_now',
+			array(
+				'label' => esc_html__( 'Book Now', 'pet-studio-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+
+		$this->add_control(
+			'show_book_now',
+			array(
+				'label'        => esc_html__( 'Show Book Now button', 'pet-studio-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
+
+		$this->add_control(
+			'book_now_label',
+			array(
+				'label'     => esc_html__( 'Button label', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => $defaults['book_now_label'] ?? 'Book Now',
+				'condition' => array( 'show_book_now' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
+			'book_now_link',
+			array(
+				'label'     => esc_html__( 'Button link', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::URL,
+				'default'   => api_link_to_control( $defaults['book_now_link'] ?? array( 'url' => '/contact/' ) ),
+				'condition' => array( 'show_book_now' => 'yes' ),
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'section_social',
 			array(
 				'label' => esc_html__( 'Social', 'pet-studio-elementor' ),
@@ -383,6 +423,7 @@ class Header_Widget extends Widget_Base {
 					<div class="uk-margin-auto-bottom">
 						<div class="uk-panel" id="module-menu-dialog-mobile">
 							<?php $this->render_mobile_nav( $settings['navigation'] ?? array() ); ?>
+							<?php $this->render_book_now( $settings, true ); ?>
 						</div>
 					</div>
 				</div>
@@ -401,6 +442,7 @@ class Header_Widget extends Widget_Base {
 							</div>
 							<div class="uk-navbar-right">
 								<?php $this->render_desktop_nav( $settings['navigation'] ?? array() ); ?>
+								<?php $this->render_book_now( $settings, false ); ?>
 								<?php if ( ( $settings['show_social'] ?? '' ) === 'yes' ) : ?>
 									<div class="uk-navbar-item" id="module-tm-3">
 										<?php $this->render_social( $settings['social_items'] ?? array() ); ?>
@@ -464,6 +506,36 @@ class Header_Widget extends Widget_Base {
 				</li>
 			<?php endforeach; ?>
 		</ul>
+		<?php
+	}
+
+	/**
+	 * @param array<string, mixed> $settings Widget settings.
+	 * @param bool                 $mobile   Off-canvas vs desktop navbar.
+	 */
+	private function render_book_now( array $settings, bool $mobile ): void {
+		if ( ( $settings['show_book_now'] ?? '' ) !== 'yes' ) {
+			return;
+		}
+
+		$label = $settings['book_now_label'] ?? '';
+		$link  = $settings['book_now_link'] ?? null;
+		if ( ! $label || empty( $link['url'] ) ) {
+			return;
+		}
+
+		if ( $mobile ) {
+			?>
+			<div class="uk-margin-medium-top">
+				<a class="uk-button uk-button-primary uk-width-1-1"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+			</div>
+			<?php
+			return;
+		}
+		?>
+		<div class="uk-navbar-item ps-header-book-now">
+			<a class="uk-button uk-button-primary"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+		</div>
 		<?php
 	}
 

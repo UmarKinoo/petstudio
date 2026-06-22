@@ -74,6 +74,13 @@
       "is_active": false
     }
   ],
+  "show_book_now": true,
+  "book_now_label": "Book Now",
+  "book_now_link": {
+    "url": "/contact/",
+    "is_external": false,
+    "nofollow": false
+  },
   "social_items": [
     {
       "network": "tiktok",

@@ -4,5 +4,7 @@
         "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/icons/icon_dog_01.png"
     },
     "parallax_x": "x: 50vw",
-    "show_on_mobile": true
+    "show_on_mobile": true,
+    "icon_width": 105,
+    "icon_height": 98
 }
