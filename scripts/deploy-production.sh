@@ -79,10 +79,10 @@ fi
 
 remote_version() {
 	local raw
-	raw="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+	raw="$(curl "${curl_tls[@]}" -sS --user "$U:$P" \
 		"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
 	if [[ -z "$raw" ]]; then
-		raw="$(curl "${curl_tls[@]}" -sS --user "$U:$P" \
+		raw="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
 			"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
 	fi
 	printf '%s' "$raw" \
@@ -92,10 +92,10 @@ remote_version() {
 
 remote_header_version() {
 	local raw
-	raw="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+	raw="$(curl "${curl_tls[@]}" -sS --user "$U:$P" \
 		"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
 	if [[ -z "$raw" ]]; then
-		raw="$(curl "${curl_tls[@]}" -sS --user "$U:$P" \
+		raw="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
 			"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
 	fi
 	printf '%s' "$raw" \
@@ -118,8 +118,10 @@ find_version_commit() {
 }
 
 remote_deploy_commit() {
-	curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
-		"${FTP_URL}/.git-ftp.log" 2>/dev/null | tr -d '[:space:]' || true
+	curl "${curl_tls[@]}" -sS --user "$U:$P" \
+		"${FTP_URL}/.git-ftp.log" 2>/dev/null | tr -d '[:space:]' \
+		|| curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+			"${FTP_URL}/.git-ftp.log" 2>/dev/null | tr -d '[:space:]' || true
 }
 
 upload_file() {
@@ -129,9 +131,9 @@ upload_file() {
 		echo "Skip missing: $rel" >&2
 		return 0
 	fi
-	if ! curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U" --passwd "$P" \
+	if ! curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U:$P" \
 		-T "$file" "${FTP_URL}/${rel}" >/dev/null 2>&1; then
-		curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U:$P" \
+		curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U" --passwd "$P" \
 			-T "$file" "${FTP_URL}/${rel}" >/dev/null
 	fi
 	echo "  ↑ ${rel}"
@@ -187,13 +189,19 @@ if [[ "${DEPLOY_FORCE:-0}" == "1" ]]; then
 fi
 
 echo "Deploying ${LOCAL_VERSION} to ${FTP_URL} (incremental via git-ftp)…"
-git ftp "${ftp_args[@]}" "$FTP_URL"
+if [[ "${DEPLOY_SKIP_GIT_FTP:-0}" != "1" ]]; then
+	git ftp "${ftp_args[@]}" "$FTP_URL" || echo "git-ftp warning: push returned non-zero; continuing with curl verify." >&2
+else
+	echo "DEPLOY_SKIP_GIT_FTP=1: using curl upload only."
+fi
 
 REMOTE_VERSION="$(remote_version)"
-if [[ -z "$REMOTE_VERSION" || "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
-	echo "git-ftp finished but remote is ${REMOTE_VERSION:-missing} (expected ${LOCAL_VERSION}). Curl upload of changed files…" >&2
+REMOTE_HEADER_VERSION="$(remote_header_version)"
+HEAD="$(git rev-parse HEAD)"
+
+if [[ "$REMOTE_VERSION" != "$LOCAL_VERSION" || "$REMOTE_HEADER_VERSION" != "$LOCAL_VERSION" ]]; then
+	echo "Remote is constant=${REMOTE_VERSION:-missing} header=${REMOTE_HEADER_VERSION:-missing} (expected ${LOCAL_VERSION}). Curl upload of changed files…" >&2
 	BASE="$(remote_deploy_commit)"
-	HEAD="$(git rev-parse HEAD)"
 	# When git-ftp advanced the log but skipped files, diff from the version on the server.
 	if [[ -n "$REMOTE_VERSION" ]]; then
 		REMOTE_BASE="$(find_version_commit "$REMOTE_VERSION" || true)"
@@ -202,22 +210,21 @@ if [[ -z "$REMOTE_VERSION" || "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
 		fi
 	fi
 	upload_changed_via_curl "$BASE" "$HEAD"
-	git rev-parse HEAD | curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
-		-T - "${FTP_URL}/.git-ftp.log" >/dev/null
+	git rev-parse HEAD | curl "${curl_tls[@]}" -sS --user "$U:$P" \
+		-T - "${FTP_URL}/.git-ftp.log" >/dev/null 2>&1 \
+		|| git rev-parse HEAD | curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+			-T - "${FTP_URL}/.git-ftp.log" >/dev/null
 	REMOTE_VERSION="$(remote_version)"
+	REMOTE_HEADER_VERSION="$(remote_header_version)"
 fi
-
-REMOTE_HEADER_VERSION="$(remote_header_version)"
 
 if [[ "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
 	echo "Deploy FAILED: remote constant ${REMOTE_VERSION:-missing}, expected ${LOCAL_VERSION}." >&2
-	echo "Try: DEPLOY_FORCE=1 bash scripts/deploy-production.sh" >&2
 	exit 1
 fi
 
 if [[ "$REMOTE_HEADER_VERSION" != "$LOCAL_VERSION" ]]; then
 	echo "Deploy FAILED: remote header Version ${REMOTE_HEADER_VERSION:-missing}, expected ${LOCAL_VERSION}." >&2
-	echo "WordPress Plugins screen uses the header — re-upload pet-studio-elementor-widgets.php." >&2
 	upload_file "pet-studio-elementor-widgets.php"
 	REMOTE_HEADER_VERSION="$(remote_header_version)"
 	if [[ "$REMOTE_HEADER_VERSION" != "$LOCAL_VERSION" ]]; then
