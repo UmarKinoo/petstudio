@@ -425,6 +425,18 @@ class Header_Widget extends Widget_Base {
 			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-nav-default > li > a > div {
 				text-transform: none !important;
 			}
+			@media (min-width: 960px) {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand {
+					max-width: none !important;
+					width: 100% !important;
+					padding-left: 100px !important;
+					padding-right: 100px !important;
+					box-sizing: border-box;
+				}
+			}
 		</style>
 		<header class="tm-header-mobile uk-hidden@m tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container; sel-active: .uk-navbar-transparent">
 			<div<?php echo $sticky_attr ? ' ' . trim( $sticky_attr ) : ''; ?>>

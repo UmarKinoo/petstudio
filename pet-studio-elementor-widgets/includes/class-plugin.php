@@ -24,6 +24,7 @@ final class Plugin {
 		add_action( 'plugins_loaded', array( $this, 'bootstrap' ), 20 );
 		add_action( 'init', array( $this, 'maybe_bust_caches' ), 30 );
 		add_filter( 'litespeed_media_lazy_img_cls_excludes', array( $this, 'litespeed_lazy_exclude_classes' ) );
+		add_filter( 'litespeed_optimize_css_excludes', array( $this, 'litespeed_css_excludes' ) );
 	}
 
 	/**
@@ -59,6 +60,22 @@ final class Plugin {
 	 */
 	public function litespeed_lazy_exclude_classes( array $excludes ): array {
 		return array_merge( $excludes, array( 'ps-no-lazy', 'skip-lazy', 'litespeed-no-lazy' ) );
+	}
+
+	/**
+	 * Keep plugin frontend.css out of LiteSpeed combined bundles (stale CSS cache on Hostinger).
+	 *
+	 * @param string[] $excludes CSS handle or URL fragments to skip.
+	 * @return string[]
+	 */
+	public function litespeed_css_excludes( array $excludes ): array {
+		return array_merge(
+			$excludes,
+			array(
+				'pet-studio-elementor-frontend',
+				'pet-studio-elementor-widgets/assets/css/frontend.css',
+			)
+		);
 	}
 
 	/**
