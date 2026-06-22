@@ -66,10 +66,30 @@ fi
 LOCAL_VERSION="$(rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" "$SYNC_DIR/pet-studio-elementor-widgets.php" | rg -o "'[^']+'" | tail -1 | tr -d "'")"
 
 remote_version() {
-	curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
-		"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null \
+	local raw
+	raw="$(curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
+		"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
+	if [[ -z "$raw" ]]; then
+		raw="$(curl "${curl_tls[@]}" -sS --user "$U:$P" \
+			"${FTP_URL}/pet-studio-elementor-widgets.php" 2>/dev/null || true)"
+	fi
+	printf '%s' "$raw" \
 		| rg -o "define\\( 'PET_STUDIO_EW_VERSION', '[^']+'" \
 		| rg -o "'[^']+'" | tail -1 | tr -d "'" || true
+}
+
+find_version_commit() {
+	local ver="$1"
+	local commit
+	while IFS= read -r commit; do
+		[[ -z "$commit" ]] && continue
+		if git show "$commit:$SYNCROOT/pet-studio-elementor-widgets.php" 2>/dev/null \
+			| rg -q "define\\( 'PET_STUDIO_EW_VERSION', '${ver}'"; then
+			printf '%s' "$commit"
+			return 0
+		fi
+	done < <(git log --format=%H -40 HEAD -- "$SYNCROOT/pet-studio-elementor-widgets.php")
+	return 1
 }
 
 remote_deploy_commit() {
@@ -104,10 +124,14 @@ upload_changed_via_curl() {
 	fi
 
 	if [[ -n "$base" && "$base" =~ ^[0-9a-f]{40}$ ]]; then
-		mapfile -t paths < <(git diff --name-only --diff-filter=ACMR "$base" "$head" -- "$SYNCROOT")
+		while IFS= read -r path; do
+			[[ -n "$path" ]] && paths+=( "$path" )
+		done < <(git diff --name-only --diff-filter=ACMR "$base" "$head" -- "$SYNCROOT")
 	else
 		echo "No remote deploy marker — uploading latest commit only." >&2
-		mapfile -t paths < <(git diff-tree --no-commit-id --name-only --diff-filter=ACMR -r "$head" -- "$SYNCROOT")
+		while IFS= read -r path; do
+			[[ -n "$path" ]] && paths+=( "$path" )
+		done < <(git diff-tree --no-commit-id --name-only --diff-filter=ACMR -r "$head" -- "$SYNCROOT")
 	fi
 
 	if [[ ${#paths[@]} -eq 0 ]]; then
@@ -142,6 +166,13 @@ if [[ -z "$REMOTE_VERSION" || "$REMOTE_VERSION" != "$LOCAL_VERSION" ]]; then
 	echo "git-ftp finished but remote is ${REMOTE_VERSION:-missing} (expected ${LOCAL_VERSION}). Curl upload of changed files…" >&2
 	BASE="$(remote_deploy_commit)"
 	HEAD="$(git rev-parse HEAD)"
+	# When git-ftp advanced the log but skipped files, diff from the version on the server.
+	if [[ -n "$REMOTE_VERSION" ]]; then
+		REMOTE_BASE="$(find_version_commit "$REMOTE_VERSION" || true)"
+		if [[ -n "$REMOTE_BASE" && "$REMOTE_BASE" =~ ^[0-9a-f]{40}$ ]]; then
+			BASE="$REMOTE_BASE"
+		fi
+	fi
 	upload_changed_via_curl "$BASE" "$HEAD"
 	git rev-parse HEAD | curl "${curl_tls[@]}" -sS --user "$U" --passwd "$P" \
 		-T - "${FTP_URL}/.git-ftp.log" >/dev/null
