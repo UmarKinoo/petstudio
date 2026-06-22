@@ -104,8 +104,11 @@ upload_file() {
 		echo "Skip missing: $rel" >&2
 		return 0
 	fi
-	curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U" --passwd "$P" \
-		-T "$file" "${FTP_URL}/${rel}" >/dev/null
+	if ! curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U" --passwd "$P" \
+		-T "$file" "${FTP_URL}/${rel}" >/dev/null 2>&1; then
+		curl "${curl_tls[@]}" -sS --ftp-create-dirs --user "$U:$P" \
+			-T "$file" "${FTP_URL}/${rel}" >/dev/null
+	fi
 	echo "  ↑ ${rel}"
 }
 
