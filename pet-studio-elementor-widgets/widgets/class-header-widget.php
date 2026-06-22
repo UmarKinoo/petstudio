@@ -436,6 +436,18 @@ class Header_Widget extends Widget_Base {
 					padding-right: 100px !important;
 					box-sizing: border-box;
 				}
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar,
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-left,
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-right,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-left,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-right {
+					align-items: center !important;
+				}
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav {
+					align-self: center !important;
+				}
 			}
 		</style>
 		<header class="tm-header-mobile uk-hidden@m tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container; sel-active: .uk-navbar-transparent">
