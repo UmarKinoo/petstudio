@@ -196,7 +196,9 @@ class Content_Normalizer {
 				break;
 
 			case 'dog-divider':
-				$fixture['icon_image']    = self::media_to_elementor( $fixture['icon_image'] ?? null );
+				$fixture['icon_image']     = self::media_to_elementor( $fixture['icon_image'] ?? null );
+				$fixture['icon_width']     = (int) ( $fixture['icon_width'] ?? 0 );
+				$fixture['icon_height']    = (int) ( $fixture['icon_height'] ?? 0 );
 				$fixture['show_on_mobile'] = self::bool_to_switcher( $fixture['show_on_mobile'] ?? true );
 				break;
 

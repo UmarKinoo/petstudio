@@ -123,6 +123,14 @@
 	margin-left: 0.75rem;
 }
 
+/* Dog divider icons — mirror uses per-icon width/height; avoid squashing from stale Elementor attrs */
+.tm-grid-expand img.el-image[src*="icon_dog"] {
+	width: auto;
+	height: auto;
+	max-width: none;
+	object-fit: contain;
+}
+
 .elementor-location-header {
 	position: relative;
 	z-index: 980;

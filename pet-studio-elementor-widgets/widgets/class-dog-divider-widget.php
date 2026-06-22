@@ -13,6 +13,7 @@ use Pet_Studio_Elementor\Widget_Base;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\dog_icon_dimensions;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\switcher_enabled;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -60,15 +61,13 @@ class Dog_Divider_Widget extends Widget_Base {
 		}
 		$parallax = esc_attr( $s['parallax_x'] ?? 'x: 50vw; easing: 0' );
 		$right    = (int) ( $s['offset_right'] ?? 30 );
-		$mobile   = ( $s['show_on_mobile'] ?? '' ) === 'yes' ? '' : ' uk-visible@s';
+		$mobile   = switcher_enabled( $s['show_on_mobile'] ?? null, true ) ? '' : ' uk-visible@s';
 		$width    = (int) ( $s['icon_width'] ?? 0 );
 		$height   = (int) ( $s['icon_height'] ?? 0 );
-		if ( ( ! $width || ! $height ) && $icon ) {
-			$dims = dog_icon_dimensions( $icon );
-			if ( $dims ) {
-				$width  = $dims['width'];
-				$height = $dims['height'];
-			}
+		$dims     = dog_icon_dimensions( $icon );
+		if ( $dims ) {
+			$width  = $dims['width'];
+			$height = $dims['height'];
 		}
 		$size_attr = ( $width && $height )
 			? ' width="' . esc_attr( (string) $width ) . '" height="' . esc_attr( (string) $height ) . '"'
