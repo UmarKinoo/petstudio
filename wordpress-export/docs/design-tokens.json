@@ -1,0 +1,24 @@
+{
+  "colors": {
+    "primary": "#FF90AA",
+    "secondary": "#B4ADA7",
+    "success": "#80B485",
+    "warning": "#E5BA43",
+    "danger": "#AA3838",
+    "text": "#000000",
+    "background": "#FFFFFF",
+    "muted": "#f8f9fa"
+  },
+  "fonts": {
+    "heading": "Manrope",
+    "body": "Noto Sans"
+  },
+  "elementor_global_settings": {
+    "primary_color": "#FF90AA",
+    "secondary_color": "#B4ADA7",
+    "text_color": "#000000",
+    "accent_color": "#FF90AA",
+    "typography_primary_font": "Manrope",
+    "typography_secondary_font": "Noto Sans"
+  }
+}

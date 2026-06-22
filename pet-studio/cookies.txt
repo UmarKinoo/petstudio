@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+mature-brown-antelope.69-72-248-210.cpanel.site	TRUE	/	FALSE	1999999999	2777221f2358a5d835fa737ac5d77372	6vqjm1jt8la107seeat1gra9b6
+

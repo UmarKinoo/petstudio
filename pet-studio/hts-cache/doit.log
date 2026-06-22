@@ -1,0 +1,8 @@
+https://mature-brown-antelope.69-72-248-210.cpanel.site/ -O /mirror +*.69-72-248-210.cpanel.site/* +mature-brown-antelope.69-72-248-210.cpanel.site/* -n -r6 -%v -c8
+File generated automatically on Tue, 09 Jun 2026 17:31:12, do NOT edit
+
+To update a mirror, just launch httrack without any parameters
+The existing cache will be used (and modified)
+To have other options, retype all parameters and launch HTTrack
+To continue an interrupted mirror, just launch httrack without any parameters
+

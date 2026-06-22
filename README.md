@@ -30,9 +30,13 @@ git add -A && git commit -m "your message" && git push origin main && bash scrip
 ### First-time deploy setup
 
 ```bash
-cp .env.deploy.example .env.deploy
-# Edit .env.deploy with FTP credentials (never commit this file)
+cp .vscode/sftp.json.example .vscode/sftp.json
+# Edit .vscode/sftp.json (password stays in JSON — safe for special characters)
 bash scripts/deploy-production.sh
 ```
+
+Force full re-upload: `DEPLOY_FORCE=1 bash scripts/deploy-production.sh`
+
+Credentials live in `.vscode/sftp.json` (gitignored), same pattern as [bizkarts](https://github.com/UmarKinoo/bizkarts).
 
 Production site: [test.motiondesignz.com](https://test.motiondesignz.com/)

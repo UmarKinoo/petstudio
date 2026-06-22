@@ -1,0 +1,13 @@
+HTTrack3.49-4+libhtsjava.so.2 launched on Tue, 09 Jun 2026 17:31:12 at https://mature-brown-antelope.69-72-248-210.cpanel.site/ +*.69-72-248-210.cpanel.site/* +mature-brown-antelope.69-72-248-210.cpanel.site/*
+(httrack https://mature-brown-antelope.69-72-248-210.cpanel.site/ -O /mirror +*.69-72-248-210.cpanel.site/* +mature-brown-antelope.69-72-248-210.cpanel.site/* -n -r6 -%v -c8 )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+17:33:18	Error: 	"Not Found" (404) at link https://mature-brown-antelope.69-72-248-210.cpanel.site/images/logo/the_pet_studio_logo_+tagline_600px.svg (from https://mature-brown-antelope.69-72-248-210.cpanel.site/)
+17:33:18	Error: 	"Not Found" (404) at link https://mature-brown-antelope.69-72-248-210.cpanel.site/templates/yootheme/packages/theme/assets/images/element-image-placeholder.png (from https://mature-brown-antelope.69-72-248-210.cpanel.site/dog-training.html)
+
+HTTrack Website Copier/3.49-4 mirror complete in 2 minutes 7 seconds : 127 links scanned, 123 files written (30591972 bytes overall) [29073068 bytes received at 228921 bytes/sec], 2232958 bytes transferred using HTTP compression in 38 files, ratio 29%, 9.7 requests per connection
+(2 errors, 0 warnings, 0 messages)
