@@ -36,7 +36,7 @@ push_to_github() {
 		return 0
 	fi
 
-	read -r ahead behind < <(git rev-list --left-right --count "${upstream}"...HEAD)
+	read -r behind ahead < <(git rev-list --left-right --count "${upstream}"...HEAD)
 	if [[ "${behind:-0}" -gt 0 ]]; then
 		echo "Local ${branch} is behind ${upstream}. Pull/rebase before deploying." >&2
 		exit 1
