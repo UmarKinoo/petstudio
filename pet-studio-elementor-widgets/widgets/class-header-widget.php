@@ -413,7 +413,7 @@ class Header_Widget extends Widget_Base {
 			? ' uk-sticky show-on-up animation="uk-animation-slide-top" cls-active="uk-navbar-sticky" sel-target=".uk-navbar-container" cls-inactive="' . esc_attr( $inactive_cls ) . '" tm-section-start'
 			: '';
 		$sticky_attr_desktop = $sticky
-			? ' uk-sticky media="@m" show-on-up animation="uk-animation-slide-top" cls-active="uk-navbar-sticky" sel-target=".uk-navbar-container" cls-inactive="' . esc_attr( $inactive_cls ) . '" tm-section-start'
+			? ' uk-sticky media="@l" show-on-up animation="uk-animation-slide-top" cls-active="uk-navbar-sticky" sel-target=".uk-navbar-container" cls-inactive="' . esc_attr( $inactive_cls ) . '" tm-section-start'
 			: '';
 		?>
 		<style>
@@ -425,7 +425,16 @@ class Header_Widget extends Widget_Base {
 			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-nav-default > li > a > div {
 				text-transform: none !important;
 			}
-			@media (min-width: 960px) {
+			@media (min-width: 1200px) and (max-width: 1499px) {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand {
+					padding-left: 40px !important;
+					padding-right: 40px !important;
+				}
+			}
+			@media (min-width: 1500px) {
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
@@ -436,6 +445,22 @@ class Header_Widget extends Widget_Base {
 					padding-right: 100px !important;
 					box-sizing: border-box;
 				}
+			}
+			@media (min-width: 1200px) {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand {
+					max-width: none !important;
+					width: 100% !important;
+					box-sizing: border-box;
+				}
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-left,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-left {
+					flex: 0 0 auto !important;
+					flex-shrink: 0 !important;
+					min-width: max-content !important;
+				}
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar,
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-left,
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-right,
@@ -444,13 +469,25 @@ class Header_Widget extends Widget_Base {
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-right {
 					align-items: center !important;
 				}
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-right,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-right {
+					margin-left: auto !important;
+					min-width: 0 !important;
+				}
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav {
 					align-self: center !important;
+					min-width: 0 !important;
+				}
+			}
+			@media (min-width: 1200px) and (max-width: 1499px) {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle {
+					display: none !important;
 				}
 			}
 		</style>
-		<header class="tm-header-mobile uk-hidden@m tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container; sel-active: .uk-navbar-transparent">
+		<header class="tm-header-mobile uk-hidden@l tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container; sel-active: .uk-navbar-transparent">
 			<div<?php echo $sticky_attr ? ' ' . trim( $sticky_attr ) : ''; ?>>
 				<div class="uk-navbar-container">
 					<div class="uk-container uk-container-expand">
@@ -482,7 +519,7 @@ class Header_Widget extends Widget_Base {
 			</div>
 		</header>
 
-		<header class="tm-header uk-visible@m tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container, .tm-headerbar; sel-active: .uk-navbar-transparent, .tm-headerbar">
+		<header class="tm-header uk-visible@l tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container, .tm-headerbar; sel-active: .uk-navbar-transparent, .tm-headerbar">
 			<div<?php echo $sticky_attr_desktop ? ' ' . trim( $sticky_attr_desktop ) : ''; ?>>
 				<div class="uk-navbar-container">
 					<div class="uk-container uk-container-expand">

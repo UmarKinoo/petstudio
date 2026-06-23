@@ -81,22 +81,47 @@
 	text-transform: none !important;
 }
 
-/* Desktop header — full-width container + room for nav + Book Now + social */
+/* Desktop header — responsive padding + flex layout so logo/nav never overlap */
 .tm-header > [uk-sticky] .uk-container-expand,
 .tm-header .uk-navbar-container .uk-container-expand,
 .tm-header .uk-navbar-container {
 	max-width: none;
 	width: 100%;
-	padding-left: 100px !important;
-	padding-right: 100px !important;
 	box-sizing: border-box;
 	overflow: visible;
+}
+
+@media (min-width: 1200px) and (max-width: 1499px) {
+	.tm-header > [uk-sticky] .uk-container-expand,
+	.tm-header .uk-navbar-container .uk-container-expand,
+	.tm-header .uk-navbar-container {
+		padding-left: 40px !important;
+		padding-right: 40px !important;
+	}
+}
+
+@media (min-width: 1500px) {
+	.tm-header > [uk-sticky] .uk-container-expand,
+	.tm-header .uk-navbar-container .uk-container-expand,
+	.tm-header .uk-navbar-container {
+		padding-left: 100px !important;
+		padding-right: 100px !important;
+	}
 }
 
 .tm-header .uk-navbar {
 	width: 100%;
 	overflow: visible;
 	align-items: center;
+	justify-content: flex-start;
+	column-gap: 0.75rem;
+}
+
+.tm-header .uk-navbar-left {
+	flex: 0 0 auto;
+	flex-shrink: 0;
+	min-width: max-content;
+	margin-right: 0;
 }
 
 .tm-header .uk-navbar-left,
@@ -105,22 +130,25 @@
 }
 
 .tm-header .uk-navbar-right {
-	flex: 0 1 auto;
+	flex: 1 1 auto;
 	justify-content: flex-end;
-	min-width: auto;
+	min-width: 0;
 	flex-wrap: nowrap;
 	overflow: visible;
+	margin-left: auto;
+	column-gap: 0.35rem;
 }
 
 .tm-header .ps-header-nav {
-	flex: 0 0 auto;
+	flex: 0 1 auto;
 	justify-content: flex-end;
 	align-self: center;
+	min-width: 0;
 }
 
 .tm-header .ps-header-nav > li > a {
-	padding-left: 0.4rem;
-	padding-right: 0.4rem;
+	padding-left: 0.35rem;
+	padding-right: 0.35rem;
 	white-space: nowrap;
 }
 
@@ -135,8 +163,51 @@
 }
 
 .tm-header .uk-logo.uk-navbar-item {
-	margin-right: 0.25rem;
+	margin-right: 0;
 	flex-shrink: 0;
+	min-width: max-content;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.tm-header .uk-logo img {
+	width: auto;
+	height: auto;
+	max-height: 28px;
+}
+
+@media (min-width: 1200px) and (max-width: 1499px) {
+	.tm-header .uk-logo img {
+		max-width: 200px;
+		max-height: 26px;
+	}
+
+	.tm-header .ps-header-nav > li > a .uk-navbar-subtitle {
+		display: none !important;
+	}
+
+	.tm-header .ps-header-nav > li > a {
+		padding-left: 0.28rem;
+		padding-right: 0.28rem;
+		font-size: 0.875rem;
+	}
+}
+
+@media (min-width: 1400px) and (max-width: 1499px) {
+	.tm-header .uk-logo img {
+		max-width: 220px;
+	}
+}
+
+/* Mobile header bar */
+.tm-header-mobile .uk-navbar-container {
+	padding-left: 1rem !important;
+	padding-right: 1rem !important;
+}
+
+.tm-header-mobile .uk-logo img {
+	max-width: min(200px, 58vw);
+	height: auto;
 }
 
 .tm-header #module-tm-3 {
@@ -334,4 +405,68 @@ a.ps-book-now-btn:focus,
 
 .pet-studio-hero-home .ps-hero-video-tile video[uk-cover].uk-object-center-left {
 	object-position: 0 50%;
+}
+
+.pet-studio-hero-home .ps-hero-logo-desktop {
+	left: 0;
+	right: 0;
+}
+
+.pet-studio-hero-home .ps-hero-logo-desktop .el-image,
+.pet-studio-hero-home .ps-hero-logo-desktop img,
+.pet-studio-hero-home .ps-hero-logo-desktop svg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: min(60vw, 650px);
+	width: 100%;
+	height: auto;
+}
+
+.pet-studio-hero-home .ps-hero-logo-mobile {
+	width: 100%;
+	text-align: center !important;
+	top: auto !important;
+	margin-top: 8vh;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	box-sizing: border-box;
+}
+
+.pet-studio-hero-home .ps-hero-logo-mobile .el-image,
+.pet-studio-hero-home .ps-hero-logo-mobile img,
+.pet-studio-hero-home .ps-hero-logo-mobile svg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: min(85vw, 400px);
+	width: 100%;
+	height: auto;
+	transform: none !important;
+}
+
+@media (max-width: 639px) {
+	.pet-studio-hero-home .ps-hero-logo-mobile {
+		margin-top: 6vh;
+	}
+
+	.pet-studio-hero-home .ps-hero-copy {
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+}
+
+.pet-studio-hero-home .ps-hero-copy .uk-heading-large,
+.pet-studio-hero-home .ps-hero-copy .uk-h1,
+.pet-studio-hero-home .ps-hero-copy .uk-text-lead {
+	padding-left: clamp(0.75rem, 4vw, 2rem);
+	padding-right: clamp(0.75rem, 4vw, 2rem);
+	box-sizing: border-box;
+}
+
+@media (max-width: 1199px) {
+	.pet-studio-hero-home .uk-heading-large {
+		font-size: clamp(2rem, 10vw, 4.5rem);
+		line-height: 1.05;
+	}
 }

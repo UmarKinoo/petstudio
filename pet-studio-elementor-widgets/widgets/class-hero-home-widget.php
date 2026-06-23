@@ -211,8 +211,24 @@ class Hero_Home_Widget extends Widget_Base {
 		$words       = $s['headline_words'] ?? array();
 		?>
 		<style class="uk-margin-remove-adjacent">
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop .el-image { transform: translateY(-50%); max-width: 60vw; }
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile .el-image { transform: translateY(-50%); max-width: 60vw; }
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop .el-image,
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop img,
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop svg {
+				transform: translateY(-50%);
+				max-width: min(60vw, 650px);
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile .el-image,
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile img,
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile svg {
+				transform: none;
+				max-width: min(85vw, 400px);
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-overlay { position: relative; z-index: 1; margin-top: -100vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-word-last { margin-bottom: 15vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-hours-text { margin-bottom: 30vh; }
@@ -246,7 +262,7 @@ class Hero_Home_Widget extends Widget_Base {
 								</div>
 							<?php endif; ?>
 							<?php if ( $logo_mob ) : ?>
-								<div class="uk-position-relative uk-margin uk-text-right uk-hidden@s ps-hero-logo-mobile" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="top: 220px; z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
+								<div class="uk-position-relative uk-margin uk-text-center uk-hidden@s ps-hero-logo-mobile" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
 									<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
 								</div>
 							<?php endif; ?>
