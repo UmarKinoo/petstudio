@@ -2,11 +2,54 @@
 # Incremental deploy via git-ftp (same pattern as bizkarts).
 # Only changed files since the last remote .git-ftp.log are uploaded.
 # DEPLOY_FORCE=1 — re-upload all plugin files (slow; includes demo media).
+# DEPLOY_SKIP_GITHUB_PUSH=1 — FTP only; skip git push to origin (emergency use).
 # Credentials: .vscode/sftp.json (gitignored).
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
+
+push_to_github() {
+	if [[ "${DEPLOY_SKIP_GITHUB_PUSH:-0}" == "1" ]]; then
+		echo "DEPLOY_SKIP_GITHUB_PUSH=1: skipping GitHub push."
+		return 0
+	fi
+
+	if ! git remote get-url origin >/dev/null 2>&1; then
+		echo "No git remote 'origin' — cannot push to GitHub before deploy." >&2
+		exit 1
+	fi
+
+	if [[ -n "$(git status --porcelain)" ]]; then
+		echo "Uncommitted changes — commit before deploying to production." >&2
+		git status -sb >&2
+		exit 1
+	fi
+
+	local branch upstream ahead behind
+	branch="$(git branch --show-current)"
+	upstream="$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null || true)"
+
+	if [[ -z "$upstream" ]]; then
+		echo "Pushing ${branch} to origin (no upstream set)…"
+		git push -u origin HEAD
+		return 0
+	fi
+
+	read -r ahead behind < <(git rev-list --left-right --count "${upstream}"...HEAD)
+	if [[ "${behind:-0}" -gt 0 ]]; then
+		echo "Local ${branch} is behind ${upstream}. Pull/rebase before deploying." >&2
+		exit 1
+	fi
+
+	if [[ "${ahead:-0}" -eq 0 ]]; then
+		echo "GitHub already up to date (${upstream})."
+		return 0
+	fi
+
+	echo "Pushing ${ahead} commit(s) to ${upstream}…"
+	git push origin HEAD
+}
 
 SFTP_JSON="$REPO_ROOT/.vscode/sftp.json"
 CTX="${DEPLOY_CONTEXT:-petstudio-prod}"
@@ -187,6 +230,8 @@ if [[ "${DEPLOY_FORCE:-0}" == "1" ]]; then
 	ftp_args+=( --force )
 	echo "DEPLOY_FORCE=1: re-uploading all plugin files."
 fi
+
+push_to_github
 
 echo "Deploying ${LOCAL_VERSION} to ${FTP_URL} (incremental via git-ftp)…"
 if [[ "${DEPLOY_SKIP_GIT_FTP:-0}" != "1" ]]; then

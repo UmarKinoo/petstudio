@@ -15,17 +15,18 @@ WordPress + Elementor rebuild of [The Pet Studio](https://mature-brown-antelope.
 
 ## Push (GitHub + production)
 
-When you say **push**, this means:
+When you say **push**, commit first, then run the deploy script — it **pushes to GitHub, then deploys to production**:
 
 1. Commit any uncommitted changes
-2. `git push origin main`
-3. `bash scripts/deploy-production.sh`
+2. `bash scripts/deploy-production.sh` (runs `git push origin` then FTP upload)
 
 One-liner:
 
 ```bash
-git add -A && git commit -m "your message" && git push origin main && bash scripts/deploy-production.sh
+git add -A && git commit -m "your message" && bash scripts/deploy-production.sh
 ```
+
+Emergency FTP-only (skip GitHub): `DEPLOY_SKIP_GITHUB_PUSH=1 bash scripts/deploy-production.sh`
 
 ### First-time deploy setup
 
