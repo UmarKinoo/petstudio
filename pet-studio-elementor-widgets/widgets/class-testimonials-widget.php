@@ -68,7 +68,93 @@ class Testimonials_Widget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'section_style', array( 'label' => esc_html__( 'Style', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_STYLE ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'title_typography', 'selector' => '{{WRAPPER}} .el-title' ) );
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'title_typography',
+				'label'          => esc_html__( 'Review title typography', 'pet-studio-elementor' ),
+				'selector'       => '{{WRAPPER}} .ps-testimonial-title',
+				'fields_options' => array(
+					'font_family' => array( 'default' => 'Noto Sans' ),
+					'font_size'   => array( 'default' => array( 'size' => 20, 'unit' => 'px' ) ),
+					'font_weight' => array( 'default' => '600' ),
+					'line_height' => array( 'default' => array( 'size' => 1.4, 'unit' => 'em' ) ),
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'quote_typography',
+				'label'          => esc_html__( 'Review text typography', 'pet-studio-elementor' ),
+				'selector'       => '{{WRAPPER}} .ps-testimonial-quote, {{WRAPPER}} .ps-testimonial-quote p',
+				'fields_options' => array(
+					'font_family' => array( 'default' => 'Noto Sans' ),
+					'font_size'   => array( 'default' => array( 'size' => 16, 'unit' => 'px' ) ),
+					'font_weight' => array( 'default' => '400' ),
+					'line_height' => array( 'default' => array( 'size' => 1.5, 'unit' => 'em' ) ),
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'author_typography',
+				'label'          => esc_html__( 'Author typography', 'pet-studio-elementor' ),
+				'selector'       => '{{WRAPPER}} .ps-testimonial-author',
+				'fields_options' => array(
+					'font_family' => array( 'default' => 'Noto Sans' ),
+					'font_size'   => array( 'default' => array( 'size' => 16, 'unit' => 'px' ) ),
+					'font_weight' => array( 'default' => '400' ),
+					'line_height' => array( 'default' => array( 'size' => 1.4, 'unit' => 'em' ) ),
+				),
+			)
+		);
+		$this->add_control(
+			'quote_color',
+			array(
+				'label'     => esc_html__( 'Review text colour', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000000',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-testimonial-quote'   => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ps-testimonial-quote p'   => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'title_color',
+			array(
+				'label'     => esc_html__( 'Review title colour', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000000',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-testimonial-title' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'author_color',
+			array(
+				'label'     => esc_html__( 'Author colour', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#B4ADA7',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-testimonial-author' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'divider_color',
+			array(
+				'label'     => esc_html__( 'Title divider colour', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FF90AA',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-testimonial-title.uk-heading-divider' => 'border-bottom-color: {{VALUE}};',
+				),
+			)
+		);
 		$this->end_controls_section();
 		$this->register_style_controls( 'section_style_accent' );
 	}
@@ -104,12 +190,12 @@ class Testimonials_Widget extends Widget_Base {
 												<?php if ( $icon ) : ?>
 													<img class="el-image" src="<?php echo esc_url( $icon ); ?>" alt="" width="60" height="52">
 												<?php endif; ?>
-												<h3 class="el-title uk-h4 uk-heading-divider uk-font-primary uk-margin-top uk-margin-remove-bottom"><?php echo esc_html( $review['title'] ?? '' ); ?></h3>
+												<h3 class="el-title uk-h4 uk-heading-divider uk-font-primary uk-margin-top uk-margin-remove-bottom ps-testimonial-title"><?php echo esc_html( $review['title'] ?? '' ); ?></h3>
 												<?php if ( ! empty( $review['quote'] ) ) : ?>
-													<div class="el-content uk-panel uk-margin-top"><?php render_rich_text( wpautop( esc_html( $review['quote'] ) ) ); ?></div>
+													<div class="el-content uk-panel uk-margin-top ps-testimonial-quote"><?php render_rich_text( wpautop( esc_html( $review['quote'] ) ) ); ?></div>
 												<?php endif; ?>
 												<?php if ( ! empty( $review['author'] ) ) : ?>
-													<div class="el-meta uk-text-meta uk-margin-top"><?php echo esc_html( $review['author'] ); ?></div>
+													<div class="el-meta uk-text-meta uk-margin-top ps-testimonial-author"><?php echo esc_html( $review['author'] ); ?></div>
 												<?php endif; ?>
 											</div>
 										</div>
