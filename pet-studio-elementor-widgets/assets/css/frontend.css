@@ -483,6 +483,15 @@ a.ps-book-now-btn:focus,
 	}
 }
 
+/* Section headings — mirror @1200px (services cards, about intro, contact, etc.) */
+@media (min-width: 1200px) {
+	.display-3,
+	.display-4,
+	.uk-heading-medium {
+		font-size: 2.5rem;
+	}
+}
+
 /* About intro — mirror body copy (Noto Sans, black, bold place names) */
 .elementor-widget-pet_studio_about_intro .ps-about-intro-body,
 .elementor-widget-pet_studio_about_intro .ps-about-intro-body p {
