@@ -483,13 +483,13 @@ a.ps-book-now-btn:focus,
 	color: #000;
 }
 
-/* Testimonials — mirror typography (Noto Sans, black quote, muted author) */
+/* Testimonials — mirror typography (uk-h4 title, Noto Sans body, uk-text-meta author) */
 .elementor-widget-pet_studio_testimonials .ps-testimonial-title {
-	font-family: var(--pet-font-body);
+	font-family: 'PT Sans Caption', sans-serif;
 	font-size: 20px;
 	line-height: 1.4;
 	font-weight: 600;
-	color: #000;
+	color: #000 !important;
 }
 
 .elementor-widget-pet_studio_testimonials .ps-testimonial-quote,
@@ -498,7 +498,7 @@ a.ps-book-now-btn:focus,
 	font-size: 16px;
 	line-height: 1.5;
 	font-weight: 400;
-	color: #000;
+	color: #000 !important;
 	margin-bottom: 0;
 }
 
@@ -507,7 +507,7 @@ a.ps-book-now-btn:focus,
 	font-size: 16px;
 	line-height: 1.4;
 	font-weight: 400;
-	color: #b4ada7;
+	color: #b4ada7 !important;
 }
 
 .elementor-widget-pet_studio_testimonials .ps-testimonial-title.uk-heading-divider {

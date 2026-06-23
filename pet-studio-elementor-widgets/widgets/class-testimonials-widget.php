@@ -75,7 +75,7 @@ class Testimonials_Widget extends Widget_Base {
 				'label'          => esc_html__( 'Review title typography', 'pet-studio-elementor' ),
 				'selector'       => '{{WRAPPER}} .ps-testimonial-title',
 				'fields_options' => array(
-					'font_family' => array( 'default' => 'Noto Sans' ),
+					'font_family' => array( 'default' => 'PT Sans Caption' ),
 					'font_size'   => array( 'default' => array( 'size' => 20, 'unit' => 'px' ) ),
 					'font_weight' => array( 'default' => '600' ),
 					'line_height' => array( 'default' => array( 'size' => 1.4, 'unit' => 'em' ) ),
@@ -174,8 +174,36 @@ class Testimonials_Widget extends Widget_Base {
 				$slider_opts[] = 'autoplay-interval: ' . $interval;
 			}
 		}
-		$slider_attr = implode( '; ', $slider_opts );
+		$slider_attr  = implode( '; ', $slider_opts );
+		$element_id   = $this->get_id();
+		$quote_color  = ! empty( $s['quote_color'] ) ? $s['quote_color'] : '#000000';
+		$title_color  = ! empty( $s['title_color'] ) ? $s['title_color'] : '#000000';
+		$author_color = ! empty( $s['author_color'] ) ? $s['author_color'] : '#B4ADA7';
 		?>
+		<style>
+			.elementor-element-<?php echo esc_attr( (string) $element_id ); ?> .ps-testimonial-title {
+				font-family: 'PT Sans Caption', sans-serif;
+				font-size: 20px;
+				line-height: 1.4;
+				font-weight: 600;
+				color: <?php echo esc_attr( $title_color ); ?> !important;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $element_id ); ?> .ps-testimonial-quote,
+			.elementor-element-<?php echo esc_attr( (string) $element_id ); ?> .ps-testimonial-quote p {
+				font-family: 'Noto Sans', sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+				font-weight: 400;
+				color: <?php echo esc_attr( $quote_color ); ?> !important;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $element_id ); ?> .ps-testimonial-author {
+				font-family: 'Noto Sans', sans-serif;
+				font-size: 16px;
+				line-height: 1.4;
+				font-weight: 400;
+				color: <?php echo esc_attr( $author_color ); ?> !important;
+			}
+		</style>
 		<div class="uk-section-muted uk-section" uk-scrollspy="target: [uk-scrollspy-class]; cls: uk-animation-scale-up; delay: false;">
 			<div class="uk-container">
 				<div class="uk-grid-margin uk-grid tm-grid-expand uk-child-width-1-1">
