@@ -470,3 +470,15 @@ a.ps-book-now-btn:focus,
 		line-height: 1.05;
 	}
 }
+
+/* About intro — mirror body copy (Noto Sans, black, bold place names) */
+.elementor-widget-pet_studio_about_intro .ps-about-intro-body,
+.elementor-widget-pet_studio_about_intro .ps-about-intro-body p {
+	font-family: var(--pet-font-body);
+	color: #000;
+}
+
+.elementor-widget-pet_studio_about_intro .ps-about-intro-body strong {
+	font-weight: 700;
+	color: #000;
+}

@@ -59,7 +59,53 @@ class About_Intro_Widget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'section_style', array( 'label' => esc_html__( 'Style', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_STYLE ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'heading_typography', 'selector' => '{{WRAPPER}} .el-title' ) );
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'heading_typography',
+				'label'          => esc_html__( 'Heading typography', 'pet-studio-elementor' ),
+				'selector'       => '{{WRAPPER}} .el-title',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'body_typography',
+				'label'          => esc_html__( 'Body typography', 'pet-studio-elementor' ),
+				'selector'       => '{{WRAPPER}} .ps-about-intro-body, {{WRAPPER}} .ps-about-intro-body p',
+				'fields_options' => array(
+					'font_family' => array(
+						'default' => 'Noto Sans',
+					),
+					'font_weight' => array(
+						'default' => '400',
+					),
+				),
+			)
+		);
+		$this->add_control(
+			'body_color',
+			array(
+				'label'     => esc_html__( 'Body colour', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000000',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-about-intro-body' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ps-about-intro-body p' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'body_strong_color',
+			array(
+				'label'     => esc_html__( 'Bold text colour', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000000',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-about-intro-body strong' => 'color: {{VALUE}}; font-weight: 700;',
+				),
+			)
+		);
 		$this->end_controls_section();
 		$this->register_style_controls( 'section_style_accent' );
 	}
@@ -78,7 +124,7 @@ class About_Intro_Widget extends Widget_Base {
 							<div class="uk-panel uk-margin-remove-first-child uk-position-relative uk-margin uk-width-large" style="z-index: 1;" uk-scrollspy="target: [uk-scrollspy-class];">
 								<h2 class="el-title uk-heading-medium uk-margin-top uk-margin-remove-bottom"><?php echo esc_html( $s['heading'] ?? '' ); ?></h2>
 								<?php if ( ! empty( $s['body'] ) ) : ?>
-									<div class="el-content uk-panel uk-text-large uk-margin-medium-top"><?php render_rich_text( $s['body'] ); ?></div>
+									<div class="el-content uk-panel uk-text-large uk-margin-medium-top ps-about-intro-body"><?php render_rich_text( $s['body'] ); ?></div>
 								<?php endif; ?>
 								<?php if ( ! empty( $s['cta_text'] ) ) : ?>
 									<div class="uk-margin-large-top">
