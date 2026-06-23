@@ -91,7 +91,7 @@
 	overflow: visible;
 }
 
-@media (min-width: 1200px) and (max-width: 1499px) {
+@media (min-width: 1200px) and (max-width: 1599px) {
 	.tm-header > [uk-sticky] .uk-container-expand,
 	.tm-header .uk-navbar-container .uk-container-expand,
 	.tm-header .uk-navbar-container {
@@ -100,7 +100,7 @@
 	}
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1600px) {
 	.tm-header > [uk-sticky] .uk-container-expand,
 	.tm-header .uk-navbar-container .uk-container-expand,
 	.tm-header .uk-navbar-container {
@@ -110,7 +110,8 @@
 }
 
 .tm-header .uk-navbar {
-	width: 100%;
+	width: 100% !important;
+	max-width: 100% !important;
 	overflow: visible;
 	align-items: center;
 	justify-content: flex-start;
@@ -135,7 +136,7 @@
 	min-width: 0;
 	flex-wrap: nowrap;
 	overflow: visible;
-	margin-left: auto;
+	margin-left: auto !important;
 	column-gap: 0.35rem;
 }
 
@@ -163,7 +164,7 @@
 }
 
 .tm-header .uk-logo.uk-navbar-item {
-	margin-right: 0;
+	margin-right: 0.75rem;
 	flex-shrink: 0;
 	min-width: max-content;
 	padding-left: 0;
@@ -176,7 +177,7 @@
 	max-height: 28px;
 }
 
-@media (min-width: 1200px) and (max-width: 1499px) {
+@media (min-width: 1200px) and (max-width: 1599px) {
 	.tm-header .uk-logo img {
 		max-width: 200px;
 		max-height: 26px;
@@ -190,6 +191,17 @@
 		padding-left: 0.28rem;
 		padding-right: 0.28rem;
 		font-size: 0.875rem;
+	}
+}
+
+@media (min-width: 1500px) and (max-width: 1599px) {
+	.tm-header .ps-header-nav > li > a .uk-navbar-subtitle {
+		display: block !important;
+	}
+
+	.tm-header .uk-logo img {
+		max-width: 240px;
+		max-height: 28px;
 	}
 }
 

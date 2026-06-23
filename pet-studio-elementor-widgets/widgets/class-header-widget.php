@@ -425,7 +425,7 @@ class Header_Widget extends Widget_Base {
 			.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .uk-nav-default > li > a > div {
 				text-transform: none !important;
 			}
-			@media (min-width: 1200px) and (max-width: 1499px) {
+			@media (min-width: 1200px) and (max-width: 1599px) {
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
@@ -434,7 +434,7 @@ class Header_Widget extends Widget_Base {
 					padding-right: 40px !important;
 				}
 			}
-			@media (min-width: 1500px) {
+			@media (min-width: 1600px) {
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
@@ -447,6 +447,11 @@ class Header_Widget extends Widget_Base {
 				}
 			}
 			@media (min-width: 1200px) {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar {
+					width: 100% !important;
+					max-width: 100% !important;
+				}
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-container.uk-container-expand,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .uk-navbar-container,
@@ -480,10 +485,16 @@ class Header_Widget extends Widget_Base {
 					min-width: 0 !important;
 				}
 			}
-			@media (min-width: 1200px) and (max-width: 1499px) {
+			@media (min-width: 1200px) and (max-width: 1599px) {
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle {
 					display: none !important;
+				}
+			}
+			@media (min-width: 1500px) and (max-width: 1599px) {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle {
+					display: block !important;
 				}
 			}
 		</style>
