@@ -143,9 +143,11 @@ class Header_Widget extends Widget_Base {
 		$nav_rep->add_control(
 			'subtitle',
 			array(
-				'label'   => esc_html__( 'Subtitle', 'pet-studio-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => '',
+				'label'       => esc_html__( 'Subtitle', 'pet-studio-elementor' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'rows'        => 2,
+				'description' => esc_html__( 'Optional second line (e.g. location under Groom Your Dog).', 'pet-studio-elementor' ),
+				'default'     => '',
 			)
 		);
 
@@ -665,7 +667,20 @@ class Header_Widget extends Widget_Base {
 			echo '<br>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static mirror markup.
 			return;
 		}
-		echo esc_html( $subtitle );
+
+		$lines = preg_split( '/\r\n|\r|\n/', $subtitle );
+		$lines = array_values( array_filter( array_map( 'trim', $lines ), 'strlen' ) );
+		if ( empty( $lines ) ) {
+			echo '<br>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			return;
+		}
+
+		foreach ( $lines as $index => $line ) {
+			if ( $index > 0 ) {
+				echo '<br>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+			echo esc_html( $line );
+		}
 	}
 
 	/**
