@@ -187,6 +187,8 @@ class Content_Normalizer {
 				$fixture['left_inset_image'] = self::media_to_elementor( $fixture['left_inset_image'] ?? null );
 				$fixture['show_signature']  = self::bool_to_switcher( $fixture['show_signature'] ?? false );
 				$fixture['reverse_columns'] = self::bool_to_switcher( $fixture['reverse_columns'] ?? false );
+				$fixture['cta_link']        = self::link_to_elementor( $fixture['cta_link'] ?? null );
+				$fixture['cta2_link']       = self::link_to_elementor( $fixture['cta2_link'] ?? null );
 				break;
 
 			case 'content-split':
@@ -199,6 +201,7 @@ class Content_Normalizer {
 					}
 				);
 				$fixture['reverse_columns'] = self::bool_to_switcher( $fixture['reverse_columns'] ?? false );
+				$fixture['cta_link']        = self::link_to_elementor( $fixture['cta_link'] ?? null );
 				break;
 
 			case 'dog-divider':
@@ -406,7 +409,7 @@ class Content_Normalizer {
 	 */
 	public static function merge_settings( array $defaults, array $settings ): array {
 		foreach ( $defaults as $key => $default_val ) {
-			if ( ! array_key_exists( $key, $settings ) || self::is_empty_setting( $settings[ $key ] ) ) {
+			if ( ! array_key_exists( $key, $settings ) ) {
 				$settings[ $key ] = $default_val;
 				continue;
 			}

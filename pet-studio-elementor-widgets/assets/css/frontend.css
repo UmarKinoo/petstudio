@@ -345,6 +345,21 @@ a.ps-book-now-btn:focus,
 	box-shadow: 0 9px 24px rgba(255, 144, 170, 0.6);
 }
 
+/* Section CTAs (page-intro / content-split) */
+.ps-cta-group {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem 1.25rem;
+	margin-top: 1.75rem;
+}
+
+.ps-cta-group .ps-book-now-btn {
+	/* Allow longer labels (e.g. "Book your Dog's Teeth Clean Now") to wrap on small screens. */
+	white-space: normal !important;
+	text-align: center;
+}
+
 /* Liza signature — inline SVG (immune to LiteSpeed lazy-load on <img>) */
 .elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg {
 	max-width: 70vw;

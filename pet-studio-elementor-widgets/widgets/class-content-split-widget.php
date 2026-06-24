@@ -12,8 +12,10 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Pet_Studio_Elementor\Widget_Base;
 
+use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\render_cta_group;
 use function Pet_Studio_Elementor\render_rich_text;
 use function Pet_Studio_Elementor\section_tone_class;
 
@@ -81,6 +83,11 @@ class Content_Split_Widget extends Widget_Base {
 		$this->add_control( 'images', array( 'label' => esc_html__( 'Images', 'pet-studio-elementor' ), 'type' => Controls_Manager::REPEATER, 'fields' => $img_rep->get_controls(), 'default' => $img_default ) );
 		$this->add_control( 'reverse_columns', array( 'label' => esc_html__( 'Reverse columns', 'pet-studio-elementor' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => '' ) );
 
+		$this->add_control( 'cta_heading', array( 'label' => esc_html__( 'Call to action', 'pet-studio-elementor' ), 'type' => Controls_Manager::HEADING, 'separator' => 'before' ) );
+		$this->add_control( 'cta_text', array( 'label' => esc_html__( 'CTA text', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['cta_text'] ?? '' ) );
+		$this->add_control( 'cta_link', array( 'label' => esc_html__( 'CTA link', 'pet-studio-elementor' ), 'type' => Controls_Manager::URL, 'default' => api_link_to_control( $d['cta_link'] ?? null ), 'condition' => array( 'cta_text!' => '' ) ) );
+		$this->add_control( 'cta_style', array( 'label' => esc_html__( 'CTA style', 'pet-studio-elementor' ), 'type' => Controls_Manager::SELECT, 'default' => $d['cta_style'] ?? 'pill', 'options' => array( 'pill' => 'Pink button', 'text' => 'Text link' ), 'condition' => array( 'cta_text!' => '' ) ) );
+
 		$this->end_controls_section();
 		$this->start_controls_section( 'section_style', array( 'label' => esc_html__( 'Style', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_STYLE ) );
 		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'heading_typography', 'selector' => '{{WRAPPER}} .el-title' ) );
@@ -137,6 +144,17 @@ class Content_Split_Widget extends Widget_Base {
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>
+					<?php
+					render_cta_group(
+						array(
+							array(
+								'text'  => $s['cta_text'] ?? '',
+								'link'  => $s['cta_link'] ?? null,
+								'style' => $s['cta_style'] ?? 'pill',
+							),
+						)
+					);
+					?>
 				</div>
 			</div>
 			<?php

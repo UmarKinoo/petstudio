@@ -11,5 +11,8 @@
     "primary_image": {
         "id": 0,
         "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/BK1_8643_1.jpg"
-    }
+    },
+    "cta_text": "Book Now",
+    "cta_link": { "url": "/contact/" },
+    "cta_style": "pill"
 }

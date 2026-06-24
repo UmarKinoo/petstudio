@@ -11,10 +11,12 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Pet_Studio_Elementor\Widget_Base;
 
+use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\render_cta_group;
 use function Pet_Studio_Elementor\render_inline_svg;
 use function Pet_Studio_Elementor\render_rich_text;
 
@@ -58,6 +60,14 @@ class Page_Intro_Widget extends Widget_Base {
 		$this->add_control( 'badge_image', array( 'label' => esc_html__( 'Badge image (below text)', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => api_media_to_control( $d['badge_image'] ?? null ) ) );
 		$this->add_control( 'left_inset_image', array( 'label' => esc_html__( 'Inset image (below text, left column)', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => api_media_to_control( $d['left_inset_image'] ?? null ) ) );
 		$this->add_control( 'reverse_columns', array( 'label' => esc_html__( 'Reverse columns', 'pet-studio-elementor' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => '' ) );
+
+		$this->add_control( 'cta_heading', array( 'label' => esc_html__( 'Call to action', 'pet-studio-elementor' ), 'type' => Controls_Manager::HEADING, 'separator' => 'before' ) );
+		$this->add_control( 'cta_text', array( 'label' => esc_html__( 'Primary CTA text', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['cta_text'] ?? '' ) );
+		$this->add_control( 'cta_link', array( 'label' => esc_html__( 'Primary CTA link', 'pet-studio-elementor' ), 'type' => Controls_Manager::URL, 'default' => api_link_to_control( $d['cta_link'] ?? null ), 'condition' => array( 'cta_text!' => '' ) ) );
+		$this->add_control( 'cta_style', array( 'label' => esc_html__( 'Primary CTA style', 'pet-studio-elementor' ), 'type' => Controls_Manager::SELECT, 'default' => $d['cta_style'] ?? 'pill', 'options' => array( 'pill' => 'Pink button', 'text' => 'Text link' ), 'condition' => array( 'cta_text!' => '' ) ) );
+		$this->add_control( 'cta2_text', array( 'label' => esc_html__( 'Secondary CTA text', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['cta2_text'] ?? '' ) );
+		$this->add_control( 'cta2_link', array( 'label' => esc_html__( 'Secondary CTA link', 'pet-studio-elementor' ), 'type' => Controls_Manager::URL, 'default' => api_link_to_control( $d['cta2_link'] ?? null ), 'condition' => array( 'cta2_text!' => '' ) ) );
+		$this->add_control( 'cta2_style', array( 'label' => esc_html__( 'Secondary CTA style', 'pet-studio-elementor' ), 'type' => Controls_Manager::SELECT, 'default' => $d['cta2_style'] ?? 'text', 'options' => array( 'pill' => 'Pink button', 'text' => 'Text link' ), 'condition' => array( 'cta2_text!' => '' ) ) );
 
 		$this->end_controls_section();
 
@@ -110,6 +120,22 @@ class Page_Intro_Widget extends Widget_Base {
 									<?php if ( $badge_url ) : ?>
 										<img class="el-image uk-margin-medium-top" src="<?php echo esc_url( $badge_url ); ?>" alt="" loading="lazy" width="180" height="130">
 									<?php endif; ?>
+									<?php
+									render_cta_group(
+										array(
+											array(
+												'text'  => $s['cta_text'] ?? '',
+												'link'  => $s['cta_link'] ?? null,
+												'style' => $s['cta_style'] ?? 'pill',
+											),
+											array(
+												'text'  => $s['cta2_text'] ?? '',
+												'link'  => $s['cta2_link'] ?? null,
+												'style' => $s['cta2_style'] ?? 'text',
+											),
+										)
+									);
+									?>
 								</div>
 								<?php if ( $inset_url ) : ?>
 									<div class="uk-margin-xlarge uk-text-center" uk-parallax="opacity: 1 70%,0; blur: 0 70%,100; easing: 0; media: @l">

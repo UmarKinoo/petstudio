@@ -7,5 +7,8 @@
     { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/difficult-dog-hero.jpg" },
     { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/difficult-dog-stack-1.jpg" },
     { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/difficult-dog-stack-2.jpg" }
-  ]
+  ],
+  "cta_text": "Find Out More",
+  "cta_link": { "url": "/contact/" },
+  "cta_style": "text"
 }

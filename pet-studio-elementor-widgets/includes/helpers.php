@@ -165,6 +165,41 @@ function print_link_attributes( ?array $link ): void {
 }
 
 /**
+ * Render a group of section CTA buttons.
+ *
+ * Each CTA: text (label), link (Elementor URL control shape), style ('pill'|'text').
+ * Empty-text CTAs are skipped. In-page anchor links (href starting "#") get
+ * UIkit smooth-scroll with a sticky-header offset.
+ *
+ * @param array<int, array<string, mixed>> $ctas CTA definitions.
+ */
+function render_cta_group( array $ctas ): void {
+	$items = array();
+	foreach ( $ctas as $cta ) {
+		if ( ! empty( $cta['text'] ) ) {
+			$items[] = $cta;
+		}
+	}
+	if ( empty( $items ) ) {
+		return;
+	}
+	echo '<div class="ps-cta-group">';
+	foreach ( $items as $cta ) {
+		$is_text = ( $cta['style'] ?? 'pill' ) === 'text';
+		$class   = $is_text ? 'el-link uk-button uk-button-text' : 'el-link uk-button ps-book-now-btn';
+		$link    = is_array( $cta['link'] ?? null ) ? $cta['link'] : null;
+		$url     = (string) ( $link['url'] ?? '' );
+		echo '<a class="' . esc_attr( $class ) . '"';
+		print_link_attributes( $link );
+		if ( '' !== $url && '#' === $url[0] ) {
+			echo ' uk-scroll="offset: 100"';
+		}
+		echo '>' . esc_html( (string) $cta['text'] ) . '</a>';
+	}
+	echo '</div>';
+}
+
+/**
  * Map social network key to UIkit icon name (Kojiro set).
  */
 function social_icon_name( string $network ): string {

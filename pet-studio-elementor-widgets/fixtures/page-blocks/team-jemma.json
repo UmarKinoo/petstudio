@@ -1,16 +1,12 @@
 {
-    "name_line_1": "Jemma",
-    "name_accent": "",
-    "role": "Dog Groomer",
-    "bio": "<p>Jemma has years of experience grooming nervous, fearful dogs using gentle patience. Her specialty lies in handstripping.</p>",
-    "portrait": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/jemma.jpg"
-    },
-    "show_signature": true,
-    "signature_image": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
-    },
-    "reverse_columns": false
+  "name_line_1": "Jemma",
+  "name_accent": "",
+  "role": "Head Stylist",
+  "bio": "<p>Jemma is our Scottish pet stylist who has a passion for dog training. She also loves travelling and the arts from musical theatre to paintings. She has plans to explore Brazil in 2026.<br><br></p><p>Jemma has years of experience grooming nervous, fearful dogs, using gentle patience to create a positive experience. Her calm approach helps to reduce anxiety and build trust with the dog ❤️<br><br></p><p>Her specialty lies in handstripping, a meticulous grooming method that requires precision and patience. Jemma has 1 dog of her own, Enzo the Belgian Malinois.</p>",
+  "portrait": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/jemma.jpg"
+  },
+  "show_signature": false,
+  "reverse_columns": false
 }

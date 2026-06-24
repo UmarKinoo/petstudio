@@ -100,7 +100,7 @@ class Courses_Tabs_Widget extends Widget_Base {
 		$switcher_id = 'ps-courses-' . $this->get_id();
 		$active      = (int) ( $s['default_active_tab'] ?? 0 );
 		?>
-		<div class="uk-section-secondary uk-section uk-section-large">
+		<div id="ps-courses-available" class="uk-section-secondary uk-section uk-section-large">
 			<div class="uk-container">
 				<div class="uk-grid-margin uk-container uk-container-small">
 					<div class="uk-grid tm-grid-expand uk-child-width-1-1">

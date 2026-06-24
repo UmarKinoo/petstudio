@@ -1,16 +1,16 @@
 {
-    "name_line_1": "Liza",
-    "name_accent": "Smith",
-    "role": "Teacher, Assessor & Dog Groomer",
-    "bio": "<p>Founder of The Pet Studio, Liza Smith has been grooming dogs since 2000, when she opened her first grooming salon in Congresbury. Since then, Liza has built up her expertise and outstanding local reputation within North Somerset. So now not only do we provide dog grooming services, but we also teach the next generation of dog groomers as well as owners looking to learn to groom their own dogs.</p><p>Liza has a huge passion for dogs and has spent over the last 20 years honing her craft, so whether she is grooming your dog in the salon or inspiring and motivating trainee groomers in the Academy, she always brings her signature enthusiasm and support to whoever needs it.</p><p>So if you're looking for a company that understands dogs inside out, look no further than The Pet Studio. Liza brings her skills and experience to every groom, training session and provides her personal assurance of quality and professionalism every time.</p>",
-    "portrait": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/liza-portrait.jpg"
-    },
-    "show_signature": true,
-    "signature_image": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
-    },
-    "reverse_columns": false
+  "name_line_1": "Liza",
+  "name_accent": "Smith",
+  "role": "Teacher, Assessor & Dog Groomer",
+  "bio": "<p>Founder of The Pet Studio, Liza Smith has been grooming dogs since 2000, when she opened her first grooming salon in Congresbury. Since then, Liza has built up her expertise and outstanding local reputation within North Somerset. So now not only do we provide dog grooming services, but we also teach the next generation of dog groomers as well as owners looking to learn to groom their own dogs.</p><p>Liza has a huge passion for dogs and has spent over the last 20 years honing her craft, so whether she is grooming your dog in the salon or inspiring and motivating trainee groomers in the Academy, she always brings her signature enthusiasm and support to whoever needs it.</p><p>So if you're looking for a company that understands dogs inside out, look no further than The Pet Studio. Liza brings her skills and experience to every groom, training session and provides her personal assurance of quality and professionalism every time.</p>",
+  "portrait": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/liza-portrait.jpg"
+  },
+  "show_signature": true,
+  "signature_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+  },
+  "reverse_columns": false
 }

@@ -6,5 +6,11 @@
   "show_signature": false,
   "primary_image": {
     "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/BK1_8822_1.jpg"
-  }
+  },
+  "cta_text": "Enquire Now",
+  "cta_link": { "url": "/contact/" },
+  "cta_style": "pill",
+  "cta2_text": "Find Out More",
+  "cta2_link": { "url": "#ps-courses-available" },
+  "cta2_style": "text"
 }

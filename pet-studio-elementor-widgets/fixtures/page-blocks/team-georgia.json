@@ -1,16 +1,12 @@
 {
-    "name_line_1": "Georgia",
-    "name_accent": "",
-    "role": "Dog Groomer",
-    "bio": "<p>Georgia trained under Liza in 2021 and loves the creative and technical challenge that dog grooming offers across many breeds.</p>",
-    "portrait": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/georgia.jpg"
-    },
-    "show_signature": true,
-    "signature_image": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
-    },
-    "reverse_columns": true
+  "name_line_1": "Georgia",
+  "name_accent": "",
+  "role": "Head Stylist",
+  "bio": "<p>Georgia began working with Liza at The Pet Studio as a dog bather at seventeen years old and since then her love for what she does has only grown. ❤️</p><p>Georgia later trained under Liza on her course in 2021 and she was immediately drawn to the creative and technical challenge that dog grooming can offer. One of the things she loves most about grooming is getting the opportunity to work with so many different breeds and getting to know each dog's unique personality.<br><br>From hand-stripping spaniels and terriers, to shaping the perfect 'teddy bear' trim, Georgia loves the variety that each new pup offers. 🐶<br><br></p><p>In her spare time she travels the UK in her converted van with her German Shepherd Billie. She hopes to drive it to France next year for some sightseeing and snowboarding.</p>",
+  "portrait": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/georgia.jpg"
+  },
+  "show_signature": false,
+  "reverse_columns": false
 }

@@ -1,16 +1,12 @@
 {
-    "name_line_1": "Rita",
-    "name_accent": "",
-    "role": "Receptionist",
-    "bio": "<p>Rita works part-time as receptionist and enjoys meeting customers as they drop off their canine companions for a pampering session.</p>",
-    "portrait": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/rita.jpg"
-    },
-    "show_signature": true,
-    "signature_image": {
-        "id": 0,
-        "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
-    },
-    "reverse_columns": false
+  "name_line_1": "Rita",
+  "name_accent": "",
+  "role": "Receptionist",
+  "bio": "<p>I work at The Pet Studio as a receptionist on a part-time basis. I really enjoy meeting all the customers as they drop off their precious canine companions for a pampering session.</p><p>After the dogs have had a lovely shampoo and blow dry, I love watching the talented and skilled groomers work their magic by transforming their coats by clipping, scissoring or hand stripping, taking into account the owners individual preferences.</p><p>It's so wonderful to watch the delighted faces of the owners when they come to collect their freshly groomed dogs.</p><p>I've owned gun dogs for many years and used to enjoy showing my golden retrievers at championship shows around the country. After a gap of 3 years without a furbaby my partner and I took on a little rescue dog called Daisy - she's a Maltese who is our little princess. Unlike the Goldie's I've owned before Daisy doesn't like cold wet weather so is very much a lapdog and very enjoys her pampering sessions at The Pet Studio. 🐶</p>",
+  "portrait": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/rita.jpg"
+  },
+  "show_signature": false,
+  "reverse_columns": false
 }

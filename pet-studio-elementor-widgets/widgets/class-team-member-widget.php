@@ -10,6 +10,7 @@ namespace Pet_Studio_Elementor\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Pet_Studio_Elementor\Widget_Base;
+use Pet_Studio_Elementor\Content_Normalizer;
 
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\eager_media_attrs;
@@ -40,6 +41,15 @@ class Team_Member_Widget extends Widget_Base {
 
 	protected function get_fixture_slug(): string {
 		return 'team-member';
+	}
+
+	/**
+	 * Each team profile is a distinct instance — do not backfill empty fields from Liza defaults.
+	 */
+	protected function get_render_settings(): array {
+		$settings = $this->get_settings_for_display();
+
+		return Content_Normalizer::normalize( $this->get_name(), $settings );
 	}
 
 	protected function register_controls(): void {
