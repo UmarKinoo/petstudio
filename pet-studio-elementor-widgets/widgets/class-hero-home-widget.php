@@ -218,7 +218,11 @@ class Hero_Home_Widget extends Widget_Base {
 		$logo_desk   = media_url( $s['logo_desktop'] ?? null );
 		$logo_mob    = media_url( $s['logo_mobile'] ?? null ) ?: $logo_desk;
 		$logo_alt    = $s['logo_alt'] ?? '';
+		$defaults    = $this->get_fixture_defaults();
 		$tagline_loc = trim( (string) ( $s['tagline_location'] ?? '' ) );
+		if ( $tagline_loc === '' ) {
+			$tagline_loc = trim( (string) ( $defaults['tagline_location'] ?? 'Bristol' ) );
+		}
 		$words       = $s['headline_words'] ?? array();
 		?>
 		<style class="uk-margin-remove-adjacent">
@@ -272,7 +276,7 @@ class Hero_Home_Widget extends Widget_Base {
 									<div class="ps-hero-logo-inner">
 										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_desk ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="650" height="138"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
 										<?php if ( $tagline_loc !== '' ) : ?>
-											<span class="ps-hero-tagline-location" aria-hidden="true"><?php echo esc_html( $tagline_loc ); ?></span>
+											<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -282,7 +286,7 @@ class Hero_Home_Widget extends Widget_Base {
 									<div class="ps-hero-logo-inner">
 										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
 										<?php if ( $tagline_loc !== '' ) : ?>
-											<span class="ps-hero-tagline-location" aria-hidden="true"><?php echo esc_html( $tagline_loc ); ?></span>
+											<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
 										<?php endif; ?>
 									</div>
 								</div>

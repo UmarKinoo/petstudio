@@ -47,6 +47,35 @@ class Header_Widget extends Widget_Base {
 		return 'header';
 	}
 
+	/**
+	 * Nav subtitles follow fixture defaults at render (Elementor DB can lag after fixture edits).
+	 */
+	protected function get_render_settings(): array {
+		$settings = parent::get_render_settings();
+
+		$fixture_nav = $this->get_fixture_defaults()['navigation'] ?? array();
+		if ( empty( $settings['navigation'] ) || ! is_array( $settings['navigation'] ) || empty( $fixture_nav ) ) {
+			return $settings;
+		}
+
+		$by_label = array();
+		foreach ( $fixture_nav as $item ) {
+			$label = (string) ( $item['label'] ?? '' );
+			if ( $label !== '' ) {
+				$by_label[ $label ] = $item;
+			}
+		}
+
+		foreach ( $settings['navigation'] as $i => $item ) {
+			$label = (string) ( $item['label'] ?? '' );
+			if ( isset( $by_label[ $label ] ) ) {
+				$settings['navigation'][ $i ]['subtitle'] = $by_label[ $label ]['subtitle'] ?? '';
+			}
+		}
+
+		return $settings;
+	}
+
 	protected function register_controls(): void {
 		$defaults = $this->get_fixture_defaults();
 
