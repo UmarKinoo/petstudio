@@ -499,6 +499,38 @@ class Header_Widget extends Widget_Base {
 					display: block !important;
 				}
 			}
+			@media (min-width: 1200px) {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a {
+					align-items: flex-start !important;
+					justify-content: center !important;
+					min-height: 110px;
+					padding-top: 2rem;
+					white-space: normal;
+				}
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a::before,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a::before {
+					display: none !important;
+				}
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .ps-nav-label::after,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .ps-nav-label::after {
+					content: "";
+					position: absolute;
+					left: 0;
+					right: 100%;
+					bottom: -5px;
+					height: 2px;
+					border-radius: 2px;
+					background-color: #ff90aa;
+					transition: right 0.1s ease-in-out;
+				}
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li:hover > a .ps-nav-label::after,
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li.uk-active > a .ps-nav-label::after,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li:hover > a .ps-nav-label::after,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li.uk-active > a .ps-nav-label::after {
+					right: 0;
+				}
+			}
 		</style>
 		<header class="tm-header-mobile uk-hidden@l tm-header-overlay" uk-header uk-inverse="target: .uk-navbar-container; sel-active: .uk-navbar-transparent">
 			<div<?php echo $sticky_attr ? ' ' . trim( $sticky_attr ) : ''; ?>>
@@ -602,8 +634,8 @@ class Header_Widget extends Widget_Base {
 				?>
 				<li class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					<a<?php print_link_attributes( $item['link'] ?? null ); ?>>
-						<div>
-							<?php echo esc_html( $item['label'] ?? '' ); ?>
+						<div class="ps-nav-item-inner">
+							<span class="ps-nav-label"><?php echo esc_html( $item['label'] ?? '' ); ?></span>
 							<div class="uk-navbar-subtitle"><?php $this->render_nav_subtitle( $item['subtitle'] ?? '' ); ?></div>
 						</div>
 					</a>
@@ -678,8 +710,12 @@ class Header_Widget extends Widget_Base {
 		foreach ( $lines as $index => $line ) {
 			if ( $index > 0 ) {
 				echo '<br>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<span class="ps-nav-subtitle-extra">';
 			}
 			echo esc_html( $line );
+			if ( $index > 0 ) {
+				echo '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
 		}
 	}
 
