@@ -57,6 +57,27 @@
 	margin: 0;
 }
 
+/* Footer — smaller item fonts + logo (client request) */
+.elementor-widget-pet_studio_footer .el-title.uk-h1 {
+	font-size: 1.75rem !important; /* contact heading + phone (was ~2.6rem/42px) */
+}
+.elementor-widget-pet_studio_footer .el-title.uk-h2 {
+	font-size: 1.25rem !important; /* mobile email/phone (was ~27px) */
+}
+.elementor-widget-pet_studio_footer .el-content.uk-h3 {
+	font-size: 1.0625rem !important; /* address + opening hours (was 24px) */
+}
+.elementor-widget-pet_studio_footer .el-title.uk-h5 {
+	font-size: 0.8125rem !important; /* "Find Us" / "Opening Hours" labels (was 16px) */
+}
+.elementor-widget-pet_studio_footer .el-content.uk-text-large {
+	font-size: 1rem !important; /* tagline (was 21px) */
+}
+.elementor-widget-pet_studio_footer .el-image {
+	max-width: 240px; /* logo (was 330px wide) */
+	height: auto;
+}
+
 .tm-header .uk-navbar-nav > li > a > div > .uk-navbar-subtitle:empty::before {
 	content: '\00a0';
 	display: block;

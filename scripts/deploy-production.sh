@@ -96,7 +96,7 @@ if [[ "$PROTO" == "sftp" ]]; then
 fi
 
 R_NOSLASH="${R#/}"
-FTP_URL="${PROTO}://${H}:${PORT}//${R_NOSLASH}"
+FTP_URL="${PROTO}://${H}:${PORT}/${R_NOSLASH}"
 SYNC_DIR="$REPO_ROOT/$SYNCROOT"
 
 curl_tls=()
