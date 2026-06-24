@@ -74,8 +74,91 @@
 	font-size: 1rem !important; /* tagline (was 21px) */
 }
 .elementor-widget-pet_studio_footer .el-image {
-	max-width: 240px; /* logo (was 330px wide) */
+	max-width: 170px; /* logo (was 330px wide) */
 	height: auto;
+}
+
+/* Footer — compact spacing, remove large vertical gaps (desktop + mobile) */
+.elementor-widget-pet_studio_footer .uk-section-large {
+	padding-top: 24px !important;    /* was 70–140px */
+	padding-bottom: 16px !important;
+}
+/* Don't stretch the short address column to match the tall logo column */
+.elementor-widget-pet_studio_footer .uk-grid-match > * > .uk-panel,
+.elementor-widget-pet_studio_footer .uk-grid-match {
+	align-items: flex-start !important;
+}
+.elementor-widget-pet_studio_footer .uk-margin-xlarge {
+	margin-top: 20px !important;     /* logo/address block (was 70px top) */
+	margin-bottom: 0 !important;     /* kill the 70px bottom margin under this block */
+}
+/* Vertically centre the logo against the address column so neither leaves a gap */
+.elementor-widget-pet_studio_footer .uk-margin-xlarge {
+	align-items: center;
+}
+
+/* Logo + tagline side by side (logo left, tagline to its right) */
+.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+	flex-wrap: wrap;
+}
+.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel > a {
+	flex: 0 0 auto;
+}
+.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel > .el-content {
+	flex: 1 1 200px;
+	margin-top: 0 !important; /* not stacked anymore, drop the top gap */
+}
+.elementor-widget-pet_studio_footer .uk-margin-medium {
+	margin-top: 16px !important;     /* contact/phone blocks (was 40px) */
+	margin-bottom: 16px !important;
+}
+.elementor-widget-pet_studio_footer .uk-margin {
+	margin-top: 12px !important;     /* was 20px */
+	margin-bottom: 12px !important;
+}
+.elementor-widget-pet_studio_footer .uk-margin-top {
+	margin-top: 8px !important;      /* heading→value gap (was 20px) */
+}
+.elementor-widget-pet_studio_footer .uk-margin-small-top {
+	margin-top: 4px !important;
+}
+.elementor-widget-pet_studio_footer hr {
+	margin-top: 12px !important;     /* was 20px */
+	margin-bottom: 12px !important;
+}
+.elementor-widget-pet_studio_footer .uk-grid-large > .uk-grid-margin,
+.elementor-widget-pet_studio_footer .uk-grid-margin {
+	margin-top: 14px !important;     /* stacked rows on narrow screens (was 40px) */
+}
+
+@media (max-width: 959px) {
+	.elementor-widget-pet_studio_footer .uk-section-large {
+		padding-top: 18px !important;
+		padding-bottom: 18px !important;
+	}
+	.elementor-widget-pet_studio_footer .uk-margin-xlarge {
+		margin-top: 16px !important;
+	}
+}
+
+/* Mobile (<640px) — slightly smaller footer fonts */
+@media (max-width: 639px) {
+	.elementor-widget-pet_studio_footer .el-title.uk-h1 {
+		font-size: 1rem !important;     /* Contact Us + phone number */
+		white-space: nowrap;            /* keep the number on one line */
+	}
+	.elementor-widget-pet_studio_footer .el-content.uk-h3 {
+		font-size: 1rem !important;     /* address + opening hours */
+	}
+	.elementor-widget-pet_studio_footer .el-content.uk-text-large {
+		font-size: 0.9rem !important;   /* tagline */
+	}
+	.elementor-widget-pet_studio_footer .el-title.uk-h5 {
+		font-size: 0.75rem !important;  /* "Find Us" / "Opening Hours" labels */
+	}
 }
 
 .tm-header .uk-navbar-nav > li > a > div > .uk-navbar-subtitle:empty::before {
@@ -456,6 +539,16 @@ a.ps-book-now-btn:focus,
 	object-fit: contain;
 }
 
+/* Dog dividers: tighten top margin (UIkit uk-margin-xlarge-top = 70px → 35px) */
+.tm-grid-expand.uk-child-width-1-1.uk-margin-xlarge-top.uk-margin-remove-bottom {
+	margin-top: 35px !important;
+}
+
+/* Last dog divider on the page (no later dog sibling): add matching 35px bottom margin */
+.tm-grid-expand.uk-child-width-1-1.uk-margin-xlarge-top.uk-margin-remove-bottom:not(:has(~ .tm-grid-expand.uk-child-width-1-1.uk-margin-xlarge-top.uk-margin-remove-bottom)) {
+	margin-bottom: 35px !important;
+}
+
 .elementor-location-header {
 	position: relative;
 	z-index: 980;
@@ -566,7 +659,6 @@ a.ps-book-now-btn:focus,
 
 @media (max-width: 1199px) {
 	.pet-studio-hero-home .uk-heading-large {
-		font-size: clamp(2rem, 10vw, 4.5rem);
 		line-height: 1.05;
 	}
 }
@@ -591,8 +683,19 @@ a.ps-book-now-btn:focus,
 	}
 }
 
-/* Section headings — mirror @1200px (services cards, about intro, contact, etc.) */
+/* Section headings — client size (mobile 42px, desktop 60px) */
+.uk-heading-large,
+.el-title.uk-heading-large {
+	font-size: 42px !important;
+	line-height: 1.1;
+}
+
 @media (min-width: 1200px) {
+	.uk-heading-large,
+	.el-title.uk-heading-large {
+		font-size: 60px !important;
+	}
+
 	.display-3,
 	.display-4,
 	.uk-heading-medium {

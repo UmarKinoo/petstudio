@@ -259,8 +259,8 @@ class Footer_Widget extends Widget_Base {
 					<div class="uk-grid tm-grid-expand uk-child-width-1-1 uk-margin-small">
 						<div class="uk-width-1-1">
 							<hr>
-							<div class="uk-margin-medium uk-visible@s">
-								<div class="uk-grid uk-child-width-1-1 uk-child-width-1-2@l uk-grid-column-large uk-grid-divider uk-grid-match" uk-grid>
+							<div class="uk-margin-medium">
+								<div class="uk-grid uk-child-width-1-2 uk-grid-column-large uk-grid-divider uk-grid-match" uk-grid>
 									<div>
 										<div class="el-item uk-panel uk-margin-remove-first-child">
 											<div class="el-title uk-h1 uk-link-heading uk-margin-top uk-margin-remove-bottom">
@@ -279,7 +279,7 @@ class Footer_Widget extends Widget_Base {
 									<?php endif; ?>
 								</div>
 							</div>
-							<div class="uk-margin-medium uk-hidden@s">
+							<div class="uk-margin-medium uk-hidden">
 								<div class="uk-grid uk-child-width-1-1 uk-child-width-1-2@l uk-grid-column-large uk-grid-divider uk-grid-match" uk-grid>
 									<?php if ( $email ) : ?>
 										<div>
