@@ -483,6 +483,26 @@ a.ps-book-now-btn:focus,
 	}
 }
 
+/* Services cards — tablet (768px) uses mobile stack: no parallax, fitted images */
+@media (max-width: 959px) {
+	.elementor-widget-pet_studio_services_cards .ps-services-cards > div {
+		width: 100%;
+	}
+
+	.elementor-widget-pet_studio_services_cards .ps-services-cards .uk-link-toggle {
+		display: block;
+		max-width: min(92vw, 520px);
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.elementor-widget-pet_studio_services_cards .ps-services-cards .el-image {
+		max-width: 100%;
+		width: 100%;
+		height: auto;
+	}
+}
+
 /* Section headings — mirror @1200px (services cards, about intro, contact, etc.) */
 @media (min-width: 1200px) {
 	.display-3,

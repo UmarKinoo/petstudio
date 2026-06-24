@@ -89,13 +89,26 @@ class Services_Cards_Widget extends Widget_Base {
 				.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-services-spacer { height: 100vh; }
 				.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-services-cards { margin-top: -100vh; height: 100vh; }
 			}
+			@media (max-width: 959px) {
+				.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-services-cards .uk-link-toggle {
+					display: block;
+					max-width: min(100%, 520px);
+					margin-left: auto;
+					margin-right: auto;
+				}
+				.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-services-cards .el-image {
+					max-width: 100%;
+					width: 100%;
+					height: auto;
+				}
+			}
 		</style>
 
 		<div class="uk-section-default uk-section uk-section-xlarge-top uk-padding-remove-bottom">
 			<div class="uk-container uk-container-expand">
 				<div class="uk-grid tm-grid-expand uk-child-width-1-1 uk-margin-xlarge ps-services-spacer">
 					<div class="js-sticky uk-width-1-1">
-						<div class="uk-panel uk-position-z-index" uk-sticky="offset: 50vh - 50%; end: !.js-sticky; media: @s;">
+						<div class="uk-panel uk-position-z-index" uk-sticky="offset: 50vh - 50%; end: !.js-sticky; media: @m;">
 							<div class="uk-panel uk-margin-remove-first-child uk-margin uk-width-large uk-margin-auto uk-text-center" uk-parallax="opacity: 1,0; blur: 50; easing: 0; media: @m; target: !.tm-grid-expand&gt;*; start: 55vh; end: 100vh">
 								<h2 class="el-title uk-heading-large uk-margin-top uk-margin-remove-bottom">
 									<?php echo esc_html( $s['heading'] ?? '' ); ?>
@@ -121,8 +134,8 @@ class Services_Cards_Widget extends Widget_Base {
 							: '';
 						?>
 						<div class="uk-width-1-3@m">
-							<div class="uk-position-z-index uk-panel" uk-sticky="offset: 50vh - 50%; end: !.uk-section;">
-								<div class="uk-light uk-margin uk-text-center" uk-parallax="x: 100vw,0,0,-100vw; y: 0 68%,-1200; opacity: 1 70%,0; blur: 0 70%,100; easing: 0; media: @s; target: !.uk-section; start: <?php echo $start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
+							<div class="uk-position-z-index uk-panel" uk-sticky="offset: 50vh - 50%; end: !.uk-section; media: @m;">
+								<div class="uk-light uk-margin uk-text-center" uk-parallax="x: 100vw,0,0,-100vw; y: 0 68%,-1200; opacity: 1 70%,0; blur: 0 70%,100; easing: 0; media: @m; target: !.uk-section; start: <?php echo $start; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
 									<a class="uk-transition-toggle uk-inline-clip uk-link-toggle"<?php print_link_attributes( $card['link'] ?? null ); ?>>
 										<img class="el-image uk-transition-scale-up uk-transition-opaque" src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $card['title'] ?? '' ); ?>" loading="lazy"<?php echo $img_size; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 										<div class="uk-position-bottom">
