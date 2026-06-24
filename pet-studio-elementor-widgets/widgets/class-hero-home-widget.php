@@ -110,6 +110,16 @@ class Hero_Home_Widget extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'tagline_location',
+			array(
+				'label'       => esc_html__( 'Location (after Training Academy)', 'pet-studio-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => $defaults['tagline_location'] ?? 'Bristol',
+				'description' => esc_html__( 'Shown on the hero logo tagline bar after “Training Academy”.', 'pet-studio-elementor' ),
+			)
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -208,6 +218,7 @@ class Hero_Home_Widget extends Widget_Base {
 		$logo_desk   = media_url( $s['logo_desktop'] ?? null );
 		$logo_mob    = media_url( $s['logo_mobile'] ?? null ) ?: $logo_desk;
 		$logo_alt    = $s['logo_alt'] ?? '';
+		$tagline_loc = trim( (string) ( $s['tagline_location'] ?? '' ) );
 		$words       = $s['headline_words'] ?? array();
 		?>
 		<style class="uk-margin-remove-adjacent">
@@ -258,12 +269,22 @@ class Hero_Home_Widget extends Widget_Base {
 						<div class="uk-panel uk-width-1-1">
 							<?php if ( $logo_desk ) : ?>
 								<div class="uk-position-absolute uk-width-1-1 uk-text-center uk-visible@s ps-hero-logo-desktop" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="top: 50%; z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
-									<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_desk ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="650" height="138"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+									<div class="ps-hero-logo-inner">
+										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_desk ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="650" height="138"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+										<?php if ( $tagline_loc !== '' ) : ?>
+											<span class="ps-hero-tagline-location" aria-hidden="true"><?php echo esc_html( $tagline_loc ); ?></span>
+										<?php endif; ?>
+									</div>
 								</div>
 							<?php endif; ?>
 							<?php if ( $logo_mob ) : ?>
 								<div class="uk-position-relative uk-margin uk-text-center uk-hidden@s ps-hero-logo-mobile" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
-									<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+									<div class="ps-hero-logo-inner">
+										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+										<?php if ( $tagline_loc !== '' ) : ?>
+											<span class="ps-hero-tagline-location" aria-hidden="true"><?php echo esc_html( $tagline_loc ); ?></span>
+										<?php endif; ?>
+									</div>
 								</div>
 							<?php endif; ?>
 						</div>

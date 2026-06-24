@@ -28,6 +28,9 @@
     },
     "hours_text": {
       "type": "string"
+    },
+    "tagline_location": {
+      "type": "string"
     }
   }
 }

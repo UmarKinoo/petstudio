@@ -146,7 +146,7 @@ class Header_Widget extends Widget_Base {
 				'label'       => esc_html__( 'Subtitle', 'pet-studio-elementor' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 2,
-				'description' => esc_html__( 'Optional second line (e.g. location under Groom Your Dog).', 'pet-studio-elementor' ),
+				'description' => esc_html__( 'Optional second line under the nav label.', 'pet-studio-elementor' ),
 				'default'     => '',
 			)
 		);
