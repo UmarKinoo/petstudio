@@ -22,5 +22,11 @@
   ],
   "hours_title": "Opening Hours",
   "hours_text": "Monday - Friday\n9 am - 4 pm",
-  "tagline_location": "Bristol"
+  "tagline_location": "Bristol",
+  "cta_text": "Book Now",
+  "cta_link": {
+    "url": "/contact/",
+    "is_external": false,
+    "nofollow": false
+  }
 }

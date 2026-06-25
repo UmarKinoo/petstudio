@@ -12,8 +12,10 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Pet_Studio_Elementor\Widget_Base;
 
+use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\eager_media_attrs;
+use function Pet_Studio_Elementor\render_cta_group;
 use function Pet_Studio_Elementor\format_multiline_text;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
@@ -120,6 +122,24 @@ class Hero_Home_Widget extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'cta_text',
+			array(
+				'label'   => esc_html__( 'Book Now button text', 'pet-studio-elementor' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => $defaults['cta_text'] ?? 'Book Now',
+			)
+		);
+		$this->add_control(
+			'cta_link',
+			array(
+				'label'     => esc_html__( 'Book Now link', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::URL,
+				'default'   => api_link_to_control( $defaults['cta_link'] ?? array( 'url' => '/contact/' ) ),
+				'condition' => array( 'cta_text!' => '' ),
+			)
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -223,6 +243,8 @@ class Hero_Home_Widget extends Widget_Base {
 		if ( $tagline_loc === '' ) {
 			$tagline_loc = trim( (string) ( $defaults['tagline_location'] ?? 'Bristol' ) );
 		}
+		$cta_text = trim( (string) ( $s['cta_text'] ?? '' ) );
+		$cta_link = is_array( $s['cta_link'] ?? null ) ? $s['cta_link'] : null;
 		$words       = $s['headline_words'] ?? array();
 		?>
 		<style class="uk-margin-remove-adjacent">
@@ -278,6 +300,11 @@ class Hero_Home_Widget extends Widget_Base {
 										<?php if ( $tagline_loc !== '' ) : ?>
 											<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
 										<?php endif; ?>
+										<?php if ( $cta_text !== '' ) : ?>
+											<div class="ps-hero-cta">
+												<?php render_cta_group( array( array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' ) ) ); ?>
+											</div>
+										<?php endif; ?>
 									</div>
 								</div>
 							<?php endif; ?>
@@ -287,6 +314,11 @@ class Hero_Home_Widget extends Widget_Base {
 										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
 										<?php if ( $tagline_loc !== '' ) : ?>
 											<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
+										<?php endif; ?>
+										<?php if ( $cta_text !== '' ) : ?>
+											<div class="ps-hero-cta">
+												<?php render_cta_group( array( array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' ) ) ); ?>
+											</div>
 										<?php endif; ?>
 									</div>
 								</div>

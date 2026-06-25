@@ -657,6 +657,26 @@ a.ps-book-now-btn:focus,
 	border-radius: 5px;
 }
 
+/* Book Now CTA — sits just under the logo/Bristol badge, animates with the logo group */
+.pet-studio-hero-home .ps-hero-cta {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 3;
+	white-space: nowrap;
+	pointer-events: auto;
+}
+.pet-studio-hero-home .ps-hero-cta .ps-cta-group {
+	margin-top: 0;
+	justify-content: center;
+}
+.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-cta {
+	bottom: -2.8em;
+}
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta {
+	bottom: -2.6em;
+}
+
 /* Desktop logo — centred second line on pink tagline bar */
 .pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-tagline-location {
 	bottom: 7%;

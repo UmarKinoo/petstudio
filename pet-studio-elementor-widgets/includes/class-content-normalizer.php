@@ -102,6 +102,7 @@ class Content_Normalizer {
 		switch ( $fixture_slug ) {
 			case 'hero-home':
 				$fixture['headline_words']  = self::list_to_repeater( $fixture['headline_words'] ?? array(), 'word' );
+				$fixture['cta_link']        = self::link_to_elementor( $fixture['cta_link'] ?? null );
 				$fixture['video_desktop']   = self::media_to_elementor( $fixture['video_desktop'] ?? null );
 				$fixture['video_mobile']    = self::media_to_elementor( $fixture['video_mobile'] ?? null );
 				$fixture['logo_desktop']    = self::media_to_elementor( $fixture['logo_desktop'] ?? null );
