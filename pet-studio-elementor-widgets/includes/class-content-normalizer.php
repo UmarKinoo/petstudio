@@ -35,6 +35,7 @@ class Content_Normalizer {
 		'team-member'     => 'pet_studio_team_member',
 		'est-banner'      => 'pet_studio_est_banner',
 		'contact'         => 'pet_studio_contact',
+		'contact-form'    => 'pet_studio_contact_form',
 	);
 
 	/**

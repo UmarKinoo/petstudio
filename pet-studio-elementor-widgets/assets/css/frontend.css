@@ -59,7 +59,7 @@
 
 /* Footer — smaller item fonts + logo (client request) */
 .elementor-widget-pet_studio_footer .el-title.uk-h1 {
-	font-size: 1.75rem !important; /* contact heading + phone (was ~2.6rem/42px) */
+	font-size: 1.4rem !important; /* contact heading + phone (was ~2.6rem/42px) */
 }
 .elementor-widget-pet_studio_footer .el-title.uk-h2 {
 	font-size: 1.25rem !important; /* mobile email/phone (was ~27px) */
@@ -74,14 +74,14 @@
 	font-size: 1rem !important; /* tagline (was 21px) */
 }
 .elementor-widget-pet_studio_footer .el-image {
-	max-width: 170px; /* logo (was 330px wide) */
+	max-width: 120px; /* logo (was 170px) */
 	height: auto;
 }
 
 /* Footer — compact spacing, remove large vertical gaps (desktop + mobile) */
 .elementor-widget-pet_studio_footer .uk-section-large {
-	padding-top: 24px !important;    /* was 70–140px */
-	padding-bottom: 16px !important;
+	padding-top: 14px !important;    /* was 70–140px */
+	padding-bottom: 10px !important;
 }
 /* Don't stretch the short address column to match the tall logo column */
 .elementor-widget-pet_studio_footer .uk-grid-match > * > .uk-panel,
@@ -89,7 +89,7 @@
 	align-items: flex-start !important;
 }
 .elementor-widget-pet_studio_footer .uk-margin-xlarge {
-	margin-top: 20px !important;     /* logo/address block (was 70px top) */
+	margin-top: 12px !important;     /* logo/address block (was 70px top) */
 	margin-bottom: 0 !important;     /* kill the 70px bottom margin under this block */
 }
 /* Vertically centre the logo against the address column so neither leaves a gap */
@@ -112,35 +112,35 @@
 	margin-top: 0 !important; /* not stacked anymore, drop the top gap */
 }
 .elementor-widget-pet_studio_footer .uk-margin-medium {
-	margin-top: 16px !important;     /* contact/phone blocks (was 40px) */
-	margin-bottom: 16px !important;
+	margin-top: 10px !important;     /* contact/phone blocks (was 40px) */
+	margin-bottom: 10px !important;
 }
 .elementor-widget-pet_studio_footer .uk-margin {
-	margin-top: 12px !important;     /* was 20px */
-	margin-bottom: 12px !important;
+	margin-top: 8px !important;      /* was 20px */
+	margin-bottom: 8px !important;
 }
 .elementor-widget-pet_studio_footer .uk-margin-top {
-	margin-top: 8px !important;      /* heading→value gap (was 20px) */
+	margin-top: 5px !important;      /* heading→value gap (was 20px) */
 }
 .elementor-widget-pet_studio_footer .uk-margin-small-top {
-	margin-top: 4px !important;
+	margin-top: 3px !important;
 }
 .elementor-widget-pet_studio_footer hr {
-	margin-top: 12px !important;     /* was 20px */
-	margin-bottom: 12px !important;
+	margin-top: 8px !important;      /* was 20px */
+	margin-bottom: 8px !important;
 }
 .elementor-widget-pet_studio_footer .uk-grid-large > .uk-grid-margin,
 .elementor-widget-pet_studio_footer .uk-grid-margin {
-	margin-top: 14px !important;     /* stacked rows on narrow screens (was 40px) */
+	margin-top: 10px !important;     /* stacked rows on narrow screens (was 40px) */
 }
 
 @media (max-width: 959px) {
 	.elementor-widget-pet_studio_footer .uk-section-large {
-		padding-top: 18px !important;
-		padding-bottom: 18px !important;
+		padding-top: 10px !important;
+		padding-bottom: 10px !important;
 	}
 	.elementor-widget-pet_studio_footer .uk-margin-xlarge {
-		margin-top: 16px !important;
+		margin-top: 10px !important;
 	}
 }
 
@@ -158,6 +158,9 @@
 	}
 	.elementor-widget-pet_studio_footer .el-title.uk-h5 {
 		font-size: 0.75rem !important;  /* "Find Us" / "Opening Hours" labels */
+	}
+	.elementor-widget-pet_studio_footer .el-image {
+		max-width: 105px;               /* smaller logo on mobile */
 	}
 	/* Centre the logo (and tagline) on mobile */
 	.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel {
@@ -555,24 +558,6 @@ a.ps-book-now-btn:focus,
 	margin-top: 20px !important;
 }
 
-/* The big gap *below* a dog is the next section's own top spacing: the content-split
-   section's uk-section padding-top (40/70px) + uk-container uk-margin-xlarge-top
-   (70/140px). Content-split always sits right under a dog, so collapse it directly. */
-.elementor-widget-pet_studio_content_split .uk-section {
-	padding-top: 0 !important;
-}
-.elementor-widget-pet_studio_content_split .uk-container.uk-margin-xlarge-top {
-	margin-top: 20px !important;
-}
-
-/* Other section types that can follow a dog (courses tabs, testimonials) */
-.elementor-section:has(.elementor-widget-pet_studio_dog_divider) + .elementor-section .uk-section {
-	padding-top: 0 !important;
-}
-.elementor-section:has(.elementor-widget-pet_studio_dog_divider) + .elementor-section .uk-container.uk-margin-xlarge-top {
-	margin-top: 20px !important;
-}
-
 .elementor-location-header {
 	position: relative;
 	z-index: 980;
@@ -764,24 +749,47 @@ a.ps-book-now-btn:focus,
 	}
 }
 
-/* Section headings — client size (mobile 42px, desktop 60px) */
+/* Section headings — client size, reduced (mobile 34px, desktop 48px) */
 .uk-heading-large,
 .el-title.uk-heading-large {
-	font-size: 42px !important;
+	font-size: 34px !important;
 	line-height: 1.1;
+}
+.uk-heading-medium,
+.el-title.uk-heading-medium {
+	font-size: 30px !important;
+	line-height: 1.15;
 }
 
 @media (min-width: 1200px) {
 	.uk-heading-large,
 	.el-title.uk-heading-large {
-		font-size: 60px !important;
+		font-size: 48px !important;
 	}
 
 	.display-3,
 	.display-4,
-	.uk-heading-medium {
-		font-size: 2.5rem;
+	.uk-heading-medium,
+	.el-title.uk-heading-medium {
+		font-size: 34px !important;
 	}
+}
+
+/* Body copy — content split + page intro, reduced per client */
+.elementor-widget-pet_studio_content_split .el-content,
+.elementor-widget-pet_studio_content_split .el-content p,
+.elementor-widget-pet_studio_content_split .el-content li,
+.elementor-widget-pet_studio_page_intro .el-content,
+.elementor-widget-pet_studio_page_intro .el-content p,
+.elementor-widget-pet_studio_page_intro .el-content li {
+	font-size: 15px !important;
+	line-height: 1.6;
+}
+.elementor-widget-pet_studio_content_split .el-content blockquote,
+.elementor-widget-pet_studio_content_split .el-content blockquote p,
+.elementor-widget-pet_studio_page_intro .el-content blockquote,
+.elementor-widget-pet_studio_page_intro .el-content blockquote p {
+	font-size: 1.05rem !important; /* was 1.25rem */
 }
 
 /* About intro — mirror body copy (Noto Sans, black, bold place names) */
@@ -825,4 +833,109 @@ a.ps-book-now-btn:focus,
 
 .elementor-widget-pet_studio_testimonials .ps-testimonial-title.uk-heading-divider {
 	border-bottom-color: var(--pet-primary, #ff90aa);
+}
+
+/* ── Contact enquiry form ───────────────────────────────────────────── */
+.ps-cf-form {
+	max-width: 640px;
+}
+.ps-cf-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 1rem;
+}
+.ps-cf-field {
+	margin-bottom: 1rem;
+}
+.ps-cf-field--half {
+	flex: 1 1 calc(50% - 0.5rem);
+	min-width: 180px;
+}
+.ps-cf-label {
+	display: block;
+	margin-bottom: 0.35rem;
+	font-weight: 600;
+	color: #4a4a4a;
+}
+.ps-cf-req {
+	color: var(--pet-primary, #ff90aa);
+}
+.ps-cf-form .uk-input,
+.ps-cf-form .uk-textarea {
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid #e3dfdb;
+	border-radius: 6px;
+	background: #fff;
+}
+.ps-cf-form .uk-input:focus,
+.ps-cf-form .uk-textarea:focus {
+	border-color: var(--pet-primary, #ff90aa);
+	outline: none;
+}
+.ps-cf-form .uk-textarea {
+	padding: 10px;
+	min-height: 140px;
+}
+.ps-cf-fieldset {
+	border: 0;
+	padding: 0;
+	margin: 0 0 1rem;
+}
+.ps-cf-radios {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.5rem;
+	margin-top: 0.25rem;
+}
+.ps-cf-radio {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+}
+.ps-cf-form .uk-radio:checked {
+	background-color: var(--pet-primary, #ff90aa);
+	border-color: var(--pet-primary, #ff90aa);
+}
+.ps-cf-btn {
+	background-color: var(--pet-primary, #ff90aa);
+	color: #fff;
+	border: 0;
+	border-radius: 999px;
+	padding: 0 2rem;
+}
+.ps-cf-btn:hover,
+.ps-cf-btn:focus {
+	background-color: #f5779a;
+	color: #fff;
+}
+.ps-cf-error {
+	display: block;
+	margin-top: 0.25rem;
+	font-size: 0.85rem;
+	color: var(--pet-danger, #aa3838);
+}
+.ps-cf-notice {
+	padding: 0.85rem 1rem;
+	border-radius: 6px;
+	margin-bottom: 1.25rem;
+}
+.ps-cf-notice--success {
+	background: #eef7ef;
+	border: 1px solid var(--pet-success, #80b485);
+	color: #2f6b3a;
+}
+.ps-cf-notice--error {
+	background: #fbeeee;
+	border: 1px solid var(--pet-danger, #aa3838);
+	color: var(--pet-danger, #aa3838);
+}
+/* Honeypot — visually hidden, still in the DOM for bots */
+.ps-cf-hp {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
 }

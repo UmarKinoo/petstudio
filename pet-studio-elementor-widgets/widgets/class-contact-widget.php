@@ -48,7 +48,12 @@ class Contact_Widget extends Widget_Base {
 		$this->start_controls_section( 'section_content', array( 'label' => esc_html__( 'Content', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_CONTENT ) );
 		$this->add_control( 'heading', array( 'label' => esc_html__( 'Heading', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['heading'] ?? 'Contact Us' ) );
 		$this->add_control( 'phone', array( 'label' => esc_html__( 'Phone', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['phone'] ?? '' ) );
-		$this->add_control( 'form_shortcode', array( 'label' => esc_html__( 'Form shortcode', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['form_shortcode'] ?? '', 'description' => esc_html__( 'Elementor Pro form shortcode, e.g. [elementor-template id="123"]', 'pet-studio-elementor' ) ) );
+		$this->add_control( 'form_shortcode', array( 'label' => esc_html__( 'Form shortcode', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['form_shortcode'] ?? '', 'description' => esc_html__( 'Optional. Paste a shortcode to override the built-in enquiry form, e.g. [elementor-template id="123"]', 'pet-studio-elementor' ) ) );
+		$this->add_control( 'recipient_email', array( 'label' => esc_html__( 'Send enquiries to', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'input_type' => 'email', 'placeholder' => get_option( 'admin_email' ), 'description' => esc_html__( 'Built-in form only. Leave blank to use the site admin email.', 'pet-studio-elementor' ), 'label_block' => true, 'default' => $d['recipient_email'] ?? '' ) );
+		$this->add_control( 'email_subject', array( 'label' => esc_html__( 'Email subject', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'label_block' => true, 'default' => $d['email_subject'] ?? '' ) );
+		$this->add_control( 'button_text', array( 'label' => esc_html__( 'Button text', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['button_text'] ?? 'Send Enquiry' ) );
+		$this->add_control( 'success_message', array( 'label' => esc_html__( 'Success message', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => $d['success_message'] ?? 'Thanks for your enquiry — we’ll be in touch soon.' ) );
+		$this->add_control( 'enquiry_required', array( 'label' => esc_html__( 'Make "Type of enquiry" required', 'pet-studio-elementor' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => '' ) );
 		$this->add_control( 'sticky_image', array( 'label' => esc_html__( 'Sticky image (desktop)', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => api_media_to_control( $d['sticky_image'] ?? null ) ) );
 		$this->add_control( 'mobile_image', array( 'label' => esc_html__( 'Image (mobile)', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => api_media_to_control( $d['mobile_image'] ?? null ) ) );
 		$this->add_control( 'address', array( 'label' => esc_html__( 'Address', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXTAREA, 'default' => $d['address'] ?? '', 'rows' => 4 ) );
@@ -120,7 +125,15 @@ class Contact_Widget extends Widget_Base {
 								if ( $shortcode ) {
 									echo do_shortcode( $shortcode ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								} else {
-									echo '<p class="uk-text-muted">' . esc_html__( 'Add an Elementor Pro form shortcode in widget settings.', 'pet-studio-elementor' ) . '</p>';
+									echo \Pet_Studio_Elementor\Contact_Form::render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+											array(
+												'page_id'          => (int) get_the_ID(),
+												'widget_id'        => (string) $this->get_id(),
+												'button_text'      => $s['button_text'] ?? 'Send Enquiry',
+												'enquiry_required' => ! empty( $s['enquiry_required'] ) && 'yes' === $s['enquiry_required'],
+												'success_message'  => $s['success_message'] ?? '',
+											)
+										);
 								}
 								?>
 							</div>

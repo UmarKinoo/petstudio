@@ -98,9 +98,12 @@ final class Plugin {
 
 		require_once PET_STUDIO_EW_PATH . 'includes/class-widget-base.php';
 		require_once PET_STUDIO_EW_PATH . 'includes/class-demo-importer.php';
+		require_once PET_STUDIO_EW_PATH . 'includes/class-contact-form.php';
 
 		Demo_Importer::register_admin();
 		Demo_Importer::maybe_repair_theme_builder();
+
+		add_action( 'template_redirect', array( '\\Pet_Studio_Elementor\\Contact_Form', 'handle_submission' ) );
 
 		add_action( 'elementor/elements/categories_registered', array( $this, 'register_category' ) );
 		add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ) );
@@ -144,6 +147,7 @@ final class Plugin {
 			'Team_Member'    => 'Team_Member_Widget',
 			'Est_Banner'     => 'Est_Banner_Widget',
 			'Contact'        => 'Contact_Widget',
+			'Contact_Form'   => 'Contact_Form_Widget',
 		);
 
 		foreach ( $widgets as $file => $class ) {
