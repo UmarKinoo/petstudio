@@ -111,14 +111,14 @@ class Contact_Widget extends Widget_Base {
 							<?php endif; ?>
 							<div class="uk-h4 uk-text-primary uk-margin-large-top uk-margin-remove-bottom uk-width-xlarge uk-margin-auto uk-text-left">Get in Touch</div>
 							<?php if ( $phone ) : ?>
-								<div class="uk-h1 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-visible@s">
+								<div class="ps-contact-phone uk-h1 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-visible@s">
 									<a class="el-link uk-link-reset" href="<?php echo esc_url( $tel ); ?>"><?php echo esc_html( $phone ); ?></a>
 								</div>
-								<div class="uk-h2 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-hidden@s">
+								<div class="ps-contact-phone uk-h2 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-hidden@s">
 									<a class="el-link uk-link-reset" href="<?php echo esc_url( $tel ); ?>"><?php echo esc_html( $phone ); ?></a>
 								</div>
 							<?php endif; ?>
-							<div class="uk-h4 uk-text-primary uk-margin-large-top uk-margin-remove-bottom uk-width-xlarge uk-margin-auto uk-text-left">Enquiry Form</div>
+							<div class="ps-contact-form-label uk-h4 uk-text-primary uk-margin-large-top uk-margin-remove-bottom uk-width-xlarge uk-margin-auto uk-text-left">Enquiry Form</div>
 							<div class="uk-panel uk-margin uk-width-xlarge uk-margin-auto">
 								<?php
 								$shortcode = trim( (string) ( $s['form_shortcode'] ?? '' ) );

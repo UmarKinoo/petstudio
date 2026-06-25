@@ -95,16 +95,17 @@ class Contact_Form {
 				</div>
 			</div>
 
-			<div class="ps-cf-field">
-				<label class="ps-cf-label" for="ps-cf-email"><?php esc_html_e( 'Email', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
-				<input class="uk-input ps-cf-input" type="email" name="ps_cf[email]" id="ps-cf-email" value="<?php echo $val( 'email' ); ?>" required aria-required="true">
-				<?php echo $err( 'email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			</div>
-
-			<div class="ps-cf-field">
-				<label class="ps-cf-label" for="ps-cf-phone"><?php esc_html_e( 'Phone', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
-				<input class="uk-input ps-cf-input" type="tel" name="ps_cf[phone]" id="ps-cf-phone" value="<?php echo $val( 'phone' ); ?>" required aria-required="true">
-				<?php echo $err( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<div class="ps-cf-row">
+				<div class="ps-cf-field ps-cf-field--half">
+					<label class="ps-cf-label" for="ps-cf-email"><?php esc_html_e( 'Email', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<input class="uk-input ps-cf-input" type="email" name="ps_cf[email]" id="ps-cf-email" value="<?php echo $val( 'email' ); ?>" required aria-required="true">
+					<?php echo $err( 'email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</div>
+				<div class="ps-cf-field ps-cf-field--half">
+					<label class="ps-cf-label" for="ps-cf-phone"><?php esc_html_e( 'Phone', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<input class="uk-input ps-cf-input" type="tel" name="ps_cf[phone]" id="ps-cf-phone" value="<?php echo $val( 'phone' ); ?>" required aria-required="true">
+					<?php echo $err( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</div>
 			</div>
 
 			<fieldset class="ps-cf-field ps-cf-fieldset">
@@ -123,7 +124,7 @@ class Contact_Form {
 
 			<div class="ps-cf-field">
 				<label class="ps-cf-label" for="ps-cf-enquiry"><?php esc_html_e( 'Enquiry', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
-				<textarea class="uk-textarea ps-cf-input" name="ps_cf[enquiry]" id="ps-cf-enquiry" rows="8" placeholder="<?php esc_attr_e( 'Enter any questions you may have...', 'pet-studio-elementor' ); ?>" required aria-required="true"><?php echo esc_textarea( $old['enquiry'] ?? '' ); ?></textarea>
+				<textarea class="uk-textarea ps-cf-input" name="ps_cf[enquiry]" id="ps-cf-enquiry" rows="4" placeholder="<?php esc_attr_e( 'Enter any questions you may have...', 'pet-studio-elementor' ); ?>" required aria-required="true"><?php echo esc_textarea( $old['enquiry'] ?? '' ); ?></textarea>
 				<?php echo $err( 'enquiry' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 

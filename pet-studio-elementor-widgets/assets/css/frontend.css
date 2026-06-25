@@ -875,7 +875,15 @@ a.ps-book-now-btn:focus,
 }
 .ps-cf-form .uk-textarea {
 	padding: 10px;
-	min-height: 140px;
+	min-height: 90px;
+}
+
+/* Contact widget — smaller phone number + tighter gap before the form */
+.elementor-widget-pet_studio_contact .ps-contact-phone {
+	font-size: 1.5rem !important;
+}
+.elementor-widget-pet_studio_contact .ps-contact-form-label.uk-margin-large-top {
+	margin-top: 16px !important;
 }
 .ps-cf-fieldset {
 	border: 0;
