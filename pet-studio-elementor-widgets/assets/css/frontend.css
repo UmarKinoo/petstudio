@@ -670,6 +670,10 @@ a.ps-book-now-btn:focus,
 	margin-top: 0;
 	justify-content: center;
 }
+.pet-studio-hero-home .ps-hero-cta .ps-book-now-btn {
+	font-size: 1.125rem !important;
+	padding: 1rem 2.6rem !important;
+}
 .pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-cta {
 	bottom: -2.8em;
 }
