@@ -23,6 +23,7 @@ final class Plugin {
 	private function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'bootstrap' ), 20 );
 		add_action( 'init', array( $this, 'maybe_bust_caches' ), 30 );
+		add_action( 'template_redirect', array( $this, 'redirect_legacy_training_page' ), 1 );
 		add_filter( 'litespeed_media_lazy_img_cls_excludes', array( $this, 'litespeed_lazy_exclude_classes' ) );
 		add_filter( 'litespeed_optimize_css_excludes', array( $this, 'litespeed_css_excludes' ) );
 	}
@@ -38,6 +39,18 @@ final class Plugin {
 
 		update_option( 'pet_studio_ew_version', PET_STUDIO_EW_VERSION, false );
 		self::purge_elementor_caches();
+	}
+
+	/**
+	 * Old dog-training slug → Behaviour page.
+	 */
+	public function redirect_legacy_training_page(): void {
+		if ( is_admin() || ! is_page( 'dog-training' ) ) {
+			return;
+		}
+
+		wp_safe_redirect( home_url( '/behaviour/' ), 301 );
+		exit;
 	}
 
 	/**
@@ -102,6 +115,7 @@ final class Plugin {
 
 		Demo_Importer::register_admin();
 		Demo_Importer::maybe_repair_theme_builder();
+		Demo_Importer::ensure_behaviour_page();
 
 		add_action( 'template_redirect', array( '\\Pet_Studio_Elementor\\Contact_Form', 'handle_submission' ) );
 

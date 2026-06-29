@@ -325,6 +325,107 @@ class Content_Normalizer {
 	}
 
 	/**
+	 * Legacy dog-training URLs → /behaviour/.
+	 */
+	public static function normalize_behaviour_url( string $url ): string {
+		$url  = trim( $url );
+		$path = wp_parse_url( $url, PHP_URL_PATH );
+		if ( ! is_string( $path ) || $path === '' ) {
+			return $url;
+		}
+
+		$path = strtolower( untrailingslashit( $path ) );
+		if ( preg_match( '#/dog-training/?$#', $path ) ) {
+			return '/behaviour/';
+		}
+
+		return $url;
+	}
+
+	/**
+	 * @param array<string, mixed>|null $link Elementor URL control shape.
+	 * @return array<string, mixed>|null
+	 */
+	public static function normalize_behaviour_link( ?array $link ): ?array {
+		if ( ! is_array( $link ) ) {
+			return $link;
+		}
+
+		$url = (string) ( $link['url'] ?? '' );
+		if ( $url === '' ) {
+			return $link;
+		}
+
+		$link['url'] = self::normalize_behaviour_url( $url );
+
+		return $link;
+	}
+
+	/**
+	 * Rename Training nav item to Behaviour for sites with stale Elementor data.
+	 *
+	 * @param array<int, array<string, mixed>> $items Nav rows.
+	 * @return array<int, array<string, mixed>>
+	 */
+	public static function normalize_behaviour_nav_items( array $items ): array {
+		foreach ( $items as $i => $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+
+			$label = strtolower( trim( (string) ( $item['label'] ?? '' ) ) );
+			$link  = is_array( $item['link'] ?? null ) ? $item['link'] : array();
+			$url   = strtolower( trim( (string) ( $link['url'] ?? '' ) ) );
+
+			$is_training = in_array( $label, array( 'training', 'dog training' ), true )
+				|| ( strpos( $url, 'dog-training' ) !== false );
+
+			if ( ! $is_training ) {
+				$items[ $i ]['link'] = self::normalize_behaviour_link( $link );
+				continue;
+			}
+
+			$items[ $i ]['label'] = 'Behaviour';
+			$items[ $i ]['link']  = array(
+				'url'         => '/behaviour/',
+				'is_external' => false,
+				'nofollow'    => false,
+			);
+			if ( empty( $item['subtitle'] ) ) {
+				$items[ $i ]['subtitle'] = 'Train Your Dog';
+			}
+		}
+
+		return $items;
+	}
+
+	/**
+	 * @param array<string, mixed> $card Service card row.
+	 * @return array<string, mixed>
+	 */
+	public static function normalize_behaviour_service_card( array $card ): array {
+		$title = strtolower( trim( (string) ( $card['title'] ?? '' ) ) );
+		$link  = is_array( $card['link'] ?? null ) ? $card['link'] : array();
+		$url   = strtolower( trim( (string) ( $link['url'] ?? '' ) ) );
+
+		$is_training = in_array( $title, array( 'training', 'dog training' ), true )
+			|| ( strpos( $url, 'dog-training' ) !== false );
+
+		if ( $is_training ) {
+			$card['title'] = 'Behaviour';
+			$card['link']  = array(
+				'url'         => '/behaviour/',
+				'is_external' => false,
+				'nofollow'    => false,
+			);
+		} else {
+			$card['link'] = self::normalize_behaviour_link( $link );
+		}
+
+		return $card;
+	}
+
+	/**
 	 * Remove Book Now rows from nav repeaters — CTA is a separate control.
 	 *
 	 * @param array<int, array<string, mixed>> $items Nav rows.

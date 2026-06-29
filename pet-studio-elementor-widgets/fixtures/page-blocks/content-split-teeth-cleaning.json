@@ -14,6 +14,6 @@
     { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/teeth-cleaning-stack-2.jpg" }
   ],
   "cta_text": "Book your Dog's Teeth Clean Now",
-  "cta_link": { "url": "#ps-contact" },
+  "cta_link": { "url": "/contact/" },
   "cta_style": "pill"
 }

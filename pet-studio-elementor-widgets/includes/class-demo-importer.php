@@ -318,6 +318,28 @@ class Demo_Importer {
 	}
 
 	/**
+	 * Create or refresh the Behaviour page (prod may still only have dog-training).
+	 */
+	public static function ensure_behaviour_page(): void {
+		$config_path = PET_STUDIO_EW_PATH . 'fixtures/pages/behaviour.json';
+		if ( ! is_readable( $config_path ) ) {
+			return;
+		}
+
+		$config = json_decode( (string) file_get_contents( $config_path ), true );
+		if ( empty( $config['slug'] ) ) {
+			return;
+		}
+
+		$page = get_page_by_path( 'behaviour' );
+		if ( $page ) {
+			return;
+		}
+
+		( new self() )->create_page( $config );
+	}
+
+	/**
 	 * Rebuild Theme Builder cache when templates exist but conditions were not registered.
 	 */
 	public static function maybe_repair_theme_builder(): void {

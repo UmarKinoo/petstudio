@@ -167,7 +167,7 @@ class Hero_Home_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Book Now link', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::URL,
-				'default'   => api_link_to_control( $defaults['cta_link'] ?? array( 'url' => '#ps-contact' ) ),
+				'default'   => api_link_to_control( $defaults['cta_link'] ?? array( 'url' => '/contact/' ) ),
 				'condition' => array( 'cta_text!' => '' ),
 			)
 		);

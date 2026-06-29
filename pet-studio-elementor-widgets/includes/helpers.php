@@ -136,11 +136,32 @@ function footer_logo_url( string $url ): string {
 }
 
 /**
+ * Book Now / booking CTAs should open the contact page — not scroll to the footer.
+ *
+ * @param array|null $link Elementor URL control shape.
+ * @return array<string, mixed>
+ */
+function normalize_booking_link( ?array $link ): array {
+	$url = trim( (string) ( $link['url'] ?? '' ) );
+
+	if ( $url === '#ps-contact' || $url === '#contact' ) {
+		return array(
+			'url'         => '/contact/',
+			'is_external' => false,
+			'nofollow'    => false,
+		);
+	}
+
+	return is_array( $link ) ? $link : array( 'url' => $url );
+}
+
+/**
  * Render link attributes from URL control or API link object.
  *
  * @param array|null $link Link settings.
  */
 function link_attrs( ?array $link ): array {
+	$link = Content_Normalizer::normalize_behaviour_link( $link );
 	$url = (string) ( $link['url'] ?? '#' );
 
 	// esc_url() strips bare fragment links (#anchor) — keep in-page scroll targets intact.
@@ -212,7 +233,7 @@ function render_cta_group( array $ctas ): void {
 	foreach ( $items as $cta ) {
 		$is_text = ( $cta['style'] ?? 'pill' ) === 'text';
 		$class   = $is_text ? 'el-link uk-button uk-button-text' : 'el-link uk-button ps-book-now-btn';
-		$link    = is_array( $cta['link'] ?? null ) ? $cta['link'] : null;
+		$link    = normalize_booking_link( is_array( $cta['link'] ?? null ) ? $cta['link'] : null );
 		$url     = (string) ( $link['url'] ?? '' );
 		echo '<a class="' . esc_attr( $class ) . '"';
 		print_link_attributes( $link );

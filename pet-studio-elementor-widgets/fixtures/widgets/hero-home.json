@@ -31,7 +31,7 @@
   "signature_rotation": -18,
   "cta_text": "Book Now",
   "cta_link": {
-    "url": "#ps-contact",
+    "url": "/contact/",
     "is_external": false,
     "nofollow": false
   }

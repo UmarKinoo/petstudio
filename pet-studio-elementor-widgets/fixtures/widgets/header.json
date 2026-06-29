@@ -78,7 +78,7 @@
   "show_social": true,
   "book_now_label": "Book Now",
   "book_now_link": {
-    "url": "#ps-contact",
+    "url": "/contact/",
     "is_external": false,
     "nofollow": false
   },

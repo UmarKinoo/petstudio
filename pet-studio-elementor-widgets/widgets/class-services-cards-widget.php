@@ -12,6 +12,8 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Pet_Studio_Elementor\Widget_Base;
 
+use Pet_Studio_Elementor\Content_Normalizer;
+
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\media_url;
@@ -122,6 +124,7 @@ class Services_Cards_Widget extends Widget_Base {
 				<div class="uk-grid-margin uk-grid tm-grid-expand uk-grid-column-collapse ps-services-cards" uk-grid>
 					<?php foreach ( $cards as $card ) : ?>
 						<?php
+						$card = Content_Normalizer::normalize_behaviour_service_card( $card );
 						$img = media_url( $card['image'] ?? null );
 						if ( ! $img ) {
 							continue;

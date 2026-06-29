@@ -17,6 +17,7 @@ use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\normalize_booking_link;
 use function Pet_Studio_Elementor\print_link_attributes;
 use function Pet_Studio_Elementor\social_icon_name;
 use function Pet_Studio_Elementor\switcher_enabled;
@@ -254,7 +255,7 @@ class Header_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button link', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::URL,
-				'default'   => api_link_to_control( $defaults['book_now_link'] ?? array( 'url' => '#ps-contact' ) ),
+				'default'   => api_link_to_control( $defaults['book_now_link'] ?? array( 'url' => '/contact/' ) ),
 				'condition' => array( 'show_book_now' => 'yes' ),
 			)
 		);
@@ -688,10 +689,10 @@ class Header_Widget extends Widget_Base {
 			$label = 'Book Now';
 		}
 
-		$link = $settings['book_now_link'] ?? null;
+		$link = normalize_booking_link( $settings['book_now_link'] ?? null );
 		if ( empty( $link['url'] ) || '#' === $link['url'] ) {
 			$link = array(
-				'url'         => '#ps-contact',
+				'url'         => '/contact/',
 				'is_external' => false,
 				'nofollow'    => false,
 			);
@@ -754,6 +755,8 @@ class Header_Widget extends Widget_Base {
 	 * @return array<int, array<string, mixed>>
 	 */
 	private function filter_nav_items( array $items ): array {
+		$items = Content_Normalizer::normalize_behaviour_nav_items( $items );
+
 		$settings = $this->get_render_settings();
 		if ( ! switcher_enabled( $settings['show_book_now'] ?? null, true ) ) {
 			return $items;
