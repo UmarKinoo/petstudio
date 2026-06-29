@@ -340,6 +340,13 @@ class Demo_Importer {
 	}
 
 	/**
+	 * Append FAQ widget to core pages that list it in fixtures (prod Elementor data may predate FAQ).
+	 */
+	public static function ensure_faq_sections(): void {
+		( new self() )->sync_faq_sections();
+	}
+
+	/**
 	 * Rebuild Theme Builder cache when templates exist but conditions were not registered.
 	 */
 	public static function maybe_repair_theme_builder(): void {
@@ -597,6 +604,147 @@ class Demo_Importer {
 			return true;
 		}
 		return array_keys( $array ) === range( 0, count( $array ) - 1 );
+	}
+
+	/**
+	 * Insert FAQ sections on pages defined in fixtures when missing from saved Elementor data.
+	 */
+	private function sync_faq_sections(): void {
+		$page_files = glob( PET_STUDIO_EW_PATH . 'fixtures/pages/*.json' ) ?: array();
+		$changed    = false;
+
+		foreach ( $page_files as $file ) {
+			if ( false !== strpos( $file, 'theme-templates.json' ) ) {
+				continue;
+			}
+
+			$config = json_decode( (string) file_get_contents( $file ), true );
+			if ( ! is_array( $config ) || ! $this->fixture_includes_widget( $config['widgets'] ?? array(), 'faq' ) ) {
+				continue;
+			}
+
+			$post_id = $this->resolve_page_post_id( $config );
+			if ( ! $post_id ) {
+				continue;
+			}
+
+			if ( $this->append_faq_section_if_missing( $post_id ) ) {
+				$changed = true;
+			}
+		}
+
+		if ( $changed ) {
+			Plugin::purge_elementor_caches();
+		}
+	}
+
+	/**
+	 * @param array<int, mixed> $widget_entries Fixture widget list.
+	 */
+	private function fixture_includes_widget( array $widget_entries, string $slug ): bool {
+		foreach ( $widget_entries as $entry ) {
+			$parsed = $this->parse_widget_entry( $entry );
+			if ( $parsed['slug'] === $slug ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param array<string, mixed> $config Page fixture config.
+	 */
+	private function resolve_page_post_id( array $config ): int {
+		if ( ! empty( $config['is_front_page'] ) ) {
+			$front = (int) get_option( 'page_on_front' );
+			if ( $front ) {
+				return $front;
+			}
+		}
+
+		$slug = (string) ( $config['slug'] ?? '' );
+		if ( $slug === '' ) {
+			return 0;
+		}
+
+		$page = get_page_by_path( $slug );
+		return $page ? (int) $page->ID : 0;
+	}
+
+	/**
+	 * @param array<int, array<string, mixed>> $data Elementor document sections.
+	 */
+	private function elementor_data_has_widget( array $data, string $widget_type ): bool {
+		foreach ( $data as $section ) {
+			if ( ! is_array( $section ) ) {
+				continue;
+			}
+			foreach ( $section['elements'] ?? array() as $column ) {
+				if ( ! is_array( $column ) ) {
+					continue;
+				}
+				foreach ( $column['elements'] ?? array() as $widget ) {
+					if ( is_array( $widget ) && ( $widget['widgetType'] ?? '' ) === $widget_type ) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param array<int, array<string, mixed>> $data Elementor document sections.
+	 */
+	private function find_section_index_by_widget( array $data, string $widget_type ): ?int {
+		foreach ( $data as $index => $section ) {
+			if ( ! is_array( $section ) ) {
+				continue;
+			}
+			foreach ( $section['elements'] ?? array() as $column ) {
+				if ( ! is_array( $column ) ) {
+					continue;
+				}
+				foreach ( $column['elements'] ?? array() as $widget ) {
+					if ( is_array( $widget ) && ( $widget['widgetType'] ?? '' ) === $widget_type ) {
+						return (int) $index;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
+	private function append_faq_section_if_missing( int $post_id ): bool {
+		$raw = get_post_meta( $post_id, '_elementor_data', true );
+		if ( ! is_string( $raw ) || $raw === '' ) {
+			return false;
+		}
+
+		$data = json_decode( $raw, true );
+		if ( ! is_array( $data ) ) {
+			return false;
+		}
+
+		if ( $this->elementor_data_has_widget( $data, 'pet_studio_faq' ) ) {
+			return false;
+		}
+
+		$faq_section = $this->build_section( array( $this->build_widget_element( 'faq', '' ) ) );
+
+		$testimonials_index = $this->find_section_index_by_widget( $data, 'pet_studio_testimonials' );
+		if ( null !== $testimonials_index ) {
+			array_splice( $data, $testimonials_index, 0, array( $faq_section ) );
+		} else {
+			$data[] = $faq_section;
+		}
+
+		update_post_meta( $post_id, '_elementor_data', wp_slash( wp_json_encode( $data ) ) );
+
+		return true;
 	}
 
 	private function gen_id(): string {

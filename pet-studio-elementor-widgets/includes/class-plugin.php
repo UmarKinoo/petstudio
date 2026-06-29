@@ -116,6 +116,7 @@ final class Plugin {
 		Demo_Importer::register_admin();
 		Demo_Importer::maybe_repair_theme_builder();
 		Demo_Importer::ensure_behaviour_page();
+		Demo_Importer::ensure_faq_sections();
 
 		add_action( 'template_redirect', array( '\\Pet_Studio_Elementor\\Contact_Form', 'handle_submission' ) );
 
