@@ -1,6 +1,6 @@
 <?php
 /**
- * Site footer — mirror markup.
+ * Site footer — compact branded layout.
  *
  * @package Pet_Studio_Elementor
  */
@@ -217,8 +217,8 @@ class Footer_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'heading_typography',
-				'label'    => esc_html__( 'Contact headings', 'pet-studio-elementor' ),
-				'selector' => '{{WRAPPER}} .ps-footer-contact-title',
+				'label'    => esc_html__( 'Contact links', 'pet-studio-elementor' ),
+				'selector' => '{{WRAPPER}} .ps-footer-contact-link',
 			)
 		);
 
@@ -226,8 +226,8 @@ class Footer_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'detail_heading_typography',
-				'label'    => esc_html__( 'Detail headings', 'pet-studio-elementor' ),
-				'selector' => '{{WRAPPER}} .el-title.uk-h5',
+				'label'    => esc_html__( 'Detail labels', 'pet-studio-elementor' ),
+				'selector' => '{{WRAPPER}} .ps-footer-meta-label',
 			)
 		);
 
@@ -244,73 +244,59 @@ class Footer_Widget extends Widget_Base {
 		$logo_link = $s['logo_link'] ?? array( 'url' => '/' );
 		?>
 		<footer class="ps-footer">
-			<div class="uk-section-secondary uk-section uk-section-small">
-				<div class="uk-container uk-container-xlarge">
-					<div id="ps-contact" class="ps-footer-contact uk-margin-medium-bottom" tabindex="-1">
-						<div class="uk-grid uk-child-width-1-1 uk-child-width-auto@s uk-grid-medium uk-flex-middle" uk-grid>
-							<div>
-								<div class="ps-footer-contact-title uk-h3 uk-link-heading uk-margin-remove">
-									<a<?php print_link_attributes( $s['contact_link'] ?? null ); ?>><?php echo esc_html( $s['contact_heading'] ?? '' ); ?></a>
-								</div>
-							</div>
-							<?php if ( $phone ) : ?>
-								<div>
-									<div class="ps-footer-contact-title uk-h3 uk-link-heading uk-margin-remove">
-										<a href="<?php echo esc_url( $tel_href ); ?>"><?php echo esc_html( $phone ); ?></a>
-									</div>
-								</div>
-							<?php endif; ?>
-						</div>
+			<div class="uk-section-secondary ps-footer-section">
+				<div class="uk-container uk-container-xlarge ps-footer-inner">
+					<div id="ps-contact" class="ps-footer-contact" tabindex="-1">
+						<a class="ps-footer-contact-link uk-link-heading"<?php print_link_attributes( $s['contact_link'] ?? null ); ?>>
+							<?php echo esc_html( $s['contact_heading'] ?? '' ); ?>
+						</a>
+						<?php if ( $phone ) : ?>
+							<span class="ps-footer-sep" aria-hidden="true">|</span>
+							<a class="ps-footer-contact-link uk-link-heading" href="<?php echo esc_url( $tel_href ); ?>">
+								<?php echo esc_html( $phone ); ?>
+							</a>
+						<?php endif; ?>
 					</div>
 
-					<hr class="uk-margin-medium">
-
-					<div class="uk-grid uk-grid-medium uk-child-width-1-1 uk-child-width-1-2@m" uk-grid>
-						<div>
-							<div class="uk-panel uk-margin-remove-first-child">
-								<?php if ( $logo_url ) : ?>
-									<a<?php print_link_attributes( $logo_link ); ?> uk-scroll>
-										<img class="el-image ps-footer-logo" src="<?php echo esc_url( $logo_url ); ?>" alt="" loading="lazy" width="200">
-									</a>
-								<?php endif; ?>
-								<?php if ( ! empty( $s['tagline'] ) ) : ?>
-									<p class="ps-footer-tagline uk-text-large uk-margin-small-top uk-margin-remove-bottom"><?php echo esc_html( $s['tagline'] ); ?></p>
-								<?php endif; ?>
-							</div>
+					<div class="ps-footer-body">
+						<div class="ps-footer-brand">
+							<?php if ( $logo_url ) : ?>
+								<a class="ps-footer-logo-link"<?php print_link_attributes( $logo_link ); ?> uk-scroll>
+									<img class="el-image ps-footer-logo" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php esc_attr_e( 'The Pet Studio', 'pet-studio-elementor' ); ?>" loading="lazy" width="160" height="18">
+								</a>
+							<?php endif; ?>
+							<?php if ( ! empty( $s['tagline'] ) ) : ?>
+								<p class="ps-footer-tagline"><?php echo esc_html( $s['tagline'] ); ?></p>
+							<?php endif; ?>
 						</div>
-						<div>
-							<div class="uk-grid uk-child-width-1-2@s uk-grid-small" uk-grid>
+
+						<?php if ( ! empty( $s['address'] ) || ! empty( $s['hours_text'] ) ) : ?>
+							<dl class="ps-footer-meta">
 								<?php if ( ! empty( $s['address'] ) ) : ?>
-									<div>
-										<div class="el-title uk-h5 uk-text-muted uk-margin-remove"><?php echo esc_html( $s['address_heading'] ?? 'Find Us' ); ?></div>
-										<div class="el-content uk-panel uk-text-small uk-margin-small-top">
+									<div class="ps-footer-meta-item">
+										<dt class="ps-footer-meta-label"><?php echo esc_html( $s['address_heading'] ?? 'Find Us' ); ?></dt>
+										<dd class="ps-footer-meta-value">
 											<?php echo format_multiline_text( $s['address'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-										</div>
+										</dd>
 									</div>
 								<?php endif; ?>
 								<?php if ( ! empty( $s['hours_text'] ) ) : ?>
-									<div>
-										<div class="el-title uk-h5 uk-text-muted uk-margin-remove"><?php echo esc_html( $s['hours_heading'] ?? '' ); ?></div>
-										<div class="el-content uk-panel uk-text-small uk-margin-small-top">
+									<div class="ps-footer-meta-item">
+										<dt class="ps-footer-meta-label"><?php echo esc_html( $s['hours_heading'] ?? '' ); ?></dt>
+										<dd class="ps-footer-meta-value">
 											<?php echo format_multiline_text( $s['hours_text'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-										</div>
+										</dd>
 									</div>
 								<?php endif; ?>
-							</div>
-						</div>
+							</dl>
+						<?php endif; ?>
 					</div>
 
-					<hr class="uk-margin-medium">
-
-					<div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap ps-footer-legal">
-						<ul class="uk-margin-remove-bottom uk-subnav uk-subnav-divider">
-							<li class="el-item">
-								<a class="el-link uk-text-small"<?php print_link_attributes( $s['privacy_link'] ?? null ); ?> uk-scroll>
-									<?php echo esc_html( $s['privacy_label'] ?? '' ); ?>
-								</a>
-							</li>
-						</ul>
-						<p class="uk-text-small uk-text-muted uk-margin-remove"><?php echo esc_html( $s['copyright'] ?? '' ); ?></p>
+					<div class="ps-footer-legal">
+						<a class="ps-footer-legal-link"<?php print_link_attributes( $s['privacy_link'] ?? null ); ?> uk-scroll>
+							<?php echo esc_html( $s['privacy_label'] ?? '' ); ?>
+						</a>
+						<p class="ps-footer-copyright"><?php echo esc_html( $s['copyright'] ?? '' ); ?></p>
 					</div>
 				</div>
 			</div>

@@ -57,120 +57,173 @@
 	margin: 0;
 }
 
-/* Footer — smaller item fonts + logo (client request) */
-.elementor-widget-pet_studio_footer .el-title.uk-h1 {
-	font-size: 1.4rem !important; /* contact heading + phone (was ~2.6rem/42px) */
+/* Footer — compact branded layout */
+.ps-footer-section {
+	padding-top: 1.25rem;
+	padding-bottom: 1rem;
 }
-.elementor-widget-pet_studio_footer .el-title.uk-h2 {
-	font-size: 1.25rem !important; /* mobile email/phone (was ~27px) */
+
+.ps-footer-inner {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
-.elementor-widget-pet_studio_footer .el-content.uk-h3 {
-	font-size: 1.0625rem !important; /* address + opening hours (was 24px) */
+
+.ps-footer-contact {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem 0.75rem;
+	text-align: center;
 }
-.elementor-widget-pet_studio_footer .el-title.uk-h5 {
-	font-size: 0.8125rem !important; /* "Find Us" / "Opening Hours" labels (was 16px) */
+
+.ps-footer-contact-link {
+	font-family: var(--pet-font-heading);
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.3;
+	text-decoration: none;
+	margin: 0;
 }
-.elementor-widget-pet_studio_footer .el-content.uk-text-large {
-	font-size: 1rem !important; /* tagline (was 21px) */
+
+.ps-footer-sep {
+	opacity: 0.45;
+	font-weight: 300;
+	user-select: none;
 }
-.elementor-widget-pet_studio_footer .el-image {
-	max-width: 120px; /* logo (was 170px) */
+
+.ps-footer-body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	text-align: center;
+}
+
+.ps-footer-brand {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+	max-width: 22rem;
+}
+
+.ps-footer-logo-link {
+	display: inline-block;
+	line-height: 0;
+}
+
+.ps-footer .ps-footer-logo {
+	display: block;
+	width: auto;
+	max-width: min(11rem, 52vw);
 	height: auto;
 }
 
-/* Footer — compact spacing, remove large vertical gaps (desktop + mobile) */
-.elementor-widget-pet_studio_footer .uk-section-large {
-	padding-top: 14px !important;    /* was 70–140px */
-	padding-bottom: 10px !important;
-}
-/* Don't stretch the short address column to match the tall logo column */
-.elementor-widget-pet_studio_footer .uk-grid-match > * > .uk-panel,
-.elementor-widget-pet_studio_footer .uk-grid-match {
-	align-items: flex-start !important;
-}
-.elementor-widget-pet_studio_footer .uk-margin-xlarge {
-	margin-top: 12px !important;     /* logo/address block (was 70px top) */
-	margin-bottom: 0 !important;     /* kill the 70px bottom margin under this block */
-}
-/* Vertically centre the logo against the address column so neither leaves a gap */
-.elementor-widget-pet_studio_footer .uk-margin-xlarge {
-	align-items: center;
+.ps-footer-tagline {
+	margin: 0;
+	font-size: 0.8125rem;
+	line-height: 1.45;
+	opacity: 0.82;
+	max-width: 28ch;
 }
 
-/* Logo + tagline side by side (logo left, tagline to its right) */
-.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel {
+.ps-footer-meta {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	gap: 1.25rem;
+	gap: 0.65rem;
+	margin: 0;
+}
+
+.ps-footer-meta-item {
+	margin: 0;
+}
+
+.ps-footer-meta-label {
+	margin: 0 0 0.15rem;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	opacity: 0.55;
+}
+
+.ps-footer-meta-value {
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.45;
+}
+
+.ps-footer-legal {
+	display: flex;
 	flex-wrap: wrap;
-}
-.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel > a {
-	flex: 0 0 auto;
-}
-.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel > .el-content {
-	flex: 1 1 200px;
-	margin-top: 0 !important; /* not stacked anymore, drop the top gap */
-}
-.elementor-widget-pet_studio_footer .uk-margin-medium {
-	margin-top: 10px !important;     /* contact/phone blocks (was 40px) */
-	margin-bottom: 10px !important;
-}
-.elementor-widget-pet_studio_footer .uk-margin {
-	margin-top: 8px !important;      /* was 20px */
-	margin-bottom: 8px !important;
-}
-.elementor-widget-pet_studio_footer .uk-margin-top {
-	margin-top: 5px !important;      /* heading→value gap (was 20px) */
-}
-.elementor-widget-pet_studio_footer .uk-margin-small-top {
-	margin-top: 3px !important;
-}
-.elementor-widget-pet_studio_footer hr {
-	margin-top: 8px !important;      /* was 20px */
-	margin-bottom: 8px !important;
-}
-.elementor-widget-pet_studio_footer .uk-grid-large > .uk-grid-margin,
-.elementor-widget-pet_studio_footer .uk-grid-margin {
-	margin-top: 10px !important;     /* stacked rows on narrow screens (was 40px) */
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem 1rem;
+	padding-top: 0.75rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-@media (max-width: 959px) {
-	.elementor-widget-pet_studio_footer .uk-section-large {
-		padding-top: 10px !important;
-		padding-bottom: 10px !important;
+.ps-footer-legal-link {
+	font-size: 0.75rem;
+	text-decoration: none;
+	opacity: 0.85;
+}
+
+.ps-footer-copyright {
+	margin: 0;
+	font-size: 0.75rem;
+	opacity: 0.65;
+}
+
+@media (min-width: 640px) {
+	.ps-footer-contact {
+		justify-content: flex-start;
+		text-align: left;
 	}
-	.elementor-widget-pet_studio_footer .uk-margin-xlarge {
-		margin-top: 10px !important;
+
+	.ps-footer-body {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+		text-align: left;
+		gap: 1.5rem 2rem;
+	}
+
+	.ps-footer-brand {
+		align-items: flex-start;
+		flex: 1 1 12rem;
+		max-width: 20rem;
+	}
+
+	.ps-footer-meta {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: flex-end;
+		flex: 1 1 16rem;
+		gap: 1.5rem 2rem;
+	}
+
+	.ps-footer-meta-item {
+		flex: 0 1 auto;
 	}
 }
 
-/* Mobile (<640px) — slightly smaller footer fonts */
 @media (max-width: 639px) {
-	.elementor-widget-pet_studio_footer .el-title.uk-h1 {
-		font-size: 1rem !important;     /* Contact Us + phone number */
-		white-space: nowrap;            /* keep the number on one line */
+	.ps-footer-contact-link {
+		font-size: 0.9375rem;
 	}
-	.elementor-widget-pet_studio_footer .el-content.uk-h3 {
-		font-size: 1rem !important;     /* address + opening hours */
+
+	.ps-footer .ps-footer-logo {
+		max-width: min(10rem, 48vw);
 	}
-	.elementor-widget-pet_studio_footer .el-content.uk-text-large {
-		font-size: 0.9rem !important;   /* tagline */
-	}
-	.elementor-widget-pet_studio_footer .el-title.uk-h5 {
-		font-size: 0.75rem !important;  /* "Find Us" / "Opening Hours" labels */
-	}
-	.elementor-widget-pet_studio_footer .el-image {
-		max-width: 105px;               /* smaller logo on mobile */
-	}
-	/* Centre the logo (and tagline) on mobile */
-	.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel {
+
+	.ps-footer-legal {
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-	}
-	/* reset the row-basis so the tagline doesn't stretch tall in column mode */
-	.elementor-widget-pet_studio_footer .uk-margin-xlarge > div:first-child > .uk-panel > .el-content {
-		flex: 0 0 auto;
 	}
 }
 
@@ -498,20 +551,6 @@ a.ps-book-now-btn:focus,
 	fill: var(--pet-primary, #ff90aa);
 }
 
-/* Compact footer */
-.ps-footer .ps-footer-logo {
-	max-width: 200px;
-	height: auto;
-}
-
-.ps-footer-tagline {
-	font-weight: 600;
-}
-
-.ps-footer-legal {
-	gap: 0.75rem 1.5rem;
-}
-
 /* Contact page */
 .ps-contact-academy-intro p + p {
 	margin-top: 1rem;
@@ -786,8 +825,8 @@ a.ps-book-now-btn:focus,
 	text-align: center !important;
 	top: auto !important;
 	margin-top: 0;
-	padding-left: 1rem;
-	padding-right: 1rem;
+	padding-left: clamp(1rem, 4vw, 1.5rem);
+	padding-right: clamp(1rem, 4vw, 1.5rem);
 	box-sizing: border-box;
 }
 
@@ -806,7 +845,7 @@ a.ps-book-now-btn:focus,
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: min(85vw, 400px);
+	max-width: min(82vw, 380px);
 	width: 100%;
 	height: auto;
 	transform: none !important;
@@ -815,16 +854,18 @@ a.ps-book-now-btn:focus,
 .pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-logo-inner {
 	position: relative;
 	display: inline-block;
-	width: min(85vw, 400px);
-	max-width: min(85vw, 400px);
+	width: min(82vw, 380px);
+	max-width: min(82vw, 380px);
 	vertical-align: top;
 	container-type: inline-size;
 }
 
 .pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-brand-head {
-	width: min(85vw, 400px);
-	max-width: min(85vw, 400px);
+	width: min(82vw, 380px);
+	max-width: min(82vw, 380px);
 	padding-bottom: 1.75rem;
+	padding-right: clamp(0.5rem, 4vw, 1.25rem);
+	box-sizing: content-box;
 	container-type: inline-size;
 }
 
@@ -839,10 +880,10 @@ a.ps-book-now-btn:focus,
 }
 
 .pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature {
-	right: -20%;
+	right: 0;
 	bottom: 0.35rem;
-	width: clamp(125px, 38cqi, 200px);
-	max-width: 58%;
+	width: clamp(110px, 34cqi, 175px);
+	max-width: 50%;
 }
 
 .pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn {
@@ -897,21 +938,22 @@ a.ps-book-now-btn:focus,
 
 @media (max-width: 639px) {
 	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-brand-head {
-		width: min(88vw, 400px);
-		max-width: min(88vw, 400px);
+		width: min(82vw, 380px);
+		max-width: min(82vw, 380px);
 		padding-bottom: 1.5rem;
+		padding-right: clamp(0.65rem, 5vw, 1.35rem);
 	}
 
 	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-logo-inner,
 	.pet-studio-hero-home .ps-hero-logo-mobile .el-image,
 	.pet-studio-hero-home .ps-hero-logo-mobile img,
 	.pet-studio-hero-home .ps-hero-logo-mobile svg {
-		width: min(88vw, 400px);
-		max-width: min(88vw, 400px);
+		width: min(82vw, 380px);
+		max-width: min(82vw, 380px);
 	}
 
 	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature {
-		right: -16%;
+		right: -8%;
 		width: clamp(115px, 36cqi, 185px);
 	}
 
@@ -929,8 +971,9 @@ a.ps-book-now-btn:focus,
 	}
 
 	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature {
-		right: -10%;
-		width: clamp(105px, 34cqi, 155px);
+		right: 0;
+		width: clamp(95px, 30cqi, 145px);
+		max-width: 46%;
 	}
 
 	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn {

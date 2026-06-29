@@ -8,14 +8,14 @@
   "phone": "01934 90 60 80",
   "logo": {
     "id": 0,
-    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/the_pet_studio_logo_+tagline_MOBILE_600px.svg"
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/the_pet_studio_logo_400px.svg"
   },
   "logo_link": {
     "url": "/",
     "is_external": false,
     "nofollow": false
   },
-  "tagline": "THE first choice provider for Dog Grooming and City & Guilds Training in the South-West",
+  "tagline": "Dog grooming & City & Guilds training in the South-West",
   "address": "2 High Street, Congresbury, BS49 5JA",
   "hours_heading": "Opening Hours",
   "hours_text": "Mon–Fri, 9am–4pm",
