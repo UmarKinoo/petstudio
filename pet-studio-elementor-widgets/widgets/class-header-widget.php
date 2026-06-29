@@ -254,7 +254,7 @@ class Header_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button link', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::URL,
-				'default'   => api_link_to_control( $defaults['book_now_link'] ?? array( 'url' => '/contact/' ) ),
+				'default'   => api_link_to_control( $defaults['book_now_link'] ?? array( 'url' => '#ps-contact' ) ),
 				'condition' => array( 'show_book_now' => 'yes' ),
 			)
 		);
@@ -691,23 +691,24 @@ class Header_Widget extends Widget_Base {
 		$link = $settings['book_now_link'] ?? null;
 		if ( empty( $link['url'] ) || '#' === $link['url'] ) {
 			$link = array(
-				'url'         => '/contact/',
+				'url'         => '#ps-contact',
 				'is_external' => false,
 				'nofollow'    => false,
 			);
 		}
+		$scroll = ( ! empty( $link['url'] ) && '#' === $link['url'][0] ) ? ' uk-scroll="offset: 100"' : '';
 
 		if ( $mobile ) {
 			?>
 			<div class="uk-margin-medium-top">
-				<a class="uk-button ps-book-now-btn uk-width-1-1" style="<?php echo esc_attr( $this->book_now_button_style() ); ?>"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+				<a class="uk-button ps-book-now-btn uk-width-1-1" style="<?php echo esc_attr( $this->book_now_button_style() ); ?>"<?php print_link_attributes( $link ); ?><?php echo $scroll; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $label ); ?></a>
 			</div>
 			<?php
 			return;
 		}
 		?>
 		<div class="uk-navbar-item ps-header-book-now">
-			<a class="uk-button ps-book-now-btn" style="<?php echo esc_attr( $this->book_now_button_style() ); ?>"<?php print_link_attributes( $link ); ?>><?php echo esc_html( $label ); ?></a>
+			<a class="uk-button ps-book-now-btn" style="<?php echo esc_attr( $this->book_now_button_style() ); ?>"<?php print_link_attributes( $link ); ?><?php echo $scroll; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $label ); ?></a>
 		</div>
 		<?php
 	}

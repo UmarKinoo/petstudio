@@ -23,6 +23,7 @@ $widgets = array(
 	'team-member'     => 'Team_Member_Widget',
 	'est-banner'      => 'Est_Banner_Widget',
 	'contact'         => 'Contact_Widget',
+	'faq'             => 'Faq_Widget',
 );
 
 $errors = 0;

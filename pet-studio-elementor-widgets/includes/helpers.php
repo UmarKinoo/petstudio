@@ -123,10 +123,17 @@ function media_url( ?array $media, string $fallback = '' ): string {
  * @param array|null $link Link settings.
  */
 function link_attrs( ?array $link ): array {
-	$url = $link['url'] ?? '#';
+	$url = (string) ( $link['url'] ?? '#' );
+
+	// esc_url() strips bare fragment links (#anchor) — keep in-page scroll targets intact.
+	if ( str_starts_with( $url, '#' ) && strlen( $url ) > 1 ) {
+		$href = esc_attr( $url );
+	} else {
+		$href = esc_url( $url );
+	}
 
 	return array(
-		'href'   => esc_url( $url ),
+		'href'   => $href,
 		'target' => ! empty( $link['is_external'] ) ? '_blank' : '',
 		'rel'    => ! empty( $link['nofollow'] ) ? 'nofollow noopener noreferrer' : ( ! empty( $link['is_external'] ) ? 'noopener noreferrer' : '' ),
 	);

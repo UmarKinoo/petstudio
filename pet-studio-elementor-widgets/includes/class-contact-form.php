@@ -2,18 +2,6 @@
 /**
  * Contact form — markup renderer + secure submission handler.
  *
- * Mirrors the fields of the original Joomla (ConvertForms) contact form:
- * First name, Last name, Email, Phone, Type of enquiry (radio), Enquiry (textarea).
- *
- * The form posts back to its own page. handle_submission() runs on
- * template_redirect (before output): it validates + sanitises, emails the
- * recipient, then PRG-redirects on success. On validation error it stashes the
- * errors + old input in a per-request static so the widget can re-render them.
- *
- * The recipient/subject are read from the submitting widget's STORED Elementor
- * settings (looked up by page + element id) — never from the posted payload —
- * so the form can't be abused as an open mail relay.
- *
  * @package Pet_Studio_Elementor
  */
 
@@ -31,33 +19,28 @@ class Contact_Form {
 	private static $state = null;
 
 	/**
-	 * Default "Type of enquiry" radio options (from the original form).
-	 *
-	 * @return string[]
-	 */
-	public static function default_enquiry_options(): array {
-		return array( 'Dog Grooming', 'Training', 'Other' );
-	}
-
-	/**
 	 * Render the form markup.
 	 *
 	 * @param array $opts {
-	 *     @type int      $page_id          Post ID the form lives on.
-	 *     @type string   $widget_id        Elementor element id (for settings lookup).
-	 *     @type string   $button_text      Submit button label.
-	 *     @type string[] $enquiry_options  Radio options.
-	 *     @type bool     $enquiry_required Whether the radio is required.
-	 *     @type string   $success_message  Shown after a successful submit.
+	 *     @type int      $page_id                 Post ID the form lives on.
+	 *     @type string   $widget_id               Elementor element id (for settings lookup).
+	 *     @type string   $button_text             Submit button label.
+	 *     @type bool     $show_enquiry_type       Show "Type of enquiry" radio field.
+	 *     @type string[] $enquiry_options         Radio options when shown.
+	 *     @type bool     $enquiry_type_required   Whether the radio is required.
+	 *     @type bool     $message_required        Whether the enquiry textarea is required.
+	 *     @type string   $success_message         Shown after a successful submit.
 	 * }
 	 */
 	public static function render( array $opts = array() ): string {
-		$button_text     = (string) ( $opts['button_text'] ?? __( 'Send Enquiry', 'pet-studio-elementor' ) );
-		$options         = ! empty( $opts['enquiry_options'] ) ? (array) $opts['enquiry_options'] : self::default_enquiry_options();
-		$enquiry_req     = ! empty( $opts['enquiry_required'] );
-		$success_message = (string) ( $opts['success_message'] ?? __( 'Thanks for your enquiry — we’ll be in touch soon.', 'pet-studio-elementor' ) );
-		$page_id         = (int) ( $opts['page_id'] ?? (int) get_the_ID() );
-		$widget_id       = (string) ( $opts['widget_id'] ?? '' );
+		$button_text           = (string) ( $opts['button_text'] ?? __( 'Send Enquiry', 'pet-studio-elementor' ) );
+		$show_enquiry_type     = ! empty( $opts['show_enquiry_type'] );
+		$options               = ! empty( $opts['enquiry_options'] ) ? (array) $opts['enquiry_options'] : array( 'Dog Grooming', 'Training', 'Other' );
+		$enquiry_type_required = ! empty( $opts['enquiry_type_required'] );
+		$message_required      = array_key_exists( 'message_required', $opts ) ? (bool) $opts['message_required'] : true;
+		$success_message       = (string) ( $opts['success_message'] ?? __( 'Thanks for your enquiry — we’ll be in touch soon.', 'pet-studio-elementor' ) );
+		$page_id               = (int) ( $opts['page_id'] ?? (int) get_the_ID() );
+		$widget_id             = (string) ( $opts['widget_id'] ?? '' );
 
 		$sent   = isset( $_GET['ps_cf'] ) && 'sent' === sanitize_key( wp_unslash( $_GET['ps_cf'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$errors = self::$state['errors'] ?? array();
@@ -84,12 +67,12 @@ class Contact_Form {
 
 			<div class="ps-cf-row">
 				<div class="ps-cf-field ps-cf-field--half">
-					<label class="ps-cf-label" for="ps-cf-first"><?php esc_html_e( 'First name', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<label class="ps-cf-label" for="ps-cf-first"><?php esc_html_e( 'Name', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
 					<input class="uk-input ps-cf-input" type="text" name="ps_cf[first_name]" id="ps-cf-first" value="<?php echo $val( 'first_name' ); ?>" required aria-required="true">
 					<?php echo $err( 'first_name' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 				<div class="ps-cf-field ps-cf-field--half">
-					<label class="ps-cf-label" for="ps-cf-last"><?php esc_html_e( 'Last name', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<label class="ps-cf-label" for="ps-cf-last"><?php esc_html_e( 'Last Name', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
 					<input class="uk-input ps-cf-input" type="text" name="ps_cf[last_name]" id="ps-cf-last" value="<?php echo $val( 'last_name' ); ?>" required aria-required="true">
 					<?php echo $err( 'last_name' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
@@ -108,27 +91,34 @@ class Contact_Form {
 				</div>
 			</div>
 
-			<fieldset class="ps-cf-field ps-cf-fieldset">
-				<legend class="ps-cf-label"><?php esc_html_e( 'Type of enquiry', 'pet-studio-elementor' ); ?><?php echo $enquiry_req ? ' ' . $req : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></legend>
-				<div class="ps-cf-radios">
-					<?php foreach ( $options as $option ) : ?>
-						<?php $option = (string) $option; ?>
-						<label class="ps-cf-radio">
-							<input class="uk-radio" type="radio" name="ps_cf[enquiry_type]" value="<?php echo esc_attr( $option ); ?>" <?php checked( $old['enquiry_type'] ?? '', $option ); ?> <?php echo $enquiry_req ? 'required aria-required="true"' : ''; ?>>
-							<span><?php echo esc_html( $option ); ?></span>
-						</label>
-					<?php endforeach; ?>
-				</div>
-				<?php echo $err( 'enquiry_type' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			</fieldset>
+			<?php if ( $show_enquiry_type ) : ?>
+				<fieldset class="ps-cf-field ps-cf-fieldset">
+					<legend class="ps-cf-label"><?php esc_html_e( 'Type of enquiry', 'pet-studio-elementor' ); ?><?php echo $enquiry_type_required ? ' ' . $req : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></legend>
+					<div class="ps-cf-radios">
+						<?php foreach ( $options as $option ) : ?>
+							<?php $option = (string) $option; ?>
+							<label class="ps-cf-radio">
+								<input class="uk-radio" type="radio" name="ps_cf[enquiry_type]" value="<?php echo esc_attr( $option ); ?>" <?php checked( $old['enquiry_type'] ?? '', $option ); ?> <?php echo $enquiry_type_required ? 'required aria-required="true"' : ''; ?>>
+								<span><?php echo esc_html( $option ); ?></span>
+							</label>
+						<?php endforeach; ?>
+					</div>
+					<?php echo $err( 'enquiry_type' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</fieldset>
+			<?php endif; ?>
 
 			<div class="ps-cf-field">
-				<label class="ps-cf-label" for="ps-cf-enquiry"><?php esc_html_e( 'Enquiry', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
-				<textarea class="uk-textarea ps-cf-input" name="ps_cf[enquiry]" id="ps-cf-enquiry" rows="4" placeholder="<?php esc_attr_e( 'Enter any questions you may have...', 'pet-studio-elementor' ); ?>" required aria-required="true"><?php echo esc_textarea( $old['enquiry'] ?? '' ); ?></textarea>
+				<label class="ps-cf-label" for="ps-cf-enquiry">
+					<?php esc_html_e( 'Enquiry', 'pet-studio-elementor' ); ?>
+					<?php echo $message_required ? $req : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php if ( ! $message_required ) : ?>
+						<span class="ps-cf-optional"><?php esc_html_e( '(optional)', 'pet-studio-elementor' ); ?></span>
+					<?php endif; ?>
+				</label>
+				<textarea class="uk-textarea ps-cf-input" name="ps_cf[enquiry]" id="ps-cf-enquiry" rows="4" placeholder="<?php esc_attr_e( 'Enter any questions you may have...', 'pet-studio-elementor' ); ?>" <?php echo $message_required ? 'required aria-required="true"' : ''; ?>><?php echo esc_textarea( $old['enquiry'] ?? '' ); ?></textarea>
 				<?php echo $err( 'enquiry' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 
-			<?php // Honeypot — hidden from humans, bots tend to fill it. ?>
 			<div class="ps-cf-hp" aria-hidden="true">
 				<label><?php esc_html_e( 'Leave this field empty', 'pet-studio-elementor' ); ?>
 					<input type="text" name="ps_cf_hp" tabindex="-1" autocomplete="off" value="">
@@ -155,7 +145,6 @@ class Contact_Form {
 			return;
 		}
 
-		// Honeypot tripped → silently accept (bot), send nothing.
 		if ( ! empty( $_POST['ps_cf_hp'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			self::redirect_sent();
 		}
@@ -181,11 +170,13 @@ class Contact_Form {
 		$widget_id = isset( $_POST['ps_cf_widget'] ) ? sanitize_text_field( wp_unslash( $_POST['ps_cf_widget'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$settings  = self::lookup_widget_settings( $page_id, $widget_id );
 
-		$enquiry_required = isset( $settings['enquiry_required'] ) && 'yes' === $settings['enquiry_required'];
+		$show_enquiry_type     = isset( $settings['show_enquiry_type'] ) && 'yes' === $settings['show_enquiry_type'];
+		$enquiry_type_required = isset( $settings['enquiry_type_required'] ) && 'yes' === $settings['enquiry_type_required'];
+		$message_required      = ! isset( $settings['message_required'] ) || 'yes' === $settings['message_required'];
 
 		if ( ! $errors ) {
 			if ( '' === $data['first_name'] ) {
-				$errors['first_name'] = __( 'Please enter your first name.', 'pet-studio-elementor' );
+				$errors['first_name'] = __( 'Please enter your name.', 'pet-studio-elementor' );
 			}
 			if ( '' === $data['last_name'] ) {
 				$errors['last_name'] = __( 'Please enter your last name.', 'pet-studio-elementor' );
@@ -196,10 +187,10 @@ class Contact_Form {
 			if ( '' === $data['phone'] ) {
 				$errors['phone'] = __( 'Please enter your phone number.', 'pet-studio-elementor' );
 			}
-			if ( $enquiry_required && '' === $data['enquiry_type'] ) {
+			if ( $show_enquiry_type && $enquiry_type_required && '' === $data['enquiry_type'] ) {
 				$errors['enquiry_type'] = __( 'Please choose a type of enquiry.', 'pet-studio-elementor' );
 			}
-			if ( '' === $data['enquiry'] ) {
+			if ( $message_required && '' === $data['enquiry'] ) {
 				$errors['enquiry'] = __( 'Please enter your enquiry.', 'pet-studio-elementor' );
 			}
 		}
@@ -209,10 +200,10 @@ class Contact_Form {
 				'errors' => $errors,
 				'old'    => $data,
 			);
-			return; // Let the page render with errors + repopulated values.
+			return;
 		}
 
-		self::send( $data, $settings );
+		self::send( $data, $settings, $show_enquiry_type );
 		self::redirect_sent();
 	}
 
@@ -221,8 +212,9 @@ class Contact_Form {
 	 *
 	 * @param array<string,string> $data     Sanitised field values.
 	 * @param array<string,mixed>  $settings Stored widget settings.
+	 * @param bool                 $show_enquiry_type Whether enquiry type was on the form.
 	 */
-	private static function send( array $data, array $settings ): void {
+	private static function send( array $data, array $settings, bool $show_enquiry_type ): void {
 		$recipient = '';
 		if ( ! empty( $settings['recipient_email'] ) && is_email( (string) $settings['recipient_email'] ) ) {
 			$recipient = (string) $settings['recipient_email'];
@@ -231,7 +223,6 @@ class Contact_Form {
 			$recipient = (string) get_option( 'admin_email' );
 		}
 
-		/** Allow a site to override where enquiries are delivered. */
 		$recipient = (string) apply_filters( 'pet_studio_contact_recipient', $recipient, $data, $settings );
 
 		$subject = ! empty( $settings['email_subject'] )
@@ -239,25 +230,26 @@ class Contact_Form {
 			/* translators: %s: site name. */
 			: sprintf( __( 'New enquiry from %s', 'pet-studio-elementor' ), get_bloginfo( 'name' ) );
 
-		$body = implode(
-			"\n",
-			array(
-				sprintf( '%s: %s %s', __( 'Name', 'pet-studio-elementor' ), $data['first_name'], $data['last_name'] ),
-				sprintf( '%s: %s', __( 'Email', 'pet-studio-elementor' ), $data['email'] ),
-				sprintf( '%s: %s', __( 'Phone', 'pet-studio-elementor' ), $data['phone'] ),
-				sprintf( '%s: %s', __( 'Type of enquiry', 'pet-studio-elementor' ), '' !== $data['enquiry_type'] ? $data['enquiry_type'] : '—' ),
-				'',
-				__( 'Enquiry:', 'pet-studio-elementor' ),
-				$data['enquiry'],
-			)
+		$lines = array(
+			sprintf( '%s: %s %s', __( 'Name', 'pet-studio-elementor' ), $data['first_name'], $data['last_name'] ),
+			sprintf( '%s: %s', __( 'Email', 'pet-studio-elementor' ), $data['email'] ),
+			sprintf( '%s: %s', __( 'Phone', 'pet-studio-elementor' ), $data['phone'] ),
 		);
+
+		if ( $show_enquiry_type ) {
+			$lines[] = sprintf( '%s: %s', __( 'Type of enquiry', 'pet-studio-elementor' ), '' !== $data['enquiry_type'] ? $data['enquiry_type'] : '—' );
+		}
+
+		$lines[] = '';
+		$lines[] = __( 'Enquiry:', 'pet-studio-elementor' );
+		$lines[] = '' !== $data['enquiry'] ? $data['enquiry'] : '—';
 
 		$headers = array(
 			'Content-Type: text/plain; charset=UTF-8',
 			sprintf( 'Reply-To: %s %s <%s>', $data['first_name'], $data['last_name'], $data['email'] ),
 		);
 
-		wp_mail( $recipient, $subject, $body, $headers );
+		wp_mail( $recipient, $subject, implode( "\n", $lines ), $headers );
 	}
 
 	/**

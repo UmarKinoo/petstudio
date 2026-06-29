@@ -498,6 +498,40 @@ a.ps-book-now-btn:focus,
 	fill: var(--pet-primary, #ff90aa);
 }
 
+/* Compact footer */
+.ps-footer .ps-footer-logo {
+	max-width: 200px;
+	height: auto;
+}
+
+.ps-footer-tagline {
+	font-weight: 600;
+}
+
+.ps-footer-legal {
+	gap: 0.75rem 1.5rem;
+}
+
+/* Contact page */
+.ps-contact-academy-intro p + p {
+	margin-top: 1rem;
+}
+
+.ps-cf-optional {
+	font-weight: 400;
+	opacity: 0.75;
+	font-size: 0.875em;
+}
+
+/* FAQ accordion */
+.ps-faq-accordion .uk-accordion-title {
+	font-size: 1.125rem;
+}
+
+.ps-faq-accordion .uk-accordion-content {
+	color: inherit;
+}
+
 /* Dog divider icons — mirror uses per-icon width/height; override stale Elementor/LiteSpeed attrs */
 .tm-grid-expand img.el-image[src*="icon_dog_01.png"],
 .tm-grid-expand img.el-image[data-src*="icon_dog_01.png"] {
@@ -612,6 +646,28 @@ a.ps-book-now-btn:focus,
 .pet-studio-hero-home .ps-hero-logo-desktop {
 	left: 0;
 	right: 0;
+	top: 50%;
+	text-align: center;
+}
+
+.pet-studio-hero-home .ps-hero-overlay {
+	overflow-x: clip;
+}
+
+.pet-studio-hero-home .ps-hero-brand {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	max-width: 100%;
+	padding-left: clamp(0.5rem, 2.5vw, 1.25rem);
+	padding-right: clamp(0.5rem, 2.5vw, 1.25rem);
+	box-sizing: border-box;
+}
+
+.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-brand {
+	transform: translateY(-50%);
 }
 
 .pet-studio-hero-home .ps-hero-logo-desktop .el-image,
@@ -623,48 +679,91 @@ a.ps-book-now-btn:focus,
 	max-width: min(60vw, 650px);
 	width: 100%;
 	height: auto;
+	transform: none;
 }
 
 .pet-studio-hero-home .ps-hero-logo-inner {
 	position: relative;
 	display: inline-block;
-	width: 100%;
+	width: min(60vw, 650px);
 	max-width: min(60vw, 650px);
-	margin-left: auto;
-	margin-right: auto;
+	vertical-align: top;
 	container-type: inline-size;
 }
 
+/* Logo + Bristol + signature overlay (mockup frame) */
+.pet-studio-hero-home .ps-hero-brand-head {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: min(60vw, 650px);
+	max-width: min(60vw, 650px);
+	padding-bottom: 2.25rem;
+}
+
+/* Bristol — dark translucent pill matching academy bar colour, text-width only */
 .pet-studio-hero-home .ps-hero-tagline-location {
-	position: absolute;
-	left: 50%;
-	right: auto;
+	position: static;
+	display: inline-block;
 	width: auto;
-	transform: translateX(-50%);
+	max-width: 100%;
+	margin: 0.15rem auto 0.75rem;
+	transform: none;
 	text-align: center;
 	font-family: 'PT Sans Caption', var(--pet-font-heading), sans-serif;
 	font-weight: 700;
 	color: #ff90aa;
-	letter-spacing: 0.06em;
+	letter-spacing: 0.32em;
 	text-transform: uppercase;
 	white-space: nowrap;
 	pointer-events: none;
-	line-height: 1.15;
+	line-height: 1.2;
 	z-index: 2;
-	/* Black translucent plate, matching the logo badge */
-	background: rgba(0, 0, 0, 0.55);
-	padding: 0.14em 0.6em;
-	border-radius: 5px;
+	background: rgba(0, 0, 0, 0.502);
+	padding: 0.45em 0.85em;
+	box-sizing: border-box;
+	font-size: clamp(11px, 2.2cqi, 15px);
 }
 
-/* Book Now CTA — sits just under the logo/Bristol badge, animates with the logo group */
-.pet-studio-hero-home .ps-hero-cta {
+/* Mockup: bottom-right of frame, angled up, overlapping lower white line / tagline area */
+.pet-studio-hero-home .ps-hero-signature {
 	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 3;
+	right: -30%;
+	bottom: 1.35rem;
+	display: block;
+	margin: 0;
+	width: clamp(170px, 36cqi, 260px);
+	max-width: 52%;
+	z-index: 4;
+	pointer-events: none;
+	transform-origin: right bottom;
+}
+
+.pet-studio-hero-home .ps-hero-signature svg.ps-signature-svg,
+.pet-studio-hero-home .ps-hero-signature .ps-signature-img {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	margin: 0;
+	object-fit: contain;
+}
+
+.pet-studio-hero-home .ps-hero-signature svg.ps-signature-svg path {
+	fill: var(--pet-primary, #ff90aa);
+}
+
+/* Book Now CTA — clear gap below signature slot */
+.pet-studio-hero-home .ps-hero-cta {
+	position: relative;
+	left: auto;
+	transform: none;
+	z-index: 2;
 	white-space: nowrap;
 	pointer-events: auto;
+	margin-top: 1rem;
+	clear: both;
 }
 .pet-studio-hero-home .ps-hero-cta .ps-cta-group {
 	margin-top: 0;
@@ -674,27 +773,31 @@ a.ps-book-now-btn:focus,
 	font-size: 1.125rem !important;
 	padding: 1rem 2.6rem !important;
 }
-.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-cta {
-	bottom: -2.8em;
-}
-.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta {
-	bottom: -2.6em;
-}
 
-/* Desktop logo — centred second line on pink tagline bar */
-.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-tagline-location {
-	bottom: 7%;
-	font-size: clamp(16px, 3.4cqi, 24px);
+/* Desktop signature — sits on academy bar / frame line, lower-right */
+.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-signature {
+	right: -28%;
+	bottom: 1.5rem;
+	width: clamp(185px, 37cqi, 275px);
 }
 
 .pet-studio-hero-home .ps-hero-logo-mobile {
 	width: 100%;
 	text-align: center !important;
 	top: auto !important;
-	margin-top: 8vh;
+	margin-top: 0;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	box-sizing: border-box;
+}
+
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-brand {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	max-width: 100%;
+	transform: none;
 }
 
 .pet-studio-hero-home .ps-hero-logo-mobile .el-image,
@@ -710,37 +813,129 @@ a.ps-book-now-btn:focus,
 }
 
 .pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-logo-inner {
+	position: relative;
+	display: inline-block;
+	width: min(85vw, 400px);
 	max-width: min(85vw, 400px);
+	vertical-align: top;
+	container-type: inline-size;
+}
+
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-brand-head {
+	width: min(85vw, 400px);
+	max-width: min(85vw, 400px);
+	padding-bottom: 1.75rem;
 	container-type: inline-size;
 }
 
 .pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-tagline-location {
-	bottom: 5.25%;
-	font-size: clamp(16px, 4.8cqi, 24px);
-	letter-spacing: 0.08em;
+	font-size: clamp(10px, 3.2cqi, 14px);
+	letter-spacing: 0.28em;
+	margin: 0.1rem 0 0.65rem;
+}
+
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta {
+	margin-top: 0.85rem;
+}
+
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature {
+	right: -20%;
+	bottom: 0.35rem;
+	width: clamp(125px, 38cqi, 200px);
+	max-width: 58%;
+}
+
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn {
+	font-size: 1rem !important;
+	padding: 0.85rem 2.2rem !important;
+}
+
+/* Tablet — desktop hero visible from 640px (UIkit @s) */
+@media (min-width: 640px) and (max-width: 959px) {
+	.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-logo-inner,
+	.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-brand-head,
+	.pet-studio-hero-home .ps-hero-logo-desktop .el-image,
+	.pet-studio-hero-home .ps-hero-logo-desktop img,
+	.pet-studio-hero-home .ps-hero-logo-desktop svg {
+		width: min(72vw, 580px);
+		max-width: min(72vw, 580px);
+	}
+
+	.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-brand-head {
+		padding-bottom: 2rem;
+	}
+
+	.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-signature {
+		right: -22%;
+		bottom: 1.4rem;
+		width: clamp(165px, 35cqi, 250px);
+	}
+}
+
+/* Large desktop — full mockup signature offset */
+@media (min-width: 1200px) {
+	.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-signature {
+		right: -28%;
+		width: clamp(185px, 37cqi, 275px);
+	}
+}
+
+/* Medium desktop */
+@media (min-width: 960px) and (max-width: 1199px) {
+	.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-signature {
+		right: -24%;
+		width: clamp(175px, 36cqi, 265px);
+	}
 }
 
 @media (max-width: 959px) {
-	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-tagline-location {
-		bottom: 5.5%;
-		font-size: clamp(15px, 5vw, 22px);
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature svg.ps-signature-svg,
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature .ps-signature-img {
+		max-width: 100%;
 	}
 }
 
 @media (max-width: 639px) {
-	.pet-studio-hero-home .ps-hero-logo-mobile {
-		margin-top: 6vh;
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-brand-head {
+		width: min(88vw, 400px);
+		max-width: min(88vw, 400px);
+		padding-bottom: 1.5rem;
 	}
 
-	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-tagline-location {
-		bottom: 5.75%;
-		font-size: clamp(14px, 4.6vw, 20px);
-		letter-spacing: 0.1em;
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-logo-inner,
+	.pet-studio-hero-home .ps-hero-logo-mobile .el-image,
+	.pet-studio-hero-home .ps-hero-logo-mobile img,
+	.pet-studio-hero-home .ps-hero-logo-mobile svg {
+		width: min(88vw, 400px);
+		max-width: min(88vw, 400px);
+	}
+
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature {
+		right: -16%;
+		width: clamp(115px, 36cqi, 185px);
 	}
 
 	.pet-studio-hero-home .ps-hero-copy {
 		padding-left: 0.75rem;
 		padding-right: 0.75rem;
+	}
+}
+
+@media (max-width: 389px) {
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-tagline-location {
+		font-size: clamp(9px, 2.8cqi, 11px);
+		letter-spacing: 0.2em;
+		padding: 0.38em 0.55em;
+	}
+
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-signature {
+		right: -10%;
+		width: clamp(105px, 34cqi, 155px);
+	}
+
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn {
+		font-size: 0.9375rem !important;
+		padding: 0.75rem 1.85rem !important;
 	}
 }
 

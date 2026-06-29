@@ -2,35 +2,20 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://thepetstudio.local/schemas/hero-home.json",
   "title": "Pet Studio widget: hero-home",
-  "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
   "type": "object",
   "properties": {
-    "video_desktop": {
-      "$ref": "_common.json#/$defs/media"
-    },
-    "video_mobile": {
-      "$ref": "_common.json#/$defs/media"
-    },
-    "logo_desktop": {
-      "$ref": "_common.json#/$defs/media"
-    },
-    "logo_mobile": {
-      "$ref": "_common.json#/$defs/media"
-    },
-    "headline_words": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "hours_title": {
-      "type": "string"
-    },
-    "hours_text": {
-      "type": "string"
-    },
-    "tagline_location": {
-      "type": "string"
-    }
+    "video_desktop": { "$ref": "_common.json#/$defs/media" },
+    "video_mobile": { "$ref": "_common.json#/$defs/media" },
+    "logo_desktop": { "$ref": "_common.json#/$defs/media" },
+    "logo_mobile": { "$ref": "_common.json#/$defs/media" },
+    "headline_words": { "type": "array", "items": { "type": "string" } },
+    "hours_title": { "type": "string" },
+    "hours_text": { "type": "string" },
+    "tagline_location": { "type": "string" },
+    "show_signature": { "type": "boolean" },
+    "signature_image": { "$ref": "_common.json#/$defs/media" },
+    "signature_rotation": { "type": "number" },
+    "cta_text": { "type": "string" },
+    "cta_link": { "$ref": "_common.json#/$defs/link" }
   }
 }

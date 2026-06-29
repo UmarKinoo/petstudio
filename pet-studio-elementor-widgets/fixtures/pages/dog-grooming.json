@@ -16,6 +16,7 @@
     { "slug": "content-split", "variant": "content-split-hand-stripping" },
     { "slug": "dog-divider", "variant": "dog-divider-06" },
     { "slug": "content-split", "variant": "content-split-teeth-cleaning" },
+    "faq",
     "testimonials"
   ]
 }

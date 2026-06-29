@@ -23,9 +23,15 @@
   "hours_title": "Opening Hours",
   "hours_text": "Monday - Friday\n9 am - 4 pm",
   "tagline_location": "Bristol",
+  "show_signature": true,
+  "signature_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+  },
+  "signature_rotation": -18,
   "cta_text": "Book Now",
   "cta_link": {
-    "url": "/contact/",
+    "url": "#ps-contact",
     "is_external": false,
     "nofollow": false
   }

@@ -44,10 +44,10 @@
       "is_active": false
     },
     {
-      "label": "Training",
+      "label": "Behaviour",
       "subtitle": "Train Your Dog",
       "link": {
-        "url": "/dog-training/",
+        "url": "/behaviour/",
         "is_external": false,
         "nofollow": false
       },
@@ -78,7 +78,7 @@
   "show_social": true,
   "book_now_label": "Book Now",
   "book_now_link": {
-    "url": "/contact/",
+    "url": "#ps-contact",
     "is_external": false,
     "nofollow": false
   },

@@ -13,6 +13,6 @@
         "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/BK1_8643_1.jpg"
     },
     "cta_text": "Book Now",
-    "cta_link": { "url": "/contact/" },
+    "cta_link": { "url": "#ps-contact" },
     "cta_style": "pill"
 }

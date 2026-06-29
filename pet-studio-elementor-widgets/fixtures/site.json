@@ -25,9 +25,9 @@
       "slug": "grooming-academy"
     },
     {
-      "label": "Training",
+      "label": "Behaviour",
       "subtitle": "Train Your Dog",
-      "slug": "dog-training"
+      "slug": "behaviour"
     },
     {
       "label": "Team",
@@ -44,7 +44,7 @@
     "home",
     "dog-grooming",
     "grooming-academy",
-    "dog-training",
+    "behaviour",
     "team",
     "contact"
   ]

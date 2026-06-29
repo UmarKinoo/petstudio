@@ -148,6 +148,7 @@ final class Plugin {
 			'Est_Banner'     => 'Est_Banner_Widget',
 			'Contact'        => 'Contact_Widget',
 			'Contact_Form'   => 'Contact_Form_Widget',
+			'Faq'            => 'Faq_Widget',
 		);
 
 		foreach ( $widgets as $file => $class ) {

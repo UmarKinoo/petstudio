@@ -1,6 +1,6 @@
 {
-  "slug": "dog-training",
-  "title": "Dog Training",
+  "slug": "behaviour",
+  "title": "Behaviour",
   "widgets": [
     "hero-inner",
     { "slug": "page-intro", "variant": "page-intro-training" },
@@ -11,6 +11,7 @@
     { "slug": "dog-divider", "variant": "dog-divider-03" },
     "courses-tabs",
     { "slug": "dog-divider", "variant": "dog-divider-01" },
+    "faq",
     "testimonials"
   ]
 }

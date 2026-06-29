@@ -36,6 +36,7 @@ class Content_Normalizer {
 		'est-banner'      => 'pet_studio_est_banner',
 		'contact'         => 'pet_studio_contact',
 		'contact-form'    => 'pet_studio_contact_form',
+		'faq'             => 'pet_studio_faq',
 	);
 
 	/**
@@ -107,6 +108,11 @@ class Content_Normalizer {
 				$fixture['video_mobile']    = self::media_to_elementor( $fixture['video_mobile'] ?? null );
 				$fixture['logo_desktop']    = self::media_to_elementor( $fixture['logo_desktop'] ?? null );
 				$fixture['logo_mobile']     = self::media_to_elementor( $fixture['logo_mobile'] ?? null );
+				$fixture['signature_image'] = self::media_to_elementor( $fixture['signature_image'] ?? null );
+				$fixture['show_signature']  = self::bool_to_switcher( $fixture['show_signature'] ?? false );
+				if ( self::is_empty_setting( $fixture['tagline_location'] ?? null ) ) {
+					$fixture['tagline_location'] = 'Bristol';
+				}
 				break;
 
 			case 'header':
@@ -147,8 +153,21 @@ class Content_Normalizer {
 
 			case 'footer':
 				$fixture['logo']         = self::media_to_elementor( $fixture['logo'] ?? null );
+				$fixture['logo_link']    = self::link_to_elementor( $fixture['logo_link'] ?? null );
 				$fixture['contact_link'] = self::link_to_elementor( $fixture['contact_link'] ?? null );
 				$fixture['privacy_link'] = self::link_to_elementor( $fixture['privacy_link'] ?? null );
+				break;
+
+			case 'faq':
+				$fixture['items'] = self::map_list(
+					$fixture['items'] ?? array(),
+					function ( array $item ): array {
+						return array(
+							'question' => $item['question'] ?? '',
+							'answer'   => $item['answer'] ?? '',
+						);
+					}
+				);
 				break;
 
 			case 'hero-inner':
@@ -263,6 +282,8 @@ class Content_Normalizer {
 				$fixture['sticky_image'] = self::media_to_elementor( $fixture['sticky_image'] ?? null );
 				$fixture['mobile_image'] = self::media_to_elementor( $fixture['mobile_image'] ?? null );
 				$fixture['maps_link']    = self::link_to_elementor( $fixture['maps_link'] ?? null );
+				$fixture['show_enquiry_type'] = self::bool_to_switcher( $fixture['show_enquiry_type'] ?? false );
+				$fixture['message_required']  = self::bool_to_switcher( $fixture['message_required'] ?? true );
 				break;
 
 			case 'cookie-consent':
@@ -424,6 +445,8 @@ class Content_Normalizer {
 				} else {
 					$settings[ $key ] = self::merge_settings( $default_val, $settings[ $key ] );
 				}
+			} elseif ( self::is_empty_setting( $settings[ $key ] ) && ! self::is_empty_setting( $default_val ) ) {
+				$settings[ $key ] = $default_val;
 			}
 		}
 

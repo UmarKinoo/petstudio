@@ -4,6 +4,7 @@
   "widgets": [
     "hero-inner",
     "contact",
+    "faq",
     "testimonials"
   ]
 }

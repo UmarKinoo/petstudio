@@ -1,7 +1,17 @@
 {
   "heading": "Contact Us",
+  "subheading": "Get in touch to book an appointment for your dog",
   "phone": "01934 90 60 80",
+  "intro_text": "Each appointment is tailored to your dog's specific needs, so please call to discuss and we can ensure we allocate the correct amount of time to your appointment.",
+  "academy_heading": "City & Guilds Dog Training Academy | Enquiry Form",
+  "academy_intro": "Please complete the form below if you are interested in finding out more about our City & Guilds dog grooming training.\n\nYou will then receive an automated email and a booking link to Liza's diary where she will call you to discuss further and answer any questions you may have.",
   "form_shortcode": "",
+  "recipient_email": "",
+  "email_subject": "City & Guilds Academy enquiry",
+  "button_text": "Send Enquiry",
+  "success_message": "Thanks for your enquiry — we'll be in touch soon.",
+  "show_enquiry_type": false,
+  "message_required": false,
   "address": "2 High Street\nCongresbury\nNorth Somerset\nBS49 5JA",
   "maps_button_text": "Open in Google Maps",
   "maps_link": {

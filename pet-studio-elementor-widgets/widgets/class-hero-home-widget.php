@@ -19,6 +19,7 @@ use function Pet_Studio_Elementor\render_cta_group;
 use function Pet_Studio_Elementor\format_multiline_text;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\render_inline_svg;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -123,6 +124,37 @@ class Hero_Home_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
+			'show_signature',
+			array(
+				'label'        => esc_html__( 'Show signature', 'pet-studio-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => ! empty( $defaults['show_signature'] ) ? 'yes' : '',
+			)
+		);
+
+		$this->add_control(
+			'signature_image',
+			array(
+				'label'     => esc_html__( 'Signature image', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::MEDIA,
+				'default'   => api_media_to_control( $defaults['signature_image'] ?? null ),
+				'condition' => array( 'show_signature' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
+			'signature_rotation',
+			array(
+				'label'     => esc_html__( 'Signature angle (°)', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array( 'deg' => array( 'min' => -30, 'max' => 30 ) ),
+				'default'   => array( 'size' => (float) ( $defaults['signature_rotation'] ?? -16 ), 'unit' => 'deg' ),
+				'condition' => array( 'show_signature' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
 			'cta_text',
 			array(
 				'label'   => esc_html__( 'Book Now button text', 'pet-studio-elementor' ),
@@ -135,7 +167,7 @@ class Hero_Home_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Book Now link', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::URL,
-				'default'   => api_link_to_control( $defaults['cta_link'] ?? array( 'url' => '/contact/' ) ),
+				'default'   => api_link_to_control( $defaults['cta_link'] ?? array( 'url' => '#ps-contact' ) ),
 				'condition' => array( 'cta_text!' => '' ),
 			)
 		);
@@ -243,15 +275,33 @@ class Hero_Home_Widget extends Widget_Base {
 		if ( $tagline_loc === '' ) {
 			$tagline_loc = trim( (string) ( $defaults['tagline_location'] ?? 'Bristol' ) );
 		}
+		$sig_url     = media_url( $s['signature_image'] ?? null );
+		$rotation    = isset( $s['signature_rotation']['size'] ) ? (float) $s['signature_rotation']['size'] : (float) ( $s['signature_rotation'] ?? -18 );
 		$cta_text = trim( (string) ( $s['cta_text'] ?? '' ) );
 		$cta_link = is_array( $s['cta_link'] ?? null ) ? $s['cta_link'] : null;
 		$words       = $s['headline_words'] ?? array();
 		?>
 		<style class="uk-margin-remove-adjacent">
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop {
+				left: 0;
+				right: 0;
+				top: 50%;
+				text-align: center;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop .ps-hero-brand {
+				display: inline-flex;
+				flex-direction: column;
+				align-items: center;
+				transform: translateY(-50%);
+				text-align: center;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile .ps-hero-brand {
+				transform: none;
+			}
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop .el-image,
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop img,
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop svg {
-				transform: translateY(-50%);
+				transform: none;
 				max-width: min(60vw, 650px);
 				margin-left: auto;
 				margin-right: auto;
@@ -266,7 +316,7 @@ class Hero_Home_Widget extends Widget_Base {
 				margin-right: auto;
 				display: block;
 			}
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-overlay { position: relative; z-index: 1; margin-top: -100vh; }
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-overlay { position: relative; z-index: 1; margin-top: -100vh; overflow-x: clip; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-word-last { margin-bottom: 15vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-hours-text { margin-bottom: 30vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-copy > * { position: relative; z-index: 1; }
@@ -295,11 +345,24 @@ class Hero_Home_Widget extends Widget_Base {
 						<div class="uk-panel uk-width-1-1">
 							<?php if ( $logo_desk ) : ?>
 								<div class="uk-position-absolute uk-width-1-1 uk-text-center uk-visible@s ps-hero-logo-desktop" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="top: 50%; z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
-									<div class="ps-hero-logo-inner">
-										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_desk ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="650" height="138"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
-										<?php if ( $tagline_loc !== '' ) : ?>
-											<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
-										<?php endif; ?>
+									<div class="ps-hero-brand">
+										<div class="ps-hero-brand-head">
+											<div class="ps-hero-logo-inner">
+												<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_desk ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="650" height="138"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+											</div>
+											<?php if ( $tagline_loc !== '' ) : ?>
+												<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
+											<?php endif; ?>
+											<?php if ( ( $s['show_signature'] ?? '' ) === 'yes' && $sig_url ) : ?>
+												<div class="ps-hero-signature" style="<?php echo esc_attr( sprintf( 'transform: rotate(%sdeg);', $rotation ) ); ?>">
+													<?php
+													if ( ! render_inline_svg( $sig_url, 'uk-text-primary el-image ps-signature-svg', 260, 135 ) ) :
+														?>
+														<img class="el-image ps-signature-img" src="<?php echo esc_url( $sig_url ); ?>" alt="" width="260" height="135"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+													<?php endif; ?>
+												</div>
+											<?php endif; ?>
+										</div>
 										<?php if ( $cta_text !== '' ) : ?>
 											<div class="ps-hero-cta">
 												<?php render_cta_group( array( array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' ) ) ); ?>
@@ -310,11 +373,24 @@ class Hero_Home_Widget extends Widget_Base {
 							<?php endif; ?>
 							<?php if ( $logo_mob ) : ?>
 								<div class="uk-position-relative uk-margin uk-text-center uk-hidden@s ps-hero-logo-mobile" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
-									<div class="ps-hero-logo-inner">
-										<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
-										<?php if ( $tagline_loc !== '' ) : ?>
-											<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
-										<?php endif; ?>
+									<div class="ps-hero-brand">
+										<div class="ps-hero-brand-head">
+											<div class="ps-hero-logo-inner">
+												<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
+											</div>
+											<?php if ( $tagline_loc !== '' ) : ?>
+												<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
+											<?php endif; ?>
+											<?php if ( ( $s['show_signature'] ?? '' ) === 'yes' && $sig_url ) : ?>
+												<div class="ps-hero-signature" style="<?php echo esc_attr( sprintf( 'transform: rotate(%sdeg);', $rotation ) ); ?>">
+													<?php
+													if ( ! render_inline_svg( $sig_url, 'uk-text-primary el-image ps-signature-svg', 200, 104 ) ) :
+														?>
+														<img class="el-image ps-signature-img" src="<?php echo esc_url( $sig_url ); ?>" alt="" width="200" height="104"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+													<?php endif; ?>
+												</div>
+											<?php endif; ?>
+										</div>
 										<?php if ( $cta_text !== '' ) : ?>
 											<div class="ps-hero-cta">
 												<?php render_cta_group( array( array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' ) ) ); ?>

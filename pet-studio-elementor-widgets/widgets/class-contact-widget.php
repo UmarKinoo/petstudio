@@ -1,6 +1,6 @@
 <?php
 /**
- * Contact page section — form shortcode + map.
+ * Contact page section — booking info + academy enquiry form + map.
  *
  * @package Pet_Studio_Elementor
  */
@@ -17,6 +17,7 @@ use function Pet_Studio_Elementor\format_multiline_text;
 use function Pet_Studio_Elementor\media_url;
 use function Pet_Studio_Elementor\phone_tel_href;
 use function Pet_Studio_Elementor\print_link_attributes;
+use function Pet_Studio_Elementor\render_rich_text;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -45,15 +46,26 @@ class Contact_Widget extends Widget_Base {
 	protected function register_controls(): void {
 		$d = $this->get_fixture_defaults();
 
-		$this->start_controls_section( 'section_content', array( 'label' => esc_html__( 'Content', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_CONTENT ) );
+		$this->start_controls_section( 'section_booking', array( 'label' => esc_html__( 'Booking', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_CONTENT ) );
 		$this->add_control( 'heading', array( 'label' => esc_html__( 'Heading', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['heading'] ?? 'Contact Us' ) );
+		$this->add_control( 'subheading', array( 'label' => esc_html__( 'Subheading', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['subheading'] ?? '' ) );
 		$this->add_control( 'phone', array( 'label' => esc_html__( 'Phone', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['phone'] ?? '' ) );
-		$this->add_control( 'form_shortcode', array( 'label' => esc_html__( 'Form shortcode', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['form_shortcode'] ?? '', 'description' => esc_html__( 'Optional. Paste a shortcode to override the built-in enquiry form, e.g. [elementor-template id="123"]', 'pet-studio-elementor' ) ) );
-		$this->add_control( 'recipient_email', array( 'label' => esc_html__( 'Send enquiries to', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'input_type' => 'email', 'placeholder' => get_option( 'admin_email' ), 'description' => esc_html__( 'Built-in form only. Leave blank to use the site admin email.', 'pet-studio-elementor' ), 'label_block' => true, 'default' => $d['recipient_email'] ?? '' ) );
+		$this->add_control( 'intro_text', array( 'label' => esc_html__( 'Booking intro', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXTAREA, 'default' => $d['intro_text'] ?? '', 'rows' => 4 ) );
+		$this->end_controls_section();
+
+		$this->start_controls_section( 'section_academy_form', array( 'label' => esc_html__( 'Academy enquiry form', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_CONTENT ) );
+		$this->add_control( 'academy_heading', array( 'label' => esc_html__( 'Section heading', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['academy_heading'] ?? '', 'label_block' => true ) );
+		$this->add_control( 'academy_intro', array( 'label' => esc_html__( 'Section intro', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXTAREA, 'default' => $d['academy_intro'] ?? '', 'rows' => 5 ) );
+		$this->add_control( 'form_shortcode', array( 'label' => esc_html__( 'Form shortcode override', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['form_shortcode'] ?? '', 'description' => esc_html__( 'Optional. Paste a shortcode to replace the built-in form.', 'pet-studio-elementor' ) ) );
+		$this->add_control( 'recipient_email', array( 'label' => esc_html__( 'Send enquiries to', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'input_type' => 'email', 'placeholder' => get_option( 'admin_email' ), 'label_block' => true, 'default' => $d['recipient_email'] ?? '' ) );
 		$this->add_control( 'email_subject', array( 'label' => esc_html__( 'Email subject', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'label_block' => true, 'default' => $d['email_subject'] ?? '' ) );
 		$this->add_control( 'button_text', array( 'label' => esc_html__( 'Button text', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => $d['button_text'] ?? 'Send Enquiry' ) );
-		$this->add_control( 'success_message', array( 'label' => esc_html__( 'Success message', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => $d['success_message'] ?? 'Thanks for your enquiry — we’ll be in touch soon.' ) );
-		$this->add_control( 'enquiry_required', array( 'label' => esc_html__( 'Make "Type of enquiry" required', 'pet-studio-elementor' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => '' ) );
+		$this->add_control( 'success_message', array( 'label' => esc_html__( 'Success message', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => $d['success_message'] ?? '' ) );
+		$this->add_control( 'show_enquiry_type', array( 'label' => esc_html__( 'Show "Type of enquiry" field', 'pet-studio-elementor' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => ! empty( $d['show_enquiry_type'] ) ? 'yes' : '' ) );
+		$this->add_control( 'message_required', array( 'label' => esc_html__( 'Require enquiry message', 'pet-studio-elementor' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => ! empty( $d['message_required'] ) ? 'yes' : '' ) );
+		$this->end_controls_section();
+
+		$this->start_controls_section( 'section_location', array( 'label' => esc_html__( 'Location', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_CONTENT ) );
 		$this->add_control( 'sticky_image', array( 'label' => esc_html__( 'Sticky image (desktop)', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => api_media_to_control( $d['sticky_image'] ?? null ) ) );
 		$this->add_control( 'mobile_image', array( 'label' => esc_html__( 'Image (mobile)', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => api_media_to_control( $d['mobile_image'] ?? null ) ) );
 		$this->add_control( 'address', array( 'label' => esc_html__( 'Address', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXTAREA, 'default' => $d['address'] ?? '', 'rows' => 4 ) );
@@ -87,7 +99,7 @@ class Contact_Widget extends Widget_Base {
 			$zoom
 		);
 		?>
-		<div class="uk-section-default uk-section uk-section-small-top uk-padding-remove-bottom">
+		<div class="uk-section-default uk-section uk-section-small-top uk-padding-remove-bottom ps-contact-section">
 			<div class="uk-container uk-container-expand">
 				<div class="uk-grid-margin uk-container uk-container-expand">
 					<div class="uk-grid tm-grid-expand uk-grid-column-medium" uk-grid>
@@ -101,42 +113,63 @@ class Contact_Widget extends Widget_Base {
 							</div>
 						</div>
 						<div class="uk-width-1-2@l">
-							<h1 class="uk-heading-medium uk-heading-line uk-margin-large uk-width-xlarge uk-margin-auto uk-text-left">
-								<span><?php echo esc_html( $s['heading'] ?? '' ); ?></span>
-							</h1>
-							<?php if ( $mobile ) : ?>
-								<div class="uk-margin uk-hidden@m">
-									<img class="el-image" src="<?php echo esc_url( $mobile ); ?>" alt="" loading="lazy" width="1240" height="1860">
-								</div>
-							<?php endif; ?>
-							<div class="uk-h4 uk-text-primary uk-margin-large-top uk-margin-remove-bottom uk-width-xlarge uk-margin-auto uk-text-left">Get in Touch</div>
-							<?php if ( $phone ) : ?>
-								<div class="ps-contact-phone uk-h1 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-visible@s">
-									<a class="el-link uk-link-reset" href="<?php echo esc_url( $tel ); ?>"><?php echo esc_html( $phone ); ?></a>
-								</div>
-								<div class="ps-contact-phone uk-h2 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-hidden@s">
-									<a class="el-link uk-link-reset" href="<?php echo esc_url( $tel ); ?>"><?php echo esc_html( $phone ); ?></a>
-								</div>
-							<?php endif; ?>
-							<div class="ps-contact-form-label uk-h4 uk-text-primary uk-margin-large-top uk-margin-remove-bottom uk-width-xlarge uk-margin-auto uk-text-left">Enquiry Form</div>
-							<div class="uk-panel uk-margin uk-width-xlarge uk-margin-auto">
-								<?php
-								$shortcode = trim( (string) ( $s['form_shortcode'] ?? '' ) );
-								if ( $shortcode ) {
-									echo do_shortcode( $shortcode ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								} else {
-									echo \Pet_Studio_Elementor\Contact_Form::render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							<div class="ps-contact-booking" tabindex="-1">
+								<h1 class="uk-heading-medium uk-heading-line uk-margin-medium uk-width-xlarge uk-margin-auto uk-text-left">
+									<span><?php echo esc_html( $s['heading'] ?? '' ); ?></span>
+								</h1>
+								<?php if ( $mobile ) : ?>
+									<div class="uk-margin uk-hidden@l">
+										<img class="el-image" src="<?php echo esc_url( $mobile ); ?>" alt="" loading="lazy" width="1240" height="1860">
+									</div>
+								<?php endif; ?>
+								<?php if ( ! empty( $s['subheading'] ) ) : ?>
+									<p class="uk-h4 uk-width-xlarge uk-margin-auto uk-text-left uk-margin-remove-top"><?php echo esc_html( $s['subheading'] ); ?></p>
+								<?php endif; ?>
+								<?php if ( $phone ) : ?>
+									<div class="ps-contact-phone uk-h1 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-visible@s">
+										<a class="el-link uk-link-reset" href="<?php echo esc_url( $tel ); ?>"><?php echo esc_html( $phone ); ?></a>
+									</div>
+									<div class="ps-contact-phone uk-h2 uk-margin uk-width-xlarge uk-margin-auto uk-text-left uk-hidden@s">
+										<a class="el-link uk-link-reset" href="<?php echo esc_url( $tel ); ?>"><?php echo esc_html( $phone ); ?></a>
+									</div>
+								<?php endif; ?>
+								<?php if ( ! empty( $s['intro_text'] ) ) : ?>
+									<div class="ps-contact-intro uk-width-xlarge uk-margin-auto uk-text-left uk-margin-medium-top">
+										<?php echo render_rich_text( '<p>' . esc_html( $s['intro_text'] ) . '</p>' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									</div>
+								<?php endif; ?>
+							</div>
+
+							<div class="ps-contact-academy uk-margin-xlarge uk-width-xlarge uk-margin-auto">
+								<?php if ( ! empty( $s['academy_heading'] ) ) : ?>
+									<h2 class="uk-h3 uk-text-primary uk-margin-medium-bottom"><?php echo esc_html( $s['academy_heading'] ); ?></h2>
+								<?php endif; ?>
+								<?php if ( ! empty( $s['academy_intro'] ) ) : ?>
+									<div class="ps-contact-academy-intro uk-margin-medium-bottom">
+										<?php echo format_multiline_text( $s['academy_intro'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									</div>
+								<?php endif; ?>
+								<div class="uk-panel uk-margin">
+									<?php
+									$shortcode = trim( (string) ( $s['form_shortcode'] ?? '' ) );
+									if ( $shortcode ) {
+										echo do_shortcode( $shortcode ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									} else {
+										echo \Pet_Studio_Elementor\Contact_Form::render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											array(
-												'page_id'          => (int) get_the_ID(),
-												'widget_id'        => (string) $this->get_id(),
-												'button_text'      => $s['button_text'] ?? 'Send Enquiry',
-												'enquiry_required' => ! empty( $s['enquiry_required'] ) && 'yes' === $s['enquiry_required'],
-												'success_message'  => $s['success_message'] ?? '',
+												'page_id'           => (int) get_the_ID(),
+												'widget_id'         => (string) $this->get_id(),
+												'button_text'       => $s['button_text'] ?? 'Send Enquiry',
+												'show_enquiry_type' => ! empty( $s['show_enquiry_type'] ) && 'yes' === $s['show_enquiry_type'],
+												'message_required'  => ! isset( $s['message_required'] ) || 'yes' === $s['message_required'],
+												'success_message'   => $s['success_message'] ?? '',
 											)
 										);
-								}
-								?>
+									}
+									?>
+								</div>
 							</div>
+
 							<?php if ( ! empty( $s['address'] ) ) : ?>
 								<div class="uk-h4 uk-text-primary uk-margin-large-top uk-margin-remove-bottom uk-width-xlarge uk-margin-auto uk-text-left">Find Us</div>
 								<div class="uk-h3 uk-margin uk-width-xlarge uk-margin-auto uk-text-left">

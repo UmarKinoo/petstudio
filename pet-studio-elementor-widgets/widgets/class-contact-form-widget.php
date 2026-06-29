@@ -92,12 +92,33 @@ class Contact_Form_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'enquiry_required',
+			'show_enquiry_type',
 			array(
-				'label'        => esc_html__( 'Make "Type of enquiry" required', 'pet-studio-elementor' ),
+				'label'        => esc_html__( 'Show "Type of enquiry" field', 'pet-studio-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
+			)
+		);
+
+		$this->add_control(
+			'enquiry_type_required',
+			array(
+				'label'        => esc_html__( 'Require type of enquiry', 'pet-studio-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => '',
+				'condition'    => array( 'show_enquiry_type' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
+			'message_required',
+			array(
+				'label'        => esc_html__( 'Require enquiry message', 'pet-studio-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
 			)
 		);
 
@@ -139,17 +160,19 @@ class Contact_Form_Widget extends Widget_Base {
 			}
 		}
 		if ( ! $options ) {
-			$options = Contact_Form::default_enquiry_options();
+			$options = array( 'Dog Grooming', 'Training', 'Other' );
 		}
 
 		echo Contact_Form::render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			array(
-				'page_id'          => (int) get_the_ID(),
-				'widget_id'        => (string) $this->get_id(),
-				'button_text'      => $s['button_text'] ?? 'Send Enquiry',
-				'enquiry_options'  => $options,
-				'enquiry_required' => ! empty( $s['enquiry_required'] ) && 'yes' === $s['enquiry_required'],
-				'success_message'  => $s['success_message'] ?? '',
+				'page_id'                 => (int) get_the_ID(),
+				'widget_id'               => (string) $this->get_id(),
+				'button_text'             => $s['button_text'] ?? 'Send Enquiry',
+				'show_enquiry_type'       => ! empty( $s['show_enquiry_type'] ) && 'yes' === $s['show_enquiry_type'],
+				'enquiry_options'         => $options,
+				'enquiry_type_required'   => ! empty( $s['enquiry_type_required'] ) && 'yes' === $s['enquiry_type_required'],
+				'message_required'        => ! isset( $s['message_required'] ) || 'yes' === $s['message_required'],
+				'success_message'         => $s['success_message'] ?? '',
 			)
 		);
 	}
