@@ -14,6 +14,7 @@ use Pet_Studio_Elementor\Widget_Base;
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\footer_logo_url;
+use function Pet_Studio_Elementor\format_multiline_text;
 use function Pet_Studio_Elementor\media_url;
 use function Pet_Studio_Elementor\phone_tel_href;
 use function Pet_Studio_Elementor\print_link_attributes;
