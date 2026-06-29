@@ -13,7 +13,7 @@ use Pet_Studio_Elementor\Widget_Base;
 
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
-use function Pet_Studio_Elementor\format_multiline_text;
+use function Pet_Studio_Elementor\footer_logo_url;
 use function Pet_Studio_Elementor\media_url;
 use function Pet_Studio_Elementor\phone_tel_href;
 use function Pet_Studio_Elementor\print_link_attributes;
@@ -240,7 +240,7 @@ class Footer_Widget extends Widget_Base {
 		$s         = $this->get_render_settings();
 		$phone     = $s['phone'] ?? '';
 		$tel_href  = $phone ? phone_tel_href( $phone ) : '#';
-		$logo_url  = media_url( $s['logo'] ?? null );
+		$logo_url  = footer_logo_url( media_url( $s['logo'] ?? null ) );
 		$logo_link = $s['logo_link'] ?? array( 'url' => '/' );
 		?>
 		<footer class="ps-footer">
@@ -262,7 +262,7 @@ class Footer_Widget extends Widget_Base {
 						<div class="ps-footer-brand">
 							<?php if ( $logo_url ) : ?>
 								<a class="ps-footer-logo-link"<?php print_link_attributes( $logo_link ); ?> uk-scroll>
-									<img class="el-image ps-footer-logo" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php esc_attr_e( 'The Pet Studio', 'pet-studio-elementor' ); ?>" loading="lazy" width="160" height="18">
+									<img class="el-image ps-footer-logo" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php esc_attr_e( 'The Pet Studio', 'pet-studio-elementor' ); ?>" loading="lazy" width="200" height="23">
 								</a>
 							<?php endif; ?>
 							<?php if ( ! empty( $s['tagline'] ) ) : ?>

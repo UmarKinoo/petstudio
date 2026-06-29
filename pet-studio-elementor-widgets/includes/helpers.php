@@ -118,6 +118,24 @@ function media_url( ?array $media, string $fallback = '' ): string {
 }
 
 /**
+ * Footer should use the compact wordmark — not the tall hero/mobile tagline SVG.
+ */
+function footer_logo_url( string $url ): string {
+	if ( $url === '' ) {
+		return '';
+	}
+
+	if ( preg_match( '/tagline_MOBILE_600|tagline\+box|tagline_%2B/i', $url ) ) {
+		$uploads = wp_upload_dir();
+		$base    = trailingslashit( $uploads['baseurl'] ) . 'pet-studio/media/logos/the_pet_studio_logo_400px.svg';
+
+		return $base;
+	}
+
+	return $url;
+}
+
+/**
  * Render link attributes from URL control or API link object.
  *
  * @param array|null $link Link settings.

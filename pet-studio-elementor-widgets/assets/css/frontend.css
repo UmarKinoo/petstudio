@@ -106,19 +106,26 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 0.5rem;
-	max-width: 22rem;
+	max-width: 24rem;
+	min-width: 0;
+	overflow: visible;
 }
 
 .ps-footer-logo-link {
-	display: inline-block;
+	display: block;
+	width: 100%;
+	max-width: 13.5rem;
 	line-height: 0;
+	overflow: visible;
 }
 
 .ps-footer .ps-footer-logo {
 	display: block;
-	width: auto;
-	max-width: min(11rem, 52vw);
-	height: auto;
+	width: 100%;
+	max-width: 100%;
+	height: auto !important;
+	object-fit: contain;
+	object-position: left center;
 }
 
 .ps-footer-tagline {
@@ -194,8 +201,8 @@
 
 	.ps-footer-brand {
 		align-items: flex-start;
-		flex: 1 1 12rem;
-		max-width: 20rem;
+		flex: 0 1 14rem;
+		max-width: 24rem;
 	}
 
 	.ps-footer-meta {
@@ -216,8 +223,8 @@
 		font-size: 0.9375rem;
 	}
 
-	.ps-footer .ps-footer-logo {
-		max-width: min(10rem, 48vw);
+	.ps-footer-logo-link {
+		max-width: 12rem;
 	}
 
 	.ps-footer-legal {
