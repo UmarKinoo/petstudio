@@ -534,8 +534,10 @@ a.ps-book-now-btn:focus,
 	text-align: center;
 }
 
-/* Liza signature — inline SVG (immune to LiteSpeed lazy-load on <img>) */
+/* A Class Team — signature overlay scales with viewport */
+.elementor-widget-pet_studio_about_intro .ps-signature-overlay .el-image,
 .elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg {
+	width: clamp(10rem, 38vw, 37.5rem);
 	max-width: 70vw;
 	height: auto;
 	display: inline-block;
@@ -543,6 +545,53 @@ a.ps-book-now-btn:focus,
 
 .elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg path {
 	fill: var(--pet-primary, #ff90aa);
+}
+
+@media (max-width: 1599px) {
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay .el-image,
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg {
+		width: clamp(9rem, 34vw, 32rem);
+		max-width: 62vw;
+	}
+}
+
+@media (max-width: 1199px) {
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay .el-image,
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg {
+		width: clamp(8.5rem, 40vw, 26rem);
+		max-width: 55vw;
+	}
+
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay {
+		right: -20px !important;
+		bottom: -4vh !important;
+	}
+}
+
+@media (max-width: 959px) {
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay .el-image,
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg {
+		width: clamp(7.5rem, 48vw, 20rem);
+		max-width: 58vw;
+	}
+
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay {
+		right: -12px !important;
+		bottom: -3vh !important;
+	}
+}
+
+@media (max-width: 639px) {
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay .el-image,
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay svg.ps-signature-svg {
+		width: clamp(6.5rem, 62vw, 16rem);
+		max-width: 72vw;
+	}
+
+	.elementor-widget-pet_studio_about_intro .ps-signature-overlay {
+		right: -8px !important;
+		bottom: -2vh !important;
+	}
 }
 
 .ps-signature-inline svg.ps-signature-svg {
