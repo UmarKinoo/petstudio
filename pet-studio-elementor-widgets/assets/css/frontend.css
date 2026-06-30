@@ -683,6 +683,17 @@ a.ps-book-now-btn:focus,
 	object-fit: contain;
 }
 
+/* Services section — uk-section-xlarge-top spacing */
+.uk-section-xlarge-top {
+	padding-top: 100px !important;
+}
+
+@media (min-width: 960px) {
+	.uk-section-xlarge-top {
+		padding-top: 150px !important;
+	}
+}
+
 /* Dog dividers: tighten top margin (UIkit uk-margin-xlarge-top = 70/140px → 20px),
    same on desktop and mobile. */
 .tm-grid-expand.uk-child-width-1-1.uk-margin-xlarge-top.uk-margin-remove-bottom {
