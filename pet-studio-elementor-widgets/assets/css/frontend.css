@@ -364,10 +364,10 @@
 
 @media (min-width: 1200px) {
 	.tm-header .ps-header-nav > li > a {
-		align-items: flex-start !important;
+		align-items: center !important;
 		justify-content: center !important;
 		min-height: 110px;
-		padding-top: 2rem;
+		padding-top: 0;
 	}
 
 	.tm-header .ps-header-nav > li > a::before {
@@ -412,22 +412,19 @@
 		max-height: 26px;
 	}
 
-	.tm-header .ps-header-nav > li > a .uk-navbar-subtitle {
-		display: none !important;
-	}
-
 	.tm-header .ps-header-nav > li > a {
 		padding-left: 0.28rem;
 		padding-right: 0.28rem;
 		font-size: 0.875rem;
 	}
+
+	.tm-header .ps-header-nav > li > a .uk-navbar-subtitle {
+		display: block !important;
+		font-size: 0.68rem;
+	}
 }
 
 @media (min-width: 1500px) and (max-width: 1599px) {
-	.tm-header .ps-header-nav > li > a .uk-navbar-subtitle {
-		display: block !important;
-	}
-
 	.tm-header .uk-logo img {
 		max-width: 240px;
 		max-height: 28px;

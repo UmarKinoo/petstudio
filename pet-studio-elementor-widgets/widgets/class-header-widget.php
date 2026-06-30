@@ -517,25 +517,13 @@ class Header_Widget extends Widget_Base {
 					min-width: 0 !important;
 				}
 			}
-			@media (min-width: 1200px) and (max-width: 1599px) {
-				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle,
-				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle {
-					display: none !important;
-				}
-			}
-			@media (min-width: 1500px) and (max-width: 1599px) {
-				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle,
-				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .uk-navbar-subtitle {
-					display: block !important;
-				}
-			}
 			@media (min-width: 1200px) {
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a {
-					align-items: flex-start !important;
+					align-items: center !important;
 					justify-content: center !important;
 					min-height: 110px;
-					padding-top: 2rem;
+					padding-top: 0;
 					white-space: normal;
 				}
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a::before,
