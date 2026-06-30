@@ -570,6 +570,11 @@ a.ps-book-now-btn:focus,
 }
 
 /* FAQ accordion */
+.ps-faq-section {
+	padding-top: 30px !important;
+	padding-bottom: 100px !important;
+}
+
 .ps-faq-accordion .uk-accordion-title {
 	font-size: 1.125rem;
 }
