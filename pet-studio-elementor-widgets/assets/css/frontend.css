@@ -370,28 +370,57 @@
 	}
 }
 
-.tm-header .uk-logo.uk-navbar-item {
+.tm-header .uk-logo.uk-navbar-item,
+.tm-header-mobile .uk-logo.uk-navbar-item {
 	margin-right: 0.75rem;
 	flex-shrink: 0;
 	min-width: max-content;
 	padding-left: 0;
 	padding-right: 0;
-	overflow: visible;
+	overflow: hidden;
+	line-height: 0;
 }
 
-/* Height-based scale — img width/height attrs must match SVG viewBox (401×46.1) or the last glyph clips */
-.tm-header .uk-logo img {
+/* Height-based scale — do not set display on both logos (breaks UIkit inverse swap) */
+.tm-header .uk-logo > img,
+.tm-header-mobile .uk-logo > img {
 	width: auto !important;
 	max-width: none !important;
 	height: 28px !important;
 	max-height: none;
 	object-fit: contain;
 	object-position: left center;
-	display: block;
+}
+
+/* Solid / sticky nav — dark logo only */
+.tm-header .uk-navbar-container.uk-navbar-sticky .uk-logo > img.uk-logo-inverse,
+.tm-header .uk-navbar-container:not(.uk-navbar-transparent) .uk-logo > img.uk-logo-inverse,
+.tm-header-mobile .uk-navbar-container.uk-navbar-sticky .uk-logo > img.uk-logo-inverse,
+.tm-header-mobile .uk-navbar-container:not(.uk-navbar-transparent) .uk-logo > img.uk-logo-inverse {
+	display: none !important;
+}
+
+.tm-header .uk-navbar-container.uk-navbar-sticky .uk-logo > img:not(.uk-logo-inverse),
+.tm-header .uk-navbar-container:not(.uk-navbar-transparent) .uk-logo > img:not(.uk-logo-inverse),
+.tm-header-mobile .uk-navbar-container.uk-navbar-sticky .uk-logo > img:not(.uk-logo-inverse),
+.tm-header-mobile .uk-navbar-container:not(.uk-navbar-transparent) .uk-logo > img:not(.uk-logo-inverse) {
+	display: block !important;
+}
+
+/* Transparent over hero — light logo only (sticky wins if both classes briefly overlap) */
+.tm-header .uk-navbar-container.uk-navbar-transparent:not(.uk-navbar-sticky) .uk-logo > img:not(.uk-logo-inverse),
+.tm-header-mobile .uk-navbar-container.uk-navbar-transparent:not(.uk-navbar-sticky) .uk-logo > img:not(.uk-logo-inverse) {
+	display: none !important;
+}
+
+.tm-header .uk-navbar-container.uk-navbar-transparent:not(.uk-navbar-sticky) .uk-logo > img.uk-logo-inverse,
+.tm-header-mobile .uk-navbar-container.uk-navbar-transparent:not(.uk-navbar-sticky) .uk-logo > img.uk-logo-inverse {
+	display: block !important;
 }
 
 @media (min-width: 1200px) and (max-width: 1599px) {
-	.tm-header .uk-logo img {
+	.tm-header .uk-logo > img,
+	.tm-header-mobile .uk-logo > img {
 		height: 26px !important;
 	}
 
@@ -411,7 +440,8 @@
 }
 
 @media (min-width: 1500px) and (max-width: 1599px) {
-	.tm-header .uk-logo img {
+	.tm-header .uk-logo > img,
+	.tm-header-mobile .uk-logo > img {
 		height: 28px !important;
 	}
 }
@@ -428,9 +458,8 @@
 	line-height: 1.3;
 }
 
-.tm-header-mobile .uk-logo img {
+.tm-header-mobile .uk-logo > img {
 	max-width: min(200px, 58vw);
-	height: auto;
 }
 
 .tm-header #module-tm-3 {
