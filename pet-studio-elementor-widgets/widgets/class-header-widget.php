@@ -522,16 +522,17 @@ class Header_Widget extends Widget_Base {
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a {
 					align-items: center !important;
 					justify-content: center !important;
-					min-height: 110px;
+					min-height: 0;
 					padding-top: 0;
-					white-space: normal;
+					padding-bottom: 0;
+					white-space: nowrap;
 				}
 				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a::before,
 				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li > a::before {
 					display: none !important;
 				}
-				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .ps-nav-subtitle-text::after,
-				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .ps-nav-subtitle-text::after {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .ps-nav-label::after,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav .ps-nav-label::after {
 					content: "";
 					position: absolute;
 					left: 0;
@@ -542,10 +543,10 @@ class Header_Widget extends Widget_Base {
 					background-color: #ff90aa;
 					transition: right 0.1s ease-in-out;
 				}
-				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li:hover > a .ps-nav-subtitle-text::after,
-				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li.uk-active > a .ps-nav-subtitle-text::after,
-				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li:hover > a .ps-nav-subtitle-text::after,
-				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li.uk-active > a .ps-nav-subtitle-text::after {
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li:hover > a .ps-nav-label::after,
+				.elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li.uk-active > a .ps-nav-label::after,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li:hover > a .ps-nav-label::after,
+				.elementor-location-header .elementor-element-<?php echo $element_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> .tm-header .ps-header-nav > li.uk-active > a .ps-nav-label::after {
 					right: 0;
 				}
 			}
@@ -625,10 +626,7 @@ class Header_Widget extends Widget_Base {
 				?>
 				<li class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					<a<?php print_link_attributes( $item['link'] ?? null ); ?>>
-						<div>
-							<?php echo esc_html( $item['label'] ?? '' ); ?>
-							<div class="uk-nav-subtitle"><?php $this->render_nav_subtitle( $item['subtitle'] ?? '' ); ?></div>
-						</div>
+						<?php echo esc_html( $item['label'] ?? '' ); ?>
 					</a>
 				</li>
 			<?php endforeach; ?>
@@ -652,10 +650,7 @@ class Header_Widget extends Widget_Base {
 				?>
 				<li class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					<a<?php print_link_attributes( $item['link'] ?? null ); ?>>
-						<div class="ps-nav-item-inner">
-							<span class="ps-nav-label"><?php echo esc_html( $item['label'] ?? '' ); ?></span>
-							<div class="uk-navbar-subtitle"><span class="ps-nav-subtitle-text"><?php $this->render_nav_subtitle( $item['subtitle'] ?? '' ); ?></span></div>
-						</div>
+						<span class="ps-nav-label"><?php echo esc_html( $item['label'] ?? '' ); ?></span>
 					</a>
 				</li>
 			<?php endforeach; ?>
