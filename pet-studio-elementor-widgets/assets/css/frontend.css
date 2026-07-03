@@ -328,7 +328,7 @@
 	padding-left: 0.55rem;
 	padding-right: 0.55rem;
 	white-space: nowrap;
-	font-size: 1rem;
+	font-size: 1.1rem;
 	font-weight: 600;
 	line-height: 1.25;
 }
@@ -398,7 +398,7 @@
 	.tm-header .ps-header-nav > li > a {
 		padding-left: 0.45rem;
 		padding-right: 0.45rem;
-		font-size: 0.9375rem;
+		font-size: 1.1rem;
 	}
 }
 
@@ -423,7 +423,7 @@
 }
 
 .tm-header-mobile .uk-nav-default > li > a {
-	font-size: 1.125rem;
+	font-size: 1.1rem;
 	font-weight: 600;
 	line-height: 1.3;
 }
