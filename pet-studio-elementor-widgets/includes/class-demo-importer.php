@@ -332,11 +332,29 @@ class Demo_Importer {
 		}
 
 		$page = get_page_by_path( 'behaviour' );
-		if ( $page ) {
+		if ( ! $page ) {
+			( new self() )->refresh_page_from_fixture( $config );
 			return;
 		}
 
-		( new self() )->create_page( $config );
+		$raw = get_post_meta( (int) $page->ID, '_elementor_data', true );
+		if ( is_string( $raw ) && false !== strpos( $raw, 'thepetstudio.local' ) ) {
+			( new self() )->refresh_page_from_fixture( $config );
+		}
+	}
+
+	/**
+	 * Rebuild a page from fixtures with saved media attachment map (fixes stale local URLs in Elementor data).
+	 *
+	 * @param array<string, mixed> $config Page fixture config.
+	 */
+	public function refresh_page_from_fixture( array $config ): void {
+		$this->media_map = get_option( self::OPTION_MEDIA_MAP, array() );
+		if ( ! is_array( $this->media_map ) ) {
+			$this->media_map = array();
+		}
+
+		$this->create_page( $config );
 	}
 
 	/**
@@ -556,7 +574,7 @@ class Demo_Importer {
 		}
 		return array(
 			'id'  => isset( $media['id'] ) ? (string) $media['id'] : '',
-			'url' => (string) ( $media['url'] ?? '' ),
+			'url' => \Pet_Studio_Elementor\resolve_pet_studio_media_url( (string) ( $media['url'] ?? '' ) ),
 		);
 	}
 

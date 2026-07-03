@@ -102,6 +102,27 @@ function render_inline_svg( string $url, string $class = '', int $width = 0, int
 	return true;
 }
 
+function resolve_pet_studio_media_url( string $url ): string {
+	if ( $url === '' ) {
+		return '';
+	}
+
+	$needle = '/pet-studio/media/';
+	$pos    = strpos( $url, $needle );
+	if ( false === $pos ) {
+		return $url;
+	}
+
+	$relative = ltrim( str_replace( '\\', '/', substr( $url, $pos + strlen( $needle ) ) ), '/' );
+	if ( $relative === '' ) {
+		return $url;
+	}
+
+	$uploads = wp_upload_dir();
+
+	return trailingslashit( $uploads['baseurl'] ) . 'pet-studio/media/' . $relative;
+}
+
 function media_url( ?array $media, string $fallback = '' ): string {
 	if ( empty( $media['url'] ) ) {
 		return $fallback;
@@ -114,7 +135,7 @@ function media_url( ?array $media, string $fallback = '' ): string {
 		}
 	}
 
-	return (string) $media['url'];
+	return resolve_pet_studio_media_url( (string) $media['url'] );
 }
 
 /**
