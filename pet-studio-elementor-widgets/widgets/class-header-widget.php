@@ -589,7 +589,7 @@ class Header_Widget extends Widget_Base {
 						<nav class="uk-navbar" uk-navbar='{"align":"left","container":".tm-header > [uk-sticky]","boundary":".tm-header .uk-navbar-container"}'>
 							<div class="uk-navbar-left">
 								<a aria-label="<?php esc_attr_e( 'Back to home', 'pet-studio-elementor' ); ?>" class="uk-logo uk-navbar-item"<?php print_link_attributes( $settings['logo_link'] ?? null ); ?>>
-									<?php $this->render_logo_images( $logo_url, $logo_inv, $logo_alt, 240, 28 ); ?>
+									<?php $this->render_logo_images( $logo_url, $logo_inv, $logo_alt, 244, 28 ); ?>
 								</a>
 							</div>
 							<div class="uk-navbar-right">

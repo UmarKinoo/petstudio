@@ -398,18 +398,23 @@
 	min-width: max-content;
 	padding-left: 0;
 	padding-right: 0;
+	overflow: visible;
 }
 
+/* Height-based scale — img width/height attrs must match SVG viewBox (401×46.1) or the last glyph clips */
 .tm-header .uk-logo img {
-	width: auto;
-	height: auto;
-	max-height: 28px;
+	width: auto !important;
+	max-width: none !important;
+	height: 28px !important;
+	max-height: none;
+	object-fit: contain;
+	object-position: left center;
+	display: block;
 }
 
 @media (min-width: 1200px) and (max-width: 1599px) {
 	.tm-header .uk-logo img {
-		max-width: 200px;
-		max-height: 26px;
+		height: 26px !important;
 	}
 
 	.tm-header .ps-header-nav > li > a {
@@ -426,14 +431,7 @@
 
 @media (min-width: 1500px) and (max-width: 1599px) {
 	.tm-header .uk-logo img {
-		max-width: 240px;
-		max-height: 28px;
-	}
-}
-
-@media (min-width: 1400px) and (max-width: 1499px) {
-	.tm-header .uk-logo img {
-		max-width: 220px;
+		height: 28px !important;
 	}
 }
 
