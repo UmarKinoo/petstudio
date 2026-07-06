@@ -117,9 +117,9 @@ class Hero_Inner_Widget extends Widget_Base {
 		<div class="uk-section-primary uk-inverse-light uk-section uk-padding-remove-vertical" tm-header-transparent-noplaceholder>
 			<div class="uk-grid tm-grid-expand uk-child-width-1-1">
 				<div class="uk-width-1-1">
-					<div class="uk-position-z-index uk-tile uk-padding-remove" uk-height-viewport="offset-top: !*; offset-bottom: <?php echo esc_attr( (string) $offset ); ?>;" uk-sticky="end: !.uk-section;">
+					<div class="uk-position-z-index uk-tile uk-padding-remove ps-hero-video-tile" uk-height-viewport="offset-top: !*; offset-bottom: <?php echo esc_attr( (string) $offset ); ?>;" uk-sticky="end: !.uk-section;">
 						<?php if ( $video ) : ?>
-							<video src="<?php echo esc_url( $video ); ?>" playsinline loop muted preload="none" width="2560" class="uk-object-center-left" uk-cover></video>
+							<video src="<?php echo esc_url( $video ); ?>" playsinline muted preload="auto" width="2560" class="uk-object-center-left" uk-cover></video>
 						<?php endif; ?>
 						<div class="uk-position-cover ps-hero-inner-overlay"></div>
 						<div class="uk-panel uk-width-1-1"></div>

@@ -757,12 +757,25 @@ a.ps-book-now-btn:focus,
 }
 
 /* Hero home — mirror video framing (left-aligned cover crop) */
-.pet-studio-hero-home .ps-hero-video-tile {
+.pet-studio-hero-home .ps-hero-video-tile,
+.ps-hero-video-tile {
 	overflow: hidden;
 }
 
-.pet-studio-hero-home .ps-hero-video-tile video[uk-cover].uk-object-center-left {
+.pet-studio-hero-home .ps-hero-video-tile video[uk-cover].uk-object-center-left,
+.ps-hero-video-tile video[uk-cover].uk-object-center-left {
 	object-position: 0 50%;
+}
+
+/* Seamless hero loop — crossfade between paired video layers */
+.ps-hero-video-tile video.ps-hero-video-a,
+.ps-hero-video-tile video.ps-hero-video-b {
+	transition: opacity 0.15s ease-in-out;
+	opacity: 0;
+}
+
+.ps-hero-video-tile video.is-visible {
+	opacity: 1;
 }
 
 .pet-studio-hero-home .ps-hero-logo-desktop {

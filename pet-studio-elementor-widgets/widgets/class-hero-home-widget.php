@@ -328,10 +328,10 @@ class Hero_Home_Widget extends Widget_Base {
 					<div class="uk-position-z-index uk-tile uk-padding-remove ps-hero-video-tile" uk-height-viewport="offset-top: !*;" uk-sticky="end: !.uk-section;">
 						<?php if ( $video_desk ) : ?>
 							<?php if ( $split_video ) : ?>
-								<video class="uk-object-center-left uk-visible@s" src="<?php echo esc_url( $video_desk ); ?>" playsinline loop muted preload="none" width="2560" uk-cover></video>
-								<video class="uk-object-center-left uk-hidden@s" src="<?php echo esc_url( $video_mob ); ?>" playsinline loop muted preload="none" width="2560" uk-cover></video>
+								<video class="uk-object-center-left uk-visible@s" src="<?php echo esc_url( $video_desk ); ?>" playsinline muted preload="auto" width="2560" uk-cover></video>
+								<video class="uk-object-center-left uk-hidden@s" src="<?php echo esc_url( $video_mob ); ?>" playsinline muted preload="auto" width="2560" uk-cover></video>
 							<?php else : ?>
-								<video class="uk-object-center-left" src="<?php echo esc_url( $video_desk ); ?>" playsinline loop muted preload="none" width="2560" uk-cover></video>
+								<video class="uk-object-center-left" src="<?php echo esc_url( $video_desk ); ?>" playsinline muted preload="auto" width="2560" uk-cover></video>
 							<?php endif; ?>
 						<?php endif; ?>
 						<div class="uk-panel uk-width-1-1"></div>
