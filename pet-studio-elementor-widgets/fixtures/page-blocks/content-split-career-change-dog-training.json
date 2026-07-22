@@ -1,9 +1,11 @@
 {
-  "heading": "Career Change?",
-  "blockquote": "Looking to change career or just want to learn to groom your own dog? Learn more about the City & Guilds Qualifications and what we can offer.",
-  "body": "",
+  "heading": "Behaviour is never 'just bad behaviour'",
+  "blockquote": "",
+  "body": "<p>Many unwanted behaviours are rooted in fear, anxiety, uncertainty or past experiences.</p><p>Rather than trying to simply manage the symptoms, we work to understand the individual dog, recognising their triggers, body language and emotional responses before creating a tailored plan that supports lasting change.</p>",
   "image_layout": "1-right",
   "images": [
-    { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/general/service-card-dog-training.jpg" }
+    {
+      "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/general/service-card-dog-training.jpg"
+    }
   ]
 }

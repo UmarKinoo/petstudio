@@ -3,14 +3,70 @@
   "title": "Behaviour",
   "widgets": [
     "hero-inner",
-    { "slug": "page-intro", "variant": "page-intro-training" },
-    { "slug": "dog-divider", "variant": "dog-divider-07" },
-    { "slug": "content-split", "variant": "content-split-training-salon-dog-training" },
-    { "slug": "dog-divider", "variant": "dog-divider-08" },
-    { "slug": "content-split", "variant": "content-split-career-change-dog-training" },
-    { "slug": "dog-divider", "variant": "dog-divider-03" },
-    "courses-tabs",
-    { "slug": "dog-divider", "variant": "dog-divider-01" },
+    {
+      "slug": "page-intro",
+      "variant": "page-intro-training"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-07"
+    },
+    {
+      "slug": "content-split",
+      "variant": "content-split-training-salon-dog-training"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-08"
+    },
+    {
+      "slug": "content-split",
+      "variant": "content-split-career-change-dog-training"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-02"
+    },
+    {
+      "slug": "content-split",
+      "variant": "content-split-behaviour-every-dog"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-04"
+    },
+    {
+      "slug": "content-split",
+      "variant": "content-split-behaviour-experience"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-05"
+    },
+    {
+      "slug": "content-split",
+      "variant": "content-split-behaviour-lasting-change"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-06"
+    },
+    {
+      "slug": "content-split",
+      "variant": "content-split-behaviour-partnership"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-03"
+    },
+    {
+      "slug": "content-split",
+      "variant": "content-split-behaviour-investment"
+    },
+    {
+      "slug": "dog-divider",
+      "variant": "dog-divider-01"
+    },
     "faq",
     "testimonials"
   ]

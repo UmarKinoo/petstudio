@@ -1,16 +1,20 @@
 {
-  "heading": "Train",
-  "heading_accent": "Your Dog",
+  "heading": "Specialist Behaviour",
+  "heading_accent": "Support",
   "blockquote": "",
-  "body": "<h4><strong>Subtitle.</strong></h4><p>Main text.</p>",
+  "body": "<h4><strong>Helping dogs feel calmer, more confident and better understood.</strong></h4><p>Every dog communicates through its behaviour.</p><p>Whether your dog struggles with grooming, becomes anxious on walks, reacts to other dogs, dislikes being handled, or finds new situations overwhelming, their behaviour is telling us something. The challenge is understanding what they're trying to say.</p><p>Specialist dog handler and behavioural trainer, Liza Smith, helps owners look beyond the behaviour itself to understand the reason behind it. By building trust, improving communication and adapting our approach, we help dogs develop greater confidence and create more positive experiences in everyday life.</p>",
   "show_signature": false,
   "primary_image": {
     "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/BK1_8822_1.jpg"
   },
   "cta_text": "Enquire Now",
-  "cta_link": { "url": "/contact/" },
+  "cta_link": {
+    "url": "/contact/"
+  },
   "cta_style": "pill",
-  "cta2_text": "Find Out More",
-  "cta2_link": { "url": "#ps-courses-available" },
+  "cta2_text": "",
+  "cta2_link": {
+    "url": ""
+  },
   "cta2_style": "text"
 }

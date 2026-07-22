@@ -318,7 +318,7 @@ class Demo_Importer {
 	}
 
 	/**
-	 * Create or refresh the Behaviour page (prod may still only have dog-training).
+	 * Create or refresh the Behaviour page (prod may still only have dog-training / academy copy).
 	 */
 	public static function ensure_behaviour_page(): void {
 		$config_path = PET_STUDIO_EW_PATH . 'fixtures/pages/behaviour.json';
@@ -338,7 +338,17 @@ class Demo_Importer {
 		}
 
 		$raw = get_post_meta( (int) $page->ID, '_elementor_data', true );
-		if ( is_string( $raw ) && false !== strpos( $raw, 'thepetstudio.local' ) ) {
+		$raw = is_string( $raw ) ? $raw : '';
+
+		// Stale Elementor data: local URLs, academy leftover, or pre-behaviour-copy layout.
+		$needs_refresh = ( false !== strpos( $raw, 'thepetstudio.local' ) )
+			|| ( false !== strpos( $raw, 'Career Change?' ) )
+			|| ( false !== strpos( $raw, 'Train Your Dog' ) )
+			|| ( false !== strpos( $raw, 'Subtitle.' ) )
+			|| ( false === strpos( $raw, 'Specialist Behaviour' ) )
+			|| ( false === strpos( $raw, 'lasting behaviour change' ) );
+
+		if ( $needs_refresh ) {
 			( new self() )->refresh_page_from_fixture( $config );
 		}
 	}
