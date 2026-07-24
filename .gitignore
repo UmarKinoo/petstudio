@@ -3,3 +3,7 @@
 *.zip
 .DS_Store
 .cursor/
+
+# Client copy drafts (local reference)
+WEBSITE COPY_ BEHAVIOUR TAB_Draft1.pdf
+cont
