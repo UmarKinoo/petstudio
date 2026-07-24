@@ -547,11 +547,32 @@ class Content_Normalizer {
 					$settings[ $key ] = self::merge_settings( $default_val, $settings[ $key ] );
 				}
 			} elseif ( self::is_empty_setting( $settings[ $key ] ) && ! self::is_empty_setting( $default_val ) ) {
-				$settings[ $key ] = $default_val;
+				// Keep intentional blanks (e.g. Behaviour page clears salon blockquotes).
+				if ( ! self::allows_empty_override( $key ) ) {
+					$settings[ $key ] = $default_val;
+				}
 			}
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * Keys that may be explicitly emptied in page-block fixtures / Elementor panel.
+	 */
+	private static function allows_empty_override( string $key ): bool {
+		return in_array(
+			$key,
+			array(
+				'blockquote',
+				'cta_text',
+				'cta2_text',
+				'cta_link',
+				'cta2_link',
+				'heading_accent',
+			),
+			true
+		);
 	}
 
 	/**

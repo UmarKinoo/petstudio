@@ -346,7 +346,9 @@ class Demo_Importer {
 			|| ( false !== strpos( $raw, 'Train Your Dog' ) )
 			|| ( false !== strpos( $raw, 'Subtitle.' ) )
 			|| ( false === strpos( $raw, 'Specialist Behaviour' ) )
-			|| ( false === strpos( $raw, 'lasting behaviour change' ) );
+			|| ( false === strpos( $raw, 'lasting behaviour change' ) )
+			|| ( false !== strpos( $raw, 'open plan Congresbury salon' ) )
+			|| ( false !== strpos( $raw, 'highly rated dog grooming services' ) );
 
 		if ( $needs_refresh ) {
 			( new self() )->refresh_page_from_fixture( $config );
