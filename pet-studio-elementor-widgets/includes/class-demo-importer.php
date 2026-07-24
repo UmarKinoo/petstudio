@@ -347,6 +347,7 @@ class Demo_Importer {
 			|| ( false !== strpos( $raw, 'Subtitle.' ) )
 			|| ( false === strpos( $raw, 'Specialist Behaviour' ) )
 			|| ( false === strpos( $raw, 'lasting behaviour change' ) )
+			|| ( false === strpos( $raw, 'for Dogs and Their Owners' ) )
 			|| ( false !== strpos( $raw, 'open plan Congresbury salon' ) )
 			|| ( false !== strpos( $raw, 'highly rated dog grooming services' ) );
 
