@@ -1,0 +1,14 @@
+{
+  "heading": "Meet The Pet Studio",
+  "heading_accent": "Team",
+  "blockquote": "A friendly, experienced team brought together by a shared love of dogs.",
+  "body": "<p>From experienced groomers and teaching assistants to apprentices and receptionists, every member of The Pet Studio plays a part in creating a welcoming, professional environment. Many of our groomers began their journey by training with Liza, which means the same values of patience, kindness and high standards run throughout the team.</p><p>We are proud of the different skills and personalities each person brings. Together, we care for dogs, support their owners and help future groomers develop the confidence to build careers of their own.</p>",
+  "show_signature": false,
+  "primary_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/team/home-team-section.jpg"
+  },
+  "cta_text": "",
+  "cta_link": { "url": "" },
+  "cta_style": "pill"
+}

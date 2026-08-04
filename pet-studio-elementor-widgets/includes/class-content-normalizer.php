@@ -104,6 +104,7 @@ class Content_Normalizer {
 			case 'hero-home':
 				$fixture['headline_words']  = self::list_to_repeater( $fixture['headline_words'] ?? array(), 'word' );
 				$fixture['cta_link']        = self::link_to_elementor( $fixture['cta_link'] ?? null );
+				$fixture['cta2_link']       = self::link_to_elementor( $fixture['cta2_link'] ?? null );
 				$fixture['video_desktop']   = self::media_to_elementor( $fixture['video_desktop'] ?? null );
 				$fixture['video_mobile']    = self::media_to_elementor( $fixture['video_mobile'] ?? null );
 				$fixture['logo_desktop']    = self::media_to_elementor( $fixture['logo_desktop'] ?? null );
@@ -237,6 +238,7 @@ class Content_Normalizer {
 					$fixture['tabs'] ?? array(),
 					function ( array $tab ): array {
 						$tab['badge_image'] = self::media_to_elementor( $tab['badge_image'] ?? null );
+						$tab['cta_link']    = self::link_to_elementor( $tab['cta_link'] ?? null );
 						$lines              = array();
 						foreach ( $tab['features'] ?? array() as $feat ) {
 							$line = is_string( $feat ) ? $feat : ( $feat['item'] ?? '' );
@@ -282,6 +284,7 @@ class Content_Normalizer {
 				$fixture['sticky_image'] = self::media_to_elementor( $fixture['sticky_image'] ?? null );
 				$fixture['mobile_image'] = self::media_to_elementor( $fixture['mobile_image'] ?? null );
 				$fixture['maps_link']    = self::link_to_elementor( $fixture['maps_link'] ?? null );
+				$fixture['privacy_link'] = self::link_to_elementor( $fixture['privacy_link'] ?? null );
 				$fixture['show_enquiry_type'] = self::bool_to_switcher( $fixture['show_enquiry_type'] ?? false );
 				$fixture['message_required']  = self::bool_to_switcher( $fixture['message_required'] ?? true );
 				break;

@@ -1,8 +1,8 @@
 {
-    "heading": "Dog",
-    "heading_accent": "Grooming",
-    "blockquote": "Come to us for our highly rated dog grooming services in Congresbury, North Somerset.",
-    "body": "<p>Our groomers are experts in all key dog grooming techniques, which means that you can guarantee that whatever grooming service you require for your dog, The Pet Studio can deliver with utmost skill and professionalism. In testament to our services, our clients come back to us time and again. Not only because we deliver excellence in grooming standards, but also because we understand dogs \u2013 and a happy dog is a happy client.</p>",
+    "heading": "Professional Dog Grooming",
+    "heading_accent": "in Congresbury",
+    "blockquote": "Trusted dog grooming delivered with experience, patience and genuine care.",
+    "body": "<p>Every dog deserves to feel comfortable, understood and beautifully cared for. From our welcoming salon in Congresbury, our qualified groomers provide professional grooming tailored to your dog’s breed, coat, lifestyle and personality.</p><p>Whether your dog needs a regular bath and tidy, a full groom, specialist hand stripping or a little extra patience, we take the time to make the experience as calm and positive as possible. Dog owners visit us from across North Somerset, including Yatton, Clevedon, Weston-super-Mare, Wrington, Winscombe and the surrounding areas.</p>",
     "show_signature": true,
     "signature_image": {
         "id": 0,
@@ -12,7 +12,7 @@
         "id": 0,
         "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/BK1_8643_1.jpg"
     },
-    "cta_text": "Book Now",
+    "cta_text": "Book a Grooming Appointment",
     "cta_link": { "url": "/contact/" },
     "cta_style": "pill"
 }

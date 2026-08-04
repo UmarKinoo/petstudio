@@ -13,7 +13,7 @@
     },
     {
       "slug": "content-split",
-      "variant": "content-split-training-salon-dog-training"
+      "variant": "content-split-behaviour-understanding"
     },
     {
       "slug": "dog-divider",
@@ -21,7 +21,7 @@
     },
     {
       "slug": "content-split",
-      "variant": "content-split-career-change-dog-training"
+      "variant": "content-split-behaviour-individual"
     },
     {
       "slug": "dog-divider",
@@ -37,7 +37,7 @@
     },
     {
       "slug": "content-split",
-      "variant": "content-split-behaviour-lasting-change"
+      "variant": "content-split-behaviour-areas"
     },
     {
       "slug": "dog-divider",
@@ -59,7 +59,10 @@
       "slug": "dog-divider",
       "variant": "dog-divider-01"
     },
-    "faq",
+    {
+      "slug": "content-split",
+      "variant": "content-split-behaviour-disclaimer"
+    },
     "testimonials"
   ]
 }

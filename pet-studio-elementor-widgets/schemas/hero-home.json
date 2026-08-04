@@ -8,7 +8,24 @@
     "video_mobile": { "$ref": "_common.json#/$defs/media" },
     "logo_desktop": { "$ref": "_common.json#/$defs/media" },
     "logo_mobile": { "$ref": "_common.json#/$defs/media" },
-    "headline_words": { "type": "array", "items": { "type": "string" } },
+    "headline": { "type": "string" },
+    "supporting_copy": { "type": "string" },
+    "headline_words": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "properties": {
+              "word": { "type": "string" },
+              "subtitle": { "type": "string" }
+            },
+            "required": ["word"]
+          }
+        ]
+      }
+    },
     "hours_title": { "type": "string" },
     "hours_text": { "type": "string" },
     "tagline_location": { "type": "string" },
@@ -16,6 +33,8 @@
     "signature_image": { "$ref": "_common.json#/$defs/media" },
     "signature_rotation": { "type": "number" },
     "cta_text": { "type": "string" },
-    "cta_link": { "$ref": "_common.json#/$defs/link" }
+    "cta_link": { "$ref": "_common.json#/$defs/link" },
+    "cta2_text": { "type": "string" },
+    "cta2_link": { "$ref": "_common.json#/$defs/link" }
   }
 }

@@ -5,6 +5,9 @@
   "description": "API payload shape \u2014 maps 1:1 to Elementor widget settings after normalization.",
   "type": "object",
   "properties": {
+    "section_heading": {
+      "type": "string"
+    },
     "reviews": {
       "type": "array",
       "items": {

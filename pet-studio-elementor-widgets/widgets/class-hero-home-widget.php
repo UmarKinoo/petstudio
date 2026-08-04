@@ -157,18 +157,35 @@ class Hero_Home_Widget extends Widget_Base {
 		$this->add_control(
 			'cta_text',
 			array(
-				'label'   => esc_html__( 'Book Now button text', 'pet-studio-elementor' ),
+				'label'   => esc_html__( 'Primary CTA text', 'pet-studio-elementor' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => $defaults['cta_text'] ?? 'Book Now',
+				'default' => $defaults['cta_text'] ?? 'Book Grooming',
 			)
 		);
 		$this->add_control(
 			'cta_link',
 			array(
-				'label'     => esc_html__( 'Book Now link', 'pet-studio-elementor' ),
+				'label'     => esc_html__( 'Primary CTA link', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::URL,
 				'default'   => api_link_to_control( $defaults['cta_link'] ?? array( 'url' => '/contact/' ) ),
 				'condition' => array( 'cta_text!' => '' ),
+			)
+		);
+		$this->add_control(
+			'cta2_text',
+			array(
+				'label'   => esc_html__( 'Secondary CTA text', 'pet-studio-elementor' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => $defaults['cta2_text'] ?? '',
+			)
+		);
+		$this->add_control(
+			'cta2_link',
+			array(
+				'label'     => esc_html__( 'Secondary CTA link', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::URL,
+				'default'   => api_link_to_control( $defaults['cta2_link'] ?? null ),
+				'condition' => array( 'cta2_text!' => '' ),
 			)
 		);
 
@@ -182,25 +199,63 @@ class Hero_Home_Widget extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'headline',
+			array(
+				'label'       => esc_html__( 'H1 headline', 'pet-studio-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => $defaults['headline'] ?? '',
+				'label_block' => true,
+			)
+		);
+
+		$this->add_control(
+			'supporting_copy',
+			array(
+				'label'   => esc_html__( 'Supporting copy', 'pet-studio-elementor' ),
+				'type'    => Controls_Manager::TEXTAREA,
+				'default' => $defaults['supporting_copy'] ?? '',
+				'rows'    => 4,
+			)
+		);
+
 		$words_rep = new Repeater();
 		$words_rep->add_control(
 			'word',
 			array(
-				'label'   => esc_html__( 'Word', 'pet-studio-elementor' ),
+				'label'   => esc_html__( 'Highlight word', 'pet-studio-elementor' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => 'Experienced.',
+			)
+		);
+		$words_rep->add_control(
+			'subtitle',
+			array(
+				'label'   => esc_html__( 'Highlight subtitle', 'pet-studio-elementor' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => '',
 			)
 		);
 
 		$words_default = array();
 		foreach ( $defaults['headline_words'] ?? array() as $word ) {
-			$words_default[] = is_array( $word ) ? $word : array( 'word' => (string) $word );
+			if ( is_array( $word ) ) {
+				$words_default[] = array(
+					'word'     => (string) ( $word['word'] ?? '' ),
+					'subtitle' => (string) ( $word['subtitle'] ?? '' ),
+				);
+			} else {
+				$words_default[] = array(
+					'word'     => (string) $word,
+					'subtitle' => '',
+				);
+			}
 		}
 
 		$this->add_control(
 			'headline_words',
 			array(
-				'label'   => esc_html__( 'Parallax words', 'pet-studio-elementor' ),
+				'label'   => esc_html__( 'Three highlights', 'pet-studio-elementor' ),
 				'type'    => Controls_Manager::REPEATER,
 				'fields'  => $words_rep->get_controls(),
 				'default' => $words_default,
@@ -277,9 +332,20 @@ class Hero_Home_Widget extends Widget_Base {
 		}
 		$sig_url     = media_url( $s['signature_image'] ?? null );
 		$rotation    = isset( $s['signature_rotation']['size'] ) ? (float) $s['signature_rotation']['size'] : (float) ( $s['signature_rotation'] ?? -18 );
-		$cta_text = trim( (string) ( $s['cta_text'] ?? '' ) );
-		$cta_link = is_array( $s['cta_link'] ?? null ) ? $s['cta_link'] : null;
-		$words       = $s['headline_words'] ?? array();
+		$cta_text  = trim( (string) ( $s['cta_text'] ?? '' ) );
+		$cta_link  = is_array( $s['cta_link'] ?? null ) ? $s['cta_link'] : null;
+		$cta2_text = trim( (string) ( $s['cta2_text'] ?? '' ) );
+		$cta2_link = is_array( $s['cta2_link'] ?? null ) ? $s['cta2_link'] : null;
+		$words     = $s['headline_words'] ?? array();
+		$headline  = trim( (string) ( $s['headline'] ?? '' ) );
+		$support   = trim( (string) ( $s['supporting_copy'] ?? '' ) );
+		$ctas      = array();
+		if ( $cta_text !== '' ) {
+			$ctas[] = array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' );
+		}
+		if ( $cta2_text !== '' ) {
+			$ctas[] = array( 'text' => $cta2_text, 'link' => $cta2_link, 'style' => 'text' );
+		}
 		?>
 		<style class="uk-margin-remove-adjacent">
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop {
@@ -320,6 +386,31 @@ class Hero_Home_Widget extends Widget_Base {
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-word-last { margin-bottom: 15vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-hours-text { margin-bottom: 30vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-copy > * { position: relative; z-index: 1; }
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-intro {
+				max-width: 42rem;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 0 1rem;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-h1 {
+				font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+				line-height: 1.25;
+				margin: 1rem 0 0.75rem;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-support {
+				font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+				line-height: 1.5;
+				opacity: 0.95;
+				margin-bottom: 1rem;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-highlight-sub {
+				display: block;
+				font-size: clamp(1rem, 2vw, 1.35rem);
+				font-weight: 400;
+				line-height: 1.4;
+				margin-top: 0.35rem;
+				opacity: 0.9;
+			}
 		</style>
 
 		<div class="uk-section-default uk-inverse-light uk-section uk-padding-remove-vertical pet-studio-hero-home" tm-header-transparent-noplaceholder>
@@ -363,9 +454,19 @@ class Hero_Home_Widget extends Widget_Base {
 												</div>
 											<?php endif; ?>
 										</div>
-										<?php if ( $cta_text !== '' ) : ?>
-											<div class="ps-hero-cta">
-												<?php render_cta_group( array( array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' ) ) ); ?>
+										<?php if ( $headline !== '' || $support !== '' || ! empty( $ctas ) ) : ?>
+											<div class="ps-hero-intro">
+												<?php if ( $headline !== '' ) : ?>
+													<h1 class="ps-hero-h1 uk-margin-remove-bottom"><?php echo esc_html( $headline ); ?></h1>
+												<?php endif; ?>
+												<?php if ( $support !== '' ) : ?>
+													<p class="ps-hero-support uk-margin-small-top"><?php echo esc_html( $support ); ?></p>
+												<?php endif; ?>
+												<?php if ( ! empty( $ctas ) ) : ?>
+													<div class="ps-hero-cta">
+														<?php render_cta_group( $ctas ); ?>
+													</div>
+												<?php endif; ?>
 											</div>
 										<?php endif; ?>
 									</div>
@@ -391,9 +492,19 @@ class Hero_Home_Widget extends Widget_Base {
 												</div>
 											<?php endif; ?>
 										</div>
-										<?php if ( $cta_text !== '' ) : ?>
-											<div class="ps-hero-cta">
-												<?php render_cta_group( array( array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' ) ) ); ?>
+										<?php if ( $headline !== '' || $support !== '' || ! empty( $ctas ) ) : ?>
+											<div class="ps-hero-intro">
+												<?php if ( $headline !== '' ) : ?>
+													<h1 class="ps-hero-h1 uk-margin-remove-bottom"><?php echo esc_html( $headline ); ?></h1>
+												<?php endif; ?>
+												<?php if ( $support !== '' ) : ?>
+													<p class="ps-hero-support uk-margin-small-top"><?php echo esc_html( $support ); ?></p>
+												<?php endif; ?>
+												<?php if ( ! empty( $ctas ) ) : ?>
+													<div class="ps-hero-cta">
+														<?php render_cta_group( $ctas ); ?>
+													</div>
+												<?php endif; ?>
 											</div>
 										<?php endif; ?>
 									</div>
@@ -410,10 +521,15 @@ class Hero_Home_Widget extends Widget_Base {
 						<?php
 						$word_count = count( $words );
 						foreach ( $words as $i => $row ) :
-							$is_last = ( $i === $word_count - 1 );
+							$is_last  = ( $i === $word_count - 1 );
+							$word     = is_array( $row ) ? (string) ( $row['word'] ?? '' ) : (string) $row;
+							$subtitle = is_array( $row ) ? trim( (string) ( $row['subtitle'] ?? '' ) ) : '';
 							?>
 							<div class="uk-heading-large uk-text-center<?php echo $is_last ? ' ps-hero-word-last' : ''; ?>" uk-parallax="scale: 0.5; opacity: 1,0; blur: 50; easing: 0; start: 55vh + 50%">
-								<?php echo esc_html( is_array( $row ) ? ( $row['word'] ?? '' ) : (string) $row ); ?>
+								<?php echo esc_html( $word ); ?>
+								<?php if ( $subtitle !== '' ) : ?>
+									<span class="ps-hero-highlight-sub"><?php echo esc_html( $subtitle ); ?></span>
+								<?php endif; ?>
 							</div>
 						<?php endforeach; ?>
 

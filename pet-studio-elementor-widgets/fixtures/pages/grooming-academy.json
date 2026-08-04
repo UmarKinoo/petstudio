@@ -11,7 +11,9 @@
     { "slug": "dog-divider", "variant": "dog-divider-03" },
     "courses-tabs",
     { "slug": "dog-divider", "variant": "dog-divider-01" },
-    "faq",
+    { "slug": "content-split", "variant": "content-split-meet-your-tutor" },
+    { "slug": "dog-divider", "variant": "dog-divider-02" },
+    { "slug": "faq", "variant": "faq-academy" },
     { "slug": "testimonials", "variant": "testimonials-academy" }
   ]
 }

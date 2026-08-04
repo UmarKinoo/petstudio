@@ -3,6 +3,7 @@
   "title": "Team",
   "widgets": [
     "hero-inner",
+    { "slug": "page-intro", "variant": "page-intro-team" },
     "est-banner",
     { "slug": "team-member", "variant": "team-liza" },
     { "slug": "team-member", "variant": "team-skye" },

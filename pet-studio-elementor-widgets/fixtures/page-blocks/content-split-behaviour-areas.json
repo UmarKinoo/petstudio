@@ -1,0 +1,23 @@
+{
+  "heading": "How We May Be Able to Help",
+  "blockquote": "Owners often seek support with:",
+  "body": "<p>Understanding why a behaviour happens allows us to create realistic changes that can make walks, grooming, handling, vet visits and life at home feel easier and more manageable.</p>",
+  "bullet_list": [
+    { "item": "Anxiety and nervousness" },
+    { "item": "Grooming-related fear" },
+    { "item": "Handling and touch sensitivity" },
+    { "item": "Reactivity towards people or other dogs" },
+    { "item": "Confidence building" },
+    { "item": "Puppies and early socialisation" },
+    { "item": "Rescue dogs settling into new homes" },
+    { "item": "Building trust and communication" },
+    { "item": "Everyday behavioural challenges" }
+  ],
+  "image_layout": "1-right",
+  "images": [
+    {
+      "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/difficult-dog-stack-1.jpg"
+    }
+  ],
+  "reverse_columns": "yes"
+}

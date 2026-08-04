@@ -115,6 +115,7 @@ final class Plugin {
 
 		Demo_Importer::register_admin();
 		Demo_Importer::maybe_repair_theme_builder();
+		Demo_Importer::ensure_july_2026_copy_refresh();
 		Demo_Importer::ensure_behaviour_page();
 		Demo_Importer::ensure_faq_sections();
 

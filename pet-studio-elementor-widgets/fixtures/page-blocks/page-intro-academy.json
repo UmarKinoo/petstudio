@@ -1,11 +1,14 @@
 {
-  "heading": "Training",
-  "heading_accent": "Academy",
-  "blockquote": "",
-  "body": "<h4><strong>Be inspired, with dog grooming training courses in Congresbury, North Somerset.</strong></h4><p>Whether you want to become a dog groomer or learn to groom your own dog at home, our Training Academy can help you get there. With City &amp; Guilds qualifications and our own dog grooming courses, as well as a fully equipped teaching space chock full with dogs of all shapes and sizes to practise on, there has never been a better time to get started.</p>",
+  "heading": "Dog Grooming Training Academy",
+  "heading_accent": "in Bristol & North Somerset",
+  "blockquote": "Turn your love of dogs into practical skills, recognised qualifications and a career you can be proud of.",
+  "body": "<p>Whether you want to become a professional dog groomer, start your own business or learn to groom your own dog with confidence, The Pet Studio Training Academy can help you take the next step.</p><p>Led by experienced groomer, teacher and assessor Liza Smith, our practical courses combine City &amp; Guilds qualifications with real-world knowledge built over more than 26 years in the industry. You will learn in a supportive environment, work with real dogs and develop the confidence to use your skills beyond the classroom.</p>",
   "show_signature": false,
   "badge_image": { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/academy/cg-badge.png" },
   "left_inset_image": { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/academy/intro-hero.jpg" },
   "primary_image": { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/academy/intro-portrait.jpg" },
-  "secondary_image": { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/academy/intro-stack.jpg" }
+  "secondary_image": { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/academy/intro-stack.jpg" },
+  "cta_text": "Explore Our Courses",
+  "cta_link": { "url": "#ps-courses-available" },
+  "cta_style": "pill"
 }

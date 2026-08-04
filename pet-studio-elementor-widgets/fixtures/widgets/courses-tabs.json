@@ -8,8 +8,10 @@
       },
       "title": "Level 2 City & Guilds for Dog Grooming Assistants",
       "duration_meta": "24 Day Course",
-      "content": "<p>Fed up of working for someone else? Don't want to do shift work or weekends? Looking to achieve a better work/life balance? Want to earn more money?</p><p>Designed for those with no experience in dog grooming but who wish to do this as a career, this 24-day accredited qualification includes 2 practical assessment units and an online multiple choice examination. This course will take you from absolute beginner to being ready to groom dogs for a living.</p><p>With our City &amp; Guilds Level 2 qualification, you'll learn all there is to know about dog grooming. Both theory and practical elements make up this in-depth training course, which will equip you to start out in the world of dog grooming, either as an employee at a salon or starting your own grooming business.</p><p>Learning from Liza Smith, our founder who has been grooming for over 20 years, you'll receive so much more than the course curriculum dictates. From running your own business and choosing your equipment, to advanced grooming techniques not typically covered under this qualification, Liza ensures that all of our C&amp;G students are ready to hit the ground running when they graduate.</p><p>Our course content includes inputs on:</p><ul><li>Dog handling</li><li>Coat types and breed types</li><li>Shampoos and product choices</li><li>Ectoparasites</li><li>Health checking and assessment</li><li>Methods of drying</li><li>Canine first aid</li><li>Health and safety consideration</li><li>Codes of practice</li><li>Restraining equipment</li><li>Maintenance of equipment and methods of waste disposal</li></ul><p>In addition, you'll also receive significant practical grooming experience and training, including pet trims, clipping different coat types and shapes, nail clipping, ear cleaning, scissoring and thinning.</p>",
-      "features": []
+      "content": "<p>A practical route into professional dog grooming for complete beginners.</p><p>This accredited course is designed for people with no previous grooming experience who want to begin working within the industry. Through a combination of practical assessments, theory and online examination, you will build a strong foundation in professional salon practice.</p><p>Training covers safe dog handling, coat and breed types, bathing, drying, health checks, first aid, equipment, salon safety, clipping, scissoring, nail care and finishing. Alongside the qualification, Liza shares the everyday knowledge that comes from running a successful grooming business, helping students feel better prepared for employment or self-employment after completing the course.</p>",
+      "features": [],
+      "cta_text": "Enquire About Level 2",
+      "cta_link": { "url": "/contact/" }
     },
     {
       "tab_label": "Groom Your Own Dog",
@@ -18,8 +20,10 @@
       },
       "title": "Groom Your Own Dog",
       "duration_meta": "1 Day Course",
-      "content": "<p>Designed for dog owners who want to learn how to keep their own pet's coat in good style and condition. This 1-day course is specific to your pet's breed and will give you some great simple techniques to enable you to groom your own dog to a good standard, including bathing, grooming, trimming and styling.</p><p>This is a fantastic one to one experience with Liza where she ensures that you get the optimum value from your day to ensure that you can confidently, with all the tools and techniques, continue to groom your own dog!</p><p>The course is held on a Saturday or Sunday between 9:30am and 4pm and we cover the following:<br><br></p><ul><li>Health check</li><li>Correct bathing and preparation</li><li>Drying techniques</li><li>Scissor techniques</li><li>Nail trimming</li><li>Feet shape</li><li>Body styling</li><li>Head styling</li><li>Equipment advice</li></ul><p>It is an intensive one to one day but by the end of our training session not only will you know how to groom your dog well from start to finish, but you'll also have material to take away with you – including photos and videos of you and your dog during the session to ensure that you have everything you need to continue grooming your own dog to a great standard!</p>",
-      "features": []
+      "content": "<p>Learn how to care for your own dog’s coat safely and confidently at home.</p><p>This personalised one-day course is designed around your dog’s breed, coat and individual grooming needs. Working closely with Liza, you will learn how to prepare, bathe, dry, brush, trim and style your dog using suitable tools and techniques.</p><p>The day can include health checking, nail care, feet and head shaping, body styling and practical equipment advice. You will also receive guidance, photographs or videos to help you remember what you have learned. By the end of the session, you should feel far more confident maintaining your dog between professional appointments.</p>",
+      "features": [],
+      "cta_text": "Enquire About Grooming Your Own Dog",
+      "cta_link": { "url": "/contact/" }
     },
     {
       "tab_label": "Quick Refresher",
@@ -28,18 +32,22 @@
       },
       "title": "Quick Dog Grooming Refresher",
       "duration_meta": "5 Day Course",
-      "content": "<p>Designed for working dog groomers and grooming assistants who want to upskill and refresh their grooming knowledge, this 5-day course will help improve your style and technique for a number of popular breeds.</p>",
-      "features": []
+      "content": "<p>Refresh your knowledge, rebuild confidence and sharpen your practical technique.</p><p>Designed for working groomers and grooming assistants, this five-day course provides focused support for those who want to improve efficiency, finishing and confidence across a range of popular breeds.</p><p>The course can be adapted around the areas in which you need the most help, whether that is coat preparation, handling, clipping, scissoring or producing a cleaner and more balanced finish. It is an ideal option for groomers returning after a break or those who feel they would benefit from experienced, hands-on guidance in a supportive salon environment.</p>",
+      "features": [],
+      "cta_text": "Enquire About the Quick Refresher",
+      "cta_link": { "url": "/contact/" }
     },
     {
       "tab_label": "In-depth Refresher",
       "badge_image": {
         "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/accredited_white_100.png"
       },
-      "title": "In-depth Dog Grooming Refresher",
+      "title": "In-Depth Dog Grooming Refresher",
       "duration_meta": "10 Day Course",
-      "content": "<p>Designed for those with some background experience in dog grooming, this 10-day course will help improve your practical grooming ability, increase your repertoire of skills and techniques, and provide focus on specific breeds.</p>",
-      "features": []
+      "content": "<p>Develop your practical ability and extend your repertoire of breeds and techniques.</p><p>This ten-day course is intended for groomers who already have some experience but want more time to improve their skills, overcome gaps in confidence and focus on particular breeds or styles.</p><p>With additional practical coaching, you can refine coat preparation, clipping, scissoring, shaping and finishing while learning how to approach more demanding grooms with greater confidence. The course is tailored wherever possible to your development needs, giving you focused time to practise, receive constructive feedback and strengthen the quality and consistency of your work.</p>",
+      "features": [],
+      "cta_text": "Enquire About the In-Depth Refresher",
+      "cta_link": { "url": "/contact/" }
     }
   ],
   "default_active_tab": 0

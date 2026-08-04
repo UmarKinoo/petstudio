@@ -141,6 +141,12 @@
         "content": {
           "type": "string"
         },
+        "cta_text": {
+          "type": "string"
+        },
+        "cta_link": {
+          "$ref": "#/$defs/link"
+        },
         "features": {
           "type": "array",
           "items": {

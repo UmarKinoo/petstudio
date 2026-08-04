@@ -1,7 +1,7 @@
 {
-  "heading": "An investment in your dog's future",
-  "blockquote": "",
-  "body": "<p>Behaviour support is about much more than addressing a single issue.</p><p>It's about helping your dog feel safer, more confident and better equipped to navigate the world around them.</p><p>You're not simply paying for an appointment. You're investing in decades of professional experience, specialist behavioural knowledge and an approach tailored specifically to your dog. When behaviour improves, everything else becomes easier, from walks and handling to grooming, vet visits and life at home.</p><p>Every dog has the capacity to learn, adapt and grow with the right guidance, patience and understanding. Sometimes they simply need someone who knows how to listen.</p>",
+  "heading": "An Investment in Your Dog’s Future",
+  "blockquote": "Better understanding can improve far more than one behaviour.",
+  "body": "<p>Behaviour support is not simply about stopping a single unwanted action. It is about helping your dog feel safer, more confident and better equipped to cope with the world around them.</p><p>You are investing in specialist knowledge, decades of practical experience and an approach tailored to your individual dog. As confidence grows, everyday experiences such as walking, grooming, handling, visiting the vet and relaxing at home can all become easier.</p><p>Every dog has the capacity to learn, adapt and grow with the right guidance, patience and understanding. Sometimes they simply need someone who knows how to listen.</p>",
   "image_layout": "1-right",
   "images": [
     {
@@ -9,7 +9,7 @@
     }
   ],
   "reverse_columns": "yes",
-  "cta_text": "Enquire Now",
+  "cta_text": "Talk to Liza About Your Dog",
   "cta_link": {
     "url": "/contact/"
   },

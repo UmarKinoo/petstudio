@@ -12,8 +12,10 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Pet_Studio_Elementor\Widget_Base;
 
+use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\print_link_attributes;
 use function Pet_Studio_Elementor\render_rich_text;
 
 defined( 'ABSPATH' ) || exit;
@@ -52,6 +54,8 @@ class Courses_Tabs_Widget extends Widget_Base {
 		$tab_rep->add_control( 'title', array( 'label' => esc_html__( 'Title', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => '' ) );
 		$tab_rep->add_control( 'duration_meta', array( 'label' => esc_html__( 'Duration', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => '' ) );
 		$tab_rep->add_control( 'content', array( 'label' => esc_html__( 'Content', 'pet-studio-elementor' ), 'type' => Controls_Manager::WYSIWYG, 'default' => '' ) );
+		$tab_rep->add_control( 'cta_text', array( 'label' => esc_html__( 'CTA text', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => '' ) );
+		$tab_rep->add_control( 'cta_link', array( 'label' => esc_html__( 'CTA link', 'pet-studio-elementor' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => '' ), 'condition' => array( 'cta_text!' => '' ) ) );
 		$tab_rep->add_control(
 			'features_list',
 			array(
@@ -77,6 +81,8 @@ class Courses_Tabs_Widget extends Widget_Base {
 				'title'         => $tab['title'] ?? '',
 				'duration_meta' => $tab['duration_meta'] ?? '',
 				'content'       => $tab['content'] ?? '',
+				'cta_text'      => $tab['cta_text'] ?? '',
+				'cta_link'      => api_link_to_control( $tab['cta_link'] ?? null ),
 				'features_list' => implode( "\n", $lines ),
 			);
 		}
@@ -147,6 +153,11 @@ class Courses_Tabs_Widget extends Widget_Base {
 													</ul>
 												<?php endif; ?>
 											</div>
+											<?php if ( ! empty( $tab['cta_text'] ) ) : ?>
+												<div class="uk-margin-medium-top">
+													<a class="uk-button uk-button-primary"<?php print_link_attributes( $tab['cta_link'] ?? null ); ?>><?php echo esc_html( $tab['cta_text'] ); ?></a>
+												</div>
+											<?php endif; ?>
 										</div>
 									<?php endforeach; ?>
 								</div>

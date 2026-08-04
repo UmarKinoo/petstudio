@@ -45,6 +45,16 @@ class Testimonials_Widget extends Widget_Base {
 
 		$this->start_controls_section( 'section_content', array( 'label' => esc_html__( 'Content', 'pet-studio-elementor' ), 'tab' => Controls_Manager::TAB_CONTENT ) );
 
+		$this->add_control(
+			'section_heading',
+			array(
+				'label'       => esc_html__( 'Section heading', 'pet-studio-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => $d['section_heading'] ?? '',
+				'label_block' => true,
+			)
+		);
+
 		$rep = new Repeater();
 		$rep->add_control( 'icon', array( 'label' => esc_html__( 'Icon', 'pet-studio-elementor' ), 'type' => Controls_Manager::MEDIA, 'default' => array( 'url' => '' ) ) );
 		$rep->add_control( 'title', array( 'label' => esc_html__( 'Title', 'pet-studio-elementor' ), 'type' => Controls_Manager::TEXT, 'default' => '' ) );
@@ -206,6 +216,9 @@ class Testimonials_Widget extends Widget_Base {
 		</style>
 		<div class="uk-section-muted uk-section" uk-scrollspy="target: [uk-scrollspy-class]; cls: uk-animation-scale-up; delay: false;">
 			<div class="uk-container">
+				<?php if ( ! empty( $s['section_heading'] ) ) : ?>
+					<h2 class="uk-h2 uk-text-center uk-margin-medium-bottom ps-testimonials-heading"><?php echo esc_html( $s['section_heading'] ); ?></h2>
+				<?php endif; ?>
 				<div class="uk-grid-margin uk-grid tm-grid-expand uk-child-width-1-1">
 					<div class="uk-width-1-1">
 						<div class="uk-slider-container uk-margin uk-text-left" uk-slider="<?php echo esc_attr( $slider_attr ); ?>" uk-scrollspy-class>

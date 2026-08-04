@@ -318,6 +318,44 @@ class Demo_Importer {
 	}
 
 	/**
+	 * One-shot rebuild of all demo pages after the 30.07.26 site copy drop (v0.5.66+).
+	 * Prod Elementor data only updates when pages are rebuilt from fixtures.
+	 */
+	public static function ensure_july_2026_copy_refresh(): void {
+		$flag = 'pet_studio_ew_refreshed_copy_20260730';
+		if ( get_option( $flag ) ) {
+			return;
+		}
+
+		$page_files = glob( PET_STUDIO_EW_PATH . 'fixtures/pages/*.json' ) ?: array();
+		if ( empty( $page_files ) ) {
+			return;
+		}
+
+		$importer = new self();
+
+		foreach ( $page_files as $file ) {
+			if ( false !== strpos( $file, 'theme-templates.json' ) ) {
+				continue;
+			}
+			$config = json_decode( (string) file_get_contents( $file ), true );
+			if ( empty( $config['slug'] ) ) {
+				continue;
+			}
+			// Only rebuild pages that already exist (or create missing Behaviour).
+			$page = get_page_by_path( (string) $config['slug'] );
+			if ( ! $page && 'behaviour' !== $config['slug'] ) {
+				continue;
+			}
+			$importer->refresh_page_from_fixture( $config );
+		}
+
+		update_option( $flag, time(), false );
+		update_option( self::OPTION_IMPORTED, time(), false );
+		Plugin::purge_elementor_caches();
+	}
+
+	/**
 	 * Create or refresh the Behaviour page (prod may still only have dog-training / academy copy).
 	 */
 	public static function ensure_behaviour_page(): void {
@@ -340,18 +378,19 @@ class Demo_Importer {
 		$raw = get_post_meta( (int) $page->ID, '_elementor_data', true );
 		$raw = is_string( $raw ) ? $raw : '';
 
-		// Stale Elementor data: local URLs, academy leftover, or pre-behaviour-copy layout.
+		// Stale Elementor data: local URLs, academy leftover, or pre-30.07.26 behaviour copy.
 		$needs_refresh = ( false !== strpos( $raw, 'thepetstudio.local' ) )
 			|| ( false !== strpos( $raw, 'Career Change?' ) )
 			|| ( false !== strpos( $raw, 'Train Your Dog' ) )
 			|| ( false !== strpos( $raw, 'Subtitle.' ) )
 			|| ( false === strpos( $raw, 'Specialist Behaviour' ) )
-			|| ( false === strpos( $raw, 'lasting behaviour change' ) )
 			|| ( false === strpos( $raw, 'for Dogs and Their Owners' ) )
-			|| ( false === strpos( $raw, 'supports lasting change.</p><h3>Every dog is different' ) )
-			|| ( false === strpos( $raw, 'specifically to your dog. When behaviour improves' ) )
+			|| ( false === strpos( $raw, 'Behaviour Is Never' ) )
+			|| ( false === strpos( $raw, 'Talk to Liza About Your Dog' ) )
+			|| ( false === strpos( $raw, 'not veterinary treatment' ) )
 			|| ( false !== strpos( $raw, 'open plan Congresbury salon' ) )
-			|| ( false !== strpos( $raw, 'highly rated dog grooming services' ) );
+			|| ( false !== strpos( $raw, 'highly rated dog grooming services' ) )
+			|| ( false !== strpos( $raw, 'lasting behaviour change' ) );
 
 		if ( $needs_refresh ) {
 			( new self() )->refresh_page_from_fixture( $config );

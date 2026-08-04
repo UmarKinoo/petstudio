@@ -30,6 +30,14 @@ class Contact_Form {
 	 *     @type bool     $enquiry_type_required   Whether the radio is required.
 	 *     @type bool     $message_required        Whether the enquiry textarea is required.
 	 *     @type string   $success_message         Shown after a successful submit.
+	 *     @type string   $first_name_label        First name field label.
+	 *     @type string   $last_name_label         Last name field label.
+	 *     @type string   $email_label             Email field label.
+	 *     @type string   $phone_label             Phone field label.
+	 *     @type string   $message_label           Enquiry textarea label.
+	 *     @type string   $message_placeholder     Enquiry textarea placeholder.
+	 *     @type string   $privacy_text            Privacy note under submit.
+	 *     @type array    $privacy_link            Privacy policy URL control.
 	 * }
 	 */
 	public static function render( array $opts = array() ): string {
@@ -41,6 +49,14 @@ class Contact_Form {
 		$success_message       = (string) ( $opts['success_message'] ?? __( 'Thanks for your enquiry — we’ll be in touch soon.', 'pet-studio-elementor' ) );
 		$page_id               = (int) ( $opts['page_id'] ?? (int) get_the_ID() );
 		$widget_id             = (string) ( $opts['widget_id'] ?? '' );
+		$first_name_label      = (string) ( $opts['first_name_label'] ?? __( 'First Name', 'pet-studio-elementor' ) );
+		$last_name_label       = (string) ( $opts['last_name_label'] ?? __( 'Last Name', 'pet-studio-elementor' ) );
+		$email_label           = (string) ( $opts['email_label'] ?? __( 'Email Address', 'pet-studio-elementor' ) );
+		$phone_label           = (string) ( $opts['phone_label'] ?? __( 'Telephone Number', 'pet-studio-elementor' ) );
+		$message_label         = (string) ( $opts['message_label'] ?? __( 'Enquiry', 'pet-studio-elementor' ) );
+		$message_placeholder   = (string) ( $opts['message_placeholder'] ?? __( 'Enter any questions you may have...', 'pet-studio-elementor' ) );
+		$privacy_text          = (string) ( $opts['privacy_text'] ?? '' );
+		$privacy_link          = $opts['privacy_link'] ?? null;
 
 		$sent   = isset( $_GET['ps_cf'] ) && 'sent' === sanitize_key( wp_unslash( $_GET['ps_cf'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$errors = self::$state['errors'] ?? array();
@@ -67,12 +83,12 @@ class Contact_Form {
 
 			<div class="ps-cf-row">
 				<div class="ps-cf-field ps-cf-field--half">
-					<label class="ps-cf-label" for="ps-cf-first"><?php esc_html_e( 'Name', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<label class="ps-cf-label" for="ps-cf-first"><?php echo esc_html( $first_name_label ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
 					<input class="uk-input ps-cf-input" type="text" name="ps_cf[first_name]" id="ps-cf-first" value="<?php echo $val( 'first_name' ); ?>" required aria-required="true">
 					<?php echo $err( 'first_name' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 				<div class="ps-cf-field ps-cf-field--half">
-					<label class="ps-cf-label" for="ps-cf-last"><?php esc_html_e( 'Last Name', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<label class="ps-cf-label" for="ps-cf-last"><?php echo esc_html( $last_name_label ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
 					<input class="uk-input ps-cf-input" type="text" name="ps_cf[last_name]" id="ps-cf-last" value="<?php echo $val( 'last_name' ); ?>" required aria-required="true">
 					<?php echo $err( 'last_name' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
@@ -80,12 +96,12 @@ class Contact_Form {
 
 			<div class="ps-cf-row">
 				<div class="ps-cf-field ps-cf-field--half">
-					<label class="ps-cf-label" for="ps-cf-email"><?php esc_html_e( 'Email', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<label class="ps-cf-label" for="ps-cf-email"><?php echo esc_html( $email_label ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
 					<input class="uk-input ps-cf-input" type="email" name="ps_cf[email]" id="ps-cf-email" value="<?php echo $val( 'email' ); ?>" required aria-required="true">
 					<?php echo $err( 'email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 				<div class="ps-cf-field ps-cf-field--half">
-					<label class="ps-cf-label" for="ps-cf-phone"><?php esc_html_e( 'Phone', 'pet-studio-elementor' ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+					<label class="ps-cf-label" for="ps-cf-phone"><?php echo esc_html( $phone_label ); ?> <?php echo $req; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
 					<input class="uk-input ps-cf-input" type="tel" name="ps_cf[phone]" id="ps-cf-phone" value="<?php echo $val( 'phone' ); ?>" required aria-required="true">
 					<?php echo $err( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
@@ -109,13 +125,13 @@ class Contact_Form {
 
 			<div class="ps-cf-field">
 				<label class="ps-cf-label" for="ps-cf-enquiry">
-					<?php esc_html_e( 'Enquiry', 'pet-studio-elementor' ); ?>
+					<?php echo esc_html( $message_label ); ?>
 					<?php echo $message_required ? $req : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					<?php if ( ! $message_required ) : ?>
 						<span class="ps-cf-optional"><?php esc_html_e( '(optional)', 'pet-studio-elementor' ); ?></span>
 					<?php endif; ?>
 				</label>
-				<textarea class="uk-textarea ps-cf-input" name="ps_cf[enquiry]" id="ps-cf-enquiry" rows="4" placeholder="<?php esc_attr_e( 'Enter any questions you may have...', 'pet-studio-elementor' ); ?>" <?php echo $message_required ? 'required aria-required="true"' : ''; ?>><?php echo esc_textarea( $old['enquiry'] ?? '' ); ?></textarea>
+				<textarea class="uk-textarea ps-cf-input" name="ps_cf[enquiry]" id="ps-cf-enquiry" rows="4" placeholder="<?php echo esc_attr( $message_placeholder ); ?>" <?php echo $message_required ? 'required aria-required="true"' : ''; ?>><?php echo esc_textarea( $old['enquiry'] ?? '' ); ?></textarea>
 				<?php echo $err( 'enquiry' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 
@@ -132,6 +148,22 @@ class Contact_Form {
 			<div class="ps-cf-field ps-cf-submit">
 				<button type="submit" class="uk-button uk-button-primary ps-cf-btn"><?php echo esc_html( $button_text ); ?></button>
 			</div>
+			<?php if ( '' !== $privacy_text ) : ?>
+				<p class="ps-cf-privacy uk-text-meta uk-margin-small-top">
+					<?php
+					$privacy_url = is_array( $privacy_link ) ? (string) ( $privacy_link['url'] ?? '' ) : '';
+					if ( $privacy_url && false !== stripos( $privacy_text, 'Privacy Policy' ) ) {
+						$link = '<a href="' . esc_url( $privacy_url ) . '">' . esc_html__( 'Privacy Policy', 'pet-studio-elementor' ) . '</a>';
+						echo wp_kses(
+							preg_replace( '/Privacy Policy/i', $link, esc_html( $privacy_text ), 1 ),
+							array( 'a' => array( 'href' => true ) )
+						);
+					} else {
+						echo esc_html( $privacy_text );
+					}
+					?>
+				</p>
+			<?php endif; ?>
 		</form>
 		<?php
 		return (string) ob_get_clean();

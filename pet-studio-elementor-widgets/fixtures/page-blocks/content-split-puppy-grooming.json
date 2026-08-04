@@ -1,12 +1,12 @@
 {
-  "heading": "Puppy Grooming",
-  "blockquote": "We want all dogs to feel welcome and enjoy their grooming process with us and not be fearful or scared!",
-  "body": "<p>Owners are encouraged to bring their puppy's to us for desensitisation and get them use to the grooming salon environment from as early as 4 month's old. We give puppies a positive and fun experience whilst introducing them to the sights and sounds within the salon.</p><p>We like to work closely with owners to help them be able to continue their puppy's grooming at home and we are on hand to help with handling and different types of equipment that can be used.</p>",
+  "heading": "A Happy Start to a Lifetime of Grooming",
+  "blockquote": "Your puppy’s first grooming visits are about building trust, not creating the perfect haircut.",
+  "body": "<p>We encourage owners to introduce puppies to the salon from around four months old, once their vaccinations are complete. These early appointments help puppies become familiar with the sights, sounds, equipment and handling involved in professional grooming.</p><p>Everything is introduced gradually and positively so your puppy can build confidence at their own pace. We also work closely with you, sharing simple guidance on brushing, handling paws and ears, and maintaining the coat at home. A calm introduction now can make grooming easier and happier throughout your dog’s life.</p>",
   "image_layout": "1-right",
   "images": [
     { "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/puppy-grooming.jpg" }
   ],
-  "cta_text": "Book a Puppy Groom",
+  "cta_text": "Book a Puppy Introduction",
   "cta_link": { "url": "/contact/" },
   "cta_style": "pill"
 }
