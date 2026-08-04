@@ -1,6 +1,6 @@
 <?php
 /**
- * Hero — Home (video + parallax logo + headline words).
+ * Hero — Home (video + text headline + parallax highlight words).
  *
  * @package Pet_Studio_Elementor
  */
@@ -14,12 +14,9 @@ use Pet_Studio_Elementor\Widget_Base;
 
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
-use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\render_cta_group;
 use function Pet_Studio_Elementor\format_multiline_text;
-use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
-use function Pet_Studio_Elementor\render_inline_svg;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -59,98 +56,60 @@ class Hero_Home_Widget extends Widget_Base {
 		$this->add_control(
 			'video_desktop',
 			array(
-				'label'   => esc_html__( 'Background video (desktop)', 'pet-studio-elementor' ),
-				'type'    => Controls_Manager::MEDIA,
+				'label'       => esc_html__( 'Background video (desktop)', 'pet-studio-elementor' ),
+				'type'        => Controls_Manager::MEDIA,
 				'media_types' => array( 'video' ),
-				'default' => api_media_to_control( $defaults['video_desktop'] ?? null ),
+				'default'     => api_media_to_control( $defaults['video_desktop'] ?? null ),
 			)
 		);
 
 		$this->add_control(
 			'video_mobile',
 			array(
-				'label'   => esc_html__( 'Background video (mobile)', 'pet-studio-elementor' ),
-				'type'    => Controls_Manager::MEDIA,
+				'label'       => esc_html__( 'Background video (mobile)', 'pet-studio-elementor' ),
+				'type'        => Controls_Manager::MEDIA,
 				'media_types' => array( 'video' ),
-				'default' => api_media_to_control( $defaults['video_mobile'] ?? null ),
+				'default'     => api_media_to_control( $defaults['video_mobile'] ?? null ),
 			)
 		);
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_logo',
+			'section_hero_copy',
 			array(
-				'label' => esc_html__( 'Logo', 'pet-studio-elementor' ),
+				'label' => esc_html__( 'Hero heading', 'pet-studio-elementor' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
 
 		$this->add_control(
-			'logo_desktop',
+			'headline',
 			array(
-				'label'   => esc_html__( 'Logo (desktop)', 'pet-studio-elementor' ),
-				'type'    => Controls_Manager::MEDIA,
-				'default' => api_media_to_control( $defaults['logo_desktop'] ?? null ),
-			)
-		);
-
-		$this->add_control(
-			'logo_mobile',
-			array(
-				'label'   => esc_html__( 'Logo (mobile)', 'pet-studio-elementor' ),
-				'type'    => Controls_Manager::MEDIA,
-				'default' => api_media_to_control( $defaults['logo_mobile'] ?? null ),
-			)
-		);
-
-		$this->add_control(
-			'logo_alt',
-			array(
-				'label'   => esc_html__( 'Logo alt text', 'pet-studio-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => 'The Pet Studio - Dog Grooming & Training Academy',
-			)
-		);
-
-		$this->add_control(
-			'tagline_location',
-			array(
-				'label'       => esc_html__( 'Location (after Training Academy)', 'pet-studio-elementor' ),
+				'label'       => esc_html__( 'Heading (white)', 'pet-studio-elementor' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => $defaults['tagline_location'] ?? 'Bristol',
-				'description' => esc_html__( 'Shown on the hero logo tagline bar after “Training Academy”.', 'pet-studio-elementor' ),
+				'default'     => $defaults['headline'] ?? '',
+				'label_block' => true,
 			)
 		);
 
 		$this->add_control(
-			'show_signature',
+			'headline_accent',
 			array(
-				'label'        => esc_html__( 'Show signature', 'pet-studio-elementor' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'default'      => ! empty( $defaults['show_signature'] ) ? 'yes' : '',
+				'label'       => esc_html__( 'Heading accent (pink)', 'pet-studio-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => $defaults['headline_accent'] ?? '',
+				'label_block' => true,
 			)
 		);
 
 		$this->add_control(
-			'signature_image',
+			'supporting_copy',
 			array(
-				'label'     => esc_html__( 'Signature image', 'pet-studio-elementor' ),
-				'type'      => Controls_Manager::MEDIA,
-				'default'   => api_media_to_control( $defaults['signature_image'] ?? null ),
-				'condition' => array( 'show_signature' => 'yes' ),
-			)
-		);
-
-		$this->add_control(
-			'signature_rotation',
-			array(
-				'label'     => esc_html__( 'Signature angle (°)', 'pet-studio-elementor' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => array( 'deg' => array( 'min' => -30, 'max' => 30 ) ),
-				'default'   => array( 'size' => (float) ( $defaults['signature_rotation'] ?? -16 ), 'unit' => 'deg' ),
-				'condition' => array( 'show_signature' => 'yes' ),
+				'label'   => esc_html__( 'Subheading', 'pet-studio-elementor' ),
+				'type'    => Controls_Manager::TEXTAREA,
+				'default' => $defaults['supporting_copy'] ?? '',
+				'rows'    => 4,
 			)
 		);
 
@@ -194,28 +153,8 @@ class Hero_Home_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_headlines',
 			array(
-				'label' => esc_html__( 'Headlines', 'pet-studio-elementor' ),
+				'label' => esc_html__( 'Highlights & hours', 'pet-studio-elementor' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
-			)
-		);
-
-		$this->add_control(
-			'headline',
-			array(
-				'label'       => esc_html__( 'H1 headline', 'pet-studio-elementor' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => $defaults['headline'] ?? '',
-				'label_block' => true,
-			)
-		);
-
-		$this->add_control(
-			'supporting_copy',
-			array(
-				'label'   => esc_html__( 'Supporting copy', 'pet-studio-elementor' ),
-				'type'    => Controls_Manager::TEXTAREA,
-				'default' => $defaults['supporting_copy'] ?? '',
-				'rows'    => 4,
 			)
 		);
 
@@ -295,19 +234,62 @@ class Hero_Home_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'headline_typography',
-				'label'    => esc_html__( 'Headline typography', 'pet-studio-elementor' ),
-				'selector' => '{{WRAPPER}} .uk-heading-large',
+				'label'    => esc_html__( 'Hero heading typography', 'pet-studio-elementor' ),
+				'selector' => '{{WRAPPER}} .ps-hero-h1',
 			)
 		);
 
 		$this->add_control(
 			'headline_color',
 			array(
-				'label'     => esc_html__( 'Headline colour', 'pet-studio-elementor' ),
+				'label'     => esc_html__( 'Heading colour (white)', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
 				'selectors' => array(
-					'{{WRAPPER}} .uk-heading-large' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ps-hero-h1' => 'color: {{VALUE}};',
 				),
+			)
+		);
+
+		$this->add_control(
+			'headline_accent_color',
+			array(
+				'label'     => esc_html__( 'Heading accent colour (pink)', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ff90aa',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-hero-h1 .uk-text-primary' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'support_typography',
+				'label'    => esc_html__( 'Subheading typography', 'pet-studio-elementor' ),
+				'selector' => '{{WRAPPER}} .ps-hero-support',
+			)
+		);
+
+		$this->add_control(
+			'support_color',
+			array(
+				'label'     => esc_html__( 'Subheading colour', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => array(
+					'{{WRAPPER}} .ps-hero-support' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'highlight_typography',
+				'label'    => esc_html__( 'Highlight word typography', 'pet-studio-elementor' ),
+				'selector' => '{{WRAPPER}} .uk-heading-large',
 			)
 		);
 
@@ -322,86 +304,64 @@ class Hero_Home_Widget extends Widget_Base {
 		$video_desk  = media_url( $s['video_desktop'] ?? null );
 		$video_mob   = media_url( $s['video_mobile'] ?? null ) ?: $video_desk;
 		$split_video = $video_desk && $video_mob && $video_mob !== $video_desk;
-		$logo_desk   = media_url( $s['logo_desktop'] ?? null );
-		$logo_mob    = media_url( $s['logo_mobile'] ?? null ) ?: $logo_desk;
-		$logo_alt    = $s['logo_alt'] ?? '';
-		$defaults    = $this->get_fixture_defaults();
-		$tagline_loc = trim( (string) ( $s['tagline_location'] ?? '' ) );
-		if ( $tagline_loc === '' ) {
-			$tagline_loc = trim( (string) ( $defaults['tagline_location'] ?? 'Bristol' ) );
-		}
-		$sig_url     = media_url( $s['signature_image'] ?? null );
-		$rotation    = isset( $s['signature_rotation']['size'] ) ? (float) $s['signature_rotation']['size'] : (float) ( $s['signature_rotation'] ?? -18 );
-		$cta_text  = trim( (string) ( $s['cta_text'] ?? '' ) );
-		$cta_link  = is_array( $s['cta_link'] ?? null ) ? $s['cta_link'] : null;
-		$cta2_text = trim( (string) ( $s['cta2_text'] ?? '' ) );
-		$cta2_link = is_array( $s['cta2_link'] ?? null ) ? $s['cta2_link'] : null;
-		$words     = $s['headline_words'] ?? array();
-		$headline  = trim( (string) ( $s['headline'] ?? '' ) );
-		$support   = trim( (string) ( $s['supporting_copy'] ?? '' ) );
-		$ctas      = array();
+		$cta_text    = trim( (string) ( $s['cta_text'] ?? '' ) );
+		$cta_link    = is_array( $s['cta_link'] ?? null ) ? $s['cta_link'] : null;
+		$cta2_text   = trim( (string) ( $s['cta2_text'] ?? '' ) );
+		$cta2_link   = is_array( $s['cta2_link'] ?? null ) ? $s['cta2_link'] : null;
+		$words       = $s['headline_words'] ?? array();
+		$headline    = trim( (string) ( $s['headline'] ?? '' ) );
+		$accent      = trim( (string) ( $s['headline_accent'] ?? '' ) );
+		$support     = trim( (string) ( $s['supporting_copy'] ?? '' ) );
+		$ctas        = array();
 		if ( $cta_text !== '' ) {
 			$ctas[] = array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' );
 		}
 		if ( $cta2_text !== '' ) {
 			$ctas[] = array( 'text' => $cta2_text, 'link' => $cta2_link, 'style' => 'text' );
 		}
+		$has_title = ( $headline !== '' || $accent !== '' || $support !== '' || ! empty( $ctas ) );
 		?>
 		<style class="uk-margin-remove-adjacent">
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop {
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-title-desktop {
 				left: 0;
 				right: 0;
 				top: 50%;
 				text-align: center;
 			}
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop .ps-hero-brand {
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-title-desktop .ps-hero-brand {
 				display: inline-flex;
 				flex-direction: column;
 				align-items: center;
 				transform: translateY(-50%);
 				text-align: center;
 			}
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile .ps-hero-brand {
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-title-mobile .ps-hero-brand {
 				transform: none;
-			}
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop .el-image,
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop img,
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-desktop svg {
-				transform: none;
-				max-width: min(60vw, 650px);
-				margin-left: auto;
-				margin-right: auto;
-				display: block;
-			}
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile .el-image,
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile img,
-			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-logo-mobile svg {
-				transform: none;
-				max-width: min(85vw, 400px);
-				margin-left: auto;
-				margin-right: auto;
-				display: block;
 			}
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-overlay { position: relative; z-index: 1; margin-top: -100vh; overflow-x: clip; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-word-last { margin-bottom: 15vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-hours-text { margin-bottom: 30vh; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-copy > * { position: relative; z-index: 1; }
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-intro {
-				max-width: 42rem;
+				max-width: min(92vw, 52rem);
 				margin-left: auto;
 				margin-right: auto;
 				padding: 0 1rem;
 			}
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-h1 {
-				font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-				line-height: 1.25;
-				margin: 1rem 0 0.75rem;
+				margin: 0;
+				color: #ffffff;
+			}
+			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-h1 .uk-text-primary {
+				color: #ff90aa;
 			}
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-support {
-				font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+				margin: 1rem auto 0;
+				max-width: 42rem;
+				color: #ffffff;
+				font-size: 1.25rem;
 				line-height: 1.5;
-				opacity: 0.95;
-				margin-bottom: 1rem;
+				font-weight: 400;
 			}
 			.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-highlight-sub {
 				display: block;
@@ -410,6 +370,11 @@ class Hero_Home_Widget extends Widget_Base {
 				line-height: 1.4;
 				margin-top: 0.35rem;
 				opacity: 0.9;
+			}
+			@media (min-width: 1200px) {
+				.elementor-element-<?php echo esc_attr( (string) $eid ); ?> .ps-hero-support {
+					font-size: 1.35rem;
+				}
 			}
 		</style>
 
@@ -434,79 +399,15 @@ class Hero_Home_Widget extends Widget_Base {
 				<div class="uk-light uk-width-1-1">
 					<div class="uk-height-viewport uk-panel uk-flex uk-flex-middle">
 						<div class="uk-panel uk-width-1-1">
-							<?php if ( $logo_desk ) : ?>
-								<div class="uk-position-absolute uk-width-1-1 uk-text-center uk-visible@s ps-hero-logo-desktop" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="top: 50%; z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
+							<?php if ( $has_title ) : ?>
+								<div class="uk-position-absolute uk-width-1-1 uk-text-center uk-visible@s ps-hero-title-desktop" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="top: 50%; z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
 									<div class="ps-hero-brand">
-										<div class="ps-hero-brand-head">
-											<div class="ps-hero-logo-inner">
-												<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_desk ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="650" height="138"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
-											</div>
-											<?php if ( $tagline_loc !== '' ) : ?>
-												<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
-											<?php endif; ?>
-											<?php if ( ( $s['show_signature'] ?? '' ) === 'yes' && $sig_url ) : ?>
-												<div class="ps-hero-signature" style="<?php echo esc_attr( sprintf( 'transform: rotate(%sdeg);', $rotation ) ); ?>">
-													<?php
-													if ( ! render_inline_svg( $sig_url, 'uk-text-primary el-image ps-signature-svg', 260, 135 ) ) :
-														?>
-														<img class="el-image ps-signature-img" src="<?php echo esc_url( $sig_url ); ?>" alt="" width="260" height="135"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-													<?php endif; ?>
-												</div>
-											<?php endif; ?>
-										</div>
-										<?php if ( $headline !== '' || $support !== '' || ! empty( $ctas ) ) : ?>
-											<div class="ps-hero-intro">
-												<?php if ( $headline !== '' ) : ?>
-													<h1 class="ps-hero-h1 uk-margin-remove-bottom"><?php echo esc_html( $headline ); ?></h1>
-												<?php endif; ?>
-												<?php if ( $support !== '' ) : ?>
-													<p class="ps-hero-support uk-margin-small-top"><?php echo esc_html( $support ); ?></p>
-												<?php endif; ?>
-												<?php if ( ! empty( $ctas ) ) : ?>
-													<div class="ps-hero-cta">
-														<?php render_cta_group( $ctas ); ?>
-													</div>
-												<?php endif; ?>
-											</div>
-										<?php endif; ?>
+										<?php $this->render_hero_title_block( $headline, $accent, $support, $ctas ); ?>
 									</div>
 								</div>
-							<?php endif; ?>
-							<?php if ( $logo_mob ) : ?>
-								<div class="uk-position-relative uk-margin uk-text-center uk-hidden@s ps-hero-logo-mobile" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
+								<div class="uk-position-relative uk-margin uk-text-center uk-hidden@s ps-hero-title-mobile" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
 									<div class="ps-hero-brand">
-										<div class="ps-hero-brand-head">
-											<div class="ps-hero-logo-inner">
-												<img class="<?php echo esc_attr( lazy_load_exempt_class( 'el-image uk-text-primary' ) ); ?>" src="<?php echo esc_url( $logo_mob ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" width="400" height="270"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> uk-svg>
-											</div>
-											<?php if ( $tagline_loc !== '' ) : ?>
-												<span class="ps-hero-tagline-location"><?php echo esc_html( $tagline_loc ); ?></span>
-											<?php endif; ?>
-											<?php if ( ( $s['show_signature'] ?? '' ) === 'yes' && $sig_url ) : ?>
-												<div class="ps-hero-signature" style="<?php echo esc_attr( sprintf( 'transform: rotate(%sdeg);', $rotation ) ); ?>">
-													<?php
-													if ( ! render_inline_svg( $sig_url, 'uk-text-primary el-image ps-signature-svg', 200, 104 ) ) :
-														?>
-														<img class="el-image ps-signature-img" src="<?php echo esc_url( $sig_url ); ?>" alt="" width="200" height="104"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-													<?php endif; ?>
-												</div>
-											<?php endif; ?>
-										</div>
-										<?php if ( $headline !== '' || $support !== '' || ! empty( $ctas ) ) : ?>
-											<div class="ps-hero-intro">
-												<?php if ( $headline !== '' ) : ?>
-													<h1 class="ps-hero-h1 uk-margin-remove-bottom"><?php echo esc_html( $headline ); ?></h1>
-												<?php endif; ?>
-												<?php if ( $support !== '' ) : ?>
-													<p class="ps-hero-support uk-margin-small-top"><?php echo esc_html( $support ); ?></p>
-												<?php endif; ?>
-												<?php if ( ! empty( $ctas ) ) : ?>
-													<div class="ps-hero-cta">
-														<?php render_cta_group( $ctas ); ?>
-													</div>
-												<?php endif; ?>
-											</div>
-										<?php endif; ?>
+										<?php $this->render_hero_title_block( $headline, $accent, $support, $ctas ); ?>
 									</div>
 								</div>
 							<?php endif; ?>
@@ -547,6 +448,32 @@ class Hero_Home_Widget extends Widget_Base {
 					</div>
 				</div>
 			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * @param array<int, array<string, mixed>> $ctas CTA list.
+	 */
+	private function render_hero_title_block( string $headline, string $accent, string $support, array $ctas ): void {
+		?>
+		<div class="ps-hero-intro">
+			<?php if ( $headline !== '' || $accent !== '' ) : ?>
+				<h1 class="ps-hero-h1 uk-heading-large uk-margin-remove-bottom">
+					<?php echo esc_html( $headline ); ?>
+					<?php if ( $accent !== '' ) : ?>
+						<span class="uk-text-primary"><?php echo ( $headline !== '' ? ' ' : '' ) . esc_html( $accent ); ?></span>
+					<?php endif; ?>
+				</h1>
+			<?php endif; ?>
+			<?php if ( $support !== '' ) : ?>
+				<p class="ps-hero-support uk-text-lead uk-margin-small-top"><?php echo esc_html( $support ); ?></p>
+			<?php endif; ?>
+			<?php if ( ! empty( $ctas ) ) : ?>
+				<div class="ps-hero-cta">
+					<?php render_cta_group( $ctas ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 		<?php
 	}

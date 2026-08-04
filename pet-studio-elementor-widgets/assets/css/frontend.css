@@ -778,7 +778,8 @@ a.ps-book-now-btn:focus,
 	opacity: 1;
 }
 
-.pet-studio-hero-home .ps-hero-logo-desktop {
+.pet-studio-hero-home .ps-hero-logo-desktop,
+.pet-studio-hero-home .ps-hero-title-desktop {
 	left: 0;
 	right: 0;
 	top: 50%;
@@ -801,7 +802,8 @@ a.ps-book-now-btn:focus,
 	box-sizing: border-box;
 }
 
-.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-brand {
+.pet-studio-hero-home .ps-hero-logo-desktop .ps-hero-brand,
+.pet-studio-hero-home .ps-hero-title-desktop .ps-hero-brand {
 	transform: translateY(-50%);
 }
 
@@ -916,7 +918,8 @@ a.ps-book-now-btn:focus,
 	width: clamp(185px, 37cqi, 275px);
 }
 
-.pet-studio-hero-home .ps-hero-logo-mobile {
+.pet-studio-hero-home .ps-hero-logo-mobile,
+.pet-studio-hero-home .ps-hero-title-mobile {
 	width: 100%;
 	text-align: center !important;
 	top: auto !important;
@@ -926,7 +929,8 @@ a.ps-book-now-btn:focus,
 	box-sizing: border-box;
 }
 
-.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-brand {
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-brand,
+.pet-studio-hero-home .ps-hero-title-mobile .ps-hero-brand {
 	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
@@ -971,7 +975,8 @@ a.ps-book-now-btn:focus,
 	margin: 0.1rem 0 0.65rem;
 }
 
-.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta {
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta,
+.pet-studio-hero-home .ps-hero-title-mobile .ps-hero-cta {
 	margin-top: 0.85rem;
 }
 
@@ -982,7 +987,8 @@ a.ps-book-now-btn:focus,
 	max-width: 50%;
 }
 
-.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn {
+.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn,
+.pet-studio-hero-home .ps-hero-title-mobile .ps-hero-cta .ps-book-now-btn {
 	font-size: 1rem !important;
 	padding: 0.85rem 2.2rem !important;
 }
@@ -1072,7 +1078,8 @@ a.ps-book-now-btn:focus,
 		max-width: 46%;
 	}
 
-	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn {
+	.pet-studio-hero-home .ps-hero-logo-mobile .ps-hero-cta .ps-book-now-btn,
+	.pet-studio-hero-home .ps-hero-title-mobile .ps-hero-cta .ps-book-now-btn {
 		font-size: 0.9375rem !important;
 		padding: 0.75rem 1.85rem !important;
 	}

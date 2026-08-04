@@ -7,15 +7,8 @@
     "id": 0,
     "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/video/pet_studio_backround_v01.mp4"
   },
-  "logo_desktop": {
-    "id": 0,
-    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/the_pet_studio_logo_+tagline+box_04.svg"
-  },
-  "logo_mobile": {
-    "id": 0,
-    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/the_pet_studio_logo_+tagline_MOBILE_600px.svg"
-  },
-  "headline": "Expert Dog Grooming & Professional Dog Grooming Training",
+  "headline": "Expert Dog Grooming",
+  "headline_accent": "& Professional Dog Grooming Training",
   "supporting_copy": "For over 26 years, The Pet Studio has helped dogs look and feel their best while inspiring the next generation of professional dog groomers. Whether you're looking for exceptional grooming or a rewarding new career, you'll find experience, compassion and expertise at the heart of everything we do.",
   "headline_words": [
     {
@@ -33,13 +26,6 @@
   ],
   "hours_title": "Opening Hours",
   "hours_text": "Monday - Friday\n9 am - 4 pm",
-  "tagline_location": "Bristol",
-  "show_signature": true,
-  "signature_image": {
-    "id": 0,
-    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
-  },
-  "signature_rotation": -18,
   "cta_text": "Book Grooming",
   "cta_link": {
     "url": "/contact/",

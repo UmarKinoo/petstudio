@@ -102,18 +102,11 @@ class Content_Normalizer {
 
 		switch ( $fixture_slug ) {
 			case 'hero-home':
-				$fixture['headline_words']  = self::list_to_repeater( $fixture['headline_words'] ?? array(), 'word' );
-				$fixture['cta_link']        = self::link_to_elementor( $fixture['cta_link'] ?? null );
-				$fixture['cta2_link']       = self::link_to_elementor( $fixture['cta2_link'] ?? null );
-				$fixture['video_desktop']   = self::media_to_elementor( $fixture['video_desktop'] ?? null );
-				$fixture['video_mobile']    = self::media_to_elementor( $fixture['video_mobile'] ?? null );
-				$fixture['logo_desktop']    = self::media_to_elementor( $fixture['logo_desktop'] ?? null );
-				$fixture['logo_mobile']     = self::media_to_elementor( $fixture['logo_mobile'] ?? null );
-				$fixture['signature_image'] = self::media_to_elementor( $fixture['signature_image'] ?? null );
-				$fixture['show_signature']  = self::bool_to_switcher( $fixture['show_signature'] ?? false );
-				if ( self::is_empty_setting( $fixture['tagline_location'] ?? null ) ) {
-					$fixture['tagline_location'] = 'Bristol';
-				}
+				$fixture['headline_words'] = self::list_to_repeater( $fixture['headline_words'] ?? array(), 'word' );
+				$fixture['cta_link']       = self::link_to_elementor( $fixture['cta_link'] ?? null );
+				$fixture['cta2_link']      = self::link_to_elementor( $fixture['cta2_link'] ?? null );
+				$fixture['video_desktop']  = self::media_to_elementor( $fixture['video_desktop'] ?? null );
+				$fixture['video_mobile']   = self::media_to_elementor( $fixture['video_mobile'] ?? null );
 				break;
 
 			case 'header':
