@@ -37,5 +37,11 @@
     "url": "/grooming-academy/",
     "is_external": false,
     "nofollow": false
-  }
+  },
+  "show_signature": true,
+  "signature_image": {
+    "id": 0,
+    "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/logos/Liza_signature_pink_v06.svg"
+  },
+  "signature_rotation": -18
 }

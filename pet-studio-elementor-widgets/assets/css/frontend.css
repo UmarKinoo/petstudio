@@ -807,6 +807,45 @@ a.ps-book-now-btn:focus,
 	transform: translateY(-50%);
 }
 
+.pet-studio-hero-home .ps-hero-title-desktop .ps-hero-brand-head,
+.pet-studio-hero-home .ps-hero-title-mobile .ps-hero-brand-head {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: min(92vw, 52rem);
+	max-width: min(92vw, 52rem);
+	padding-bottom: 2.25rem;
+	container-type: inline-size;
+}
+
+.pet-studio-hero-home .ps-hero-title-desktop .ps-hero-intro {
+	max-width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.pet-studio-hero-home .ps-hero-title-desktop .ps-hero-signature {
+	right: -18%;
+	bottom: 1.35rem;
+	width: clamp(170px, 28cqi, 260px);
+}
+
+.pet-studio-hero-home .ps-hero-title-mobile .ps-hero-brand-head {
+	width: min(92vw, 24rem);
+	max-width: min(92vw, 24rem);
+	padding-bottom: 1.75rem;
+	padding-right: clamp(0.5rem, 4vw, 1.25rem);
+	box-sizing: content-box;
+}
+
+.pet-studio-hero-home .ps-hero-title-mobile .ps-hero-signature {
+	right: -6%;
+	bottom: 0.35rem;
+	width: clamp(110px, 30cqi, 175px);
+	max-width: 50%;
+}
+
 .pet-studio-hero-home .ps-hero-logo-desktop .el-image,
 .pet-studio-hero-home .ps-hero-logo-desktop img,
 .pet-studio-hero-home .ps-hero-logo-desktop svg {

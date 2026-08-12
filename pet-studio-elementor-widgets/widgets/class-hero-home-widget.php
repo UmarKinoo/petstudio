@@ -15,8 +15,11 @@ use Pet_Studio_Elementor\Widget_Base;
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\render_cta_group;
+use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\format_multiline_text;
+use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\render_inline_svg;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -145,6 +148,37 @@ class Hero_Home_Widget extends Widget_Base {
 				'type'      => Controls_Manager::URL,
 				'default'   => api_link_to_control( $defaults['cta2_link'] ?? null ),
 				'condition' => array( 'cta2_text!' => '' ),
+			)
+		);
+
+		$this->add_control(
+			'show_signature',
+			array(
+				'label'        => esc_html__( 'Show signature', 'pet-studio-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => ! empty( $defaults['show_signature'] ) ? 'yes' : '',
+			)
+		);
+
+		$this->add_control(
+			'signature_image',
+			array(
+				'label'     => esc_html__( 'Signature image', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::MEDIA,
+				'default'   => api_media_to_control( $defaults['signature_image'] ?? null ),
+				'condition' => array( 'show_signature' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
+			'signature_rotation',
+			array(
+				'label'     => esc_html__( 'Signature angle (°)', 'pet-studio-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array( 'deg' => array( 'min' => -30, 'max' => 30 ) ),
+				'default'   => array( 'size' => (float) ( $defaults['signature_rotation'] ?? -18 ), 'unit' => 'deg' ),
+				'condition' => array( 'show_signature' => 'yes' ),
 			)
 		);
 
@@ -312,6 +346,9 @@ class Hero_Home_Widget extends Widget_Base {
 		$headline    = trim( (string) ( $s['headline'] ?? '' ) );
 		$accent      = trim( (string) ( $s['headline_accent'] ?? '' ) );
 		$support     = trim( (string) ( $s['supporting_copy'] ?? '' ) );
+		$sig_url     = media_url( $s['signature_image'] ?? null );
+		$rotation    = isset( $s['signature_rotation']['size'] ) ? (float) $s['signature_rotation']['size'] : (float) ( $s['signature_rotation'] ?? -18 );
+		$show_sig    = ( $s['show_signature'] ?? '' ) === 'yes' && $sig_url;
 		$ctas        = array();
 		if ( $cta_text !== '' ) {
 			$ctas[] = array( 'text' => $cta_text, 'link' => $cta_link, 'style' => 'pill' );
@@ -402,12 +439,22 @@ class Hero_Home_Widget extends Widget_Base {
 							<?php if ( $has_title ) : ?>
 								<div class="uk-position-absolute uk-width-1-1 uk-text-center uk-visible@s ps-hero-title-desktop" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="top: 50%; z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
 									<div class="ps-hero-brand">
-										<?php $this->render_hero_title_block( $headline, $accent, $support, $ctas ); ?>
+										<div class="ps-hero-brand-head">
+											<?php $this->render_hero_title_block( $headline, $accent, $support, $ctas ); ?>
+											<?php if ( $show_sig ) : ?>
+												<?php $this->render_hero_signature( $sig_url, $rotation, true ); ?>
+											<?php endif; ?>
+										</div>
 									</div>
 								</div>
 								<div class="uk-position-relative uk-margin uk-text-center uk-hidden@s ps-hero-title-mobile" uk-parallax="y: -80; scale: 0.5; rotate: -30; opacity: 1,0,0; blur: 50; easing: 0; start: 50vh + 50%" style="z-index: 0;" uk-scrollspy="target: [uk-scrollspy-class];">
 									<div class="ps-hero-brand">
-										<?php $this->render_hero_title_block( $headline, $accent, $support, $ctas ); ?>
+										<div class="ps-hero-brand-head">
+											<?php $this->render_hero_title_block( $headline, $accent, $support, $ctas ); ?>
+											<?php if ( $show_sig ) : ?>
+												<?php $this->render_hero_signature( $sig_url, $rotation, false ); ?>
+											<?php endif; ?>
+										</div>
 									</div>
 								</div>
 							<?php endif; ?>
@@ -473,6 +520,20 @@ class Hero_Home_Widget extends Widget_Base {
 				<div class="ps-hero-cta">
 					<?php render_cta_group( $ctas ); ?>
 				</div>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
+
+	private function render_hero_signature( string $sig_url, float $rotation, bool $desktop ): void {
+		$width  = $desktop ? 260 : 200;
+		$height = $desktop ? 135 : 104;
+		?>
+		<div class="ps-hero-signature" style="<?php echo esc_attr( sprintf( 'transform: rotate(%sdeg);', $rotation ) ); ?>">
+			<?php
+			if ( ! render_inline_svg( $sig_url, 'uk-text-primary el-image ps-signature-svg', $width, $height ) ) :
+				?>
+				<img class="el-image ps-signature-img" src="<?php echo esc_url( $sig_url ); ?>" alt="" width="<?php echo esc_attr( (string) $width ); ?>" height="<?php echo esc_attr( (string) $height ); ?>"<?php echo eager_media_attrs( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<?php endif; ?>
 		</div>
 		<?php

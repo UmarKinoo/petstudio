@@ -30,6 +30,9 @@
     "cta_text": { "type": "string" },
     "cta_link": { "$ref": "_common.json#/$defs/link" },
     "cta2_text": { "type": "string" },
-    "cta2_link": { "$ref": "_common.json#/$defs/link" }
+    "cta2_link": { "$ref": "_common.json#/$defs/link" },
+    "show_signature": { "type": "boolean" },
+    "signature_image": { "$ref": "_common.json#/$defs/media" },
+    "signature_rotation": { "type": "number" }
   }
 }

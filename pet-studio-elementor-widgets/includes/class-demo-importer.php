@@ -385,6 +385,35 @@ class Demo_Importer {
 	}
 
 	/**
+	 * One-shot Home rebuild after restoring hero signature on text heading (v0.5.68+).
+	 */
+	public static function ensure_home_hero_signature_refresh(): void {
+		$flag = 'pet_studio_ew_refreshed_hero_signature_20260812';
+		if ( get_option( $flag ) ) {
+			return;
+		}
+
+		$config_path = PET_STUDIO_EW_PATH . 'fixtures/pages/home.json';
+		if ( ! is_readable( $config_path ) ) {
+			return;
+		}
+
+		$config = json_decode( (string) file_get_contents( $config_path ), true );
+		if ( empty( $config['slug'] ) ) {
+			return;
+		}
+
+		$page = get_page_by_path( (string) $config['slug'] );
+		if ( ! $page ) {
+			return;
+		}
+
+		( new self() )->refresh_page_from_fixture( $config );
+		update_option( $flag, time(), false );
+		Plugin::purge_elementor_caches();
+	}
+
+	/**
 	 * Create or refresh the Behaviour page (prod may still only have dog-training / academy copy).
 	 */
 	public static function ensure_behaviour_page(): void {
