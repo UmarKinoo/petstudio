@@ -436,7 +436,7 @@ class Demo_Importer {
 		$raw = get_post_meta( (int) $page->ID, '_elementor_data', true );
 		$raw = is_string( $raw ) ? $raw : '';
 
-		// Stale Elementor data: local URLs, academy leftover, or pre-30.07.26 behaviour copy.
+		// Stale Elementor data: local URLs, academy leftover, or pre-CALM Method behaviour copy.
 		$needs_refresh = ( false !== strpos( $raw, 'thepetstudio.local' ) )
 			|| ( false !== strpos( $raw, 'Career Change?' ) )
 			|| ( false !== strpos( $raw, 'Train Your Dog' ) )
@@ -446,6 +446,9 @@ class Demo_Importer {
 			|| ( false === strpos( $raw, 'Behaviour Is Never' ) )
 			|| ( false === strpos( $raw, 'Talk to Liza About Your Dog' ) )
 			|| ( false === strpos( $raw, 'not veterinary treatment' ) )
+			|| ( false === strpos( $raw, 'CALM Method' ) )
+			|| ( false === strpos( $raw, 'pawsuite.co.uk/training-enquiry' ) )
+			|| ( false !== strpos( $raw, 'Every dog communicates through behaviour' ) )
 			|| ( false !== strpos( $raw, 'open plan Congresbury salon' ) )
 			|| ( false !== strpos( $raw, 'highly rated dog grooming services' ) )
 			|| ( false !== strpos( $raw, 'lasting behaviour change' ) );

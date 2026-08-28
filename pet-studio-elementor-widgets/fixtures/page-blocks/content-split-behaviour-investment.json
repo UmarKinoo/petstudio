@@ -11,7 +11,9 @@
   "reverse_columns": "yes",
   "cta_text": "Talk to Liza About Your Dog",
   "cta_link": {
-    "url": "/contact/"
+    "url": "https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd",
+    "is_external": true,
+    "nofollow": false
   },
   "cta_style": "pill"
 }
