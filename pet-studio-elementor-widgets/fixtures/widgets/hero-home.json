@@ -28,8 +28,8 @@
   "hours_text": "Monday - Friday\n9 am - 4 pm",
   "cta_text": "Book Grooming",
   "cta_link": {
-    "url": "/contact/",
-    "is_external": false,
+    "url": "https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd",
+    "is_external": true,
     "nofollow": false
   },
   "cta2_text": "Explore Training",

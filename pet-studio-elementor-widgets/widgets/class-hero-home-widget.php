@@ -14,6 +14,7 @@ use Pet_Studio_Elementor\Widget_Base;
 
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
+use function Pet_Studio_Elementor\booking_link;
 use function Pet_Studio_Elementor\render_cta_group;
 use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\format_multiline_text;
@@ -129,7 +130,7 @@ class Hero_Home_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Primary CTA link', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::URL,
-				'default'   => api_link_to_control( $defaults['cta_link'] ?? array( 'url' => '/contact/' ) ),
+				'default'   => api_link_to_control( $defaults['cta_link'] ?? booking_link() ),
 				'condition' => array( 'cta_text!' => '' ),
 			)
 		);

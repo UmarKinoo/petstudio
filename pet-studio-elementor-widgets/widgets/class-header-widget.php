@@ -17,6 +17,7 @@ use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\eager_media_attrs;
 use function Pet_Studio_Elementor\lazy_load_exempt_class;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\booking_link;
 use function Pet_Studio_Elementor\normalize_booking_link;
 use function Pet_Studio_Elementor\print_link_attributes;
 use function Pet_Studio_Elementor\social_icon_name;
@@ -255,7 +256,7 @@ class Header_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button link', 'pet-studio-elementor' ),
 				'type'      => Controls_Manager::URL,
-				'default'   => api_link_to_control( $defaults['book_now_link'] ?? array( 'url' => '/contact/' ) ),
+				'default'   => api_link_to_control( $defaults['book_now_link'] ?? booking_link() ),
 				'condition' => array( 'show_book_now' => 'yes' ),
 			)
 		);
@@ -673,13 +674,6 @@ class Header_Widget extends Widget_Base {
 		}
 
 		$link = normalize_booking_link( $settings['book_now_link'] ?? null );
-		if ( empty( $link['url'] ) || '#' === $link['url'] ) {
-			$link = array(
-				'url'         => '/contact/',
-				'is_external' => false,
-				'nofollow'    => false,
-			);
-		}
 		$scroll = ( ! empty( $link['url'] ) && '#' === $link['url'][0] ) ? ' uk-scroll="offset: 100"' : '';
 
 		if ( $mobile ) {

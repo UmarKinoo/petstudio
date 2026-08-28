@@ -443,6 +443,55 @@ class Demo_Importer {
 	}
 
 	/**
+	 * One-shot rebuild after routing all Book Now CTAs to Pawsuite (v0.5.71+).
+	 */
+	public static function ensure_pawsuite_booking_refresh(): void {
+		$flag = 'pet_studio_ew_refreshed_pawsuite_booking_20260828';
+		if ( get_option( $flag ) ) {
+			return;
+		}
+
+		$importer = new self();
+
+		$config_path = PET_STUDIO_EW_PATH . 'fixtures/pages/theme-templates.json';
+		if ( is_readable( $config_path ) ) {
+			$config = json_decode( (string) file_get_contents( $config_path ), true );
+			if ( is_array( $config ) && ! empty( $config['header'] ) ) {
+				$importer->refresh_theme_template_from_fixture( 'header', $config['header'] );
+			}
+		}
+
+		foreach ( array( 'home', 'dog-grooming', 'grooming-academy', 'behaviour' ) as $slug ) {
+			$page_path = PET_STUDIO_EW_PATH . 'fixtures/pages/' . $slug . '.json';
+			if ( ! is_readable( $page_path ) ) {
+				continue;
+			}
+			$page_config = json_decode( (string) file_get_contents( $page_path ), true );
+			if ( empty( $page_config['slug'] ) ) {
+				continue;
+			}
+			if ( get_page_by_path( (string) $page_config['slug'] ) ) {
+				$importer->refresh_page_from_fixture( $page_config );
+			}
+		}
+
+		update_option( $flag, time(), false );
+		Plugin::purge_elementor_caches();
+	}
+
+	/**
+	 * @param array<string, mixed> $config Template config.
+	 */
+	public function refresh_theme_template_from_fixture( string $type, array $config ): void {
+		$this->media_map = get_option( self::OPTION_MEDIA_MAP, array() );
+		if ( ! is_array( $this->media_map ) ) {
+			$this->media_map = array();
+		}
+
+		$this->create_theme_template( $type, $config );
+	}
+
+	/**
 	 * Create or refresh the Behaviour page (prod may still only have dog-training / academy copy).
 	 */
 	public static function ensure_behaviour_page(): void {

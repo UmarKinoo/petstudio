@@ -11,7 +11,11 @@
       "content": "<p>A practical route into professional dog grooming for complete beginners.</p><p>This accredited course is designed for people with no previous grooming experience who want to begin working within the industry. Through a combination of practical assessments, theory and online examination, you will build a strong foundation in professional salon practice.</p><p>Training covers safe dog handling, coat and breed types, bathing, drying, health checks, first aid, equipment, salon safety, clipping, scissoring, nail care and finishing. Alongside the qualification, Liza shares the everyday knowledge that comes from running a successful grooming business, helping students feel better prepared for employment or self-employment after completing the course.</p>",
       "features": [],
       "cta_text": "Enquire About Level 2",
-      "cta_link": { "url": "/contact/" }
+      "cta_link": {
+        "url": "https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd",
+        "is_external": true,
+        "nofollow": false
+      }
     },
     {
       "tab_label": "Groom Your Own Dog",
@@ -23,7 +27,11 @@
       "content": "<p>Learn how to care for your own dog’s coat safely and confidently at home.</p><p>This personalised one-day course is designed around your dog’s breed, coat and individual grooming needs. Working closely with Liza, you will learn how to prepare, bathe, dry, brush, trim and style your dog using suitable tools and techniques.</p><p>The day can include health checking, nail care, feet and head shaping, body styling and practical equipment advice. You will also receive guidance, photographs or videos to help you remember what you have learned. By the end of the session, you should feel far more confident maintaining your dog between professional appointments.</p>",
       "features": [],
       "cta_text": "Enquire About Grooming Your Own Dog",
-      "cta_link": { "url": "/contact/" }
+      "cta_link": {
+        "url": "https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd",
+        "is_external": true,
+        "nofollow": false
+      }
     },
     {
       "tab_label": "Quick Refresher",
@@ -35,7 +43,11 @@
       "content": "<p>Refresh your knowledge, rebuild confidence and sharpen your practical technique.</p><p>Designed for working groomers and grooming assistants, this five-day course provides focused support for those who want to improve efficiency, finishing and confidence across a range of popular breeds.</p><p>The course can be adapted around the areas in which you need the most help, whether that is coat preparation, handling, clipping, scissoring or producing a cleaner and more balanced finish. It is an ideal option for groomers returning after a break or those who feel they would benefit from experienced, hands-on guidance in a supportive salon environment.</p>",
       "features": [],
       "cta_text": "Enquire About the Quick Refresher",
-      "cta_link": { "url": "/contact/" }
+      "cta_link": {
+        "url": "https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd",
+        "is_external": true,
+        "nofollow": false
+      }
     },
     {
       "tab_label": "In-depth Refresher",
@@ -47,7 +59,11 @@
       "content": "<p>Develop your practical ability and extend your repertoire of breeds and techniques.</p><p>This ten-day course is intended for groomers who already have some experience but want more time to improve their skills, overcome gaps in confidence and focus on particular breeds or styles.</p><p>With additional practical coaching, you can refine coat preparation, clipping, scissoring, shaping and finishing while learning how to approach more demanding grooms with greater confidence. The course is tailored wherever possible to your development needs, giving you focused time to practise, receive constructive feedback and strengthen the quality and consistency of your work.</p>",
       "features": [],
       "cta_text": "Enquire About the In-Depth Refresher",
-      "cta_link": { "url": "/contact/" }
+      "cta_link": {
+        "url": "https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd",
+        "is_external": true,
+        "nofollow": false
+      }
     }
   ],
   "default_active_tab": 0

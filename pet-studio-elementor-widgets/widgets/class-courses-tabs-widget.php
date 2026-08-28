@@ -15,6 +15,7 @@ use Pet_Studio_Elementor\Widget_Base;
 use function Pet_Studio_Elementor\api_link_to_control;
 use function Pet_Studio_Elementor\api_media_to_control;
 use function Pet_Studio_Elementor\media_url;
+use function Pet_Studio_Elementor\normalize_booking_link;
 use function Pet_Studio_Elementor\print_link_attributes;
 use function Pet_Studio_Elementor\render_rich_text;
 
@@ -155,7 +156,7 @@ class Courses_Tabs_Widget extends Widget_Base {
 											</div>
 											<?php if ( ! empty( $tab['cta_text'] ) ) : ?>
 												<div class="uk-margin-medium-top">
-													<a class="uk-button uk-button-primary"<?php print_link_attributes( $tab['cta_link'] ?? null ); ?>><?php echo esc_html( $tab['cta_text'] ); ?></a>
+													<a class="uk-button uk-button-primary"<?php print_link_attributes( normalize_booking_link( is_array( $tab['cta_link'] ?? null ) ? $tab['cta_link'] : null ) ); ?>><?php echo esc_html( $tab['cta_text'] ); ?></a>
 												</div>
 											<?php endif; ?>
 										</div>

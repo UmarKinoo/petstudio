@@ -44,9 +44,8 @@ if ( ! class_exists( \"Pet_Studio_Elementor\\Demo_Importer\" ) ) {
 	echo \"Plugin not loaded\\n\";
 	exit(1);
 }
-delete_option( \"pet_studio_ew_refreshed_behaviour_calm_20260828\" );
-\\Pet_Studio_Elementor\\Demo_Importer::ensure_behaviour_calm_method_refresh();
-\\Pet_Studio_Elementor\\Demo_Importer::ensure_behaviour_page();
+delete_option( \"pet_studio_ew_refreshed_pawsuite_booking_20260828\" );
+\\Pet_Studio_Elementor\\Demo_Importer::ensure_pawsuite_booking_refresh();
 update_option( \"pet_studio_ew_version\", \"\", false );
 \\Pet_Studio_Elementor\\Plugin::purge_elementor_caches();
 echo \"Behaviour refresh complete\\n\";

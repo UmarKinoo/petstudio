@@ -13,6 +13,10 @@
         "url": "https://thepetstudio.local/wp-content/uploads/pet-studio/media/photos/grooming/BK1_8643_1.jpg"
     },
     "cta_text": "Book a Grooming Appointment",
-    "cta_link": { "url": "/contact/" },
+    "cta_link": {
+        "url": "https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd",
+        "is_external": true,
+        "nofollow": false
+    },
     "cta_style": "pill"
 }

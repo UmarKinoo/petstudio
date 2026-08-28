@@ -157,7 +157,27 @@ function footer_logo_url( string $url ): string {
 }
 
 /**
- * Book Now / booking CTAs should open the contact page — not scroll to the footer.
+ * Pawsuite booking / enquiry form for all Book Now CTAs.
+ */
+function booking_url(): string {
+	return 'https://pawsuite.co.uk/training-enquiry/the-pet-studio-grooming-ltd';
+}
+
+/**
+ * Elementor URL control shape for the site-wide booking link.
+ *
+ * @return array<string, mixed>
+ */
+function booking_link(): array {
+	return array(
+		'url'         => booking_url(),
+		'is_external' => true,
+		'nofollow'    => false,
+	);
+}
+
+/**
+ * Book Now / booking CTAs should open Pawsuite — not the contact page or footer anchors.
  *
  * @param array|null $link Elementor URL control shape.
  * @return array<string, mixed>
@@ -165,12 +185,17 @@ function footer_logo_url( string $url ): string {
 function normalize_booking_link( ?array $link ): array {
 	$url = trim( (string) ( $link['url'] ?? '' ) );
 
-	if ( $url === '#ps-contact' || $url === '#contact' ) {
-		return array(
-			'url'         => '/contact/',
-			'is_external' => false,
-			'nofollow'    => false,
-		);
+	if ( $url === '' || $url === '#' ) {
+		return booking_link();
+	}
+
+	if ( in_array( $url, array( '#ps-contact', '#contact', '/contact/', '/contact' ), true ) ) {
+		return booking_link();
+	}
+
+	$path = wp_parse_url( $url, PHP_URL_PATH );
+	if ( is_string( $path ) && untrailingslashit( $path ) === '/contact' ) {
+		return booking_link();
 	}
 
 	return is_array( $link ) ? $link : array( 'url' => $url );
