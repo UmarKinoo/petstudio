@@ -414,6 +414,35 @@ class Demo_Importer {
 	}
 
 	/**
+	 * One-shot Behaviour rebuild after CALM Method intro copy (v0.5.70+).
+	 */
+	public static function ensure_behaviour_calm_method_refresh(): void {
+		$flag = 'pet_studio_ew_refreshed_behaviour_calm_20260828';
+		if ( get_option( $flag ) ) {
+			return;
+		}
+
+		$config_path = PET_STUDIO_EW_PATH . 'fixtures/pages/behaviour.json';
+		if ( ! is_readable( $config_path ) ) {
+			return;
+		}
+
+		$config = json_decode( (string) file_get_contents( $config_path ), true );
+		if ( empty( $config['slug'] ) ) {
+			return;
+		}
+
+		$page = get_page_by_path( 'behaviour' );
+		if ( ! $page ) {
+			return;
+		}
+
+		( new self() )->refresh_page_from_fixture( $config );
+		update_option( $flag, time(), false );
+		Plugin::purge_elementor_caches();
+	}
+
+	/**
 	 * Create or refresh the Behaviour page (prod may still only have dog-training / academy copy).
 	 */
 	public static function ensure_behaviour_page(): void {

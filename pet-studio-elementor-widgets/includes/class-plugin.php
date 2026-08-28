@@ -118,6 +118,7 @@ final class Plugin {
 		Demo_Importer::ensure_july_2026_copy_refresh();
 		Demo_Importer::ensure_home_hero_text_refresh();
 		Demo_Importer::ensure_home_hero_signature_refresh();
+		Demo_Importer::ensure_behaviour_calm_method_refresh();
 		Demo_Importer::ensure_behaviour_page();
 		Demo_Importer::ensure_faq_sections();
 

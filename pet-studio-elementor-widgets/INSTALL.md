@@ -1,6 +1,6 @@
 # Pet Studio Elementor Widgets — Install guide
 
-Version **0.5.69**
+Version **0.5.70**
 
 This plugin adds The Pet Studio widgets to Elementor and can import the demo pages (Home, Dog Grooming, Grooming Academy, Behaviour, Team, Contact) plus header and footer.
 
@@ -22,7 +22,7 @@ This plugin adds The Pet Studio widgets to Elementor and can import the demo pag
 ### Option A — WordPress admin (easiest)
 
 1. In WP Admin go to **Plugins → Add New → Upload Plugin**.
-2. Choose `pet-studio-elementor-widgets-0.5.69.zip`.
+2. Choose `pet-studio-elementor-widgets-0.5.70.zip`.
 3. Click **Install Now**, then **Activate**.
 
 If WordPress says the file is too large, use Option B.
